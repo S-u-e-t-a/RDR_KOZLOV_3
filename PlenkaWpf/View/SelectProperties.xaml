@@ -1,0 +1,32 @@
+﻿<Window x:Class="PlenkaWpf.View.SelectProperties"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlenkaWpf.View"
+        xmlns:vm="clr-namespace:PlenkaWpf.VM"
+        mc:Ignorable="d"
+        Title="SelectProperties" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance vm:SelectPropertiesVM}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding AvailableProperties}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ProperrtyId}" />
+                <DataGridTextColumn Header="Имя свойства" Binding="{Binding PropertyName}" />
+                <DataGridTextColumn Header="Единица измерения" Binding="{Binding PropertyUnitName}" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Row="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="AddButton" Width="100" Margin="5" Content="Добавить"/>
+                <Button x:Name="EditButton" Width="100" Margin="5" Content="Изменить"/>
+                <Button x:Name="ExitButton" Width="100" Margin="5" Content="Удалить" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

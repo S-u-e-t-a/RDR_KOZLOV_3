@@ -1,0 +1,17 @@
+﻿надо короче открыть nuget pm, пото в нем написать 
+Scaffold-DbContext "DataSource=Membrane.db" Microsoft.EntityFrameworkCore.Sqlite -ContextDir Data -OutputDir Models
+контекст дир это куда констекст а аутпут дир это куда модели 
+если что-то не так, то надо проеверить назначен ли проект по умолчанию тот что нужен, и запускаемый проект тот ли что нуужен 
+воооот такая инструкция
+
+
+
+
+
+
+
+            Materials.Load();
+            Properties.Load();
+            Users.Load();
+            UserTypes.Load();
+            Values.Load();
