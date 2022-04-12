@@ -11,7 +11,7 @@
             <RowDefinition />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <StackPanel Width="220">
+        <!--<StackPanel Width="220">
             <xctk:WatermarkTextBox Margin="5,25,5,25">
                 <xctk:WatermarkTextBox.Watermark>
                     <TextBlock Text="Имя материала" />
@@ -22,7 +22,7 @@
                     <TextBlock Text="Характеристика" />
                 </xctk:WatermarkTextBox.Watermark>
             </xctk:WatermarkTextBox>
-        </StackPanel>
+        </StackPanel>-->
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,10">
             <Button Content="Ок" Width="100" Margin="5" />
             <Button Content="Отмена" Width="100" Margin="5" />

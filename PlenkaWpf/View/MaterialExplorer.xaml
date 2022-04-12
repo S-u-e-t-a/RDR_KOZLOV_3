@@ -3,10 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
         mc:Ignorable="d"
-        d:DesignHeight="450" d:DesignWidth="800"> <!--d:DataContext="{d:DesignInstance vm:MaterialExplorerVM}"-->
-        
+        d:DataContext="{d:DesignInstance viewModels:MaterialExplorerVM}"
+        d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -21,11 +23,11 @@
             </DataGrid.Columns>
         </DataGrid>
         <Grid Row="1">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="AddButton" Width="100" Margin="5" Content="Добавить" Click="AddButton_Click"  />
-                <Button x:Name="EditButton" Width="100" Margin="5" Content="Изменить" Click="Button_Click"/>
-                <Button x:Name="ExitButton" Width="100" Margin="5" Content="Удалить" />
-            </StackPanel>
+            <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="AddButton" Width="100"  Content="Добавить" Click="AddButton_Click"  />
+                <Button x:Name="EditButton" Width="100" Content="Изменить" Click="Button_Click"/>
+                <Button x:Name="ExitButton" Width="100" Content="Удалить" />
+            </hc:ElementGroup>
         </Grid>
     </Grid>
 </Window>
