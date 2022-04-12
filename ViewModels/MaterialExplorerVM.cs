@@ -6,30 +6,18 @@ using System.Runtime.CompilerServices;
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 
-using PlenkaWpf.Annotations;
-
-namespace PlenkaWpf.VM
+namespace ViewModels
 {
-    internal class MaterialExplorerVM : INotifyPropertyChanged
+    public class MaterialExplorerVM : ViewModelBase
     {
         public List<Material> Materials { get; set; }
         public Material SelectedMaterial { get; set; }
-
-
+       
         public MaterialExplorerVM()
         {
             var con = DbContextSingleton.GetInstance();
             Materials = con.Materials.ToList();
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

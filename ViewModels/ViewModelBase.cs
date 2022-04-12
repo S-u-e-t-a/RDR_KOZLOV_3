@@ -1,25 +1,25 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
-using PlenkaAPI.Models;
-
-namespace PlenkaWpf.VM
+namespace ViewModels
 {
-    internal class MaterialEdit3VM : INotifyPropertyChanged
+    public class ViewModelBase: INotifyPropertyChanged
     {
-        public ObservableCollection<Value> values { get; set; }
-
-
-        public MaterialEdit3VM(Material material)
+        public void ShowChildWindow(Window window)
         {
-            values = new ObservableCollection<Value>(material.Values);
+            window.Show();
         }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-
+        
+        [Annotations.NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

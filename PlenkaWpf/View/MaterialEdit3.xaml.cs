@@ -4,15 +4,14 @@ using System.Windows;
 
 using PlenkaAPI.Models;
 
-using PlenkaWpf.Annotations;
-using PlenkaWpf.VM;
+using ViewModels;
 
 namespace PlenkaWpf.View
 {
     /// <summary>
     ///     Логика взаимодействия для MaterialEdit3.xaml
     /// </summary>
-    public partial class MaterialEdit3 : Window, INotifyPropertyChanged
+    public partial class MaterialEdit3 : Window
     {
         private readonly Material material;
 
@@ -24,17 +23,7 @@ namespace PlenkaWpf.View
             DataContext = new MaterialEdit3VM(material);
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-
+        
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             var win = new SelectProperties(material);

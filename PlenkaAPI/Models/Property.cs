@@ -16,6 +16,7 @@ namespace PlenkaAPI.Models
         public string PropertyName { get; set; }
         public long UnitId { get; set; }
 
+        public virtual Unit Unit { get; set; }
         public virtual ICollection<Value> Values { get; set; }
     }
 }

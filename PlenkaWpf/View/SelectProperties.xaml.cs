@@ -2,7 +2,7 @@
 
 using PlenkaAPI.Models;
 
-using PlenkaWpf.VM;
+using ViewModels;
 
 namespace PlenkaWpf.View
 {
