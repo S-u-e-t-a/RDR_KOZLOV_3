@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
         Title="SelectProperties" Height="450" Width="800"
-        d:DataContext="{d:DesignInstance viewModels:SelectPropertiesVM}">
+        d:DataContext="{d:DesignInstance vm:SelectPropertiesVM}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -20,11 +21,14 @@
             </DataGrid.Columns>
         </DataGrid>
         <Grid Row="1">
+            <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="CreateButton" Width="100"  Content="Создать"/>
+                <Button x:Name="AddButton" Width="100"  Content="Применить" CommandParameter="{Binding ElementName=PropertyGrid, Path=SelectedItems}" Command="{Binding SelectProperties}"/>
+                <Button x:Name="EditButton" Width="100"  Content="Изменить" />
+                <Button x:Name="ExitButton" Width="100"  Content="Удалить" />
+            </hc:ElementGroup>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="CreateButton" Width="100" Margin="5" Content="Создать"/>
-                <Button x:Name="AddButton" Width="100" Margin="5" Content="Добавить" Command="{Binding SelectProperties}" CommandParameter="{Binding ElementName=PropertyGrid, Path=SelectedItems}"/>
-                <Button x:Name="EditButton" Width="100" Margin="5" Content="Изменить" />
-                <Button x:Name="ExitButton" Width="100" Margin="5" Content="Удалить" />
+                
             </StackPanel>
         </Grid>
     </Grid>

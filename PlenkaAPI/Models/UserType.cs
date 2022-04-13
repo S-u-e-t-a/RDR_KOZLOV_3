@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using PropertyChanged;
+
 #nullable disable
 
 namespace PlenkaAPI.Models
 {
-    public partial class UserType
+    [AddINotifyPropertyChangedInterface]
+    public partial class UserType 
     {
         public UserType()
         {

@@ -4,7 +4,7 @@ using System.Windows;
 
 using PlenkaAPI.Models;
 
-using ViewModels;
+using PlenkaWpf.VM;
 
 namespace PlenkaWpf.View
 {

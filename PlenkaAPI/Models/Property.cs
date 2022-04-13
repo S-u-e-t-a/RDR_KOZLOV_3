@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using PropertyChanged;
+
 #nullable disable
 
 namespace PlenkaAPI.Models
 {
-    public partial class Property
+    [AddINotifyPropertyChangedInterface]
+    public partial class Property 
     {
         public Property()
         {

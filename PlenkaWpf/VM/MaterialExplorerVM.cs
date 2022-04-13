@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 
-using ViewModels.Utils;
+using PlenkaWpf.Utils;
+using PlenkaWpf.View;
 
-namespace ViewModels
+namespace PlenkaWpf.VM
 {
     public class MaterialExplorerVM : ViewModelBase
     {
@@ -46,7 +45,7 @@ namespace ViewModels
             {
                 return _addNewMaterial ??= new RelayCommand(o =>
                 {
-                    ShowChildWindow(new );
+                    ShowChildWindow(new MaterialEdit3(new Material()));
                 });
             }
         }
@@ -59,7 +58,7 @@ namespace ViewModels
             {
                 return _editMaterial ??= new RelayCommand(o =>
                     {
-                        
+                        ShowChildWindow(new MaterialEdit3(SelectedMaterial));
                     },
                     (c) => SelectedMaterial!=null
                 );

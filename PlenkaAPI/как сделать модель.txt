@@ -5,8 +5,9 @@ Scaffold-DbContext "DataSource=Membrane.db" Microsoft.EntityFrameworkCore.Sqlite
 воооот такая инструкция
 
 
+Scaffold-DbContext "DataSource=Membrane.db" Microsoft.EntityFrameworkCore.Sqlite -ContextDir Data -OutputDir Models
 
-
+Scaffold-DbContext "DataSource=Membrane.db" Microsoft.EntityFrameworkCore.Sqlite -o Models -c NorthwindSlimContext -f --context-dir Contexts
 
 
 

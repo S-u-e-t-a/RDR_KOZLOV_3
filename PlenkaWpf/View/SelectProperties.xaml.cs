@@ -1,8 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 using PlenkaAPI.Models;
 
-using ViewModels;
+using PlenkaWpf.VM;
 
 namespace PlenkaWpf.View
 {
@@ -14,7 +15,9 @@ namespace PlenkaWpf.View
         public SelectProperties(Material material)
         {
             InitializeComponent();
-            DataContext = new SelectPropertiesVM(material);
+            var vm = new SelectPropertiesVM(material);
+            DataContext = vm;
+            vm.ClosingRequest += (sender, e) => this.Close();
         }
     }
 }

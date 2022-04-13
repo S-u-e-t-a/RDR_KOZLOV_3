@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlenkaWpf.View"
-        xmlns:vm="clr-namespace:ViewModels;assembly=ViewModels"
+        xmlns:vm1="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
         Title="CreatePropertyWindow" Height="200" Width="300"
-        d:DataContext="{d:DesignInstance vm:CreatePropertyVM}">
+        d:DataContext="{d:DesignInstance vm1:CreatePropertyVM}">
 
     <Grid>
         <Grid.RowDefinitions>

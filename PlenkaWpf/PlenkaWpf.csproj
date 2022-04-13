@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PlenkaAPI\PlenkaAPI.csproj" />
-    <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
