@@ -7,7 +7,8 @@
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
         Title="CreateMaterialWindow" Height="160" Width="300"
-        d:DataContext="{d:DesignInstance vm:CreateMaterialVM}">
+        d:DataContext="{d:DesignInstance vm:CreateMaterialVM}"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />

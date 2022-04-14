@@ -7,14 +7,15 @@
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:MaterialExplorerVM}"
-        d:DesignHeight="450" d:DesignWidth="800">
+        d:DesignHeight="450" d:DesignWidth="800"
+        WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Materials}"
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Materials}" CanUserAddRows="False" IsReadOnly="True"
                   SelectedItem="{Binding SelectedMaterial}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding MaterialId}" />

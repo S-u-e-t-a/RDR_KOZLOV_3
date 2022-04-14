@@ -9,12 +9,10 @@
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Title="SelectProperties" Height="450" Width="800"
-        d:DataContext="{d:DesignInstance vm:SelectPropertiesVM}">
+        d:DataContext="{d:DesignInstance vm:SelectPropertiesVM}"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <vm:ObjectInListConverter x:Key="ObjectInListConverter" />
-        
-        
-
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
