@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
 using PropertyChanged;
 
 #nullable disable
@@ -12,7 +12,7 @@ namespace PlenkaAPI.Models
     {
         public Property()
         {
-            Values = new HashSet<Value>();
+            Values = new ObservableCollection<Value>();
         }
 
         public long ProperrtyId { get; set; }
@@ -20,6 +20,6 @@ namespace PlenkaAPI.Models
         public long UnitId { get; set; }
 
         public virtual Unit Unit { get; set; }
-        public virtual ICollection<Value> Values { get; set; }
+        public virtual ObservableCollection<Value> Values { get; set; }
     }
 }

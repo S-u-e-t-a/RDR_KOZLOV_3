@@ -24,7 +24,7 @@
             <StackPanel Orientation="Horizontal">
                 <hc:TextBox Margin="5" hc:InfoElement.Title="Имя материала" hc:InfoElement.TitlePlacement="Left"  Text="{Binding Path=Material.MateriadName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" MinWidth="100"/>
             </StackPanel>
-            <ListBox Grid.Row="1" x:Name="listBox" ItemsSource="{Binding Path=Values, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox Grid.Row="1" x:Name="listBox" ItemsSource="{Binding Path=values, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <hc:ElementGroup Orientation="Horizontal" Margin="5" Height="40">

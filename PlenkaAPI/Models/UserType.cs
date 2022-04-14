@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
 using PropertyChanged;
 
 #nullable disable
@@ -12,12 +12,12 @@ namespace PlenkaAPI.Models
     {
         public UserType()
         {
-            Users = new HashSet<User>();
+            Users = new ObservableCollection<User>();
         }
 
         public long UserTypeId { get; set; }
         public long UserTypeName { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ObservableCollection<User> Users { get; set; }
     }
 }

@@ -54,6 +54,8 @@ namespace PlenkaWpf.VM
                     {
                         Material.Values.Add(new Value() { Mat = Material, Prop = property });
                     }
+
+                    DbContextSingleton.GetInstance().SaveChanges();
                     OnClosingRequest();
                 },(o)=> ((System.Collections.IList)o).Count>0);
             }

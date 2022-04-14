@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -17,13 +18,13 @@ namespace PlenkaAPI.Models
     {
         public Material()
         {
-            Values = new HashSet<Value>();
+            Values = new ObservableCollection<Value>();
         }
 
         public long MaterialId { get; set; }
         public string MateriadName { get; set; }
 
-        public virtual ICollection<Value> Values { get; set; }
+        public virtual ObservableCollection<Value> Values { get; set; }
         
 
     }

@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-
+using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 
 using PlenkaWpf.Utils;
@@ -23,7 +23,7 @@ namespace PlenkaWpf.VM
         public MaterialEdit3VM(Material material)
         {
             Material = material;
-            values = new ObservableCollection<Value>(material.Values);
+            values = Material.Values;
         }
 
         #endregion
@@ -44,6 +44,16 @@ namespace PlenkaWpf.VM
             
                 }));
             }
+        }
+
+        private RelayCommand _openEditMaterialToEdit;
+
+        public RelayCommand OpenEditMaterialToEdit
+        {
+            get { return _openEditMaterialToEdit ?? (_openEditMaterialToEdit = new RelayCommand(o =>
+            {
+
+            })); }
         }
 
 

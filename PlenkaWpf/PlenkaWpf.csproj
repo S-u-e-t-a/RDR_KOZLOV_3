@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <None Update="Membrane.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
