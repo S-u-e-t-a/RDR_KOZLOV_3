@@ -19,17 +19,4 @@ public partial class MaterialEdit3 : Window
         DataContext = new MaterialEdit3VM(material);
     }
 
-
-    private void AddButton_Click(object sender, RoutedEventArgs e)
-    {
-        var win = new SelectProperties(material);
-        win.ShowDialog();
-    }
-
-
-    private void EditButton_Click(object sender, RoutedEventArgs e)
-    {
-        var win = new SelectProperties(material);
-        win.ShowDialog();
-    }
 }

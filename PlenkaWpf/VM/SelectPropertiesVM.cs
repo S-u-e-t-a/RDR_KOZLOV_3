@@ -1,15 +1,38 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
+using System.Windows.Data;
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
 
 namespace PlenkaWpf.VM;
 
+
+public class ObjectInListConverter : IMultiValueConverter
+{
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    {
+        IList subset = values[1] as IList;
+        Nullable<bool> result = subset.Contains(values[0]);
+        return result;
+    }
+
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
 public class SelectPropertiesVM : ViewModelBase
 {
+    
     #region Functions
+
+
+
 
     #region Constructors
 
@@ -20,6 +43,7 @@ public class SelectPropertiesVM : ViewModelBase
         AvailableProperties = db.Properties.ToList();
         var materialProperties = material.Values.Select(v => v.Prop);
         AvailableProperties = AvailableProperties.Except(materialProperties).ToList();
+        AllProperties = db.Properties.Local.ToObservableCollection();
     }
 
     #endregion
@@ -27,9 +51,18 @@ public class SelectPropertiesVM : ViewModelBase
     #endregion
 
     #region Properties
-
+    public ObservableCollection<Property> AllProperties { get; set; }
     public List<Property> AvailableProperties { get; set; }
     public Material Material { get; set; }
+    private List<Property> _propertiesToDelete = new List<Property>();
+    private List<Property> _propertiesToAdd = new List<Property>();
+    public List<Property> MaterialProperties
+    {
+        get
+        {
+            return Material.Values.Select(o => o.Prop).ToList();
+        }
+    }
 
     #endregion
 
@@ -43,17 +76,46 @@ public class SelectPropertiesVM : ViewModelBase
         {
             return _selectProperties ??= new RelayCommand(o =>
             {
-                var items = (IList) o;
-                var selectedProperties = items.Cast<Property>();
-                //var selectedProperties = new List<Property>();
-                foreach (var property in selectedProperties)
-                    Material.Values.Add(new Value {Mat = Material, Prop = property});
+                foreach (var property in _propertiesToDelete)
+                {
+                    Material.Values.Remove(Material.Values.Where(o => o.Prop == property).First());
+                }
 
+                foreach (var property in _propertiesToAdd)
+                {
+                    Material.Values.Add((new Value() { Mat = Material, Prop = property }));
+                }
+
+                
                 DbContextSingleton.GetInstance().SaveChanges();
                 OnClosingRequest();
-            }, o => ((IList) o).Count > 0);
+            }); //, o => ((IList) o).Count > 0);
         }
     }
+
+    private RelayCommand _isCompletedUncheckedCommand;
+
+    public RelayCommand IsCompletedUncheckedCommand
+    {
+        get { return _isCompletedUncheckedCommand ?? (_isCompletedUncheckedCommand = new RelayCommand(o =>
+        {
+            _propertiesToDelete.Add((Property)o);
+        })); }
+    }
+
+
+    private RelayCommand _isCompletedCheckedCommand;
+
+    public RelayCommand IsCompletedCheckedCommand
+    {
+        get { return _isCompletedCheckedCommand ?? (_isCompletedCheckedCommand = new RelayCommand(o =>
+        {
+            _propertiesToDelete.Remove((Property) o);
+            _propertiesToAdd.Add((Property)o);
+            //Material.Values.Add((new Value() { Mat = Material, Prop = (Property)o }));
+        })); }
+    }
+
 
     private RelayCommand _createProperty;
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
+using PlenkaWpf.View;
 
 namespace PlenkaWpf.VM;
 
@@ -30,18 +31,11 @@ public class MaterialEdit3VM : ViewModelBase
 
     #region Commands
 
-    private RelayCommand _addProperty;
+    private RelayCommand _openSelectPropertyesToChange;
 
-    public RelayCommand AddProperty
+    public RelayCommand OpenSelectPropertyesToChange
     {
-        get { return _addProperty ?? (_addProperty = new RelayCommand(o => { })); }
-    }
-
-    private RelayCommand _openEditMaterialToEdit;
-
-    public RelayCommand OpenEditMaterialToEdit
-    {
-        get { return _openEditMaterialToEdit ?? (_openEditMaterialToEdit = new RelayCommand(o => { })); }
+        get { return _openSelectPropertyesToChange ?? (_openSelectPropertyesToChange = new RelayCommand(o => { ShowChildWindow(new SelectProperties(Material)); })); }
     }
 
     #endregion

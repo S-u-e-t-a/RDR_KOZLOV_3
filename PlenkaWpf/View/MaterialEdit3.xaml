@@ -46,8 +46,7 @@
 
         <Grid Row="1">
             <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="AddButton" Width="100" Content="Добавить" Click="AddButton_Click" />
-                <Button x:Name="EditButton" Width="100" Content="Изменить" Click="EditButton_Click" />
+                <Button x:Name="AddButton" Width="100" Content="Изменить свойства" Command="{Binding OpenSelectPropertyesToChange}" />
                 <Button Width="100" Content="Удалить" />
             </hc:ElementGroup>
         </Grid>

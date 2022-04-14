@@ -5,21 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Title="SelectProperties" Height="450" Width="800"
         d:DataContext="{d:DesignInstance vm:SelectPropertiesVM}">
+    <Window.Resources>
+        <vm:ObjectInListConverter x:Key="ObjectInListConverter" />
+        
+        
+
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <DataGrid x:Name="PropertyGrid" ItemsSource="{Binding AvailableProperties}" AutoGenerateColumns="False">
+
+        <ListBox ItemsSource="{Binding AllProperties}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Height="60" VerticalAlignment="Top" Content="{Binding PropertyName}" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding DataContext.IsCompletedCheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+
+                            <i:EventTrigger EventName="Unchecked">
+                                <i:InvokeCommandAction Command="{Binding DataContext.IsCompletedUncheckedCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <CheckBox.IsChecked>
+                            <MultiBinding Converter="{StaticResource ObjectInListConverter}" Mode="OneWay">
+                                <Binding />
+                                <Binding Path="DataContext.MaterialProperties" >
+                                    <Binding.RelativeSource>
+                                        <RelativeSource Mode="FindAncestor" AncestorType="{x:Type Window}"></RelativeSource>
+                                    </Binding.RelativeSource>
+                                </Binding>
+                            </MultiBinding>
+                        </CheckBox.IsChecked>
+                    </CheckBox>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        
+        <!--<DataGrid x:Name="PropertyGrid" ItemsSource="{Binding AvailableProperties}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ProperrtyId}" />
                 <DataGridTextColumn Header="Имя свойства" Binding="{Binding PropertyName}" />
                 <DataGridTextColumn Header="Единица измерения" Binding="{Binding Unit.UnitName}" />
             </DataGrid.Columns>
-        </DataGrid>
+        </DataGrid>-->
         <Grid Row="1">
             <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="CreateButton" Width="100" Content="Создать" />
