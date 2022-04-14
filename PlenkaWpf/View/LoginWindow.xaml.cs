@@ -18,7 +18,7 @@ public partial class LoginWindow : Window
     {
         var con = DbContextSingleton.GetInstance();
         //var mat = con.Materials.Local.First();
-        //var win = new MaterialEdit3(mat);
+        //var win = new MaterialEdit(mat);
         var win = new MaterialExplorer();
         win.Show();
     }

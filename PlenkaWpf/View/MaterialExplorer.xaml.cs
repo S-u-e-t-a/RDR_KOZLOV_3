@@ -18,14 +18,14 @@ public partial class MaterialExplorer : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        var win = new MaterialEdit3((DataContext as MaterialExplorerVM).SelectedMaterial);
+        var win = new MaterialEdit((DataContext as MaterialExplorerVM).SelectedMaterial);
         win.ShowDialog();
     }
 
 
     private void AddButton_Click(object sender, RoutedEventArgs e)
     {
-        var win = new MaterialEdit3(new Material());
+        var win = new MaterialEdit(new Material());
         win.ShowDialog();
     }
 }

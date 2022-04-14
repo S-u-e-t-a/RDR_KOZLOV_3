@@ -5,13 +5,13 @@ using PlenkaWpf.View;
 
 namespace PlenkaWpf.VM;
 
-public class MaterialEdit3VM : ViewModelBase
+public class MaterialEditVM : ViewModelBase
 {
     #region Functions
 
     #region Constructors
 
-    public MaterialEdit3VM(Material material)
+    public MaterialEditVM(Material material)
     {
         Material = material;
         values = Material.Values;

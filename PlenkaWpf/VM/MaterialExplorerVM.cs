@@ -39,7 +39,7 @@ public class MaterialExplorerVM : ViewModelBase
     {
         get
         {
-            return _addNewMaterial ??= new RelayCommand(o => { ShowChildWindow(new MaterialEdit3(new Material())); });
+            return _addNewMaterial ??= new RelayCommand(o => { ShowChildWindow(new MaterialEdit(new Material())); });
         }
     }
 
@@ -49,7 +49,7 @@ public class MaterialExplorerVM : ViewModelBase
     {
         get
         {
-            return _editMaterial ??= new RelayCommand(o => { ShowChildWindow(new MaterialEdit3(SelectedMaterial)); },
+            return _editMaterial ??= new RelayCommand(o => { ShowChildWindow(new MaterialEdit(SelectedMaterial)); },
                 c => SelectedMaterial != null
             );
         }
