@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
@@ -16,7 +17,7 @@ public class MaterialExplorerVM : ViewModelBase
     public MaterialExplorerVM()
     {
         var con = DbContextSingleton.GetInstance();
-        Materials = con.Materials.ToList();
+        Materials = con.Materials.Local.ToObservableCollection();
     }
 
     #endregion
@@ -25,7 +26,7 @@ public class MaterialExplorerVM : ViewModelBase
 
     #region Properties
 
-    public List<Material> Materials { get; set; }
+    public ObservableCollection<Material> Materials { get; set; }
     public Material SelectedMaterial { get; set; }
 
     #endregion
@@ -39,7 +40,7 @@ public class MaterialExplorerVM : ViewModelBase
     {
         get
         {
-            return _addNewMaterial ??= new RelayCommand(o => { ShowChildWindow(new MaterialEdit(new Material())); });
+            return _addNewMaterial ??= new RelayCommand(o => { ShowChildWindow(new CreateMaterialWindow()); });
         }
     }
 

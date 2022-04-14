@@ -1,0 +1,22 @@
+﻿<Window x:Class="PlenkaWpf.View.CreateMaterialWindow"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:PlenkaWpf.VM"
+        mc:Ignorable="d"
+        Title="CreateMaterialWindow" Height="160" Width="300"
+        d:DataContext="{d:DesignInstance vm:CreateMaterialVM}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <hc:TextBox hc:InfoElement.Title="Название материала" Text="{Binding Material.MateriadName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" ></hc:TextBox>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,10">
+            <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveMaterial}" />
+            <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}"/>
+        </StackPanel>
+    </Grid>
+</Window>

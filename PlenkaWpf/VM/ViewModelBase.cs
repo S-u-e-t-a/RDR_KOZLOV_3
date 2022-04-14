@@ -3,12 +3,25 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using PlenkaWpf.Annotations;
+using PlenkaWpf.Utils;
 
 namespace PlenkaWpf.VM;
 
 public class ViewModelBase : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
+
+    private RelayCommand _closeWindow;
+
+    public RelayCommand CloseWindow
+    {
+        get { return _closeWindow ?? (_closeWindow = new RelayCommand(o =>
+        {
+            OnClosingRequest();
+        })); }
+    }
+
+
 
     public void ShowChildWindow(Window window)
     {

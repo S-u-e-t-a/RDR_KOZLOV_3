@@ -31,9 +31,6 @@ public class SelectPropertiesVM : ViewModelBase
     
     #region Functions
 
-
-
-
     #region Constructors
 
     public SelectPropertiesVM(Material material)
