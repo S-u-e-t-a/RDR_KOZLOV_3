@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using PropertyChanged;
 
 #nullable disable
 
-namespace PlenkaAPI.Models
+namespace PlenkaAPI.Models;
+
+[AddINotifyPropertyChangedInterface]
+public class Unit
 {
-    [AddINotifyPropertyChangedInterface]
-    public partial class Unit 
+    public Unit()
     {
-        public Unit()
-        {
-            Properties = new ObservableCollection<Property>();
-        }
-
-        public long UnitId { get; set; }
-        public string UnitName { get; set; }
-
-        public virtual ObservableCollection<Property> Properties { get; set; }
+        Properties = new ObservableCollection<Property>();
     }
+
+    public long UnitId { get; set; }
+    public string UnitName { get; set; }
+
+    public virtual ObservableCollection<Property> Properties { get; set; }
 }

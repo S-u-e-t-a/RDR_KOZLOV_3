@@ -14,7 +14,8 @@
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Materials}" SelectedItem="{Binding SelectedMaterial}">
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Materials}"
+                  SelectedItem="{Binding SelectedMaterial}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding MaterialId}" />
                 <DataGridTextColumn Header="Имя" Binding="{Binding MateriadName}" />
@@ -24,8 +25,8 @@
         </DataGrid>
         <Grid Row="1">
             <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="AddButton" Width="100"  Content="Добавить" Command="{Binding AddNewMaterial }"  />
-                <Button x:Name="EditButton" Width="100" Content="Изменить" Command="{Binding EditMaterial }"/>
+                <Button x:Name="AddButton" Width="100" Content="Добавить" Command="{Binding AddNewMaterial }" />
+                <Button x:Name="EditButton" Width="100" Content="Изменить" Command="{Binding EditMaterial }" />
                 <Button x:Name="ExitButton" Width="100" Content="Удалить" />
             </hc:ElementGroup>
         </Grid>

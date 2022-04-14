@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace PlenkaWpf.View
+namespace PlenkaWpf.View;
+
+/// <summary>
+///     Логика взаимодействия для MainUserControl.xaml
+/// </summary>
+public partial class MainUserControl : UserControl
 {
-    /// <summary>
-    ///     Логика взаимодействия для MainUserControl.xaml
-    /// </summary>
-    public partial class MainUserControl : UserControl
+    public MainUserControl()
     {
-        public MainUserControl()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

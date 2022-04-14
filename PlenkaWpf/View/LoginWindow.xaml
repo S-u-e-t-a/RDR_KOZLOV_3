@@ -14,15 +14,11 @@
         </Grid.RowDefinitions>
         <Grid Row="1" Height="150" Width="180">
             <StackPanel>
-                <hc:TextBox hc:InfoElement.Title="Имя пользователя" >
-
-                </hc:TextBox>
-                <hc:PasswordBox hc:InfoElement.Title="Пароль">
-
-                </hc:PasswordBox>
+                <hc:TextBox hc:InfoElement.Title="Имя пользователя" />
+                <hc:PasswordBox hc:InfoElement.Title="Пароль" />
                 <Button Margin="5" Content="Выполнить вход" Click="Button_Click" />
             </StackPanel>
-            
+
         </Grid>
     </Grid>
 </Window>

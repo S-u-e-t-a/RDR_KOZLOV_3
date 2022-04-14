@@ -1,26 +1,25 @@
-﻿namespace PlenkaAPI
+﻿namespace PlenkaAPI;
+
+public interface IAutorization
 {
-    public interface IAutorization
-    {
-    }
+}
 
-    public interface IValidator
-    {
-    }
+public interface IValidator
+{
+}
 
-    public interface IMathModeler
-    {
-    }
+public interface IMathModeler
+{
+}
 
-    public interface IVisualizer
-    {
-    }
+public interface IVisualizer
+{
+}
 
-    public interface IReportGenerator
-    {
-    }
+public interface IReportGenerator
+{
+}
 
-    public interface IEconomer
-    {
-    }
+public interface IEconomer
+{
 }

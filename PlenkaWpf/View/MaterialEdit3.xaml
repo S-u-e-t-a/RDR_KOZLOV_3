@@ -4,7 +4,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:utils="clr-namespace:PlenkaWpf.Utils"
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
 
         mc:Ignorable="d"
@@ -18,32 +17,38 @@
         </Grid.RowDefinitions>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"  />
+                <RowDefinition Height="40" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <hc:TextBox Margin="5" hc:InfoElement.Title="Имя материала" hc:InfoElement.TitlePlacement="Left"  Text="{Binding Path=Material.MateriadName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" MinWidth="100"/>
+                <hc:TextBox Margin="5" hc:InfoElement.Title="Имя материала" hc:InfoElement.TitlePlacement="Left"
+                            Text="{Binding Path=Material.MateriadName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            MinWidth="100" />
             </StackPanel>
-            <ListBox Grid.Row="1" x:Name="listBox" ItemsSource="{Binding Path=values, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox Grid.Row="1" x:Name="listBox"
+                     ItemsSource="{Binding Path=values, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <hc:ElementGroup Orientation="Horizontal" Margin="5" Height="40">
-                            <Label Content="{Binding Path=Prop.PropertyName, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="100"/>
-                    
-                            <hc:NumericUpDown Value="{Binding Path=Value1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="30"  Width="70">
-                            </hc:NumericUpDown>
-                            <Label   Content="{Binding Path=Prop.Unit.UnitName, UpdateSourceTrigger=PropertyChanged}" Height="30"/>
+                            <Label Content="{Binding Path=Prop.PropertyName, UpdateSourceTrigger=PropertyChanged}"
+                                   Height="30" Width="100" />
+
+                            <hc:NumericUpDown
+                                Value="{Binding Path=Value1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                Height="30" Width="70" />
+                            <Label Content="{Binding Path=Prop.Unit.UnitName, UpdateSourceTrigger=PropertyChanged}"
+                                   Height="30" />
                         </hc:ElementGroup>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        
+
         <Grid Row="1">
             <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="AddButton" Width="100"  Content="Добавить" Click="AddButton_Click" />
+                <Button x:Name="AddButton" Width="100" Content="Добавить" Click="AddButton_Click" />
                 <Button x:Name="EditButton" Width="100" Content="Изменить" Click="EditButton_Click" />
-                <Button Width="100"  Content="Удалить" />
+                <Button Width="100" Content="Удалить" />
             </hc:ElementGroup>
         </Grid>
     </Grid>

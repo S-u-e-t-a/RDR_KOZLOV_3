@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace PlenkaWpf.View
+namespace PlenkaWpf.View;
+
+/// <summary>
+///     Логика взаимодействия для MainAdminPanel.xaml
+/// </summary>
+public partial class MainAdminPanel : UserControl
 {
-    /// <summary>
-    ///     Логика взаимодействия для MainAdminPanel.xaml
-    /// </summary>
-    public partial class MainAdminPanel : UserControl
+    public MainAdminPanel()
     {
-        public MainAdminPanel()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

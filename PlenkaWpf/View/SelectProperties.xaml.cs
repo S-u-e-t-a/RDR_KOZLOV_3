@@ -1,23 +1,19 @@
-﻿using System;
-using System.Windows;
-
+﻿using System.Windows;
 using PlenkaAPI.Models;
-
 using PlenkaWpf.VM;
 
-namespace PlenkaWpf.View
+namespace PlenkaWpf.View;
+
+/// <summary>
+///     Interaction logic for SelectProperties.xaml
+/// </summary>
+public partial class SelectProperties : Window
 {
-    /// <summary>
-    ///     Interaction logic for SelectProperties.xaml
-    /// </summary>
-    public partial class SelectProperties : Window
+    public SelectProperties(Material material)
     {
-        public SelectProperties(Material material)
-        {
-            InitializeComponent();
-            var vm = new SelectPropertiesVM(material);
-            DataContext = vm;
-            vm.ClosingRequest += (sender, e) => this.Close();
-        }
+        InitializeComponent();
+        var vm = new SelectPropertiesVM(material);
+        DataContext = vm;
+        vm.ClosingRequest += (sender, e) => Close();
     }
 }

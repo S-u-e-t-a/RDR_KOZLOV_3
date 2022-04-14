@@ -22,14 +22,14 @@
         </DataGrid>
         <Grid Row="1">
             <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="CreateButton" Width="100"  Content="Создать"/>
-                <Button x:Name="AddButton" Width="100"  Content="Применить" CommandParameter="{Binding ElementName=PropertyGrid, Path=SelectedItems}" Command="{Binding SelectProperties}"/>
-                <Button x:Name="EditButton" Width="100"  Content="Изменить" />
-                <Button x:Name="ExitButton" Width="100"  Content="Удалить" />
+                <Button x:Name="CreateButton" Width="100" Content="Создать" />
+                <Button x:Name="AddButton" Width="100" Content="Применить"
+                        CommandParameter="{Binding ElementName=PropertyGrid, Path=SelectedItems}"
+                        Command="{Binding SelectProperties}" />
+                <Button x:Name="EditButton" Width="100" Content="Изменить" />
+                <Button x:Name="ExitButton" Width="100" Content="Удалить" />
             </hc:ElementGroup>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                
-            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" />
         </Grid>
     </Grid>
 </Window>

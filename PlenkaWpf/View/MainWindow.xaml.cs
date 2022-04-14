@@ -1,15 +1,14 @@
 ﻿using System.Windows;
 
-namespace PlenkaWpf.View
+namespace PlenkaWpf.View;
+
+/// <summary>
+///     Логика взаимодействия для MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    ///     Логика взаимодействия для MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
