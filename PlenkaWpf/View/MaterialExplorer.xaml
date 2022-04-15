@@ -15,7 +15,8 @@
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Materials}" CanUserAddRows="False" IsReadOnly="True"
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Materials}" CanUserAddRows="False"
+                  IsReadOnly="True"
                   SelectedItem="{Binding SelectedMaterial}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding MaterialId}" />

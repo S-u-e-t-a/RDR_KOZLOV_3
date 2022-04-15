@@ -35,7 +35,11 @@ public class MaterialEditVM : ViewModelBase
 
     public RelayCommand OpenSelectPropertyesToChange
     {
-        get { return _openSelectPropertyesToChange ?? (_openSelectPropertyesToChange = new RelayCommand(o => { ShowChildWindow(new SelectProperties(Material)); })); }
+        get
+        {
+            return _openSelectPropertyesToChange ?? (_openSelectPropertyesToChange =
+                new RelayCommand(o => { ShowChildWindow(new SelectProperties(Material)); }));
+        }
     }
 
     #endregion

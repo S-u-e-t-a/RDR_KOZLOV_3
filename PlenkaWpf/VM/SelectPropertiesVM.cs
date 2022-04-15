@@ -12,13 +12,12 @@ using PlenkaWpf.View;
 
 namespace PlenkaWpf.VM;
 
-
 public class ObjectInListConverter : IMultiValueConverter
 {
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        IList subset = values[1] as IList;
-        Nullable<bool> result = subset.Contains(values[0]);
+        var subset = values[1] as IList;
+        bool? result = subset.Contains(values[0]);
         return result;
     }
 
@@ -27,9 +26,9 @@ public class ObjectInListConverter : IMultiValueConverter
         throw new NotImplementedException();
     }
 }
+
 public class SelectPropertiesVM : ViewModelBase
 {
-    
     #region Functions
 
     #region Constructors
@@ -49,19 +48,17 @@ public class SelectPropertiesVM : ViewModelBase
     #endregion
 
     #region Properties
+
     public ObservableCollection<Property> AllProperties { get; set; }
     public List<Property> AvailableProperties { get; set; }
     public Material Material { get; set; }
-    private List<Property> _propertiesToDelete = new List<Property>();
-    private List<Property> _propertiesToAdd = new List<Property>();
+    private readonly List<Property> _propertiesToDelete = new();
+    private readonly List<Property> _propertiesToAdd = new();
     public Property SelectedProperty { get; set; }
 
     public List<Property> MaterialProperties
     {
-        get
-        {
-            return Material.Values.Select(o => o.Prop).ToList();
-        }
+        get { return Material.Values.Select(o => o.Prop).ToList(); }
     }
 
     #endregion
@@ -77,20 +74,15 @@ public class SelectPropertiesVM : ViewModelBase
             return _selectProperties ??= new RelayCommand(o =>
             {
                 foreach (var property in _propertiesToDelete)
-                {
                     Material.Values.Remove(Material.Values.Where(o => o.Prop == property).First());
-                }
 
                 foreach (var property in _propertiesToAdd)
-                {
-                    if (Material.Values.Select(o=>o).Where(o=> o.MatId==Material.MaterialId && o.PropId==property.ProperrtyId).Count()==0)
-                    {
-                        Material.Values.Add((new Value() { Mat = Material, Prop = property }));
-                    }
-                    
-                }
+                    if (Material.Values.Select(o => o)
+                            .Where(o => o.MatId == Material.MaterialId && o.PropId == property.ProperrtyId).Count() ==
+                        0)
+                        Material.Values.Add(new Value {Mat = Material, Prop = property});
 
-                
+
                 DbContextSingleton.GetInstance().SaveChanges();
                 OnClosingRequest();
             }); //, o => ((IList) o).Count > 0);
@@ -101,11 +93,14 @@ public class SelectPropertiesVM : ViewModelBase
 
     public RelayCommand IsCompletedUncheckedCommand
     {
-        get { return _isCompletedUncheckedCommand ?? (_isCompletedUncheckedCommand = new RelayCommand(o =>
+        get
         {
-            _propertiesToAdd.Remove((Property)o);
-            _propertiesToDelete.Add((Property)o);
-        })); }
+            return _isCompletedUncheckedCommand ?? (_isCompletedUncheckedCommand = new RelayCommand(o =>
+            {
+                _propertiesToAdd.Remove((Property) o);
+                _propertiesToDelete.Add((Property) o);
+            }));
+        }
     }
 
 
@@ -113,12 +108,15 @@ public class SelectPropertiesVM : ViewModelBase
 
     public RelayCommand IsCompletedCheckedCommand
     {
-        get { return _isCompletedCheckedCommand ?? (_isCompletedCheckedCommand = new RelayCommand(o =>
+        get
         {
-            _propertiesToDelete.Remove((Property) o);
-            _propertiesToAdd.Add((Property)o);
-            //Material.Values.Add((new Value() { Mat = Material, Prop = (TempProperty)o }));
-        })); }
+            return _isCompletedCheckedCommand ?? (_isCompletedCheckedCommand = new RelayCommand(o =>
+            {
+                _propertiesToDelete.Remove((Property) o);
+                _propertiesToAdd.Add((Property) o);
+                //Material.Values.Add((new Value() { Mat = Material, Prop = (TempProperty)o }));
+            }));
+        }
     }
 
 
@@ -126,22 +124,25 @@ public class SelectPropertiesVM : ViewModelBase
 
     public RelayCommand CreateProperty
     {
-        get { return _createProperty ?? (_createProperty = new RelayCommand(o =>
+        get
         {
-            ShowChildWindow(new CreatePropertyWindow(new Property()));
-        })); }
+            return _createProperty ?? (_createProperty = new RelayCommand(o =>
+            {
+                ShowChildWindow(new CreatePropertyWindow(new Property()));
+            }));
+        }
     }
 
     private RelayCommand _editProperty;
 
     public RelayCommand EditProperty
     {
-        get { return _editProperty ?? (_editProperty = new RelayCommand(o =>
+        get
         {
-            ShowChildWindow(new CreatePropertyWindow(SelectedProperty));
-        },o=> SelectedProperty!=null)); }
+            return _editProperty ?? (_editProperty = new RelayCommand(
+                o => { ShowChildWindow(new CreatePropertyWindow(SelectedProperty)); }, o => SelectedProperty != null));
+        }
     }
-
 
     #endregion
 }

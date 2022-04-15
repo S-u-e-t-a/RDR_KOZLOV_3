@@ -18,5 +18,4 @@ public partial class MaterialEdit : Window
         InitializeComponent();
         DataContext = new MaterialEditVM(material);
     }
-
 }

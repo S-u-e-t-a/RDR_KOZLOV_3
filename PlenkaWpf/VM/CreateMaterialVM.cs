@@ -1,51 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Objects.DataClasses;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PlenkaAPI.Data;
+﻿using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
 
-namespace PlenkaWpf.VM
+namespace PlenkaWpf.VM;
+
+internal class CreateMaterialVM : ViewModelBase
+
 {
-    internal class CreateMaterialVM : ViewModelBase
+    #region Properties
 
+    public Material Material { get; set; } = new() {MateriadName = ""};
+
+    #endregion
+
+    #region Functions
+
+    #region Constructors
+
+    #endregion
+
+    #endregion
+
+    #region Commands
+
+    private RelayCommand _saveMaterial;
+
+    public RelayCommand SaveMaterial
     {
-        #region Functions
-
-        #region Constructors
-
-
-
-        #endregion
-
-        #endregion
-
-        #region Properties
-
-        public Material Material { get; set; } = new Material(){MateriadName = ""};
-
-
-        #endregion
-
-        #region Commands
-
-        private RelayCommand _saveMaterial;
-
-        public RelayCommand SaveMaterial
+        get
         {
-            get { return _saveMaterial ?? (_saveMaterial = new RelayCommand(o =>
+            return _saveMaterial ?? (_saveMaterial = new RelayCommand(o =>
             {
                 var db = DbContextSingleton.GetInstance();
                 db.Materials.Add(Material);
                 db.SaveChanges();
                 OnClosingRequest();
-            },o=>  Material?.MateriadName.Length>0)); }
+            }, o => Material?.MateriadName.Length > 0));
         }
-
-
-        #endregion
     }
+
+    #endregion
 }

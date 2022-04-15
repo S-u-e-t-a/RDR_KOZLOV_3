@@ -16,7 +16,7 @@ public class CreatePropertyVM : ViewModelBase
     public CreatePropertyVM(Property property)
     {
         EditingProperty = property;
-        TempProperty = new Property()
+        TempProperty = new Property
         {
             ProperrtyId = property.ProperrtyId,
             PropertyName = property.PropertyName,
@@ -32,6 +32,7 @@ public class CreatePropertyVM : ViewModelBase
     #endregion
 
     #region Properties
+
     public MembraneContext Db { get; set; }
     public ObservableCollection<Unit> AllUnits { get; set; }
     public Property TempProperty { get; set; }
@@ -43,19 +44,21 @@ public class CreatePropertyVM : ViewModelBase
     #region Commands
 
     private RelayCommand _saveProperty;
+
     public RelayCommand SaveProperty
     {
-        get { return _saveProperty ?? (_saveProperty = new RelayCommand(o =>
+        get
         {
-            EditingProperty.Unit = TempProperty.Unit;
-            EditingProperty.UnitId = TempProperty.UnitId;
-            EditingProperty.PropertyName = TempProperty.PropertyName;
-            Db.SaveChanges();
-            OnClosingRequest();
-        })); }
+            return _saveProperty ?? (_saveProperty = new RelayCommand(o =>
+            {
+                EditingProperty.Unit = TempProperty.Unit;
+                EditingProperty.UnitId = TempProperty.UnitId;
+                EditingProperty.PropertyName = TempProperty.PropertyName;
+                Db.SaveChanges();
+                OnClosingRequest();
+            }));
+        }
     }
 
     #endregion
-
-
 }

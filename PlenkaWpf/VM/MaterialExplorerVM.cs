@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
@@ -38,10 +36,7 @@ public class MaterialExplorerVM : ViewModelBase
 
     public RelayCommand AddNewMaterial
     {
-        get
-        {
-            return _addNewMaterial ??= new RelayCommand(o => { ShowChildWindow(new CreateMaterialWindow()); });
-        }
+        get { return _addNewMaterial ??= new RelayCommand(o => { ShowChildWindow(new CreateMaterialWindow()); }); }
     }
 
     private RelayCommand _editMaterial;

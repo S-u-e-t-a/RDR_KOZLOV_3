@@ -9,18 +9,14 @@ namespace PlenkaWpf.VM;
 
 public class ViewModelBase : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-
     private RelayCommand _closeWindow;
 
     public RelayCommand CloseWindow
     {
-        get { return _closeWindow ?? (_closeWindow = new RelayCommand(o =>
-        {
-            OnClosingRequest();
-        })); }
+        get { return _closeWindow ?? (_closeWindow = new RelayCommand(o => { OnClosingRequest(); })); }
     }
 
+    public event PropertyChangedEventHandler PropertyChanged;
 
 
     public void ShowChildWindow(Window window)
