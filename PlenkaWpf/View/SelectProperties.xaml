@@ -20,7 +20,7 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <ListBox ItemsSource="{Binding AllProperties}">
+        <ListBox ItemsSource="{Binding AllProperties}" SelectedItem="{Binding SelectedProperty}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox Height="60" VerticalAlignment="Top" Content="{Binding PropertyName}" >
@@ -58,11 +58,11 @@
         </DataGrid>-->
         <Grid Row="1">
             <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="CreateButton" Width="100" Content="Создать" />
+                <Button x:Name="CreateButton" Width="100" Content="Создать" Command="{Binding CreateProperty}"/>
                 <Button x:Name="AddButton" Width="100" Content="Применить"
                         CommandParameter="{Binding ElementName=PropertyGrid, Path=SelectedItems}"
                         Command="{Binding SelectProperties}" />
-                <Button x:Name="EditButton" Width="100" Content="Изменить" />
+                <Button x:Name="EditButton" Width="100" Content="Изменить" Command="{Binding EditProperty}"/>
                 <Button x:Name="ExitButton" Width="100" Content="Удалить" />
             </hc:ElementGroup>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" />

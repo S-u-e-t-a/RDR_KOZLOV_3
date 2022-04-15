@@ -8,6 +8,7 @@ using System.Windows.Data;
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
+using PlenkaWpf.View;
 
 namespace PlenkaWpf.VM;
 
@@ -53,6 +54,8 @@ public class SelectPropertiesVM : ViewModelBase
     public Material Material { get; set; }
     private List<Property> _propertiesToDelete = new List<Property>();
     private List<Property> _propertiesToAdd = new List<Property>();
+    public Property SelectedProperty { get; set; }
+
     public List<Property> MaterialProperties
     {
         get
@@ -80,7 +83,11 @@ public class SelectPropertiesVM : ViewModelBase
 
                 foreach (var property in _propertiesToAdd)
                 {
-                    Material.Values.Add((new Value() { Mat = Material, Prop = property }));
+                    if (Material.Values.Select(o=>o).Where(o=> o.MatId==Material.MaterialId && o.PropId==property.ProperrtyId).Count()==0)
+                    {
+                        Material.Values.Add((new Value() { Mat = Material, Prop = property }));
+                    }
+                    
                 }
 
                 
@@ -96,6 +103,7 @@ public class SelectPropertiesVM : ViewModelBase
     {
         get { return _isCompletedUncheckedCommand ?? (_isCompletedUncheckedCommand = new RelayCommand(o =>
         {
+            _propertiesToAdd.Remove((Property)o);
             _propertiesToDelete.Add((Property)o);
         })); }
     }
@@ -109,7 +117,7 @@ public class SelectPropertiesVM : ViewModelBase
         {
             _propertiesToDelete.Remove((Property) o);
             _propertiesToAdd.Add((Property)o);
-            //Material.Values.Add((new Value() { Mat = Material, Prop = (Property)o }));
+            //Material.Values.Add((new Value() { Mat = Material, Prop = (TempProperty)o }));
         })); }
     }
 
@@ -118,8 +126,22 @@ public class SelectPropertiesVM : ViewModelBase
 
     public RelayCommand CreateProperty
     {
-        get { return _createProperty ?? (_createProperty = new RelayCommand(o => { })); }
+        get { return _createProperty ?? (_createProperty = new RelayCommand(o =>
+        {
+            ShowChildWindow(new CreatePropertyWindow(new Property()));
+        })); }
     }
+
+    private RelayCommand _editProperty;
+
+    public RelayCommand EditProperty
+    {
+        get { return _editProperty ?? (_editProperty = new RelayCommand(o =>
+        {
+            ShowChildWindow(new CreatePropertyWindow(SelectedProperty));
+        },o=> SelectedProperty!=null)); }
+    }
+
 
     #endregion
 }
