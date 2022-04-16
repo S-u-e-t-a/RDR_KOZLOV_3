@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,12 @@ namespace PlenkaWpf.View
             var vm = new Window1VM();
             DataContext = vm;
             vm.ClosingRequest += (sender, e) => Close();
+        }
+
+
+        private void ProcessGrid_OnMouseWheel(object sender, MouseWheelEventArgs e) // вот такой костыль получается
+        {
+            ScrollViewer.ScrollToVerticalOffsetWithAnimation(ScrollViewer.VerticalOffset - e.Delta);
         }
     }
 }
