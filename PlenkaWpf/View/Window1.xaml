@@ -1,174 +1,208 @@
 ﻿<Window x:Class="PlenkaWpf.View.Window1"
-        xmlns:hc="https://handyorg.github.io/handycontrol"  
+        xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PlenkaWpf.View"
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:Window1VM}"
         Title="Window1" Height="450" Width="800">
-    <Grid>
+    <Window.Resources>
+        <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
+        <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
+        <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
+    </Window.Resources>
+    <Grid Background="{StaticResource Style3}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
+            <RowDefinition Height="30" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0">
+        <Menu Grid.Row="0" Background="{StaticResource Style2}">
             <MenuItem Header="Файл">
                 <MenuItem.Icon>
-                    <Image Source="pack://application:,,,/resources/file.png"/>
+                    <Image Source="pack://application:,,,/resources/file.png" />
                 </MenuItem.Icon>
                 <MenuItem Header="Открыть файл">
                     <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/open.png"/>
+                        <Image Source="pack://application:,,,/resources/open.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Сохранить исходные данные">
                     <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/save.png"/>
+                        <Image Source="pack://application:,,,/resources/save.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Сохранить результат">
                     <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/save.png"/>
+                        <Image Source="pack://application:,,,/resources/save.png" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Справка">
-            </MenuItem>
+            <MenuItem Header="Справка" />
         </Menu>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
 
-            <Expander ExpandDirection="Right">
-                <Grid>
+            <Expander ExpandDirection="Right" Background="{StaticResource Style1}">
+                <Grid Background="{StaticResource Style2}">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
+                        <RowDefinition />
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
-                    <hc:ScrollViewer Grid.Row="0" Orientation="Vertical" VerticalScrollBarVisibility="Auto" IsInertiaEnabled="True">
-                        <StackPanel>
-                            <Expander ExpandDirection="Down" Header="Входные параметры">
-                                <StackPanel>
-                                    <GroupBox Header="Геометрические параметры канала" hc:InfoElement.TitlePlacement="Top" Style="{StaticResource GroupBoxTab}">
-                                        <StackPanel>
-                                            <!--<hc:Divider Content="Геометрические параметры канала" Margin="0,0,0,0"/>-->
-                                            <hc:NumericUpDown hc:InfoElement.Title="Длина" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                            <hc:NumericUpDown  hc:InfoElement.Title="Ширина" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                            <hc:NumericUpDown  hc:InfoElement.Title="Глубина" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                        </StackPanel>
-                                    </GroupBox>
-                                    <GroupBox Header="Выбор материала" hc:InfoElement.TitlePlacement="Top" Style="{StaticResource GroupBoxTab}">
-                                        <StackPanel>
-                                            <hc:ComboBox/>
-                                        </StackPanel>
-                                    </GroupBox>
-                                    <GroupBox Header="Параметры свойств материала" hc:InfoElement.TitlePlacement="Top" Style="{StaticResource GroupBoxTab}">
-                                        <StackPanel>
-                                            <hc:NumericUpDown hc:InfoElement.Title="Плотность" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                            <hc:NumericUpDown hc:InfoElement.Title="Удельная теплоёмкость" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                            <hc:NumericUpDown hc:InfoElement.Title="Температура плавления" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                        </StackPanel>
-                                    </GroupBox>
-                                </StackPanel>
-                            </Expander>
 
-                            <Expander ExpandDirection="Down" Header="Варьируемые параметры">
-                                <Border Style="{StaticResource }">
-                                    <StackPanel>
-                                        <hc:NumericUpDown hc:InfoElement.Title="Скорость движения крышки" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                        <hc:NumericUpDown hc:InfoElement.Title="Температура крышки" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
+                    <hc:ScrollViewer Grid.Row="0" Orientation="Vertical" VerticalScrollBarVisibility="Auto"
+                                     IsInertiaEnabled="True" Background="{StaticResource Style2}">
+                        <hc:ElementGroup Width="430">
+
+                            <Expander ExpandDirection="Down" Header="Входные параметры"
+                                      Background="{StaticResource Style1}">
+                                <hc:ElementGroup>
+                                    <Border Background="{StaticResource Style2}">
+                                        <hc:Divider Content="Геометрические параметры канала"
+                                                    Background="{StaticResource Style2}" Margin="0 5" />
+                                    </Border>
+
+
+                                    <StackPanel Background="{StaticResource Style3}">
+
+                                        <hc:NumericUpDown hc:InfoElement.Title="Длина"
+                                                          hc:InfoElement.TitlePlacement="Left"
+                                                          hc:InfoElement.TitleWidth="340" hc:Minimum="0.01"
+                                                          hc:Increment="0.01"
+                                                          Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2"
+                                                          HorizontalAlignment="Stretch" />
+                                        <hc:NumericUpDown hc:InfoElement.Title="Ширина"
+                                                          hc:InfoElement.TitlePlacement="Left"
+                                                          hc:InfoElement.TitleWidth="340" hc:Minimum="0.001"
+                                                          hc:Increment="0.001"
+                                                          Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2"
+                                                          HorizontalAlignment="Stretch" />
+                                        <hc:NumericUpDown hc:InfoElement.Title="Глубина"
+                                                          hc:InfoElement.TitlePlacement="Left"
+                                                          hc:InfoElement.TitleWidth="340" hc:Minimum="0.1"
+                                                          hc:Increment="0.1"
+                                                          Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2"
+                                                          HorizontalAlignment="Stretch" />
+
                                     </StackPanel>
-                                </Border>
+
+
+                                    <Border Background="{StaticResource Style2}">
+                                        <hc:Divider Content="Выбор материала" Background="{StaticResource DangerBrush}"
+                                                    Margin="0 5" />
+                                    </Border>
+                                    <hc:ElementGroup>
+                                        <hc:ComboBox />
+                                    </hc:ElementGroup>
+
+
+                                    <Border Background="{StaticResource Style2}">
+                                        <hc:Divider Content="Параметры свойств материала"
+                                                    Background="{StaticResource DangerBrush}" Margin="0 5" />
+                                    </Border>
+                                    <StackPanel Background="{StaticResource Style3}">
+                                        <hc:NumericUpDown hc:InfoElement.Title="Плотность"
+                                                          hc:InfoElement.TitlePlacement="Left"
+                                                          hc:InfoElement.TitleWidth="340" hc:Minimum="1"
+                                                          hc:Increment="1" Style="{StaticResource NumericUpDownExtend}"
+                                                          ValueFormat="N2" HorizontalAlignment="Stretch" />
+                                        <hc:NumericUpDown hc:InfoElement.Title="Удельная теплоёмкость"
+                                                          hc:InfoElement.TitlePlacement="Left"
+                                                          hc:InfoElement.TitleWidth="340" hc:Minimum="1"
+                                                          hc:Increment="1" Style="{StaticResource NumericUpDownExtend}"
+                                                          ValueFormat="N2" HorizontalAlignment="Stretch" />
+                                        <hc:NumericUpDown hc:InfoElement.Title="Температура плавления"
+                                                          hc:InfoElement.TitlePlacement="Left"
+                                                          hc:InfoElement.TitleWidth="340" hc:Minimum="1"
+                                                          hc:Increment="1" Style="{StaticResource NumericUpDownExtend}"
+                                                          ValueFormat="N2" HorizontalAlignment="Stretch" />
+                                    </StackPanel>
+
+                                </hc:ElementGroup>
                             </Expander>
 
-                            <Expander ExpandDirection="Down" Header="Параметры математической модели">
-                                <StackPanel>
-                                    <GroupBox Header="Параметры метода решения" hc:InfoElement.TitlePlacement="Top" Style="{StaticResource GroupBoxTab}">
-                                        <StackPanel>
-                                            <hc:NumericUpDown hc:InfoElement.Title="Шаг расчёта по длине канала" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                        </StackPanel>
-                                    </GroupBox>
 
-                                    <GroupBox Header="Эмпирические коэффициенты математической модели" hc:InfoElement.TitlePlacement="Top" Style="{StaticResource GroupBoxTab}">
-                                        <StackPanel>
-                                            <hc:NumericUpDown hc:InfoElement.Title="Коэффициент консистенции при температуре приведения" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                            <hc:NumericUpDown hc:InfoElement.Title="Температурный коэффициент вязкости материала" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                            <hc:NumericUpDown hc:InfoElement.Title="Температура приведения" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                            <hc:NumericUpDown hc:InfoElement.Title="Индекс течения материала" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                            <hc:NumericUpDown hc:InfoElement.Title="Коэффициент теплоотдачи от крышки канала к материалу" hc:InfoElement.TitlePlacement="Left" hc:Minimum="0.01" hc:Increment="0.01" Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2" HorizontalAlignment="Stretch"/>
-                                        </StackPanel>
-                                    </GroupBox>
-                                </StackPanel>
+                            <Expander ExpandDirection="Down" Header="Варьируемые параметры"
+                                      Background="{StaticResource Style1}">
+
+                                <hc:ElementGroup Background="{StaticResource Style3}">
+                                    <hc:NumericUpDown hc:InfoElement.Title="Скорость движения крышки"
+                                                      hc:InfoElement.TitlePlacement="Left"
+                                                      hc:InfoElement.TitleWidth="340" hc:Minimum="0.1"
+                                                      hc:Increment="0.1" Style="{StaticResource NumericUpDownExtend}"
+                                                      ValueFormat="N2" HorizontalAlignment="Stretch" />
+                                    <hc:NumericUpDown hc:InfoElement.Title="Температура крышки"
+                                                      hc:InfoElement.TitlePlacement="Left"
+                                                      hc:InfoElement.TitleWidth="340" hc:Minimum="1" hc:Increment="1"
+                                                      Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2"
+                                                      HorizontalAlignment="Stretch" />
+                                </hc:ElementGroup>
+
                             </Expander>
-                        </StackPanel>
+
+
+                            <Expander ExpandDirection="Down" Header="Параметры математической модели"
+                                      Background="{StaticResource Style1}">
+                                <hc:ElementGroup>
+                                    <Border Background="{StaticResource Style2}">
+                                        <hc:Divider Content="Параметры метода решения"
+                                                    Background="{StaticResource DangerBrush}" Margin="0 5" />
+                                    </Border>
+                                    <hc:ElementGroup Background="{StaticResource Style3}">
+                                        <hc:NumericUpDown hc:InfoElement.Title="Шаг расчёта по длине канала"
+                                                          hc:InfoElement.TitlePlacement="Left"
+                                                          hc:InfoElement.TitleWidth="340" hc:Minimum="0.1"
+                                                          hc:Increment="0.1"
+                                                          Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2"
+                                                          HorizontalAlignment="Stretch" />
+                                    </hc:ElementGroup>
+                                    <Border Background="{StaticResource Style2}">
+                                        <hc:Divider Content="Эмпирические коэффициенты математической модели"
+                                                    Background="{StaticResource DangerBrush}" Margin="0 5" />
+                                    </Border>
+                                    <hc:ElementGroup Background="{StaticResource Style3}">
+                                        <hc:NumericUpDown
+                                            hc:InfoElement.Title="Коэффициент консистенции при температуре приведения"
+                                            hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="340"
+                                            hc:Minimum="1" hc:Increment="1"
+                                            Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2"
+                                            HorizontalAlignment="Stretch" />
+                                        <hc:NumericUpDown
+                                            hc:InfoElement.Title="Температурный коэффициент вязкости материала"
+                                            hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="340"
+                                            hc:Minimum="0.001" hc:Increment="0.001"
+                                            Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2"
+                                            HorizontalAlignment="Stretch" />
+                                        <hc:NumericUpDown hc:InfoElement.Title="Температура приведения"
+                                                          hc:InfoElement.TitlePlacement="Left"
+                                                          hc:InfoElement.TitleWidth="340" hc:Minimum="1"
+                                                          hc:Increment="1" Style="{StaticResource NumericUpDownExtend}"
+                                                          ValueFormat="N2" HorizontalAlignment="Stretch" />
+                                        <hc:NumericUpDown hc:InfoElement.Title="Индекс течения материала"
+                                                          hc:InfoElement.TitlePlacement="Left"
+                                                          hc:InfoElement.TitleWidth="340" hc:Minimum="0.01"
+                                                          hc:Increment="0.01"
+                                                          Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2"
+                                                          HorizontalAlignment="Stretch" />
+                                        <hc:NumericUpDown
+                                            hc:InfoElement.Title="Коэффициент теплоотдачи от крышки канала к материалу"
+                                            hc:InfoElement.TitlePlacement="Left" hc:InfoElement.TitleWidth="340"
+                                            hc:Minimum="1" hc:Increment="1"
+                                            Style="{StaticResource NumericUpDownExtend}" ValueFormat="N2"
+                                            HorizontalAlignment="Stretch" />
+                                    </hc:ElementGroup>
+
+                                </hc:ElementGroup>
+                            </Expander>
+                        </hc:ElementGroup>
                     </hc:ScrollViewer>
-
-                    <Button Grid.Row="1" HorizontalAlignment="Left" Content="ПОПА КНОПКА"></Button>
+                    <Button Grid.Row="1" HorizontalAlignment="Left" Content="ПОПА КНОПКА" />
                 </Grid>
             </Expander>
-            <Label Content="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" FontSize="40"></Label>
+            <Label Content="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" FontSize="40" />
         </StackPanel>
 
-        <!--<Expander ExpandDirection="Right">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="50" />
-                </Grid.RowDefinitions>
-                <hc:ScrollViewer Grid.Row="0" Orientation="Vertical" VerticalScrollBarVisibility="Auto" IsInertiaEnabled="True">
-
-                    <hc:PropertyGrid SelectedObject="{Binding DemoModel}"  Width="300" HorizontalAlignment="Left" ShowSortButton="False" hc:ScrollViewer.IsInertiaEnabled="True"/>
-
-                </hc:ScrollViewer>
-                <Button Grid.Row="1" HorizontalAlignment="Left" Content="ПОПА КНОПКА"></Button>
-            </Grid>
-        </Expander>-->
-
-        <!--<Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Expander ExpandDirection="Right" Grid.Column="0" >
-                <StackPanel Width="300" HorizontalAlignment="Left">
-                    <hc:PropertyGrid SelectedObject="{Binding DemoModel}" HorizontalAlignment="Left"/>
-                    <Button HorizontalAlignment="Left" Content="ПОПА КНОПКА"></Button>
-                </StackPanel>
-            </Expander>
-        </Grid>-->
-
-        <!--<TabControl Grid.Row="1">
-            <TabItem Header="Гистограмма">
-                
-            </TabItem>
-            <TabItem Header="NRU">
-                <TabItem.Content>
-                    <TextBox x:Name="NRUTextBox" IsReadOnly="True" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" FontFamily="Lucida Console"/>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem Header="LRU">
-                <TabItem.Content>
-                    <TextBox x:Name="LRUTextBox" IsReadOnly="True" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" FontFamily="Lucida Console"/>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem Header="FIFO">
-                <TabItem.Content>
-                    <TextBox x:Name="FIFOTextBox" Text="{Binding FIFOLog}" IsReadOnly="True" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" FontFamily="Lucida Console"/>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem Header="«Вторая попытка»">
-                <TabItem.Content>
-                    <TextBox x:Name="SCTextBox" IsReadOnly="True" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" FontFamily="Lucida Console"/>
-                </TabItem.Content>
-            </TabItem>
-            <TabItem Header="«Часы»">
-                <TabItem.Content>
-                    <TextBox x:Name="ClockTextBox" IsReadOnly="True" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto" FontFamily="Lucida Console"/>
-                </TabItem.Content>
-            </TabItem>
-        </TabControl>-->
     </Grid>
 </Window>
