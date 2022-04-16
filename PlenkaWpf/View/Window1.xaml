@@ -39,7 +39,39 @@
             <MenuItem Header="Справка">
             </MenuItem>
         </Menu>
-        <hc:PropertyGrid Grid.Row="1" SelectedObject="{Binding DemoModel}" Margin="0,0,486,0"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+           
+            <Expander ExpandDirection="Right">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+                    <hc:ScrollViewer Grid.Row="0" Orientation="Vertical" VerticalScrollBarVisibility="Auto" IsInertiaEnabled="True">
+                        
+                            <hc:PropertyGrid SelectedObject="{Binding DemoModel}"  Width="300" HorizontalAlignment="Left" ShowSortButton="False" hc:ScrollViewer.IsInertiaEnabled="True"/>
+                        
+                    </hc:ScrollViewer>
+                    <Button Grid.Row="1" HorizontalAlignment="Left" Content="ПОПА КНОПКА"></Button>
+                </Grid>
+            </Expander>
+            <Label Content="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" FontSize="40"></Label>
+        </StackPanel>
+        
+        <!--<Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Expander ExpandDirection="Right" Grid.Column="0" >
+                <StackPanel Width="300" HorizontalAlignment="Left">
+                    <hc:PropertyGrid SelectedObject="{Binding DemoModel}" HorizontalAlignment="Left"/>
+                    <Button HorizontalAlignment="Left" Content="ПОПА КНОПКА"></Button>
+                </StackPanel>
+            </Expander>
+        </Grid>-->
+
 
         <!--<TabControl Grid.Row="1">
             <TabItem Header="Гистограмма">
