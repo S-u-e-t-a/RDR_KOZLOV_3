@@ -48,10 +48,16 @@
                         <RowDefinition/>
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
-                    <hc:ScrollViewer Grid.Row="0" Orientation="Vertical" VerticalScrollBarVisibility="Auto" IsInertiaEnabled="True">
-                        
-                            <hc:PropertyGrid SelectedObject="{Binding DemoModel}"  Width="300" HorizontalAlignment="Left" ShowSortButton="False" hc:ScrollViewer.IsInertiaEnabled="True"/>
-                        
+                    <hc:ScrollViewer x:Name="ScrollViewer" Grid.Row="0"
+                                     Orientation="Vertical"
+                                     VerticalScrollBarVisibility="Auto"
+                                     IsInertiaEnabled="True">
+                        <hc:PropertyGrid x:Name="ProcessGrid" SelectedObject="{Binding DemoModel}"
+                                         PreviewMouseWheel="ProcessGrid_OnMouseWheel"
+                                         
+                                         Width="300" HorizontalAlignment="Left"
+                                         ShowSortButton="False"
+                                         hc:ScrollViewer.IsInertiaEnabled="True"/>
                     </hc:ScrollViewer>
                     <Button Grid.Row="1" HorizontalAlignment="Left" Content="ПОПА КНОПКА"></Button>
                 </Grid>
