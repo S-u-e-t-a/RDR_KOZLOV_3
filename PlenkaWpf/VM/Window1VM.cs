@@ -36,7 +36,9 @@ namespace PlenkaWpf.VM
         [Category("Входные параметры")]
         [DisplayName("Температура плавления")]
         public int MeltingTemperature { get; set; }
-
+        /// <summary>
+        ///  
+        /// </summary>
         [Category("Варьируемые параметры")]
         [DisplayName("Скорость крышки")]
         public int CapSpeed { get; set; }
@@ -44,7 +46,9 @@ namespace PlenkaWpf.VM
         [Category("Варьируемые параметры")]
         [DisplayName("Температура крышки")]
         public int CapTemperature { get; set; }
-
+        /// <summary>
+        ///  
+        /// </summary>
         [Category("Параметры математической модели")]
         [DisplayName("Шаг расчёта по длине канала")]
         public int Step { get; set; }

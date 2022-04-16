@@ -41,7 +41,7 @@
         </Menu>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-           
+
             <Expander ExpandDirection="Right">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -49,16 +49,55 @@
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
                     <hc:ScrollViewer Grid.Row="0" Orientation="Vertical" VerticalScrollBarVisibility="Auto" IsInertiaEnabled="True">
-                        
-                            <hc:PropertyGrid SelectedObject="{Binding DemoModel}"  Width="300" HorizontalAlignment="Left" ShowSortButton="False" hc:ScrollViewer.IsInertiaEnabled="True"/>
-                        
+                        <StackPanel>
+                            <Expander ExpandDirection="Down" Header="Входные параметры">
+                                <StackPanel>
+                                    <hc:NumericUpDown hc:TitleElement.Title="Длина" hc:TitleElement.TitlePlacement="Top">
+
+                                    </hc:NumericUpDown>
+                                    <hc:NumericUpDown hc:TitleElement.Title="Ширина" hc:TitleElement.TitlePlacement="Top">
+
+                                    </hc:NumericUpDown>
+                                    <hc:NumericUpDown hc:TitleElement.Title="Глубина" hc:TitleElement.TitlePlacement="Top">
+
+                                    </hc:NumericUpDown>
+                                </StackPanel>
+
+                            </Expander>
+
+                            <Expander ExpandDirection="Down" Header="Варьируемые параметры">
+
+                            </Expander>
+
+                            <Expander ExpandDirection="Down" Header="Параметры математической модели">
+
+                            </Expander>
+                        </StackPanel>
+
+
                     </hc:ScrollViewer>
+
                     <Button Grid.Row="1" HorizontalAlignment="Left" Content="ПОПА КНОПКА"></Button>
                 </Grid>
             </Expander>
             <Label Content="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" FontSize="40"></Label>
         </StackPanel>
-        
+
+        <!--<Expander ExpandDirection="Right">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <hc:ScrollViewer Grid.Row="0" Orientation="Vertical" VerticalScrollBarVisibility="Auto" IsInertiaEnabled="True">
+
+                    <hc:PropertyGrid SelectedObject="{Binding DemoModel}"  Width="300" HorizontalAlignment="Left" ShowSortButton="False" hc:ScrollViewer.IsInertiaEnabled="True"/>
+
+                </hc:ScrollViewer>
+                <Button Grid.Row="1" HorizontalAlignment="Left" Content="ПОПА КНОПКА"></Button>
+            </Grid>
+        </Expander>-->
+
         <!--<Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
@@ -71,7 +110,6 @@
                 </StackPanel>
             </Expander>
         </Grid>-->
-
 
         <!--<TabControl Grid.Row="1">
             <TabItem Header="Гистограмма">
