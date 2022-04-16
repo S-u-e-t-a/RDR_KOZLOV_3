@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PlenkaWpf.VM;
 
 namespace PlenkaWpf.View
 {
@@ -22,6 +23,9 @@ namespace PlenkaWpf.View
         public Window1()
         {
             InitializeComponent();
+            var vm = new Window1VM();
+            DataContext = vm;
+            vm.ClosingRequest += (sender, e) => Close();
         }
     }
 }

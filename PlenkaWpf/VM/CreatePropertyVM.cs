@@ -54,6 +54,10 @@ public class CreatePropertyVM : ViewModelBase
                 EditingProperty.Unit = TempProperty.Unit;
                 EditingProperty.UnitId = TempProperty.UnitId;
                 EditingProperty.PropertyName = TempProperty.PropertyName;
+                if (!Db.Properties.Contains(EditingProperty))
+                {
+                    Db.Properties.Add(EditingProperty);
+                }
                 Db.SaveChanges();
                 OnClosingRequest();
             }));

@@ -5,7 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlenkaWpf.View"
+        xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:Window1VM}"
         Title="Window1" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
