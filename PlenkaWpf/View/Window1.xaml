@@ -163,7 +163,7 @@
                                         <hc:Divider Content="Эмпирические коэффициенты математической модели"
                                                     Background="{StaticResource DangerBrush}" Margin="0 5" />
                                     </Border>
-                                    <hc:ElementGroup Background="{StaticResource Style3}">
+                                    <StackPanel Background="{StaticResource Style3}">
                                         <hc:NumericUpDown
                                             hc:InfoElement.Title="Коэффициент консистенции при температуре приведения, Па·сⁿ"
                                             hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
@@ -178,18 +178,20 @@
                                             hc:Increment="0.001" hc:Value="0.018"
                                             Style="{StaticResource NumericUpDownExtend}"
                                             HorizontalAlignment="Stretch" />
-                                        <hc:NumericUpDown hc:InfoElement.Title="Температура приведения, °С"
-                                                          hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
-                                                          hc:InfoElement.TitleWidth="390" hc:Minimum="1"
-                                                          hc:Increment="1" hc:Value="200"
-                                                          Style="{StaticResource NumericUpDownExtend}"
-                                                          HorizontalAlignment="Stretch" />
-                                        <hc:NumericUpDown hc:InfoElement.Title="Индекс течения материала"
-                                                          hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
-                                                          hc:InfoElement.TitleWidth="390" hc:Minimum="0.01"
-                                                          hc:Increment="0.01" hc:Value="0.35"
-                                                          Style="{StaticResource NumericUpDownExtend}"
-                                                          HorizontalAlignment="Stretch" />
+                                        <hc:NumericUpDown 
+                                            hc:InfoElement.Title="Температура приведения, °С"
+                                            hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
+                                            hc:InfoElement.TitleWidth="390" hc:Minimum="1"
+                                            hc:Increment="1" hc:Value="200"
+                                            Style="{StaticResource NumericUpDownExtend}"
+                                            HorizontalAlignment="Stretch" />
+                                        <hc:NumericUpDown 
+                                            hc:InfoElement.Title="Индекс течения материала"
+                                            hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
+                                            hc:InfoElement.TitleWidth="390" hc:Minimum="0.01"
+                                            hc:Increment="0.01" hc:Value="0.35"
+                                            Style="{StaticResource NumericUpDownExtend}"
+                                            HorizontalAlignment="Stretch" />
                                         <hc:NumericUpDown
                                             hc:InfoElement.Title="Коэффициент теплоотдачи от крышки канала к материалу, Вт/(м²·°С)"
                                             hc:InfoElement.TitlePlacement="Left" Margin="10 5"
@@ -197,7 +199,7 @@
                                             hc:Increment="1" hc:Value="500"
                                             Style="{StaticResource NumericUpDownExtend}"
                                             HorizontalAlignment="Stretch" />
-                                    </hc:ElementGroup>
+                                    </StackPanel>
                                 </hc:ElementGroup>
                             </Expander>
                         </hc:ElementGroup>
