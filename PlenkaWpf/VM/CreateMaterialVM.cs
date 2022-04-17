@@ -49,7 +49,7 @@ internal class CreateMaterialVM : ViewModelBase
                 db.MembraneObjects.Add(MembraneObject);
                 db.SaveChanges();
                 OnClosingRequest();
-            }, o => MembraneObject?.ObName.Length > 0);
+            }, o => MembraneObject?.ObName.Length > 0 && MembraneObject.Type!=null);
         }
     }
 

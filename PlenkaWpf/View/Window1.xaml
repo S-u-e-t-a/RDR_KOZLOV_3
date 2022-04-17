@@ -76,21 +76,21 @@
                                                           hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                                           hc:InfoElement.TitleWidth="390" hc:Minimum="0.01"
                                                           hc:Increment="0.01"
-                                                          hc:Value="0.27"
+                                                          hc:Value="{Binding Length}"
                                                           Style="{StaticResource NumericUpDownExtend}"
                                                           HorizontalAlignment="Stretch" />
                                         <hc:NumericUpDown hc:InfoElement.Title="Ширина, м"
                                                           hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                                           hc:InfoElement.TitleWidth="390" hc:Minimum="0.001"
                                                           hc:Increment="0.001"
-                                                          hc:Value="0.012"
+                                                          hc:Value="{Binding Width}"
                                                           Style="{StaticResource NumericUpDownExtend}"
                                                           HorizontalAlignment="Stretch" />
                                         <hc:NumericUpDown hc:InfoElement.Title="Глубина, м"
                                                           hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                                           hc:InfoElement.TitleWidth="390" hc:Minimum="0.1"
                                                           hc:Increment="0.1"
-                                                          hc:Value="10.6"
+                                                          hc:Value="{Binding Depth}"
                                                           Style="{StaticResource NumericUpDownExtend}"
                                                           HorizontalAlignment="Stretch" />
                                     </StackPanel>
@@ -109,19 +109,19 @@
                                         <hc:NumericUpDown hc:InfoElement.Title="Плотность кг/м³" 
                                             hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                                           hc:InfoElement.TitleWidth="390" hc:Minimum="1"
-                                                          hc:Increment="1" hc:Value="1060" 
+                                                          hc:Increment="1" hc:Value="{Binding Density}" 
                                                           Style="{StaticResource NumericUpDownExtend}"
                                                           HorizontalAlignment="Stretch" />
                                         <hc:NumericUpDown hc:InfoElement.Title="Удельная теплоёмкость, Дж/(кг·°С)"
                                                           hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                                           hc:InfoElement.TitleWidth="390" hc:Minimum="1"
-                                                          hc:Increment="1" hc:Value="1200"
+                                                          hc:Increment="1" hc:Value="{Binding SpecifiсHeatCapacity}"
                                                           Style="{StaticResource NumericUpDownExtend}"
                                                           HorizontalAlignment="Stretch" />
                                         <hc:NumericUpDown hc:InfoElement.Title="Температура плавления, °С"
                                                           hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                                           hc:InfoElement.TitleWidth="390" hc:Minimum="1"
-                                                          hc:Increment="1" hc:Value="170"
+                                                          hc:Increment="1" hc:Value="{Binding MeltingTemperature}"
                                                           Style="{StaticResource NumericUpDownExtend}"
                                                           HorizontalAlignment="Stretch" />
                                     </StackPanel>
@@ -133,13 +133,13 @@
                                     <hc:NumericUpDown hc:InfoElement.Title="Скорость движения крышки, м/с"
                                                       hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                                       hc:InfoElement.TitleWidth="390" hc:Minimum="0.1"
-                                                      hc:Increment="0.1" hc:Value="1.5"
+                                                      hc:Increment="0.1" hc:Value="{Binding CapSpeed}"
                                                       Style="{StaticResource NumericUpDownExtend}"
                                                       HorizontalAlignment="Stretch" />
                                     <hc:NumericUpDown hc:InfoElement.Title="Температура крышки, °С"
                                                       hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                                       hc:InfoElement.TitleWidth="390" hc:Minimum="1" 
-                                                      hc:Increment="1" hc:Value="210"
+                                                      hc:Increment="1" hc:Value="{Binding CapTemperature}"
                                                       Style="{StaticResource NumericUpDownExtend}"
                                                       HorizontalAlignment="Stretch" />
                                 </hc:ElementGroup>
@@ -155,6 +155,7 @@
                                         <hc:NumericUpDown hc:InfoElement.Title="Шаг расчёта по длине канала"
                                                           hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                                           hc:InfoElement.TitleWidth="390" hc:Minimum="0.1"
+                                                          hc:Value="{Binding Step}"
                                                           hc:Increment="0.1"
                                                           Style="{StaticResource NumericUpDownExtend}"
                                                           HorizontalAlignment="Stretch" />
@@ -168,35 +169,35 @@
                                             hc:InfoElement.Title="Коэффициент консистенции при температуре приведения, Па·сⁿ"
                                             hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                             hc:InfoElement.TitleWidth="390" hc:Minimum="1" 
-                                            hc:Increment="1" hc:Value="11000"
+                                            hc:Increment="1" hc:Value="{Binding СonsСoef}"
                                             Style="{StaticResource NumericUpDownExtend}"
                                             HorizontalAlignment="Stretch" />
                                         <hc:NumericUpDown
                                             hc:InfoElement.Title="Температурный коэффициент вязкости материала, 1/°С"
                                             hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                             hc:InfoElement.TitleWidth="390" hc:Minimum="0.001" 
-                                            hc:Increment="0.001" hc:Value="0.018"
+                                            hc:Increment="0.001" hc:Value="{Binding TempСoef}"
                                             Style="{StaticResource NumericUpDownExtend}"
                                             HorizontalAlignment="Stretch" />
                                         <hc:NumericUpDown 
                                             hc:InfoElement.Title="Температура приведения, °С"
                                             hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                             hc:InfoElement.TitleWidth="390" hc:Minimum="1"
-                                            hc:Increment="1" hc:Value="200"
+                                            hc:Increment="1" hc:Value="{Binding RefTemp}"
                                             Style="{StaticResource NumericUpDownExtend}"
                                             HorizontalAlignment="Stretch" />
                                         <hc:NumericUpDown 
                                             hc:InfoElement.Title="Индекс течения материала"
                                             hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
                                             hc:InfoElement.TitleWidth="390" hc:Minimum="0.01"
-                                            hc:Increment="0.01" hc:Value="0.35"
+                                            hc:Increment="0.01" hc:Value="{Binding MatFlowIndex}"
                                             Style="{StaticResource NumericUpDownExtend}"
                                             HorizontalAlignment="Stretch" />
                                         <hc:NumericUpDown
                                             hc:InfoElement.Title="Коэффициент теплоотдачи от крышки канала к материалу, Вт/(м²·°С)"
                                             hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                             hc:InfoElement.TitleWidth="390" hc:Minimum="1" 
-                                            hc:Increment="1" hc:Value="500"
+                                            hc:Increment="1" hc:Value="{Binding HeatCoef}"
                                             Style="{StaticResource NumericUpDownExtend}"
                                             HorizontalAlignment="Stretch" />
                                     </StackPanel>
@@ -204,13 +205,14 @@
                             </Expander>
                         </hc:ElementGroup>
                     </hc:ScrollViewer>
-                    <Button Grid.Row="2" HorizontalAlignment="Center" Content="Рассчитать" Background="{StaticResource Style3}"/>
+                    <Button Grid.Row="2" HorizontalAlignment="Center" Content="Рассчитать" Background="{StaticResource Style3}" Command="{Binding CalcCommand}"/>
                 </Grid>
             </Expander>
             
             <TabControl Grid.Column="1" Style="{StaticResource TabControlInLine}">
                 <TabItem Header="График распределения температуры" HorizontalAlignment="Stretch">
-                    <lvc:CartesianChart x:Name="tempChart"  LegendLocation="None" Series="{Binding SeriesCol}" >
+                    <lvc:CartesianChart x:Name="tempChart"  LegendLocation="None" Series="{Binding Results.Ti}" >
+
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis x:Name="tempChartAxisX" Title="Координата по длине канал, м" MinValue="0">
                                 <lvc:Axis.Separator>
@@ -228,7 +230,7 @@
                     </lvc:CartesianChart>
                 </TabItem>
                 <TabItem Header="График распределения вязкости">
-                    <lvc:CartesianChart x:Name="Chart"  LegendLocation="None" Series="{Binding SeriesCol}" >
+                    <lvc:CartesianChart x:Name="Chart"  LegendLocation="None" Series="{Binding Results.Ni}" >
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis x:Name="ChartAxisX" Title="Координата по длине канал, м" MinValue="0">
                                 <lvc:Axis.Separator>

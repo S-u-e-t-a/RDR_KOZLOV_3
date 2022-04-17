@@ -18,7 +18,7 @@ public class MaterialExplorerVM : ViewModelBase
     {
         con.SavedChanges += (sender, args) => { OnPropertyChanged(nameof(Materials)); };
         //var con = DbContextSingleton.GetInstance();
-        //Materials = con.MembraneObjects.Where(o=>o.TypeId==1).;
+        Materials = con.MembraneObjects.Local.ToObservableCollection();
     }
 
     #endregion
@@ -28,13 +28,10 @@ public class MaterialExplorerVM : ViewModelBase
     #region Properties
 
     private MembraneContext con = DbContextSingleton.GetInstance();
-    public List<MembraneObject> Materials
+    public ObservableCollection<MembraneObject> Materials
     {
-        get
-        {
-            return con.MembraneObjects.Where(o => o.TypeId == 1).ToList();
-        }
-        //set;
+        get;
+        set;
     }
 
     public MembraneObject SelectedMaterial { get; set; }

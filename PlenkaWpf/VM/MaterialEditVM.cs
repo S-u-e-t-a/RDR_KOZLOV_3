@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
 using PlenkaWpf.View;
@@ -40,6 +41,16 @@ public class MaterialEditVM : ViewModelBase
             return _openSelectPropertyesToChange ?? (_openSelectPropertyesToChange =
                 new RelayCommand(o => { ShowChildWindow(new SelectProperties(Material)); }));
         }
+    }
+
+    private RelayCommand _saveChanges;
+
+    public RelayCommand SaveChanges
+    {
+        get { return _saveChanges ?? (_saveChanges = new RelayCommand(o =>
+        {
+            DbContextSingleton.GetInstance().SaveChanges();
+        })); }
     }
 
     #endregion

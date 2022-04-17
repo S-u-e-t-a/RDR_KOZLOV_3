@@ -31,14 +31,14 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <hc:ElementGroup Orientation="Horizontal" Margin="5" Height="40">
-                            <Label Content="{Binding Path=Prop.PropertyName, UpdateSourceTrigger=PropertyChanged}"
-                                   Height="30" Width="100" />
+                            <Label Content="{Binding Path=Prop.PropertyName, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left"
+                                   Height="30" Width="500" />
 
                             <hc:NumericUpDown
                                 Value="{Binding Path=Value1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                 Height="30" Width="70" />
                             <Label Content="{Binding Path=Prop.Unit.UnitName, UpdateSourceTrigger=PropertyChanged}"
-                                   Height="30" />
+                                   Height="30" Width="50"/>
                         </hc:ElementGroup>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -47,9 +47,10 @@
 
         <Grid Row="1">
             <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="AddButton" Width="100" Content="Изменить свойства"
+                <Button Width="150" Content="Применить" Command="{Binding SaveChanges}"/>
+                <Button x:Name="AddButton" Width="150" Content="Изменить свойства"
                         Command="{Binding OpenSelectPropertyesToChange}" />
-                <Button Width="100" Content="Удалить" />
+                <Button Width="150" Content="Удалить" />
             </hc:ElementGroup>
         </Grid>
     </Grid>
