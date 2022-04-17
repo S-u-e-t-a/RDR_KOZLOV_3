@@ -7,9 +7,15 @@
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:MaterialExplorerVM}"
-        d:DesignHeight="450" d:DesignWidth="800"
-        WindowStartupLocation="CenterScreen">
-
+        d:DesignHeight="450"
+        Title="Просмотр материалов" 
+        WindowStartupLocation="CenterScreen" Width="430">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
+        <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
+        <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -17,20 +23,19 @@
         </Grid.RowDefinitions>
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Materials}" CanUserAddRows="False"
                   IsReadOnly="True"
-                  SelectedItem="{Binding SelectedMaterial}">
+                  SelectedItem="{Binding SelectedMaterial}" Background="{StaticResource Style2}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding MaterialId}" />
                 <DataGridTextColumn Header="Имя" Binding="{Binding MateriadName}" />
                 <DataGridTextColumn Header="Количество параметров" Binding="{Binding Values.Count}" />
-
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Row="1">
-            <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="AddButton" Width="100" Content="Добавить" Command="{Binding AddNewMaterial }" />
-                <Button x:Name="EditButton" Width="100" Content="Изменить" Command="{Binding EditMaterial }" />
-                <Button x:Name="ExitButton" Width="100" Content="Удалить" />
-            </hc:ElementGroup>
+        <Grid Row="1" Background="{StaticResource Style1}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                <Button x:Name="AddButton" Width="100" Content="Добавить" Command="{Binding AddNewMaterial }" Margin="0,0,10,0" Background="{StaticResource Style3}"/>
+                <Button x:Name="EditButton" Width="100" Content="Изменить" Command="{Binding EditMaterial }" Background="{StaticResource Style3}"/>
+                <Button x:Name="ExitButton" Width="100" Content="Удалить"  Margin="10,0,0,0"  Background="{StaticResource Style3}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

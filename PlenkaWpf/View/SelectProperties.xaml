@@ -7,11 +7,14 @@
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="SelectProperties" Height="450" Width="800"
+        Title="Выбор свойств" Height="450" Width="800"
         d:DataContext="{d:DesignInstance vm:SelectPropertiesVM}"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <vm:ObjectInListConverter x:Key="ObjectInListConverter" />
+        <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
+        <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
+        <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -19,7 +22,7 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <ListBox ItemsSource="{Binding AllProperties}" SelectedItem="{Binding SelectedProperty}">
+        <ListBox ItemsSource="{Binding AllProperties}" SelectedItem="{Binding SelectedProperty}" Background="{StaticResource Style2}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox Height="60" VerticalAlignment="Top" Content="{Binding PropertyName}">
@@ -59,15 +62,15 @@
                 <DataGridTextColumn Header="Единица измерения" Binding="{Binding Unit.UnitName}" />
             </DataGrid.Columns>
         </DataGrid>-->
-        <Grid Row="1">
-            <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="CreateButton" Width="100" Content="Создать" Command="{Binding CreateProperty}" />
+        <Grid Row="1" Background="{StaticResource Style1}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="CreateButton" Width="100" Content="Создать" Command="{Binding CreateProperty}" Margin="0,0,5,0"  Background="{StaticResource Style3}"/>
                 <Button x:Name="AddButton" Width="100" Content="Применить"
                         CommandParameter="{Binding ElementName=PropertyGrid, Path=SelectedItems}"
-                        Command="{Binding SelectProperties}" />
-                <Button x:Name="EditButton" Width="100" Content="Изменить" Command="{Binding EditProperty}" />
-                <Button x:Name="ExitButton" Width="100" Content="Удалить" />
-            </hc:ElementGroup>
+                        Command="{Binding SelectProperties}" Background="{StaticResource Style3}" Margin="5,0,5,0"/>
+                <Button x:Name="EditButton" Width="100" Content="Изменить" Command="{Binding EditProperty}" Background="{StaticResource Style3}" Margin="5,0,5,0"/>
+                <Button x:Name="ExitButton" Width="100" Content="Удалить" Background="{StaticResource Style3}" Margin="5,0,0,0"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" />
         </Grid>
     </Grid>
