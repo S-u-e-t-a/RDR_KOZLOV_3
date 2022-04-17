@@ -11,7 +11,7 @@ public class MaterialEditVM : ViewModelBase
 
     #region Constructors
 
-    public MaterialEditVM(Material material)
+    public MaterialEditVM(MembraneObject material)
     {
         Material = material;
         values = Material.Values;
@@ -24,7 +24,7 @@ public class MaterialEditVM : ViewModelBase
     #region Properties
 
     public ObservableCollection<Value> values { get; set; }
-    public Material Material { get; set; }
+    public MembraneObject Material { get; set; }
 
     #endregion
 

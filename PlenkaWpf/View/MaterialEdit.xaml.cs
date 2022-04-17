@@ -9,10 +9,10 @@ namespace PlenkaWpf.View;
 /// </summary>
 public partial class MaterialEdit : Window
 {
-    private readonly Material material;
+    private readonly MembraneObject material;
 
 
-    public MaterialEdit(Material material)
+    public MaterialEdit(MembraneObject material)
     {
         this.material = material;
         InitializeComponent();

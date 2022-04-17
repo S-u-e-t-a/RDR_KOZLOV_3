@@ -14,8 +14,12 @@
             <RowDefinition />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <hc:TextBox hc:InfoElement.Title="Название материала"
-                    Text="{Binding Material.MateriadName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+        <StackPanel>
+            <hc:TextBox hc:InfoElement.Title="Название материала"
+                        Text="{Binding Material.ObName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+            <hc:ComboBox ItemsSource="{Binding AllTypes}" SelectedItem="{Binding Material.Type}" DisplayMemberPath="TypeName"></hc:ComboBox>
+        </StackPanel>
+        
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,10">
             <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveMaterial}" />
             <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}" />

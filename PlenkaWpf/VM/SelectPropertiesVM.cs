@@ -33,7 +33,7 @@ public class SelectPropertiesVM : ViewModelBase
 
     #region Constructors
 
-    public SelectPropertiesVM(Material material)
+    public SelectPropertiesVM(MembraneObject material)
     {
         Material = material;
         var db = DbContextSingleton.GetInstance();
@@ -51,7 +51,7 @@ public class SelectPropertiesVM : ViewModelBase
 
     public ObservableCollection<Property> AllProperties { get; set; }
     public List<Property> AvailableProperties { get; set; }
-    public Material Material { get; set; }
+    public MembraneObject Material { get; set; }
     private readonly List<Property> _propertiesToDelete = new();
     private readonly List<Property> _propertiesToAdd = new();
     public Property SelectedProperty { get; set; }
@@ -78,7 +78,7 @@ public class SelectPropertiesVM : ViewModelBase
 
                 foreach (var property in _propertiesToAdd)
                     if (Material.Values.Select(o => o)
-                            .Where(o => o.MatId == Material.MaterialId && o.PropId == property.ProperrtyId).Count() ==
+                            .Where(o => o.MatId == Material.ObId && o.PropId == property.ProperrtyId).Count() ==
                         0)
                         Material.Values.Add(new Value {Mat = Material, Prop = property});
 

@@ -25,7 +25,7 @@ public partial class MaterialExplorer : Window
 
     private void AddButton_Click(object sender, RoutedEventArgs e)
     {
-        var win = new MaterialEdit(new Material());
+        var win = new MaterialEdit(new MembraneObject());
         win.ShowDialog();
     }
 }

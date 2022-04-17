@@ -23,7 +23,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
                 <hc:TextBox Margin="5" hc:InfoElement.Title="Имя материала" hc:InfoElement.TitlePlacement="Left"
-                            Text="{Binding Path=Material.MateriadName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            Text="{Binding Path=Material.ObName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             MinWidth="100" />
             </StackPanel>
             <ListBox Grid.Row="1" x:Name="listBox"

@@ -19,8 +19,8 @@
                   IsReadOnly="True"
                   SelectedItem="{Binding SelectedMaterial}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding MaterialId}" />
-                <DataGridTextColumn Header="Имя" Binding="{Binding MateriadName}" />
+                <DataGridTextColumn Header="ID" Binding="{Binding ObId}" />
+                <DataGridTextColumn Header="Имя" Binding="{Binding ObName}" />
                 <DataGridTextColumn Header="Количество параметров" Binding="{Binding Values.Count}" />
 
             </DataGrid.Columns>

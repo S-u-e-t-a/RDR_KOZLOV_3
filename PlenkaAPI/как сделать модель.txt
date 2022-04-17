@@ -13,9 +13,10 @@ Scaffold-DbContext "DataSource=Membrane.db" Microsoft.EntityFrameworkCore.Sqlite
 
 
 
-Materials.Load();
+MembraneObjects.Load();
 Properties.Load();
 Users.Load();
 UserTypes.Load();
 Values.Load();
 Units.Load();
+ObjectTypes.Load();

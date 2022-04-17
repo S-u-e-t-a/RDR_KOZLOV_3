@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
@@ -14,8 +16,9 @@ public class MaterialExplorerVM : ViewModelBase
 
     public MaterialExplorerVM()
     {
-        var con = DbContextSingleton.GetInstance();
-        Materials = con.Materials.Local.ToObservableCollection();
+        con.SavedChanges += (sender, args) => { OnPropertyChanged(nameof(Materials)); };
+        //var con = DbContextSingleton.GetInstance();
+        //Materials = con.MembraneObjects.Where(o=>o.TypeId==1).;
     }
 
     #endregion
@@ -24,8 +27,17 @@ public class MaterialExplorerVM : ViewModelBase
 
     #region Properties
 
-    public ObservableCollection<Material> Materials { get; set; }
-    public Material SelectedMaterial { get; set; }
+    private MembraneContext con = DbContextSingleton.GetInstance();
+    public List<MembraneObject> Materials
+    {
+        get
+        {
+            return con.MembraneObjects.Where(o => o.TypeId == 1).ToList();
+        }
+        //set;
+    }
+
+    public MembraneObject SelectedMaterial { get; set; }
 
     #endregion
 

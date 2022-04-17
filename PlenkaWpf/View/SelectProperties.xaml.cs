@@ -9,7 +9,7 @@ namespace PlenkaWpf.View;
 /// </summary>
 public partial class SelectProperties : Window
 {
-    public SelectProperties(Material material)
+    public SelectProperties(MembraneObject material)
     {
         InitializeComponent();
         var vm = new SelectPropertiesVM(material);

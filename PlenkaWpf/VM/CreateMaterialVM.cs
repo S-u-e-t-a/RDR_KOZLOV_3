@@ -1,4 +1,6 @@
-﻿using PlenkaAPI.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
 
@@ -9,7 +11,8 @@ internal class CreateMaterialVM : ViewModelBase
 {
     #region Properties
 
-    public Material Material { get; set; } = new() {MateriadName = ""};
+    public MembraneObject Material { get; set; } = new() {ObName = ""};
+    public List<ObjectType> AllTypes { get; set; }
 
     #endregion
 
@@ -17,6 +20,10 @@ internal class CreateMaterialVM : ViewModelBase
 
     #region Constructors
 
+    public CreateMaterialVM()
+    {
+        AllTypes = DbContextSingleton.GetInstance().ObjectTypes.ToList();
+    }
     #endregion
 
     #endregion
@@ -31,11 +38,12 @@ internal class CreateMaterialVM : ViewModelBase
         {
             return _saveMaterial ?? (_saveMaterial = new RelayCommand(o =>
             {
+                Material.TypeId = Material.Type.TypeId;
                 var db = DbContextSingleton.GetInstance();
-                db.Materials.Add(Material);
+                db.MembraneObjects.Add(Material);
                 db.SaveChanges();
                 OnClosingRequest();
-            }, o => Material?.MateriadName.Length > 0));
+            }, o => Material?.ObName.Length > 0));
         }
     }
 
