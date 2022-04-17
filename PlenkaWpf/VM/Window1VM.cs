@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
 using PlenkaAPI;
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
@@ -12,7 +14,12 @@ using PlenkaWpf.Utils;
 
 namespace PlenkaWpf.VM
 {
-
+    public struct CordTempN
+    {
+        public double cord { get; set; }
+        public double temp { get; set; }
+        public double n { get; set; }
+    }
     internal class Window1VM : ViewModelBase
 
     {
@@ -34,6 +41,30 @@ namespace PlenkaWpf.VM
         {
             return mat.Values.First(v => v.Prop.PropertyName == propName);
         }
+
+        private SeriesCollection seriesCollectionByDictionary(Dictionary<double, double> points)
+        {
+            var sc = new SeriesCollection();
+            var ls = new LineSeries(){Values = new ChartValues<ObservablePoint>()};
+            foreach (var point in points)
+            {
+                ls.Values.Add(new ObservablePoint(point.Key, point.Value));
+            }
+            sc.Add(ls);
+            return sc;
+        }
+
+        private List<CordTempN> cordTempNsByDictionaries(Dictionary<double, double> ti, Dictionary<double, double> ni)
+        {
+            var l = new List<CordTempN>();
+            foreach (var d in ni)
+            {
+                l.Add(new CordTempN(){cord = d.Key,temp = ti[d.Key],n=ni[d.Key]});
+            }
+
+            return l;
+        }
+
         #endregion
 
         #region Properties
@@ -204,6 +235,48 @@ namespace PlenkaWpf.VM
 
         #endregion
 
+        #region Graphics
+
+        public List<CordTempN> CordTempNs
+        {
+            get
+            {
+                if (Results.Ni != null)
+                {
+                    return cordTempNsByDictionaries(Results.Ti, Results.Ni);
+                }
+
+                return null;
+            }
+        }
+
+        public SeriesCollection SeriesCollectionTemp
+        {
+            get
+            {
+                if (Results.Ni!=null)
+                {
+                    return seriesCollectionByDictionary(Results.Ti);
+                }
+
+                return null;
+            }
+        }
+        public SeriesCollection SeriesCollectionN
+        {
+            get
+            {
+                if (Results.Ni != null)
+                {
+                    return seriesCollectionByDictionary(Results.Ni);
+                }
+
+                return null;
+            }
+        }
+
+        #endregion
+
         private CalculationResults results;
 
         public CalculationResults Results
@@ -216,8 +289,13 @@ namespace PlenkaWpf.VM
             {
                 results = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(SeriesCollectionTemp));
+                OnPropertyChanged(nameof(SeriesCollectionN));
+                OnPropertyChanged(nameof(CordTempNs));
             }
         }
+
+
 
         public double? Step
         {

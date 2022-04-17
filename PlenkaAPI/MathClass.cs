@@ -58,6 +58,11 @@ namespace PlenkaAPI
         private double step => cp.step;
 
         #endregion
+        private int GetDecimalDigitsCount(double number)
+        {
+            string[] str = number.ToString(new System.Globalization.NumberFormatInfo() { NumberDecimalSeparator = "." }).Split('.');
+            return str.Length == 2 ? str[1].Length : 0;
+        }
         public CalculationResults calculate()
         {
             var F = 0.125 * Pow(cp.H / cp.W, 2);
@@ -69,10 +74,11 @@ namespace PlenkaAPI
             var Ni = new Dictionary<double, double>();
             for (double i = 0; i <= L; i+=step)
             {
-                Ti.Add(i,Tr + (1 / b) * Log((b * qGamma + W * au) /
-                    (b * qAlpha) * (1 - Exp(-((i * b * qAlpha) /
-                    (p * c * Qch)))) + Exp(b * (T0 - Tr - (i * qAlpha) / (p * c * Qch)))));
-                Ni.Add(i,u0 * Exp(-b * (Ti[i] - Tr)) * Pow(gamma, n - 1));
+                var ii = Round(i, GetDecimalDigitsCount(step));
+                Ti.Add(ii,Round(Tr + (1 / b) * Log((b * qGamma + W * au) /
+                    (b * qAlpha) * (1 - Exp(-((ii * b * qAlpha) /
+                    (p * c * Qch)))) + Exp(b * (T0 - Tr - (ii * qAlpha) / (p * c * Qch)))),1));
+                Ni.Add(ii,Round(u0 * Exp(-b * (Ti[ii] - Tr)) * Pow(gamma, n - 1),1));
             }
 
             var Q = p * Qch * 3600;

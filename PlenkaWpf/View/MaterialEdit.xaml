@@ -33,18 +33,23 @@
             </StackPanel>
             <ListBox Grid.Row="1" x:Name="listBox"
                      ItemsSource="{Binding Path=values, UpdateSourceTrigger=PropertyChanged}" Background="{StaticResource Style2}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <hc:ElementGroup Orientation="Horizontal" Margin="5" Height="40">
-                            <Label Content="{Binding Path=Prop.PropertyName, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left"
-                                   Height="30" Width="500" Background="{StaticResource Style3}"/>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+<ListBox.ItemTemplate>
+                    <DataTemplate >
+                        <hc:ElementGroup Orientation="Horizontal" Margin="5" Height="40" Background="{StaticResource Style2}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Label Content="{Binding Path=Prop.PropertyName, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left"
+                                       Height="30" Width="500" Background="{StaticResource Style3}"/>
 
-                            <hc:NumericUpDown
-                                Value="{Binding Path=Value1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                Height="30" Width="70" Background="{StaticResource Style3}"/>
-                            <Label Content="{Binding Path=Prop.Unit.UnitName, UpdateSourceTrigger=PropertyChanged}"
-                                   Height="30" Width="50" Background="{StaticResource Style3}"/>
-                        </hc:ElementGroup>
+                                <hc:NumericUpDown
+                                    Value="{Binding Path=Value1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    Height="30" Width="120" Background="{StaticResource Style3}"/>
+                                <Label Content="{Binding Path=Prop.Unit.UnitName, UpdateSourceTrigger=PropertyChanged}"
+                                       Height="30" Width="50" Background="{StaticResource Style3}"/>
+                            </hc:ElementGroup>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
