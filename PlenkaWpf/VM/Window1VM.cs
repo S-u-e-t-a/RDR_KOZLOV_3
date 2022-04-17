@@ -123,16 +123,18 @@ namespace PlenkaWpf.VM
         #endregion
 
         #region VarProps
+
         public double? CapSpeed
         {
             get;
             set;
-        }
+        } = 1;
+
         public double? CapTemperature
         {
             get;
             set;
-        }
+        } = 1;
 
         #endregion
 
@@ -221,7 +223,7 @@ namespace PlenkaWpf.VM
         {
             get;
             set;
-        }
+        } = 0.1;
 
 
         #endregion
