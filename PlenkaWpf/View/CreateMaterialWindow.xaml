@@ -6,23 +6,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
-        Title="CreateMaterialWindow" Height="160" Width="300"
+        Title="Добавление материала" Height="160" Width="400"
         d:DataContext="{d:DesignInstance vm:CreateMaterialVM}"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
+        <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
+        <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="60" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <StackPanel>
-            <hc:TextBox hc:InfoElement.Title="Название объекта"
-                        Text="{Binding MembraneObject.ObName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-            <hc:ComboBox ItemsSource="{Binding AllTypes}" SelectedItem="{Binding MembraneObject.Type}" DisplayMemberPath="TypeName"></hc:ComboBox>
+        <StackPanel Grid.Row="0" Background="{StaticResource Style2}" >
+            <hc:TextBox hc:InfoElement.Title="Название материала"
+                    Text="{Binding MembraneObject.ObName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="10,0,10,10" Background="{StaticResource Style3}"/>
+        <hc:ComboBox ItemsSource="{Binding AllTypes}" SelectedItem="{Binding MembraneObject.Type}" DisplayMemberPath="TypeName">
         </StackPanel>
-        
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,10">
-            <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveMaterial}" />
-            <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}" />
-        </StackPanel>
+        <Grid Grid.Row="1" Background="{StaticResource Style1}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveMaterial}"  Background="{StaticResource Style3}"/>
+                <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}"  Background="{StaticResource Style3}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

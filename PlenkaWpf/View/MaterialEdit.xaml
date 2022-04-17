@@ -7,16 +7,21 @@
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
 
         mc:Ignorable="d"
-        Title="MaterialEdit" Height="450" Width="800"
+        Title="Изменение материала" Height="450" Width="800"
         d:DataContext="{d:DesignInstance vm:MaterialEditVM}"
         WindowStartupLocation="CenterScreen">
-
+    <Window.Resources>
+        <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
+        <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
+        <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <Grid>
+        <Grid Background="{StaticResource Style2}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition />
@@ -24,34 +29,37 @@
             <StackPanel Orientation="Horizontal">
                 <hc:TextBox Margin="5" hc:InfoElement.Title="Имя материала" hc:InfoElement.TitlePlacement="Left"
                             Text="{Binding Path=Material.ObName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                            MinWidth="100" />
+                            MinWidth="100" Background="{StaticResource Style3}"/>
             </StackPanel>
             <ListBox Grid.Row="1" x:Name="listBox"
-                     ItemsSource="{Binding Path=values, UpdateSourceTrigger=PropertyChanged}">
+                     ItemsSource="{Binding Path=values, UpdateSourceTrigger=PropertyChanged}" Background="{StaticResource Style2}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <hc:ElementGroup Orientation="Horizontal" Margin="5" Height="40">
                             <Label Content="{Binding Path=Prop.PropertyName, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left"
-                                   Height="30" Width="500" />
+                                   Height="30" Width="500" Background="{StaticResource Style3}"/>
 
                             <hc:NumericUpDown
                                 Value="{Binding Path=Value1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                Height="30" Width="70" />
+                                Height="30" Width="70" Background="{StaticResource Style3}"/>
                             <Label Content="{Binding Path=Prop.Unit.UnitName, UpdateSourceTrigger=PropertyChanged}"
-                                   Height="30" Width="50"/>
+                                   Height="30" Width="50" Background="{StaticResource Style3}"/>
                         </hc:ElementGroup>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
 
-        <Grid Row="1">
-            <hc:ElementGroup Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="150" Content="Применить" Command="{Binding SaveChanges}"/>
-                <Button x:Name="AddButton" Width="150" Content="Изменить свойства"
-                        Command="{Binding OpenSelectPropertyesToChange}" />
-                <Button Width="150" Content="Удалить" />
-            </hc:ElementGroup>
+        <Grid Row="1" Background="{StaticResource Style1}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="140" Content="Применить" Command="{Binding SaveChanges}"
+                        Margin="0,0,5,0" Background="{StaticResource Style3}"/>
+                <Button Width="140" Content="Изменить свойства"
+                        Command="{Binding OpenSelectPropertyesToChange}"
+                        Margin="0,0,5,0" Background="{StaticResource Style3}"/>
+                <Button Width="140" Content="Удалить" Margin="5,0,0,0"
+                        Background="{StaticResource Style3}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

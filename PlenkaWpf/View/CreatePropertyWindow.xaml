@@ -6,27 +6,32 @@
         xmlns:vm1="clr-namespace:PlenkaWpf.VM"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Title="CreatePropertyWindow" Height="200" Width="300"
+        Title="Добавление свойства материала" Height="200" Width="300"
         d:DataContext="{d:DesignInstance vm1:CreatePropertyVM}"
         WindowStartupLocation="CenterScreen">
-
+    
+    <Window.Resources>
+        <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
+        <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
+        <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <StackPanel>
+        <StackPanel Background="{StaticResource Style2}">
             <hc:TextBox Text="{Binding TempProperty.PropertyName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                        hc:InfoElement.Title="Название свойства" />
+                        hc:InfoElement.Title="Название свойства" Margin="10,0,10,10" Background="{StaticResource Style3}"/>
             <hc:ComboBox hc:InfoElement.Title="Единица измерения" DisplayMemberPath="UnitName"
                          ItemsSource="{Binding AllUnits, Mode=OneWay}"
-                         SelectedItem="{Binding TempProperty.Unit, Mode=TwoWay}" />
-
+                         SelectedItem="{Binding TempProperty.Unit, Mode=TwoWay}" Margin="10,0,10,10" Background="{StaticResource Style3}"/>
         </StackPanel>
-        <Grid Row="1">
+        <Grid Row="1" Background="{StaticResource Style1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="AddButton" Width="100" Margin="5" Content="Применить" Command="{Binding SaveProperty}" />
-                <Button x:Name="ExitButton" Width="100" Margin="5" Content="Отмена" Command="{Binding CloseWindow}" />
+                <Button x:Name="AddButton" Width="100" Margin="5" Content="Применить" Command="{Binding SaveProperty}" Background="{StaticResource Style3}"/>
+                <Button x:Name="ExitButton" Width="100" Margin="5" Content="Отмена" Command="{Binding CloseWindow}" Background="{StaticResource Style3}"/>
             </StackPanel>
         </Grid>
     </Grid>

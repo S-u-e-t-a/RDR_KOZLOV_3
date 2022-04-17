@@ -8,53 +8,54 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:Window1VM}"
-        Title="Window1" Height="450" Width="800" FontSize="14">
+        Title="Программный комплекс для исследования неизотермического течения аномально-вязких материалов" Height="450" Width="800" FontSize="14">
     <Window.Resources>
         <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
         <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
         <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
     </Window.Resources>
+
     <Grid Background="{StaticResource Style3}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="193*"/>
+            <ColumnDefinition Width="605*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" Background="{StaticResource Style2}">
+        <Menu Grid.Row="0" Background="{StaticResource Style2}" Grid.ColumnSpan="3">
             <MenuItem Header="Файл">
                 <MenuItem.Icon>
                     <Image Source="pack://application:,,,/resources/file.png" />
                 </MenuItem.Icon>
-                <Separator />
                 <MenuItem Header="Экспортировать результаты">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/resources/save.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Сменить учётную запись">
-                    <!--<MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/save.png" />
-                    </MenuItem.Icon>-->
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/resources/user.png" />
+                    </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Выход">
-                    <!--<MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/save.png" />
-                    </MenuItem.Icon>-->
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/resources/exit.png" />
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Справка">
-                <!--<MenuItem.Icon>
-                    <Image Source="pack://application:,,,/resources/save.png" />
-                </MenuItem.Icon> -->
+                <MenuItem.Icon>
+                    <Image Source="pack://application:,,,/resources/info.png" />
+                </MenuItem.Icon>
             </MenuItem>
         </Menu>
 
-        <Grid Grid.Row="1" >
-            
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Expander Grid.Column="0" ExpandDirection="Right" Background="{StaticResource Style1}">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.ColumnSpan="3">
+
+            <Expander ExpandDirection="Right" Background="{StaticResource Style1}">
                 <Grid Background="{StaticResource Style2}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="14*" />
@@ -208,44 +209,54 @@
                     <Button Grid.Row="2" HorizontalAlignment="Center" Content="Рассчитать" Background="{StaticResource Style3}" Command="{Binding CalcCommand}"/>
                 </Grid>
             </Expander>
-            
-            <TabControl Grid.Column="1" Style="{StaticResource TabControlInLine}">
-                <TabItem Header="График распределения температуры" HorizontalAlignment="Stretch">
-                    <lvc:CartesianChart x:Name="tempChart"  LegendLocation="None" Series="{Binding Results.Ti}" >
-
+            <!-- ТАБКОНТРОЛ ПОКРАСИТЬ -->
+            <TabControl Style="{StaticResource TabControlInLine}" Background="{StaticResource Style3}">
+                <TabItem Header="График распределения температуры" >
+                    <lvc:CartesianChart x:Name="tempChart"  LegendLocation="None" Series="{Binding SeriesCol}" Width="766" Margin="10,10,10,0" >
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis x:Name="tempChartAxisX" Title="Координата по длине канал, м" MinValue="0">
                                 <lvc:Axis.Separator>
-                                    <lvc:Separator Step="2" />
+                                    <lvc:Separator Step="2" Stroke="Red"/>
                                 </lvc:Axis.Separator>
                             </lvc:Axis>
                         </lvc:CartesianChart.AxisX>
                         <lvc:CartesianChart.AxisY>
                             <lvc:Axis x:Name="tempChartAxisY" Title="Температура, °С" MinValue="0">
                                 <lvc:Axis.Separator>
-                                    <lvc:Separator Step="10" />
+                                    <lvc:Separator Step="10" Stroke="Red"/>
                                 </lvc:Axis.Separator>
                             </lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                     </lvc:CartesianChart>
                 </TabItem>
                 <TabItem Header="График распределения вязкости">
-                    <lvc:CartesianChart x:Name="Chart"  LegendLocation="None" Series="{Binding Results.Ni}" >
+                    <lvc:CartesianChart x:Name="Chart"  LegendLocation="None" Series="{Binding SeriesCol}" Width="766" Margin="10,10,10,5" >
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis x:Name="ChartAxisX" Title="Координата по длине канал, м" MinValue="0">
                                 <lvc:Axis.Separator>
-                                    <lvc:Separator Step="2" />
+                                    <lvc:Separator Step="2" Stroke="Red"/>
                                 </lvc:Axis.Separator>
                             </lvc:Axis>
                         </lvc:CartesianChart.AxisX>
                         <lvc:CartesianChart.AxisY>
                             <lvc:Axis x:Name="ChartAxisY" Title="Вязкость, Па·с" MinValue="0">
                                 <lvc:Axis.Separator>
-                                    <lvc:Separator Step="50" />
+                                    <lvc:Separator Step="50" Stroke="Red"/>
                                 </lvc:Axis.Separator>
                             </lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                     </lvc:CartesianChart>
+                </TabItem>
+                <TabItem Header="Результаты вычислений">
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Materials}" CanUserAddRows="False"
+                              IsReadOnly="True"
+                              SelectedItem="{Binding SelectedMaterial}" Background="{StaticResource Style3}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Координата по длине канала, м" Binding="{Binding MaterialId}" />
+                            <DataGridTextColumn Header="Температура, °С" Binding="{Binding MateriadName}" />
+                            <DataGridTextColumn Header="Вязкость, Па·с" Binding="{Binding Values.Count}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
             </TabControl>
         </Grid>
