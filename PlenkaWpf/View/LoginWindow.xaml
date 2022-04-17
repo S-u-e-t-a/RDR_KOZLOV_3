@@ -13,11 +13,13 @@
             <RowDefinition />
             <RowDefinition Height="80" />
         </Grid.RowDefinitions>
-        <Grid Row="1" Height="150" Width="180">
+        <Grid Row="1" >
             <StackPanel>
                 <hc:TextBox hc:InfoElement.Title="Имя пользователя" />
                 <hc:PasswordBox hc:InfoElement.Title="Пароль" />
-                <Button Margin="5" Content="Выполнить вход" Click="Button_Click" />
+                <Button Margin="5" Content="Админинистратор" Click="Button_Click" />
+                <Button Margin="5" Content="исследователь" Click="ButtonBase_OnClick" />
+
             </StackPanel>
 
         </Grid>

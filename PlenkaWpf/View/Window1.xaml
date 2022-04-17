@@ -48,9 +48,13 @@
             </MenuItem>
         </Menu>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-
-            <Expander ExpandDirection="Right" Background="{StaticResource Style1}">
+        <Grid Grid.Row="1" >
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Expander Grid.Column="0" ExpandDirection="Right" Background="{StaticResource Style1}">
                 <Grid Background="{StaticResource Style2}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="14*" />
@@ -201,9 +205,10 @@
                     <Button Grid.Row="2" HorizontalAlignment="Center" Content="Рассчитать" Background="{StaticResource Style3}"/>
                 </Grid>
             </Expander>
-            <TabControl Style="{StaticResource TabControlInLine}">
-                <TabItem Header="График распределения температуры">
-                    <lvc:CartesianChart x:Name="tempChart"  LegendLocation="None" Series="{Binding SeriesCol}" Width="766">
+            
+            <TabControl Grid.Column="1" Style="{StaticResource TabControlInLine}">
+                <TabItem Header="График распределения температуры" HorizontalAlignment="Stretch">
+                    <lvc:CartesianChart x:Name="tempChart"  LegendLocation="None" Series="{Binding SeriesCol}" >
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis x:Name="tempChartAxisX" Title="Координата по длине канал, м" MinValue="0">
                                 <lvc:Axis.Separator>
@@ -221,7 +226,7 @@
                     </lvc:CartesianChart>
                 </TabItem>
                 <TabItem Header="График распределения вязкости">
-                    <lvc:CartesianChart x:Name="Chart"  LegendLocation="None" Series="{Binding SeriesCol}" Width="766">
+                    <lvc:CartesianChart x:Name="Chart"  LegendLocation="None" Series="{Binding SeriesCol}" >
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis x:Name="ChartAxisX" Title="Координата по длине канал, м" MinValue="0">
                                 <lvc:Axis.Separator>
@@ -239,6 +244,6 @@
                     </lvc:CartesianChart>
                 </TabItem>
             </TabControl>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Window>

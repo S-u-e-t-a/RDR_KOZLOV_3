@@ -22,4 +22,10 @@ public partial class LoginWindow : Window
         var win = new MaterialExplorer();
         win.Show();
     }
+
+    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+    {
+        var win = new Window1();
+        win.Show();
+    }
 }
