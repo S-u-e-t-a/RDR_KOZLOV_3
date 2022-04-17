@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
@@ -11,7 +12,7 @@ internal class CreateMaterialVM : ViewModelBase
 {
     #region Properties
 
-    public MembraneObject Material { get; set; } = new() {ObName = ""};
+    public MembraneObject MembraneObject { get; set; } = new() {ObName = ""};
     public List<ObjectType> AllTypes { get; set; }
 
     #endregion
@@ -36,14 +37,19 @@ internal class CreateMaterialVM : ViewModelBase
     {
         get
         {
-            return _saveMaterial ?? (_saveMaterial = new RelayCommand(o =>
+            return _saveMaterial ??= new RelayCommand(o =>
             {
-                Material.TypeId = Material.Type.TypeId;
+                MembraneObject.TypeId = MembraneObject.Type.TypeId;
                 var db = DbContextSingleton.GetInstance();
-                db.MembraneObjects.Add(Material);
+                var abc = db.DefaultProperties.Where(dp => dp.TypeId == MembraneObject.TypeId).Select(dp=>dp.Prop);
+                foreach (var prop in abc)
+                {
+                    MembraneObject.Values.Add(new Value(){Prop = prop,Mat = MembraneObject});
+                }
+                db.MembraneObjects.Add(MembraneObject);
                 db.SaveChanges();
                 OnClosingRequest();
-            }, o => Material?.ObName.Length > 0));
+            }, o => MembraneObject?.ObName.Length > 0);
         }
     }
 

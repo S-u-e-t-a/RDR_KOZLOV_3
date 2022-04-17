@@ -17,6 +17,7 @@ namespace PlenkaAPI.Data
             Values.Load();
             Units.Load();
             ObjectTypes.Load();
+            DefaultProperties.Load();
         }
 
         public MembraneContext(DbContextOptions<MembraneContext> options)
@@ -24,6 +25,7 @@ namespace PlenkaAPI.Data
         {
         }
 
+        public virtual DbSet<DefaultProperty> DefaultProperties { get; set; }
         public virtual DbSet<MembraneObject> MembraneObjects { get; set; }
         public virtual DbSet<ObjectType> ObjectTypes { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
@@ -43,6 +45,27 @@ namespace PlenkaAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<DefaultProperty>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("default_properties");
+
+                entity.Property(e => e.PropId).HasColumnName("prop_id");
+
+                entity.Property(e => e.TypeId).HasColumnName("type_id");
+
+                entity.HasOne(d => d.Prop)
+                    .WithMany()
+                    .HasForeignKey(d => d.PropId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.Type)
+                    .WithMany()
+                    .HasForeignKey(d => d.TypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
             modelBuilder.Entity<MembraneObject>(entity =>
             {
                 entity.HasKey(e => e.ObId);
@@ -83,23 +106,6 @@ namespace PlenkaAPI.Data
                 entity.Property(e => e.TypeName)
                     .IsRequired()
                     .HasColumnName("type_name");
-
-                entity.HasMany(d => d.Props)
-                    .WithMany(p => p.Types)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "DefaultProperty",
-                        l => l.HasOne<Property>().WithMany().HasForeignKey("PropId").OnDelete(DeleteBehavior.ClientSetNull),
-                        r => r.HasOne<ObjectType>().WithMany().HasForeignKey("TypeId").OnDelete(DeleteBehavior.ClientSetNull),
-                        j =>
-                        {
-                            j.HasKey("TypeId", "PropId");
-
-                            j.ToTable("default_properties");
-
-                            j.IndexerProperty<long>("TypeId").HasColumnName("type_id");
-
-                            j.IndexerProperty<long>("PropId").HasColumnName("prop_id");
-                        });
             });
 
             modelBuilder.Entity<Property>(entity =>

@@ -11,14 +11,11 @@ namespace PlenkaAPI.Models
         public ObjectType()
         {
             MembraneObjects = new ObservableCollection<MembraneObject>();
-            Props = new ObservableCollection<Property>();
         }
 
         public long TypeId { get; set; }
         public string TypeName { get; set; }
 
-        public virtual ICollection<MembraneObject> MembraneObjects { get; set; }
-
-        public virtual ObservableCollection<Property> Props { get; set; }
+        public virtual ObservableCollection<MembraneObject> MembraneObjects { get; set; }
     }
 }

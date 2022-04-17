@@ -16,8 +16,8 @@
         </Grid.RowDefinitions>
         <StackPanel>
             <hc:TextBox hc:InfoElement.Title="Название материала"
-                        Text="{Binding Material.ObName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
-            <hc:ComboBox ItemsSource="{Binding AllTypes}" SelectedItem="{Binding Material.Type}" DisplayMemberPath="TypeName"></hc:ComboBox>
+                        Text="{Binding MembraneObject.ObName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
+            <hc:ComboBox ItemsSource="{Binding AllTypes}" SelectedItem="{Binding MembraneObject.Type}" DisplayMemberPath="TypeName"></hc:ComboBox>
         </StackPanel>
         
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,10">

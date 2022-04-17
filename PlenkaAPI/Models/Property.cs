@@ -11,7 +11,6 @@ namespace PlenkaAPI.Models
         public Property()
         {
             Values = new ObservableCollection<Value>();
-            Types = new ObservableCollection<ObjectType>();
         }
 
         public long ProperrtyId { get; set; }
@@ -20,7 +19,5 @@ namespace PlenkaAPI.Models
 
         public virtual Unit Unit { get; set; }
         public virtual ObservableCollection<Value> Values { get; set; }
-
-        public virtual ObservableCollection<ObjectType> Types { get; set; }
     }
 }

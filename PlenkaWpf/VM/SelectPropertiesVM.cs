@@ -114,7 +114,7 @@ public class SelectPropertiesVM : ViewModelBase
             {
                 _propertiesToDelete.Remove((Property) o);
                 _propertiesToAdd.Add((Property) o);
-                //Material.Values.Add((new Value() { Mat = Material, Prop = (TempProperty)o }));
+                //MembraneObject.Values.Add((new Value() { Mat = MembraneObject, Prop = (TempProperty)o }));
             }));
         }
     }
