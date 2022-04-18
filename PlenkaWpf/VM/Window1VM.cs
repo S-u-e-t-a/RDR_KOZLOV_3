@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -277,6 +278,13 @@ namespace PlenkaWpf.VM
 
         #endregion
 
+        #region Timers
+
+        public Stopwatch MathTimer { get; set; } = new();
+        public Stopwatch VisualTimer { get; set; } = new();
+
+        #endregion
+
         private CalculationResults results;
 
         public CalculationResults Results
@@ -289,9 +297,13 @@ namespace PlenkaWpf.VM
             {
                 results = value;
                 OnPropertyChanged();
+                VisualTimer.Start();
                 OnPropertyChanged(nameof(SeriesCollectionTemp));
                 OnPropertyChanged(nameof(SeriesCollectionN));
                 OnPropertyChanged(nameof(CordTempNs));
+                VisualTimer.Stop();
+                OnPropertyChanged(nameof(VisualTimer));
+                OnPropertyChanged(nameof(MathTimer));
             }
         }
 
@@ -314,6 +326,8 @@ namespace PlenkaWpf.VM
         {
             get { return _calcCommand ?? (_calcCommand = new RelayCommand(o =>
             {
+                
+                MathTimer.Start();
                 var cp = new CalculationParameters()
                 {
                     W = (double) Width,
@@ -333,6 +347,8 @@ namespace PlenkaWpf.VM
                 };
                 var mc = new MathClass(cp);
                 Results = mc.calculate();
+                MathTimer.Stop();
+                OnPropertyChanged(nameof(MathTimer));
             })); }
         }
 

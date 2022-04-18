@@ -217,7 +217,8 @@
             <!-- ТАБКОНТРОЛ ПОКРАСИТЬ -->
                 <TabControl Grid.Column="1" Style="{StaticResource TabControlInLine}" Background="{StaticResource Style3}">
                 <TabItem Header="График распределения температуры" >
-                    <lvc:CartesianChart x:Name="tempChart"  LegendLocation="None" Series="{Binding SeriesCollectionTemp}" Margin="10,10,10,0" >
+                    <lvc:CartesianChart x:Name="tempChart" 
+                                        LegendLocation="None" Series="{Binding SeriesCollectionTemp}" Margin="10,10,10,0" >
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis x:Name="tempChartAxisX" Title="Координата по длине канал, м" MinValue="0">
                                 <lvc:Axis.Separator>
@@ -292,27 +293,31 @@
                                                           hc:Increment="1" 
                                                           Style="{StaticResource NumericUpDownExtend}"
                                                           HorizontalAlignment="Stretch" />
-                                <hc:NumericUpDown hc:InfoElement.Title="Время расчёта, мс" 
-                                                          IsReadOnly="True"
-                                                          hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
-                                                          hc:InfoElement.TitleWidth="270" hc:Minimum="1"
-                                                          hc:Increment="1"
-                                                          Style="{StaticResource NumericUpDownExtend}"
-                                                          HorizontalAlignment="Stretch" />
-                                <hc:NumericUpDown hc:InfoElement.Title="Время визуализации, мс"
-                                                          IsReadOnly="True"
-                                                          hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
-                                                          hc:InfoElement.TitleWidth="270" hc:Minimum="1"
-                                                          hc:Increment="1" 
-                                                          Style="{StaticResource NumericUpDownExtend}"
-                                                          HorizontalAlignment="Stretch" />
+                                <hc:TextBox hc:InfoElement.Title="Время расчёта, мс" 
+                                            IsReadOnly="True"
+                                            hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
+                                            hc:InfoElement.TitleWidth="270"
+                                            Text="{Binding MathTimer.ElapsedMilliseconds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                            
+                                            HorizontalAlignment="Stretch">
+
+                                </hc:TextBox>
+                                <hc:TextBox hc:InfoElement.Title="Время визуализации, мс" 
+                                            IsReadOnly="True"
+                                            hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
+                                            hc:InfoElement.TitleWidth="270"
+                                            Text="{Binding VisualTimer.ElapsedMilliseconds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                            
+                                            HorizontalAlignment="Stretch">
+
+                                </hc:TextBox>
                                 <hc:NumericUpDown hc:InfoElement.Title="Используемая оперативная память, Мб"
-                                                          IsReadOnly="True"
-                                                          hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
-                                                          hc:InfoElement.TitleWidth="270" hc:Minimum="1"
-                                                          hc:Increment="1" 
-                                                          Style="{StaticResource NumericUpDownExtend}"
-                                                          HorizontalAlignment="Stretch" />
+                                                  IsReadOnly="True"
+                                                  hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
+                                                  hc:InfoElement.TitleWidth="270" hc:Minimum="1"
+                                                  hc:Increment="1" 
+                                                  Style="{StaticResource NumericUpDownExtend}"
+                                                  HorizontalAlignment="Stretch" />
                             </StackPanel>
                         </Grid>
                 </TabItem>
