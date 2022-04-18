@@ -253,14 +253,67 @@
                     </lvc:CartesianChart>
                 </TabItem>
                 <TabItem Header="Результаты вычислений">
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CordTempNs}" CanUserAddRows="False"
-                              IsReadOnly="True" Background="{StaticResource Style3}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Координата по длине канала, м" Binding="{Binding cord}" />
-                            <DataGridTextColumn Header="Температура, °С" Binding="{Binding temp}" />
-                            <DataGridTextColumn Header="Вязкость, Па·с" Binding="{Binding n}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="400"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding CordTempNs}" CanUserAddRows="False"
+                                IsReadOnly="True" Background="{StaticResource Style3}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Координата по длине канала, м" Binding="{Binding cord}" />
+                                <DataGridTextColumn Header="Температура, °С" Binding="{Binding temp}" />
+                                <DataGridTextColumn Header="Вязкость, Па·с" Binding="{Binding n}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                            <Border Background="{StaticResource Style2}">
+                                <hc:Divider Background="{StaticResource DangerBrush}" Orientation="Vertical" Margin="0 5" />
+                            </Border>
+                            <StackPanel Grid.Row="1" Background="{StaticResource Style3}">
+                                <hc:NumericUpDown hc:InfoElement.Title="Температура продукта, °С" 
+                                                          IsReadOnly="False"
+                                                          hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
+                                                          hc:InfoElement.TitleWidth="390" hc:Minimum="1"
+                                                          hc:Increment="1" hc:Value="{Binding Density}" 
+                                                          Style="{StaticResource NumericUpDownExtend}"
+                                                          HorizontalAlignment="Stretch" />
+                                <hc:NumericUpDown hc:InfoElement.Title="Вязкость продукта, Па·с"
+                                                          IsReadOnly="True"
+                                                          hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
+                                                          hc:InfoElement.TitleWidth="390" hc:Minimum="1"
+                                                          hc:Increment="1" hc:Value="{Binding SpecifiсHeatCapacity}"
+                                                          Style="{StaticResource NumericUpDownExtend}"
+                                                          HorizontalAlignment="Stretch" />
+                                <hc:NumericUpDown hc:InfoElement.Title="Производительность канала, кг/ч"
+                                                          IsReadOnly="True"
+                                                          hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
+                                                          hc:InfoElement.TitleWidth="390" hc:Minimum="1"
+                                                          hc:Increment="1" hc:Value="{Binding MeltingTemperature}"
+                                                          Style="{StaticResource NumericUpDownExtend}"
+                                                          HorizontalAlignment="Stretch" />
+                                <hc:NumericUpDown hc:InfoElement.Title="Время расчёта, мс" 
+                                                          IsReadOnly="True"
+                                                          hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
+                                                          hc:InfoElement.TitleWidth="390" hc:Minimum="1"
+                                                          hc:Increment="1" hc:Value="{Binding Density}" 
+                                                          Style="{StaticResource NumericUpDownExtend}"
+                                                          HorizontalAlignment="Stretch" />
+                                <hc:NumericUpDown hc:InfoElement.Title="Время визуализации, мс"
+                                                          IsReadOnly="True"
+                                                          hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
+                                                          hc:InfoElement.TitleWidth="390" hc:Minimum="1"
+                                                          hc:Increment="1" hc:Value="{Binding SpecifiсHeatCapacity}"
+                                                          Style="{StaticResource NumericUpDownExtend}"
+                                                          HorizontalAlignment="Stretch" />
+                                <hc:NumericUpDown hc:InfoElement.Title="Используемая оперативная память, Мб"
+                                                          IsReadOnly="True"
+                                                          hc:InfoElement.TitlePlacement="Left" Margin="10 5" 
+                                                          hc:InfoElement.TitleWidth="390" hc:Minimum="1"
+                                                          hc:Increment="1" hc:Value="{Binding MeltingTemperature}"
+                                                          Style="{StaticResource NumericUpDownExtend}"
+                                                          HorizontalAlignment="Stretch" />
+                            </StackPanel>
+                        </Grid>
                 </TabItem>
             </TabControl>
             </Grid>

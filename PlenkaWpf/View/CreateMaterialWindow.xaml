@@ -20,12 +20,12 @@
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Background="{StaticResource Style2}" >
+        <StackPanel Grid.Row="0" Background="{StaticResource Style2}" Grid.RowSpan="2" >
             <hc:TextBox hc:InfoElement.Title="Название материала"
                     Text="{Binding MembraneObject.ObName, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="10,0,10,10" Background="{StaticResource Style3}"/>
-        <hc:ComboBox ItemsSource="{Binding AllTypes}" SelectedItem="{Binding MembraneObject.Type}" DisplayMemberPath="TypeName"/>
+            <hc:ComboBox ItemsSource="{Binding AllTypes}" SelectedItem="{Binding MembraneObject.Type}" DisplayMemberPath="TypeName" Margin="10,0,10,10" Background="{StaticResource Style3}"/>
         </StackPanel>
-        <Grid Grid.Row="1" Background="{StaticResource Style1}">
+        <Grid Grid.Row="1" Background="{StaticResource Style1}" Margin="0,10,0,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                 <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveMaterial}"  Background="{StaticResource Style3}"/>
                 <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}"  Background="{StaticResource Style3}"/>
