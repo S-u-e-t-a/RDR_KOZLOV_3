@@ -15,7 +15,7 @@
         <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
         <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -29,27 +29,31 @@
             <StackPanel Orientation="Horizontal">
                 <hc:TextBox Margin="5" hc:InfoElement.Title="Имя материала" hc:InfoElement.TitlePlacement="Left"
                             Text="{Binding Path=Material.ObName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                            MinWidth="100" Background="{StaticResource Style3}"/>
+                            MinWidth="100" Background="{StaticResource Style3}" />
             </StackPanel>
             <ListBox Grid.Row="1" x:Name="listBox"
-                     ItemsSource="{Binding Path=values, UpdateSourceTrigger=PropertyChanged}" Background="{StaticResource Style2}">
+                     ItemsSource="{Binding Path=values, UpdateSourceTrigger=PropertyChanged}"
+                     Background="{StaticResource Style2}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                     </Style>
                 </ListBox.ItemContainerStyle>
-<ListBox.ItemTemplate>
-                    <DataTemplate >
-                        <hc:ElementGroup Orientation="Horizontal" Margin="5" Height="40" Background="{StaticResource Style2}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <Label Content="{Binding Path=Prop.PropertyName, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left"
-                                       Height="30" Width="500" Background="{StaticResource Style3}"/>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <hc:ElementGroup Orientation="Horizontal" Margin="5" Height="40"
+                                         Background="{StaticResource Style2}" HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch">
+                            <Label Content="{Binding Path=Prop.PropertyName, UpdateSourceTrigger=PropertyChanged}"
+                                   HorizontalContentAlignment="Left"
+                                   Height="30" Width="500" Background="{StaticResource Style3}" />
 
-                                <hc:NumericUpDown
-                                    Value="{Binding Path=Value1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                    Height="30" Width="120" Background="{StaticResource Style3}"/>
-                                <Label Content="{Binding Path=Prop.Unit.UnitName, UpdateSourceTrigger=PropertyChanged}"
-                                       Height="30" Width="50" Background="{StaticResource Style3}"/>
-                            </hc:ElementGroup>
+                            <hc:NumericUpDown
+                                Value="{Binding Path=Value1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                Height="30" Width="120" Background="{StaticResource Style3}" />
+                            <Label Content="{Binding Path=Prop.Unit.UnitName, UpdateSourceTrigger=PropertyChanged}"
+                                   Height="30" Width="50" Background="{StaticResource Style3}" />
+                        </hc:ElementGroup>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -58,12 +62,12 @@
         <Grid Row="1" Background="{StaticResource Style1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Width="140" Content="Применить" Command="{Binding SaveChanges}"
-                        Margin="0,0,5,0" Background="{StaticResource Style3}"/>
+                        Margin="0,0,5,0" Background="{StaticResource Style3}" />
                 <Button Width="140" Content="Изменить свойства"
                         Command="{Binding OpenSelectPropertyesToChange}"
-                        Margin="0,0,5,0" Background="{StaticResource Style3}"/>
+                        Margin="0,0,5,0" Background="{StaticResource Style3}" />
                 <Button Width="140" Content="Удалить" Margin="5,0,0,0"
-                        Background="{StaticResource Style3}"/>
+                        Background="{StaticResource Style3}" />
             </StackPanel>
         </Grid>
     </Grid>

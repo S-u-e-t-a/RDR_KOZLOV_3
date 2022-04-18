@@ -15,15 +15,18 @@
 
     <Grid Background="{StaticResource Style2}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="80" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Row="1" Width="180">
-            <StackPanel Background="{StaticResource Style2}" Orientation="Vertical" HorizontalAlignment="Center" Width="180">
-                <hc:TextBox hc:InfoElement.Title="Имя пользователя" Margin="10,0,10,10"  Background="{StaticResource Style3}"/>
-                <hc:PasswordBox hc:InfoElement.Title="Пароль" Margin="10,0,10,10" Background="{StaticResource Style3}"/>
-                <Button Margin="5" Content="Администратор" Click="Button_Click"  Background="{StaticResource Style3}"/>
-                <Button Margin="5" Content="Исследователь" Click="ButtonBase_OnClick"  Background="{StaticResource Style3}"/>
+            <StackPanel Background="{StaticResource Style2}" Orientation="Vertical" HorizontalAlignment="Center"
+                        Width="180">
+                <hc:TextBox hc:InfoElement.Title="Имя пользователя" Margin="10,0,10,10"
+                            Background="{StaticResource Style3}" />
+                <hc:PasswordBox hc:InfoElement.Title="Пароль" Margin="10,0,10,10" Background="{StaticResource Style3}" />
+                <Button Margin="5" Content="Администратор" Click="Button_Click" Background="{StaticResource Style3}" />
+                <Button Margin="5" Content="Исследователь" Click="ButtonBase_OnClick"
+                        Background="{StaticResource Style3}" />
             </StackPanel>
 
         </Grid>

@@ -28,11 +28,7 @@ public class MaterialExplorerVM : ViewModelBase
     #region Properties
 
     private MembraneContext con = DbContextSingleton.GetInstance();
-    public ObservableCollection<MembraneObject> Materials
-    {
-        get;
-        set;
-    }
+    public ObservableCollection<MembraneObject> Materials { get; set; }
 
     public MembraneObject SelectedMaterial { get; set; }
 

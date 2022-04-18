@@ -25,6 +25,7 @@ internal class CreateMaterialVM : ViewModelBase
     {
         AllTypes = DbContextSingleton.GetInstance().ObjectTypes.ToList();
     }
+
     #endregion
 
     #endregion
@@ -41,15 +42,16 @@ internal class CreateMaterialVM : ViewModelBase
             {
                 MembraneObject.TypeId = MembraneObject.Type.TypeId;
                 var db = DbContextSingleton.GetInstance();
-                var abc = db.DefaultProperties.Where(dp => dp.TypeId == MembraneObject.TypeId).Select(dp=>dp.Prop);
+                var abc = db.DefaultProperties.Where(dp => dp.TypeId == MembraneObject.TypeId).Select(dp => dp.Prop);
                 foreach (var prop in abc)
                 {
-                    MembraneObject.Values.Add(new Value(){Prop = prop,Mat = MembraneObject});
+                    MembraneObject.Values.Add(new Value() {Prop = prop, Mat = MembraneObject});
                 }
+
                 db.MembraneObjects.Add(MembraneObject);
                 db.SaveChanges();
                 OnClosingRequest();
-            }, o => MembraneObject?.ObName.Length > 0 && MembraneObject.Type!=null);
+            }, o => MembraneObject?.ObName.Length > 0 && MembraneObject.Type != null);
         }
     }
 

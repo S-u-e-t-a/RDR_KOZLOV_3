@@ -58,6 +58,7 @@ public class CreatePropertyVM : ViewModelBase
                 {
                     Db.Properties.Add(EditingProperty);
                 }
+
                 Db.SaveChanges();
                 OnClosingRequest();
             }));

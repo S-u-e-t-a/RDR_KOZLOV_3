@@ -32,7 +32,6 @@ namespace PlenkaWpf.View
 
         private void ProcessGrid_OnMouseWheel(object sender, MouseWheelEventArgs e) // вот такой костыль получается
         {
-            
         }
     }
 }

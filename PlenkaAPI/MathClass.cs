@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using static System.Math;
+
 namespace PlenkaAPI
 {
     public struct CalculationParameters
@@ -33,12 +34,14 @@ namespace PlenkaAPI
         public double T;
         public double N;
     }
+
     public class MathClass // todo как-то красиво переписать все это
     {
         public MathClass(CalculationParameters cp)
         {
             this.cp = cp;
         }
+
         #region Parameters
 
         private CalculationParameters cp;
@@ -58,11 +61,14 @@ namespace PlenkaAPI
         private double step => cp.step;
 
         #endregion
+
         private int GetDecimalDigitsCount(double number)
         {
-            string[] str = number.ToString(new System.Globalization.NumberFormatInfo() { NumberDecimalSeparator = "." }).Split('.');
+            string[] str = number.ToString(new System.Globalization.NumberFormatInfo() {NumberDecimalSeparator = "."})
+                .Split('.');
             return str.Length == 2 ? str[1].Length : 0;
         }
+
         public CalculationResults calculate()
         {
             var F = 0.125 * Pow(cp.H / cp.W, 2);
@@ -70,22 +76,23 @@ namespace PlenkaAPI
             var qGamma = H * W * u0 * Pow(gamma, n + 1);
             var qAlpha = W * au * (1 / b - Tu + Tr);
             var Qch = ((H * W * Vu) / 2) * F;
-            var Ti = new Dictionary<double,double>();
+            var Ti = new Dictionary<double, double>();
             var Ni = new Dictionary<double, double>();
-            for (double i = 0; i <= L; i+=step)
+            for (double i = 0; i <= L; i += step)
             {
                 var ii = Round(i, GetDecimalDigitsCount(step));
-                Ti.Add(ii,Round(Tr + (1 / b) * Log((b * qGamma + W * au) /
-                    (b * qAlpha) * (1 - Exp(-((ii * b * qAlpha) /
-                    (p * c * Qch)))) + Exp(b * (T0 - Tr - (ii * qAlpha) / (p * c * Qch)))),1));
-                Ni.Add(ii,Round(u0 * Exp(-b * (Ti[ii] - Tr)) * Pow(gamma, n - 1),1));
+                Ti.Add(ii, Round(Tr + (1 / b) * Log((b * qGamma + W * au) /
+                        (b * qAlpha) * (1 - Exp(-((ii * b * qAlpha) /
+                                                  (p * c * Qch)))) +
+                        Exp(b * (T0 - Tr - (ii * qAlpha) / (p * c * Qch)))),
+                    1));
+                Ni.Add(ii, Round(u0 * Exp(-b * (Ti[ii] - Tr)) * Pow(gamma, n - 1), 1));
             }
 
             var Q = p * Qch * 3600;
             var T = Ti.Last().Value;
             var N = Ni.Last().Value;
-            return new CalculationResults(){Q=Q,T=T,N=N,Ti=Ti,Ni=Ni};
+            return new CalculationResults() {Q = Q, T = T, N = N, Ti = Ti, Ni = Ni};
         }
-
     }
 }

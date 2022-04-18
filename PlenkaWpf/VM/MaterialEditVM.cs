@@ -47,10 +47,13 @@ public class MaterialEditVM : ViewModelBase
 
     public RelayCommand SaveChanges
     {
-        get { return _saveChanges ?? (_saveChanges = new RelayCommand(o =>
+        get
         {
-            DbContextSingleton.GetInstance().SaveChanges();
-        })); }
+            return _saveChanges ?? (_saveChanges = new RelayCommand(o =>
+            {
+                DbContextSingleton.GetInstance().SaveChanges();
+            }));
+        }
     }
 
     #endregion
