@@ -17,6 +17,7 @@ namespace PlenkaAPI.Data
             Values.Load();
             Units.Load();
             ObjectTypes.Load();
+            DefaultProperties.Load();
         }
 
         public MembraneContext(DbContextOptions<MembraneContext> options)

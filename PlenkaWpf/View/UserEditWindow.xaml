@@ -15,25 +15,22 @@
         </Grid.RowDefinitions>
         <StackPanel>
             <hc:TextBox hc:InfoElement.Title="Имя пользователя"
-                        IsReadOnly="True"
                         hc:InfoElement.TitlePlacement="Top" Margin="10 5"
-                        Text="{Binding User.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding TempUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         HorizontalAlignment="Stretch"/>
             <hc:TextBox hc:InfoElement.Title="Пароль"
-                        IsReadOnly="True"
                         hc:InfoElement.TitlePlacement="Top" Margin="10 5"
-                        Text="{Binding User.UserPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding TempUser.UserPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         HorizontalAlignment="Stretch"/>
             <hc:ComboBox hc:InfoElement.Title="Тип пользователя" ItemsSource="{Binding UserTypes}"
-                        IsReadOnly="True"
-                        hc:InfoElement.TitlePlacement="Top" Margin="10 5"
-                        SelectedItem="{Binding User.UserType}"
+                         hc:InfoElement.TitlePlacement="Top" Margin="10 5"
+                        SelectedItem="{Binding TempUser.UserType}"
                         DisplayMemberPath="UserTypeName"
                         HorizontalAlignment="Stretch"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,10">
-            <Button Content="Ок" Width="100" Margin="5" />
-            <Button Content="Отмена" Width="100" Margin="5" />
+            <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveUser}"/>
+            <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}" />
         </StackPanel>
     </Grid>
 </Window>

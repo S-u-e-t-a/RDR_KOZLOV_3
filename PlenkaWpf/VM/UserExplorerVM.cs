@@ -4,10 +4,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
 using PlenkaWpf.View;
+using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace PlenkaWpf.VM
 {
@@ -44,30 +46,34 @@ namespace PlenkaWpf.VM
 
         public RelayCommand AddNewUser
         {
-            get { return _addNewUser ?? (_addNewUser = new RelayCommand(o =>
+            get { return _addNewUser ??= new RelayCommand(o =>
             {
                 ShowChildWindow(new UserEditWindow(new User()));
-            })); }
+            }); }
         }
 
         private RelayCommand _editUser;
 
         public RelayCommand EditUser
         {
-            get { return _editUser ?? (_editUser = new RelayCommand(o =>
+            get { return _editUser ??= new RelayCommand(o =>
             {
                 ShowChildWindow(new UserEditWindow(SelectedUser));
-            })); }
+            }); }
         }
 
         private RelayCommand _deleteUser;
 
         public RelayCommand DeleteUser
         {
-            get { return _deleteUser ?? (_deleteUser = new RelayCommand(o =>
+            get { return _deleteUser ??= new RelayCommand(o =>
             {
-
-            })); }
+                if (MessageBox.Show($"Вы действительно хотите удалить пользователя {SelectedUser.UserName}?", "Удаление пользователя", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    db.Users.Remove(SelectedUser);
+                    db.SaveChanges();
+                }
+            }); }
         }
 
 

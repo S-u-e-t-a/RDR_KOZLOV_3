@@ -14,7 +14,9 @@
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <DataGrid  ItemsSource="{Binding Users}"
+                       IsReadOnly="True"
                        SelectedItem="{Binding SelectedUser}"
+                       SelectionMode="Single"
                        AutoGenerateColumns="False">
                 
                 <DataGrid.Columns>

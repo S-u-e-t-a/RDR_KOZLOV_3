@@ -14,6 +14,6 @@ public partial class UserEditWindow : Window
         InitializeComponent();
         var vm = new UserEditVM(user);
         DataContext = vm;
-
+        vm.ClosingRequest += (sender, e) => Close();
     }
 }

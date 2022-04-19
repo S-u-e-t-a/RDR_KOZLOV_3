@@ -9,13 +9,13 @@ namespace PlenkaWpf.View;
 /// </summary>
 public partial class MaterialEdit : Window
 {
-    private readonly MembraneObject material;
 
 
     public MaterialEdit(MembraneObject material)
     {
-        this.material = material;
         InitializeComponent();
-        DataContext = new MaterialEditVM(material);
+        var vm = new MaterialEditVM(material);
+        DataContext = vm;
+        vm.ClosingRequest += (sender, e) => Close();
     }
 }
