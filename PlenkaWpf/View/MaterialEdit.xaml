@@ -66,8 +66,6 @@
                 <Button Width="140" Content="Изменить свойства"
                         Command="{Binding OpenSelectPropertyesToChange}"
                         Margin="0,0,5,0" Background="{StaticResource Style3}" />
-                <Button Width="140" Content="Удалить" Margin="5,0,0,0"
-                        Background="{StaticResource Style3}" />
             </StackPanel>
         </Grid>
     </Grid>

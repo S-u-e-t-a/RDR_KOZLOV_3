@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Windows;
 using System.Windows.Data;
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
 using PlenkaWpf.View;
+using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace PlenkaWpf.VM;
 
@@ -36,7 +38,6 @@ public class SelectPropertiesVM : ViewModelBase
     public SelectPropertiesVM(MembraneObject material)
     {
         Material = material;
-        var db = DbContextSingleton.GetInstance();
         AvailableProperties = db.Properties.ToList();
         var materialProperties = material.Values.Select(v => v.Prop);
         AvailableProperties = AvailableProperties.Except(materialProperties).ToList();
@@ -49,6 +50,7 @@ public class SelectPropertiesVM : ViewModelBase
 
     #region Properties
 
+    private MembraneContext db = DbContextSingleton.GetInstance();
     public ObservableCollection<Property> AllProperties { get; set; }
     public List<Property> AvailableProperties { get; set; }
     public MembraneObject Material { get; set; }
@@ -95,11 +97,11 @@ public class SelectPropertiesVM : ViewModelBase
     {
         get
         {
-            return _isCompletedUncheckedCommand ?? (_isCompletedUncheckedCommand = new RelayCommand(o =>
+            return _isCompletedUncheckedCommand ??= new RelayCommand(o =>
             {
                 _propertiesToAdd.Remove((Property) o);
                 _propertiesToDelete.Add((Property) o);
-            }));
+            });
         }
     }
 
@@ -110,12 +112,12 @@ public class SelectPropertiesVM : ViewModelBase
     {
         get
         {
-            return _isCompletedCheckedCommand ?? (_isCompletedCheckedCommand = new RelayCommand(o =>
+            return _isCompletedCheckedCommand ??= new RelayCommand(o =>
             {
                 _propertiesToDelete.Remove((Property) o);
                 _propertiesToAdd.Add((Property) o);
                 //MembraneObject.Values.Add((new Value() { Mat = MembraneObject, Prop = (TempProperty)o }));
-            }));
+            });
         }
     }
 
@@ -126,10 +128,10 @@ public class SelectPropertiesVM : ViewModelBase
     {
         get
         {
-            return _createProperty ?? (_createProperty = new RelayCommand(o =>
+            return _createProperty ??= new RelayCommand(o =>
             {
                 ShowChildWindow(new CreatePropertyWindow(new Property()));
-            }));
+            });
         }
     }
 
@@ -139,10 +141,25 @@ public class SelectPropertiesVM : ViewModelBase
     {
         get
         {
-            return _editProperty ?? (_editProperty = new RelayCommand(
-                o => { ShowChildWindow(new CreatePropertyWindow(SelectedProperty)); }, o => SelectedProperty != null));
+            return _editProperty ??= new RelayCommand(
+                o => { ShowChildWindow(new CreatePropertyWindow(SelectedProperty)); }, o => SelectedProperty != null);
         }
     }
+
+    private RelayCommand _deleteProperty;
+
+    public RelayCommand DeleteProperty
+    {
+        get { return _deleteProperty ??= new RelayCommand(o =>
+        {
+            //if (MessageBox.Show($"Вы действительно хотите удалить пользователя {SelectedUser.UserName}?", "Удаление пользователя", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            //{
+            //    db.Properties.Remove(SelectedProperty);
+            //    db.SaveChanges();
+            //}
+        }); }
+    }
+
 
     #endregion
 }
