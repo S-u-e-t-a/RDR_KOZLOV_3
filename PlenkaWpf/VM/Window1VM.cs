@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -34,6 +35,12 @@ namespace PlenkaWpf.VM
             Material = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "НашМатериал");
             Canal = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Канал");
             MatModel = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Стандартная модель");
+
+            tempLineSerie = new LineSeries();
+            TempSeries = new SeriesCollection() {tempLineSerie};
+
+            nLineSerie = new LineSeries();
+            NSeries = new SeriesCollection() { nLineSerie };
         }
 
         #endregion
@@ -43,17 +50,16 @@ namespace PlenkaWpf.VM
             return mat.Values.First(v => v.Prop.PropertyName == propName);
         }
 
-        private SeriesCollection seriesCollectionByDictionary(Dictionary<double, double> points)
+
+        private void updateLineSeriesByDictionary(LineSeries ls, Dictionary<double, double> points)
         {
-            var sc = new SeriesCollection();
-            var ls = new LineSeries() {Values = new ChartValues<ObservablePoint>()};
+            var newValues = new ChartValues<ObservablePoint>();
             foreach (var point in points)
             {
-                ls.Values.Add(new ObservablePoint(point.Key, point.Value));
+                newValues.Add(new ObservablePoint(point.Key, point.Value));
             }
 
-            sc.Add(ls);
-            return sc;
+            ls.Values = newValues;
         }
 
         private List<CordTempN> cordTempNsByDictionaries(Dictionary<double, double> ti, Dictionary<double, double> ni)
@@ -232,31 +238,13 @@ namespace PlenkaWpf.VM
             }
         }
 
-        public SeriesCollection SeriesCollectionTemp
-        {
-            get
-            {
-                if (Results.Ni != null)
-                {
-                    return seriesCollectionByDictionary(Results.Ti);
-                }
+        private LineSeries tempLineSerie { get; set; }
 
-                return null;
-            }
-        }
+        public SeriesCollection TempSeries { get; set; }
 
-        public SeriesCollection SeriesCollectionN
-        {
-            get
-            {
-                if (Results.Ni != null)
-                {
-                    return seriesCollectionByDictionary(Results.Ni);
-                }
+        private LineSeries nLineSerie { get; set; }
 
-                return null;
-            }
-        }
+        public SeriesCollection NSeries { get; set; }
 
         #endregion
 
@@ -276,9 +264,13 @@ namespace PlenkaWpf.VM
             {
                 results = value;
                 OnPropertyChanged();
+                VisualTimer.Reset();
                 VisualTimer.Start();
-                OnPropertyChanged(nameof(SeriesCollectionTemp));
-                OnPropertyChanged(nameof(SeriesCollectionN));
+                updateLineSeriesByDictionary(tempLineSerie,Results.Ti);
+                updateLineSeriesByDictionary(nLineSerie, Results.Ni);
+                OnPropertyChanged(nameof(TempSeries));
+                OnPropertyChanged(nameof(NSeries));
+                //OnPropertyChanged(nameof(SeriesCollectionN));
                 OnPropertyChanged(nameof(CordTempNs));
                 VisualTimer.Stop();
                 OnPropertyChanged(nameof(VisualTimer));
@@ -301,6 +293,7 @@ namespace PlenkaWpf.VM
             {
                 return _calcCommand ?? (_calcCommand = new RelayCommand(o =>
                 {
+                    MathTimer.Reset();
                     MathTimer.Start();
                     var cp = new CalculationParameters()
                     {
