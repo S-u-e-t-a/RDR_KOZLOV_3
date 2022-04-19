@@ -13,12 +13,14 @@
     <None Remove="resources\info.png" />
     <None Remove="resources\open.png" />
     <None Remove="resources\save.png" />
+    <None Remove="resources\Times_New_Roman.ttf" />
     <None Remove="resources\user.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="HandyControl" Version="3.3.0" />
     <PackageReference Include="HandyControls.Lang.ru" Version="3.3.11" />
+    <PackageReference Include="itext7" Version="7.2.2" />
     <PackageReference Include="LiveCharts" Version="0.9.7" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
@@ -58,6 +60,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\save.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\Times_New_Roman.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\user.png">

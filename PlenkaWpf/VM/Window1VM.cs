@@ -288,8 +288,9 @@ namespace PlenkaWpf.VM
             }
         }
 
-
         public double? Step { get; set; } = 0.1;
+
+        public bool IsCalculated = false;
 
         #endregion
 
@@ -303,6 +304,7 @@ namespace PlenkaWpf.VM
             {
                 return _calcCommand ?? (_calcCommand = new RelayCommand(o =>
                 {
+                    IsCalculated = true;
                     MathTimer.Reset();
                     MathTimer.Start();
                     var cp = new CalculationParameters()
