@@ -30,9 +30,9 @@ namespace PlenkaAPI
     {
         public Dictionary<double, double> Ti { get; set; }
         public Dictionary<double, double> Ni { get; set; }
-        public double Q;
-        public double T;
-        public double N;
+        public double Q { get; set; }
+        public double T { get; set; }
+        public double N { get; set; }
     }
 
     public class MathClass // todo как-то красиво переписать все это

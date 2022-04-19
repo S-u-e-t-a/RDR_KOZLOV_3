@@ -9,7 +9,8 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:Window1VM}"
         Title="Программный комплекс для исследования неизотермического течения аномально-вязких материалов"
-        Height="450" Width="800" FontSize="14">
+        Height="450" Width="800" FontSize="14"
+        WindowState="Maximized">
     <Window.Resources>
         <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
         <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
@@ -283,27 +284,33 @@
                                             Margin="0 5" />
                             </Border>
                             <StackPanel Grid.Column="2" Background="{StaticResource Style3}">
-                                <hc:NumericUpDown hc:InfoElement.Title="Температура продукта, °С"
-                                                  IsReadOnly="True"
-                                                  hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                  hc:InfoElement.TitleWidth="270" hc:Minimum="1"
-                                                  hc:Increment="1"
-                                                  Style="{StaticResource NumericUpDownExtend}"
-                                                  HorizontalAlignment="Stretch" />
-                                <hc:NumericUpDown hc:InfoElement.Title="Вязкость продукта, Па·с"
-                                                  IsReadOnly="True"
-                                                  hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                  hc:InfoElement.TitleWidth="270" hc:Minimum="1"
-                                                  hc:Increment="1"
-                                                  Style="{StaticResource NumericUpDownExtend}"
-                                                  HorizontalAlignment="Stretch" />
-                                <hc:NumericUpDown hc:InfoElement.Title="Производительность канала, кг/ч"
-                                                  IsReadOnly="True"
-                                                  hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                  hc:InfoElement.TitleWidth="270" hc:Minimum="1"
-                                                  hc:Increment="1"
-                                                  Style="{StaticResource NumericUpDownExtend}"
-                                                  HorizontalAlignment="Stretch" />
+                                <hc:TextBox hc:InfoElement.Title="Температура продукта, °С"
+                                            IsReadOnly="True"
+                                            hc:InfoElement.TitlePlacement="Left" Margin="10 5"
+                                            hc:InfoElement.TitleWidth="270"
+                                            Text="{Binding Results.T, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+
+                                            HorizontalAlignment="Stretch">
+
+                                </hc:TextBox>
+                                <hc:TextBox hc:InfoElement.Title="Вязкость продукта, Па·с"
+                                            IsReadOnly="True"
+                                            hc:InfoElement.TitlePlacement="Left" Margin="10 5"
+                                            hc:InfoElement.TitleWidth="270"
+                                            Text="{Binding Results.N, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+
+                                            HorizontalAlignment="Stretch">
+
+                                </hc:TextBox>
+                                <hc:TextBox hc:InfoElement.Title="Производительность канала, кг/ч"
+                                            IsReadOnly="True"
+                                            hc:InfoElement.TitlePlacement="Left" Margin="10 5"
+                                            hc:InfoElement.TitleWidth="270"
+                                            Text="{Binding Results.Q, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+
+                                            HorizontalAlignment="Stretch">
+
+                                </hc:TextBox>
                                 <hc:TextBox hc:InfoElement.Title="Время расчёта, мс"
                                             IsReadOnly="True"
                                             hc:InfoElement.TitlePlacement="Left" Margin="10 5"
@@ -322,13 +329,15 @@
                                             HorizontalAlignment="Stretch">
 
                                 </hc:TextBox>
-                                <hc:NumericUpDown hc:InfoElement.Title="Используемая оперативная память, Мб"
-                                                  IsReadOnly="True"
-                                                  hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                  hc:InfoElement.TitleWidth="270" hc:Minimum="1"
-                                                  hc:Increment="1"
-                                                  Style="{StaticResource NumericUpDownExtend}"
-                                                  HorizontalAlignment="Stretch" />
+                                <hc:TextBox hc:InfoElement.Title="Используемая оперативная память, Мб"
+                                            IsReadOnly="True"
+                                            hc:InfoElement.TitlePlacement="Left" Margin="10 5"
+                                            hc:InfoElement.TitleWidth="270"
+                                            Text="{Binding TotalMemory, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+
+                                            HorizontalAlignment="Stretch">
+
+                                </hc:TextBox>
                             </StackPanel>
                         </Grid>
                     </TabItem>

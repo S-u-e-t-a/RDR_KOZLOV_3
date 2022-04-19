@@ -36,10 +36,10 @@ namespace PlenkaWpf.VM
             Canal = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Канал");
             MatModel = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Стандартная модель");
 
-            tempLineSerie = new LineSeries();
+            tempLineSerie = new LineSeries(){Title = "Температура"};
             TempSeries = new SeriesCollection() {tempLineSerie};
 
-            nLineSerie = new LineSeries();
+            nLineSerie = new LineSeries(){ Title = "Вязкость"};
             NSeries = new SeriesCollection() { nLineSerie };
         }
 
@@ -255,6 +255,16 @@ namespace PlenkaWpf.VM
 
         #endregion
 
+        
+        public long TotalMemory
+        {
+            get
+            {
+                Process currentProcess = Process.GetCurrentProcess();
+                return currentProcess.WorkingSet64 /(1024*1024);
+            }
+        }
+
         private CalculationResults results;
 
         public CalculationResults Results
@@ -270,11 +280,11 @@ namespace PlenkaWpf.VM
                 updateLineSeriesByDictionary(nLineSerie, Results.Ni);
                 OnPropertyChanged(nameof(TempSeries));
                 OnPropertyChanged(nameof(NSeries));
-                //OnPropertyChanged(nameof(SeriesCollectionN));
                 OnPropertyChanged(nameof(CordTempNs));
                 VisualTimer.Stop();
                 OnPropertyChanged(nameof(VisualTimer));
                 OnPropertyChanged(nameof(MathTimer));
+                OnPropertyChanged(nameof(TotalMemory));
             }
         }
 
@@ -316,6 +326,7 @@ namespace PlenkaWpf.VM
                     Results = mc.calculate();
                     MathTimer.Stop();
                     OnPropertyChanged(nameof(MathTimer));
+                    
                 }));
             }
         }
