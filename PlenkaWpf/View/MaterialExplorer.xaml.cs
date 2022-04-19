@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using PlenkaAPI.Models;
 using PlenkaWpf.VM;
 
@@ -7,7 +8,7 @@ namespace PlenkaWpf.View;
 /// <summary>
 ///     Логика взаимодействия для MaterialExplorer.xaml
 /// </summary>
-public partial class MaterialExplorer : Window
+public partial class MaterialExplorer : UserControl
 {
     public MaterialExplorer()
     {
@@ -18,7 +19,7 @@ public partial class MaterialExplorer : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        var win = new MaterialEdit((DataContext as MaterialExplorerVM).SelectedMaterial);
+        var win = new MaterialEdit((DataContext as MaterialExplorerVM).SelectedMemObject);
         win.ShowDialog();
     }
 

@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using PlenkaAPI.Models;
+using PlenkaWpf.VM;
 
 namespace PlenkaWpf.View;
 
@@ -7,8 +9,11 @@ namespace PlenkaWpf.View;
 /// </summary>
 public partial class UserEditWindow : Window
 {
-    public UserEditWindow()
+    public UserEditWindow(User user)
     {
         InitializeComponent();
+        var vm = new UserEditVM(user);
+        DataContext = vm;
+
     }
 }

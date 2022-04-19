@@ -19,8 +19,9 @@ public partial class LoginWindow : Window
         var con = DbContextSingleton.GetInstance();
         //var mat = con.Materials.Local.First();
         //var win = new MaterialEdit(mat);
-        var win = new MaterialExplorer();
+        var win = new MainAdminPanel();
         win.Show();
+        
     }
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

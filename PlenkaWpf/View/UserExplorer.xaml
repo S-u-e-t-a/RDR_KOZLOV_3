@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:PlenkaWpf.VM"
              mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance vm:UserExplorerVM}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid>
@@ -11,12 +13,29 @@
                 <RowDefinition />
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
-            <DataGrid />
+            <DataGrid  ItemsSource="{Binding Users}"
+                       SelectedItem="{Binding SelectedUser}"
+                       AutoGenerateColumns="False">
+                
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id"
+                                        Binding="{Binding UserId}"/>
+                    <DataGridTextColumn Header="Имя пользователя"
+                                        Binding="{Binding UserName}"/>
+                    <DataGridTextColumn Header="Пароль"
+                                        Binding="{Binding UserPassword}"/>
+                    <DataGridTextColumn Header="Тип пользователя"
+                                        Binding="{Binding UserType.UserTypeName}"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <Grid Row="1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Width="100" Margin="5" Content="Добавить" />
-                    <Button Width="100" Margin="5" Content="Изменить" />
-                    <Button Width="100" Margin="5" Content="Удалить" />
+                    <Button Width="100" Margin="5" Content="Добавить"
+                            Command="{Binding AddNewUser}" />
+                    <Button Width="100" Margin="5" Content="Изменить"
+                            Command="{Binding EditUser}" />
+                    <Button Width="100" Margin="5" Content="Удалить"
+                            Command="{Binding DeleteUser}" />
                 </StackPanel>
             </Grid>
         </Grid>

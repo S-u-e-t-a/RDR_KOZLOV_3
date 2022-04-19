@@ -3,25 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
-        Title="UserEditWindow" Height="290" Width="285">
+        Title="UserEditWindow" Height="290" Width="285"
+        d:DataContext="{d:DesignInstance vm:UserEditVM}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <!--<StackPanel Width="220">
-            <xctk:WatermarkTextBox Margin="5,25,5,25">
-                <xctk:WatermarkTextBox.Watermark>
-                    <TextBlock Text="Имя пользователя" />
-                </xctk:WatermarkTextBox.Watermark>
-            </xctk:WatermarkTextBox>
-            <xctk:WatermarkTextBox Margin="5,25,5,25">
-                <xctk:WatermarkTextBox.Watermark>
-                    <TextBlock Text="Пароль" />
-                </xctk:WatermarkTextBox.Watermark>
-            </xctk:WatermarkTextBox>
-        </StackPanel>-->
+        <StackPanel>
+            <hc:TextBox hc:InfoElement.Title="Имя пользователя"
+                        IsReadOnly="True"
+                        hc:InfoElement.TitlePlacement="Top" Margin="10 5"
+                        Text="{Binding User.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Stretch"/>
+            <hc:TextBox hc:InfoElement.Title="Пароль"
+                        IsReadOnly="True"
+                        hc:InfoElement.TitlePlacement="Top" Margin="10 5"
+                        Text="{Binding User.UserPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        HorizontalAlignment="Stretch"/>
+            <hc:ComboBox hc:InfoElement.Title="Тип пользователя" ItemsSource="{Binding UserTypes}"
+                        IsReadOnly="True"
+                        hc:InfoElement.TitlePlacement="Top" Margin="10 5"
+                        SelectedItem="{Binding User.UserType}"
+                        DisplayMemberPath="UserTypeName"
+                        HorizontalAlignment="Stretch"/>
+        </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,10">
             <Button Content="Ок" Width="100" Margin="5" />
             <Button Content="Отмена" Width="100" Margin="5" />

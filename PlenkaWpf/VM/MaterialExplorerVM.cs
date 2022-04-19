@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using HandyControl.Controls;
+using HandyControl.Tools.Extension;
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
@@ -30,31 +32,45 @@ public class MaterialExplorerVM : ViewModelBase
     private MembraneContext con = DbContextSingleton.GetInstance();
     public ObservableCollection<MembraneObject> Materials { get; set; }
 
-    public MembraneObject SelectedMaterial { get; set; }
+    public MembraneObject SelectedMemObject { get; set; }
 
     #endregion
 
 
     #region Commands
 
-    private RelayCommand _addNewMaterial;
+    private RelayCommand _addNewMemObject;
 
-    public RelayCommand AddNewMaterial
+    public RelayCommand AddNewMemObject
     {
-        get { return _addNewMaterial ??= new RelayCommand(o => { ShowChildWindow(new CreateMaterialWindow()); }); }
+        get { return _addNewMemObject ??= new RelayCommand(o => { ShowChildWindow(new CreateMaterialWindow()); }); }
     }
 
-    private RelayCommand _editMaterial;
+    private RelayCommand _editMemObject;
 
-    public RelayCommand EditMaterial
+    public RelayCommand EditMemObject
     {
         get
         {
-            return _editMaterial ??= new RelayCommand(o => { ShowChildWindow(new MaterialEdit(SelectedMaterial)); },
-                c => SelectedMaterial != null
+            return _editMemObject ??= new RelayCommand(o =>
+                {
+                    ShowChildWindow(new MaterialEdit(SelectedMemObject));
+                },
+                c => SelectedMemObject != null
             );
         }
     }
+
+    private RelayCommand _deleteMemObject;
+
+    public RelayCommand DeleteMemObject
+    {
+        get { return _deleteMemObject ?? (_deleteMemObject = new RelayCommand(o =>
+        {
+            
+        },c=> SelectedMemObject != null)); }
+    }
+
 
     #endregion
 }

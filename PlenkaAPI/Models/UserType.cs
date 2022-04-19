@@ -14,7 +14,7 @@ namespace PlenkaAPI.Models
         }
 
         public long UserTypeId { get; set; }
-        public long UserTypeName { get; set; }
+        public string UserTypeName { get; set; }
 
         public virtual ObservableCollection<User> Users { get; set; }
     }

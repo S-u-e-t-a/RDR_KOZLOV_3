@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using PlenkaWpf.VM;
 
 namespace PlenkaWpf.View;
 
@@ -10,5 +11,6 @@ public partial class UserExplorer : UserControl
     public UserExplorer()
     {
         InitializeComponent();
+        DataContext = new UserExplorerVM();
     }
 }
