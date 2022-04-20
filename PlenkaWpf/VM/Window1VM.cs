@@ -39,9 +39,11 @@ namespace PlenkaWpf.VM
             MatModel = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Стандартная модель");
 
             tempLineSerie = new LineSeries(){Title = "Температура, °С" };
+            tempLineSerie.Fill = System.Windows.Media.Brushes.Transparent;
             TempSeries = new SeriesCollection() {tempLineSerie};
 
             nLineSerie = new LineSeries(){ Title = "Вязкость, Па·с" };
+            nLineSerie.Fill = System.Windows.Media.Brushes.Transparent;
             NSeries = new SeriesCollection() { nLineSerie };
         }
 
