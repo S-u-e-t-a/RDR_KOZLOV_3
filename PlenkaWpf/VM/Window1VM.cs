@@ -38,10 +38,10 @@ namespace PlenkaWpf.VM
             Canal = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Канал");
             MatModel = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Стандартная модель");
 
-            tempLineSerie = new LineSeries(){Title = "Температура"};
+            tempLineSerie = new LineSeries(){Title = "Температура, °С" };
             TempSeries = new SeriesCollection() {tempLineSerie};
 
-            nLineSerie = new LineSeries(){ Title = "Вязкость"};
+            nLineSerie = new LineSeries(){ Title = "Вязкость, Па·с" };
             NSeries = new SeriesCollection() { nLineSerie };
         }
 
