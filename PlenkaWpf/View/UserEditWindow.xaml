@@ -6,31 +6,39 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
-        Title="UserEditWindow" Height="290" Width="285"
+        Title="Пользователь" Height="299" Width="285"
         d:DataContext="{d:DesignInstance vm:UserEditVM}">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
+        <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
+        <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <StackPanel>
+        <StackPanel Background="{StaticResource Style2}">
             <hc:TextBox hc:InfoElement.Title="Имя пользователя"
                         hc:InfoElement.TitlePlacement="Top" Margin="10 5"
                         Text="{Binding TempUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        HorizontalAlignment="Stretch"/>
+                        Background="{StaticResource Style3}" HorizontalAlignment="Stretch"/>
             <hc:TextBox hc:InfoElement.Title="Пароль"
                         hc:InfoElement.TitlePlacement="Top" Margin="10 5"
                         Text="{Binding TempUser.UserPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        HorizontalAlignment="Stretch"/>
+                        Background="{StaticResource Style3}" HorizontalAlignment="Stretch"/>
             <hc:ComboBox hc:InfoElement.Title="Тип пользователя" ItemsSource="{Binding UserTypes}"
                          hc:InfoElement.TitlePlacement="Top" Margin="10 5"
-                        SelectedItem="{Binding TempUser.UserType}"
-                        DisplayMemberPath="UserTypeName"
-                        HorizontalAlignment="Stretch"/>
+                         SelectedItem="{Binding TempUser.UserType}"
+                         DisplayMemberPath="UserTypeName"
+                         Background="{StaticResource Style3}" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,10">
+        <Grid Row="1" Background="{StaticResource Style1}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveUser}"/>
             <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}" />
         </StackPanel>
+        </Grid>
     </Grid>
 </Window>

@@ -52,7 +52,7 @@
                                 Value="{Binding Path=Value1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                 Height="30" Width="120" Background="{StaticResource Style3}" />
                             <Label Content="{Binding Path=Prop.Unit.UnitName, UpdateSourceTrigger=PropertyChanged}"
-                                   Height="30" Width="50" Background="{StaticResource Style3}" />
+                                   Height="30" Width="90" Background="{StaticResource Style3}" />
                         </hc:ElementGroup>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
