@@ -32,6 +32,8 @@ namespace PlenkaWpf.VM
 
         public Window1VM()
         {
+            Materials = DbContextSingleton.GetInstance().MembraneObjects.Where(o=> o.Type.TypeName=="Материал").ToList();
+
             Material = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "НашМатериал");
             Canal = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Канал");
             MatModel = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Стандартная модель");
@@ -77,6 +79,8 @@ namespace PlenkaWpf.VM
 
         #region Properties
 
+        public  List<MembraneObject> Materials { get; set; }
+
         #region CanalProps
 
         public MembraneObject Canal { get; set; }
@@ -115,7 +119,23 @@ namespace PlenkaWpf.VM
 
         #region MaterialProps
 
-        public MembraneObject Material { get; set; }
+        private MembraneObject material;
+        public MembraneObject Material
+        {
+            get
+            {
+                return material;
+
+            }
+            set
+            {
+                material = value;
+
+                OnPropertyChanged(nameof(Density));
+                OnPropertyChanged(nameof(SpecifiсHeatCapacity));
+                OnPropertyChanged(nameof(MeltingTemperature));
+            }
+        }
 
         public double? Density
         {

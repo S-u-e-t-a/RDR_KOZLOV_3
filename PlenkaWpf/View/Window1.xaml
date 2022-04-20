@@ -109,7 +109,7 @@
                                                         Margin="0 5" />
                                         </Border>
                                         <hc:ElementGroup Background="{StaticResource Style3}">
-                                            <hc:ComboBox Margin="10 10" />
+                                            <hc:ComboBox Margin="10 10" ItemsSource="{Binding Materials}" SelectedItem="{Binding Material}" DisplayMemberPath="ObName"/>
                                         </hc:ElementGroup>
                                         <Border Background="{StaticResource Style2}">
                                             <hc:Divider Content="Параметры свойств материала"
