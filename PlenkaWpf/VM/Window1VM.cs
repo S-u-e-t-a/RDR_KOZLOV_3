@@ -137,6 +137,18 @@ namespace PlenkaWpf.VM
             }
         }
 
+        private object _null;
+
+        public object Null // Костыль для того чтобы ErrorStr в TextBox всегда был пустым
+        {
+            get { return _null; }
+            set
+            {
+                _null = null;
+                OnPropertyChanged();
+            }
+        }
+
         public double? Density
         {
             get { return GetMatValueByPropertyName("Плотность", Material).Value1; }
