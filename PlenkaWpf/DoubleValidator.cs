@@ -37,11 +37,32 @@ namespace PlenkaWpf
                 return new ValidationResult(false, $"Введено недопустимое значение {e.Message}");
             }
 
-            if ((val < Min) || (val > Max))
+            if (Min!=null || Max!=null)
             {
-                return new ValidationResult(false,
-                    $"Введите значение в диапазоне: {Min}-{Max}.");
+
+                if (Min == null && Max != null)
+                {
+                    if (val > Max)
+                    {
+                        return new ValidationResult(false, $"Введите значение меньшее чем {Max}.");
+                    }
+
+                }
+                if (Min != null && Max == null)
+                {
+                    if (val < Min)
+                    {
+                        return new ValidationResult(false, $"Введите значение большее чем {Min}.");
+                    }
+
+                }
+                if ((val < Min) || (val > Max))
+                {
+                    return new ValidationResult(false,
+                        $"Введите значение в диапазоне: {Min}-{Max}.");
+                }
             }
+
             return ValidationResult.ValidResult;
         } 
     }

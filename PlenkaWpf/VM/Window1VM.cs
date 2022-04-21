@@ -54,7 +54,6 @@ namespace PlenkaWpf.VM
             return mat.Values.First(v => v.Prop.PropertyName == propName);
         }
 
-
         private void updateLineSeriesByDictionary(LineSeries ls, Dictionary<double, double> points)
         {
             var newValues = new ChartValues<ObservablePoint>();
@@ -77,11 +76,69 @@ namespace PlenkaWpf.VM
             return l;
         }
 
+        //private bool isValueBetweenBounds(double value, double leftBound, double rightBound)
+        //{
+        //    if (value >= leftBound && value <= rightBound)
+        //    {
+        //        return true;
+        //    }
+
+        //    return false;
+        //}
+        
+        //private double getStepByValueRange(double valueRange, int countOfSteps)
+        //{
+        //    var estimatedStep = valueRange / countOfSteps;
+        //    var normalizedStep = estimatedStep;
+        //    var p = 1;
+
+        //    //получаем мантиссу и порядок
+        //    while (normalizedStep<1)
+        //    {
+        //        normalizedStep *= 10;
+        //        p--;
+        //    }
+        //    while (normalizedStep > 10)
+        //    {
+        //        normalizedStep /= 10;
+        //        p++;
+        //    }
+
+        //    double roundRule = 0;
+
+        //    for (int i = 0; i <= roundRuleDigits.Length-2; i++)
+        //    {
+        //        if (isValueBetweenBounds(normalizedStep,roundRuleDigits[i],roundRuleDigits[i+1]))
+        //        {
+        //            if (normalizedStep - roundRuleDigits[i] < roundRuleDigits[i + 1] - normalizedStep)
+        //            {
+        //                roundRule=roundRuleDigits[i];
+        //            }
+        //            else
+        //            {
+        //                roundRule = roundRuleDigits[i + 1];
+        //            }
+        //            break;
+        //        }
+        //    }
+
+        //    return roundRule * Math.Pow(10,p);
+        //}
+
+        //private double stepByDictionary(List<double> points)
+        //{
+        //    var range = points.Max() - points.Min();
+        //    var step = getStepByValueRange(range, 10);
+        //    return step;
+        //}
+
         #endregion
 
         #region Properties
 
-        public  List<MembraneObject> Materials { get; set; }
+        private static readonly double[] roundRuleDigits = new[] {1, 2.5, 5,10};
+
+        public List<MembraneObject> Materials { get; set; }
 
         #region CanalProps
 
@@ -276,16 +333,62 @@ namespace PlenkaWpf.VM
 
         public SeriesCollection TempSeries { get; set; }
 
+        private double _tempAxisXStep;
+
+        //public double TempAxisXStep
+        //{
+        //    get { return _tempAxisXStep; }
+        //    set
+        //    {
+        //        _tempAxisXStep = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+
+        //private double _tempAxisYStep;
+
+        //public double TempAxisYStep
+        //{
+        //    get { return _tempAxisYStep; }
+        //    set
+        //    {
+        //        _tempAxisYStep = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+
         private LineSeries nLineSerie { get; set; }
 
         public SeriesCollection NSeries { get; set; }
+        private double _nAxisXStep;
+
+        //public double NAxisXStep
+        //{
+        //    get { return _nAxisXStep; }
+        //    set
+        //    {
+        //        _nAxisXStep = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+
+        //private double _nAxisYStep;
+
+        //public double NAxisYStep
+        //{
+        //    get { return _nAxisYStep; }
+        //    set
+        //    {
+        //        _nAxisYStep = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         #endregion
 
         #region Timers
 
         public Stopwatch MathTimer { get; set; } = new();
-        public Stopwatch VisualTimer { get; set; } = new();
 
         #endregion
 
@@ -308,15 +411,18 @@ namespace PlenkaWpf.VM
             {
                 results = value;
                 OnPropertyChanged();
-                VisualTimer.Reset();
-                VisualTimer.Start();
+
+                //TempAxisXStep = stepByDictionary(results.Ni.Keys.ToList());
+                //TempAxisYStep = stepByDictionary( results.Ni.Values.ToList());
+                //NAxisXStep = stepByDictionary( results.Ni.Keys.ToList());
+                //NAxisYStep = stepByDictionary( results.Ni.Values.ToList());
                 updateLineSeriesByDictionary(tempLineSerie,Results.Ti);
                 updateLineSeriesByDictionary(nLineSerie, Results.Ni);
+                
                 OnPropertyChanged(nameof(TempSeries));
                 OnPropertyChanged(nameof(NSeries));
+
                 OnPropertyChanged(nameof(CordTempNs));
-                VisualTimer.Stop();
-                OnPropertyChanged(nameof(VisualTimer));
                 OnPropertyChanged(nameof(MathTimer));
                 OnPropertyChanged(nameof(TotalMemory));
             }
