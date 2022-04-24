@@ -134,6 +134,8 @@ namespace PlenkaWpf.VM
 
         #endregion
 
+        public List<int> ErrorList { get; set; }
+
         #region Properties
 
         private static readonly double[] roundRuleDigits = new[] {1, 2.5, 5,10};

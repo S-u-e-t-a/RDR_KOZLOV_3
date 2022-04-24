@@ -71,9 +71,6 @@ namespace PlenkaWpf.View
             }
         }
 
-        private void ProcessGrid_OnMouseWheel(object sender, MouseWheelEventArgs e) // вот такой костыль получается
-        {
-        }
 
         private void MenuItem_OnClick(object sender, RoutedEventArgs e) //todo Переписать
         {
@@ -182,10 +179,6 @@ namespace PlenkaWpf.View
                     nChartToPng.Update(true, true); //force chart redraw
                     viewbox2.UpdateLayout();
 
-                    SaveToPng(tempChartToPng, "tempChart.png");
-                    SaveToPng(nChartToPng, "nchart.png");
-
-
                     FileSystem.exportPdf(dlg.FileName, EncodeVisual(tempChartToPng, 150),EncodeVisual(nChartToPng, 150), (DataContext as Window1VM).Results);
                 }
                 else
@@ -193,6 +186,34 @@ namespace PlenkaWpf.View
                     MessageBox.Show("Нет данных для сохранения", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) // нарушение mvvm
+        {
+            if (!IsValid(MainGrid))
+            {
+                MessageBox.Show("Невозможно произвести расчет, есть ошибки ввода данных");
+            }
+            else
+            {
+                (DataContext as Window1VM).CalcCommand.Execute(null);
+            }
+        }
+
+
+
+        private bool IsValid(DependencyObject obj)
+         {
+            // The dependency object is valid if it has no errors and all
+            // of its children (that are dependency objects) are error-free.
+            return !Validation.GetHasError(obj) &&
+                   LogicalTreeHelper.GetChildren(obj)
+                       .OfType<DependencyObject>()
+                       .All(IsValid);
+        }
+        private void Validation_OnError(object? sender, ValidationErrorEventArgs e)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

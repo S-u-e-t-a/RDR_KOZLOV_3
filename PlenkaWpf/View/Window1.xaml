@@ -36,7 +36,7 @@
         
     </Window.Resources>
 
-    <Grid Background="{StaticResource Style3}">
+    <Grid Background="{StaticResource Style3}" x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="193*" />
@@ -107,7 +107,7 @@
                                                         Style="{StaticResource TextBoxInError}"
                                                         HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="Length" 
+                                                    <Binding Path="Length" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator  Max="130"/>
@@ -122,7 +122,7 @@
                                                               Style="{StaticResource TextBoxInError}"
                                                               HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="Width" 
+                                                    <Binding Path="Width" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -138,7 +138,7 @@
                                                               Style="{StaticResource TextBoxInError}"
                                                               HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="Depth" 
+                                                    <Binding Path="Depth" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -167,7 +167,7 @@
                                                               Style="{StaticResource TextBoxInError}"
                                                               HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="Density" 
+                                                    <Binding Path="Density" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -182,7 +182,7 @@
                                                               Style="{StaticResource TextBoxInError}"
                                                               HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="SpecifiсHeatCapacity" 
+                                                    <Binding Path="SpecifiсHeatCapacity" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -197,7 +197,7 @@
                                                               Style="{StaticResource TextBoxInError}"
                                                               HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="MeltingTemperature" 
+                                                    <Binding Path="MeltingTemperature" NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                              <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -218,7 +218,7 @@
                                                           Style="{StaticResource TextBoxInError}"
                                                           HorizontalAlignment="Stretch">
                                             <hc:TextBox.Text>
-                                                <Binding Path="CapSpeed" 
+                                                <Binding Path="CapSpeed" NotifyOnValidationError="True"
                                                     UpdateSourceTrigger="PropertyChanged" >
                                                     <Binding.ValidationRules>
                                                         <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -233,7 +233,7 @@
                                                           Style="{StaticResource TextBoxInError}"
                                                           HorizontalAlignment="Stretch">
                                             <hc:TextBox.Text>
-                                                <Binding Path="CapTemperature" 
+                                                <Binding Path="CapTemperature" NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" >
                                                     <Binding.ValidationRules>
                                                         <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -258,7 +258,7 @@
                                                           Style="{StaticResource TextBoxInError}"
                                                           HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="Step" 
+                                                    <Binding Path="Step" NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="1" Max="130"/>
@@ -281,7 +281,7 @@
                                                           Style="{StaticResource TextBoxInError}"
                                                           HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="СonsСoef" 
+                                                    <Binding Path="СonsСoef" NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -299,7 +299,7 @@
                                                           Style="{StaticResource TextBoxInError}"
                                                           HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="TempСoef" 
+                                                    <Binding Path="TempСoef" NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -317,7 +317,7 @@
                                                           Style="{StaticResource TextBoxInError}"
                                                           HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="RefTemp" 
+                                                    <Binding Path="RefTemp" NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -335,7 +335,7 @@
                                                           Style="{StaticResource TextBoxInError}"
                                                           HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="MatFlowIndex" 
+                                                    <Binding Path="MatFlowIndex" NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -353,7 +353,7 @@
                                                           Style="{StaticResource TextBoxInError}"
                                                           HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="HeatCoef" 
+                                                    <Binding Path="HeatCoef"  NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" >
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="5" Max="130"/>
@@ -369,7 +369,7 @@
                             </hc:ElementGroup>
                         </hc:ScrollViewer>
                         <Button Grid.Row="2" Content="Рассчитать"
-                                Background="{StaticResource Style3}" Command="{Binding CalcCommand}" Width="150" Height="50" />
+                                Background="{StaticResource Style3}"  Width="150" Height="50" Click="Button_Click" />
                     </Grid>
                 </Expander>
                 <!-- ТАБКОНТРОЛ ПОКРАСИТЬ -->
