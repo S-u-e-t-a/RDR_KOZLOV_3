@@ -34,6 +34,9 @@ internal class CreateMaterialVM : ViewModelBase
 
     private RelayCommand _saveMaterial;
 
+    /// <summary>
+    /// Команда, сохраняющая объект в базу данных
+    /// </summary>
     public RelayCommand SaveMaterial
     {
         get

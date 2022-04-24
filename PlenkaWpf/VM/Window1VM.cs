@@ -14,15 +14,31 @@ using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
 
+
+
 namespace PlenkaWpf.VM
 {
+    /// <summary>
+    /// Структура для отображения данных в таблице с результатами
+    /// </summary>
     public struct CordTempN
     {
+        /// <summary>
+        /// Координата канала по X
+        /// </summary>
         public double cord { get; set; }
+        /// <summary>
+        /// Температура
+        /// </summary>
         public double temp { get; set; }
+        /// <summary>
+        /// Вязкость
+        /// </summary>
         public double n { get; set; }
     }
-
+    /// <summary>
+    /// VM для окна исследователя
+    /// </summary>
     internal class Window1VM : ViewModelBase
 
     {
@@ -49,11 +65,21 @@ namespace PlenkaWpf.VM
 
         #endregion
 
+        /// <summary>
+        /// Фукнция, получающая свойство по его названию
+        /// </summary>
+        /// <param name="propName">Название свойства</param>
+        /// <param name="mat">Объект, свойство которого надо получить</param>
+        /// <returns>Полученное свойство</returns>
         private Value GetMatValueByPropertyName(string propName, MembraneObject mat)
         {
             return mat.Values.First(v => v.Prop.PropertyName == propName);
         }
-
+        /// <summary>
+        /// Функция, обновляющая точки графика по словарю со значениями
+        /// </summary>
+        /// <param name="ls">Серия графика</param>
+        /// <param name="points">Точки графика</param>
         private void updateLineSeriesByDictionary(LineSeries ls, Dictionary<double, double> points)
         {
             var newValues = new ChartValues<ObservablePoint>();
@@ -65,6 +91,12 @@ namespace PlenkaWpf.VM
             ls.Values = newValues;
         }
 
+        /// <summary>
+        /// Функция, создающая список со значениями для таблицы с результатами
+        /// </summary>
+        /// <param name="ti"> Словарь значений с температурой </param>
+        /// <param name="ni"> Словарь значений с вязкостью </param>
+        /// <returns></returns>
         private List<CordTempN> cordTempNsByDictionaries(Dictionary<double, double> ti, Dictionary<double, double> ni)
         {
             var l = new List<CordTempN>();
@@ -140,12 +172,20 @@ namespace PlenkaWpf.VM
 
         private static readonly double[] roundRuleDigits = new[] {1, 2.5, 5,10};
 
+        /// <summary>
+        /// Доступные материалы
+        /// </summary>
         public List<MembraneObject> Materials { get; set; }
 
         #region CanalProps
-
+        /// <summary>
+        /// Текущий канал
+        /// </summary>
         public MembraneObject Canal { get; set; }
 
+        /// <summary>
+        /// Длина канала
+        /// </summary>
         public double? Length
         {
             get { return GetMatValueByPropertyName("Длина", Canal).Value1; }
@@ -155,7 +195,9 @@ namespace PlenkaWpf.VM
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// Ширина канала
+        /// </summary>
         public double? Width
         {
             get { return GetMatValueByPropertyName("Ширина", Canal).Value1; }
@@ -166,6 +208,9 @@ namespace PlenkaWpf.VM
             }
         }
 
+        /// <summary>
+        /// Глубина канала
+        /// </summary>
         public double? Depth
         {
             get { return GetMatValueByPropertyName("Глубина", Canal).Value1; }
@@ -181,6 +226,10 @@ namespace PlenkaWpf.VM
         #region MaterialProps
 
         private MembraneObject material;
+
+        /// <summary>
+        /// Выбранный материал
+        /// </summary>
         public MembraneObject Material
         {
             get
@@ -210,6 +259,9 @@ namespace PlenkaWpf.VM
             }
         }
 
+        /// <summary>
+        /// Плоность материала
+        /// </summary>
         public double? Density
         {
             get { return GetMatValueByPropertyName("Плотность", Material).Value1; }
@@ -220,6 +272,9 @@ namespace PlenkaWpf.VM
             }
         }
 
+        /// <summary>
+        /// Удельная теплоемкость материала
+        /// </summary>
         public double? SpecifiсHeatCapacity
         {
             get { return GetMatValueByPropertyName("Удельная теплоемкость", Material).Value1; }
@@ -230,6 +285,9 @@ namespace PlenkaWpf.VM
             }
         }
 
+        /// <summary>
+        /// Температуры плавления материала
+        /// </summary>
         public double? MeltingTemperature
         {
             get { return GetMatValueByPropertyName("Температура плавления", Material).Value1; }
@@ -244,16 +302,28 @@ namespace PlenkaWpf.VM
 
         #region VarProps
 
+        /// <summary>
+        /// Скорость крышки
+        /// </summary>
         public double? CapSpeed { get; set; } = 1;
 
+        /// <summary>
+        /// Температура крашки
+        /// </summary>
         public double? CapTemperature { get; set; } = 1;
 
         #endregion
 
         #region MatModelProps
 
+        /// <summary>
+        /// Текущая мат.модель
+        /// </summary>
         public MembraneObject MatModel { get; set; }
 
+        /// <summary>
+        /// Коэффициент констистенции материала при температуре приведения
+        /// </summary>
         public double? СonsСoef
         {
             get
@@ -269,6 +339,9 @@ namespace PlenkaWpf.VM
             }
         }
 
+        /// <summary>
+        /// Температурный коэффициент вязкости материала
+        /// </summary>
         public double? TempСoef
         {
             get { return GetMatValueByPropertyName("Температурный коэффициент вязкости материала", MatModel).Value1; }
@@ -279,6 +352,9 @@ namespace PlenkaWpf.VM
             }
         }
 
+        /// <summary>
+        /// Температура приведения
+        /// </summary>
         public double? RefTemp
         {
             get { return GetMatValueByPropertyName("Температура приведения", MatModel).Value1; }
@@ -289,6 +365,9 @@ namespace PlenkaWpf.VM
             }
         }
 
+        /// <summary>
+        /// Индекс течения материала
+        /// </summary>
         public double? MatFlowIndex
         {
             get { return GetMatValueByPropertyName("Индекс течения материала", MatModel).Value1; }
@@ -299,6 +378,9 @@ namespace PlenkaWpf.VM
             }
         }
 
+        /// <summary>
+        /// Коэффициеент теплоотдачи от крышки канала к материалу
+        /// </summary>
         public double? HeatCoef
         {
             get
@@ -317,7 +399,9 @@ namespace PlenkaWpf.VM
         #endregion
 
         #region Graphics
-
+        /// <summary>
+        /// Список со значениями температуры и вязкости на протяжении канала
+        /// </summary>
         public List<CordTempN> CordTempNs
         {
             get
@@ -330,7 +414,9 @@ namespace PlenkaWpf.VM
                 return null;
             }
         }
-
+        /// <summary>
+        /// Серия точек температуры
+        /// </summary>
         private LineSeries tempLineSerie { get; set; }
 
         public SeriesCollection TempSeries { get; set; }
@@ -358,7 +444,9 @@ namespace PlenkaWpf.VM
         //        OnPropertyChanged();
         //    }
         //}
-
+        /// <summary>
+        /// Серия точек вязкости
+        /// </summary>
         private LineSeries nLineSerie { get; set; }
 
         public SeriesCollection NSeries { get; set; }
@@ -390,11 +478,16 @@ namespace PlenkaWpf.VM
 
         #region Timers
 
+        /// <summary>
+        /// Таймер для времени расчета
+        /// </summary>
         public Stopwatch MathTimer { get; set; } = new();
 
         #endregion
 
-        
+        /// <summary>
+        /// Текущая занаятая память
+        /// </summary>
         public long TotalMemory
         {
             get
@@ -405,7 +498,9 @@ namespace PlenkaWpf.VM
         }
 
         private CalculationResults results;
-
+        /// <summary>
+        /// Полученные результаты
+        /// </summary>
         public CalculationResults Results
         {
             get { return results; }
@@ -429,7 +524,9 @@ namespace PlenkaWpf.VM
                 OnPropertyChanged(nameof(TotalMemory));
             }
         }
-
+        /// <summary>
+        /// Шаг расчета
+        /// </summary>
         public double? Step { get; set; } = 0.1;
 
         public bool IsCalculated = false;
@@ -440,6 +537,9 @@ namespace PlenkaWpf.VM
 
         private RelayCommand _calcCommand;
 
+        /// <summary>
+        /// Команда, выполняющая расчет
+        /// </summary>
         public RelayCommand CalcCommand
         {
             get

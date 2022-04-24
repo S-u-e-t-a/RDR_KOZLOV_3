@@ -44,6 +44,9 @@ namespace PlenkaWpf.VM
 
         private RelayCommand _addNewUser;
 
+        /// <summary>
+        /// Команда, открывающая окно создания пользователя
+        /// </summary>
         public RelayCommand AddNewUser
         {
             get { return _addNewUser ??= new RelayCommand(o =>
@@ -54,6 +57,9 @@ namespace PlenkaWpf.VM
 
         private RelayCommand _editUser;
 
+        /// <summary>
+        /// Команда, открывающая окно редактирования пользователя
+        /// </summary>
         public RelayCommand EditUser
         {
             get { return _editUser ??= new RelayCommand(o =>
@@ -64,6 +70,9 @@ namespace PlenkaWpf.VM
 
         private RelayCommand _deleteUser;
 
+        /// <summary>
+        /// Команда, удаляющая пользователя
+        /// </summary>
         public RelayCommand DeleteUser
         {
             get { return _deleteUser ??= new RelayCommand(o =>

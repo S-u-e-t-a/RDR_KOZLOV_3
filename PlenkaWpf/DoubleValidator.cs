@@ -9,9 +9,18 @@ using iText.IO.Source;
 
 namespace PlenkaWpf
 {
+    /// <summary>
+    /// Валидатор для double значений
+    /// </summary>
     internal class DoubleValidator : ValidationRule
     {
+        /// <summary>
+        /// Минимальное значение
+        /// </summary>
         public double? Min { get; set; }
+        /// <summary>
+        /// Максимальное значение
+        /// </summary>
         public double? Max { get; set; }
 
         public bool IncludingMinValue { get; set; } = false;

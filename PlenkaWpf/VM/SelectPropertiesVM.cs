@@ -14,6 +14,9 @@ using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace PlenkaWpf.VM;
 
+/// <summary>
+/// Конвертер значений для корректного отображенияпринадлежности свойства объекту
+/// </summary>
 public class ObjectInListConverter : IMultiValueConverter
 {
     public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
@@ -69,6 +72,9 @@ public class SelectPropertiesVM : ViewModelBase
 
     private RelayCommand _selectProperties;
 
+    /// <summary>
+    /// Команда, сохраняющая результаты выбора свойств
+    /// </summary>
     public RelayCommand SelectProperties
     {
         get
@@ -93,6 +99,9 @@ public class SelectPropertiesVM : ViewModelBase
 
     private RelayCommand _isCompletedUncheckedCommand;
 
+    /// <summary>
+    /// Команда, обрабатывающая на выключение чекбокса со свойством
+    /// </summary>
     public RelayCommand IsCompletedUncheckedCommand
     {
         get
@@ -107,7 +116,9 @@ public class SelectPropertiesVM : ViewModelBase
 
 
     private RelayCommand _isCompletedCheckedCommand;
-
+    /// <summary>
+    /// Команда, обрабатывающая на включение чекбокса со свойством
+    /// </summary>
     public RelayCommand IsCompletedCheckedCommand
     {
         get
@@ -123,7 +134,9 @@ public class SelectPropertiesVM : ViewModelBase
 
 
     private RelayCommand _createProperty;
-
+    /// <summary>
+    /// Команда, открывающая окно создания свойства
+    /// </summary>
     public RelayCommand CreateProperty
     {
         get
@@ -136,7 +149,9 @@ public class SelectPropertiesVM : ViewModelBase
     }
 
     private RelayCommand _editProperty;
-
+    /// <summary>
+    /// Команда, открывающая окно редактирования свойства
+    /// </summary>
     public RelayCommand EditProperty
     {
         get
@@ -148,6 +163,9 @@ public class SelectPropertiesVM : ViewModelBase
 
     private RelayCommand _deleteProperty;
 
+    /// <summary>
+    /// Команда, удаляющая свойство
+    /// </summary>
     public RelayCommand DeleteProperty
     {
         get { return _deleteProperty ??= new RelayCommand(o =>

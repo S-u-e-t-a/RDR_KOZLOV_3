@@ -22,6 +22,7 @@ public class MaterialEditVM : ViewModelBase
 
     #endregion
 
+
     #region Properties
 
     public ObservableCollection<Value> values { get; set; }
@@ -34,6 +35,9 @@ public class MaterialEditVM : ViewModelBase
 
     private RelayCommand _openSelectPropertyesToChange;
 
+    /// <summary>
+    /// Команад, открывающая окно со свойствами для редактирования
+    /// </summary>
     public RelayCommand OpenSelectPropertyesToChange
     {
         get
@@ -45,6 +49,9 @@ public class MaterialEditVM : ViewModelBase
 
     private RelayCommand _saveChanges;
 
+    /// <summary>
+    /// Команда, сохраняющая резульаьы редактирования в базу данных
+    /// </summary>
     public RelayCommand SaveChanges
     {
         get

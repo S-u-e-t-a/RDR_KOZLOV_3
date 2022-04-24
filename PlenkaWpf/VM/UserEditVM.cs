@@ -48,6 +48,9 @@ namespace PlenkaWpf.VM
         #region Commands
 
         private RelayCommand _saveUser;
+        /// <summary>
+        /// Команда сохраняющая изменение данных о пользователе в базе данных
+        /// </summary>
         public RelayCommand SaveUser
         {
             get

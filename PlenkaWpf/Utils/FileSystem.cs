@@ -19,9 +19,19 @@ using PlenkaAPI;
 
 namespace PlenkaWpf.Utils
 {
+    /// <summary>
+    /// Класс для работы с файлами
+    /// </summary>
     internal class FileSystem 
 
     {
+        /// <summary>
+        /// Функция экспорта результатов в пдф
+        /// </summary>
+        /// <param name="path">Путь к файлу</param>
+        /// <param name="tempBitmap">График температуры</param>
+        /// <param name="nBitMap">График вязкости</param>
+        /// <param name="results">Результаты расчетов</param>
         public static void exportPdf(string path, byte[] tempBitmap, byte[] nBitMap, CalculationResults results) // todo Переписать
         {
             var writer = new PdfWriter(path);

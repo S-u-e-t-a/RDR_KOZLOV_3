@@ -32,6 +32,7 @@ public class MaterialExplorerVM : ViewModelBase
 
     #endregion
 
+
     #region Properties
 
     private MembraneContext db = DbContextSingleton.GetInstance();
@@ -46,6 +47,9 @@ public class MaterialExplorerVM : ViewModelBase
 
     private RelayCommand _addNewMemObject;
 
+    /// <summary>
+    /// Команда, открывающая окно создания нового объекта
+    /// </summary>
     public RelayCommand AddNewMemObject
     {
         get { return _addNewMemObject ??= new RelayCommand(o => { ShowChildWindow(new CreateMaterialWindow()); }); }
@@ -53,6 +57,9 @@ public class MaterialExplorerVM : ViewModelBase
 
     private RelayCommand _editMemObject;
 
+    /// <summary>
+    /// Команда, открывающая окно редактирования нового объекта
+    /// </summary>
     public RelayCommand EditMemObject
     {
         get
@@ -67,7 +74,9 @@ public class MaterialExplorerVM : ViewModelBase
     }
 
     private RelayCommand _deleteMemObject;
-
+    /// <summary>
+    /// Команда, удаляющая объект
+    /// </summary>
     public RelayCommand DeleteMemObject
     {
         get { return _deleteMemObject ??= new RelayCommand(o =>
