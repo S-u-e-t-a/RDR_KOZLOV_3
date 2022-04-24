@@ -1,13 +1,13 @@
 ﻿<UserControl x:Class="PlenkaWpf.View.MaterialExplorer"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
-        xmlns:vm="clr-namespace:PlenkaWpf.VM"
-        mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance vm:MaterialExplorerVM}"
-        d:DesignHeight="450">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:vm="clr-namespace:PlenkaWpf.VM"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance vm:MaterialExplorerVM}"
+             d:DesignHeight="450">
     <UserControl.Resources>
         <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
         <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />

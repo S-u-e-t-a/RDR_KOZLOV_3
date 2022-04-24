@@ -23,22 +23,22 @@
             <hc:TextBox hc:InfoElement.Title="Имя пользователя"
                         hc:InfoElement.TitlePlacement="Top" Margin="10 5"
                         Text="{Binding TempUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Background="{StaticResource Style3}" HorizontalAlignment="Stretch"/>
+                        Background="{StaticResource Style3}" HorizontalAlignment="Stretch" />
             <hc:TextBox hc:InfoElement.Title="Пароль"
                         hc:InfoElement.TitlePlacement="Top" Margin="10 5"
                         Text="{Binding TempUser.UserPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Background="{StaticResource Style3}" HorizontalAlignment="Stretch"/>
+                        Background="{StaticResource Style3}" HorizontalAlignment="Stretch" />
             <hc:ComboBox hc:InfoElement.Title="Тип пользователя" ItemsSource="{Binding UserTypes}"
                          hc:InfoElement.TitlePlacement="Top" Margin="10 5"
                          SelectedItem="{Binding TempUser.UserType}"
                          DisplayMemberPath="UserTypeName"
-                         Background="{StaticResource Style3}" HorizontalAlignment="Stretch"/>
+                         Background="{StaticResource Style3}" HorizontalAlignment="Stretch" />
         </StackPanel>
         <Grid Row="1" Background="{StaticResource Style1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveUser}"/>
-            <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}" />
-        </StackPanel>
+                <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveUser}" />
+                <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

@@ -14,21 +14,21 @@
                 <RowDefinition />
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
-            <DataGrid  ItemsSource="{Binding Users}"
-                       IsReadOnly="True"
-                       SelectedItem="{Binding SelectedUser}"
-                       SelectionMode="Single"
-                       AutoGenerateColumns="False">
-                
+            <DataGrid ItemsSource="{Binding Users}"
+                      IsReadOnly="True"
+                      SelectedItem="{Binding SelectedUser}"
+                      SelectionMode="Single"
+                      AutoGenerateColumns="False">
+
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID"
-                                        Binding="{Binding UserId}"/>
+                                        Binding="{Binding UserId}" />
                     <DataGridTextColumn Header="Имя пользователя"
-                                        Binding="{Binding UserName}"/>
+                                        Binding="{Binding UserName}" />
                     <DataGridTextColumn Header="Пароль"
-                                        Binding="{Binding UserPassword}"/>
+                                        Binding="{Binding UserPassword}" />
                     <DataGridTextColumn Header="Тип пользователя"
-                                        Binding="{Binding UserType.UserTypeName}"/>
+                                        Binding="{Binding UserType.UserTypeName}" />
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Row="1">

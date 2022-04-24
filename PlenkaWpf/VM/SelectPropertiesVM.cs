@@ -116,6 +116,7 @@ public class SelectPropertiesVM : ViewModelBase
 
 
     private RelayCommand _isCompletedCheckedCommand;
+
     /// <summary>
     /// Команда, обрабатывающая на включение чекбокса со свойством
     /// </summary>
@@ -134,6 +135,7 @@ public class SelectPropertiesVM : ViewModelBase
 
 
     private RelayCommand _createProperty;
+
     /// <summary>
     /// Команда, открывающая окно создания свойства
     /// </summary>
@@ -149,6 +151,7 @@ public class SelectPropertiesVM : ViewModelBase
     }
 
     private RelayCommand _editProperty;
+
     /// <summary>
     /// Команда, открывающая окно редактирования свойства
     /// </summary>
@@ -168,16 +171,18 @@ public class SelectPropertiesVM : ViewModelBase
     /// </summary>
     public RelayCommand DeleteProperty
     {
-        get { return _deleteProperty ??= new RelayCommand(o =>
+        get
         {
-            //if (MessageBox.Show($"Вы действительно хотите удалить пользователя {SelectedUser.UserName}?", "Удаление пользователя", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            //{
-            //    db.Properties.Remove(SelectedProperty);
-            //    db.SaveChanges();
-            //}
-        }); }
+            return _deleteProperty ??= new RelayCommand(o =>
+            {
+                //if (MessageBox.Show($"Вы действительно хотите удалить пользователя {SelectedUser.UserName}?", "Удаление пользователя", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                //{
+                //    db.Properties.Remove(SelectedProperty);
+                //    db.SaveChanges();
+                //}
+            });
+        }
     }
-
 
     #endregion
 }

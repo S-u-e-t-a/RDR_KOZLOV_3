@@ -21,7 +21,6 @@ public partial class LoginWindow : Window
         //var win = new MaterialEdit(mat);
         var win = new MainAdminPanel();
         win.Show();
-        
     }
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

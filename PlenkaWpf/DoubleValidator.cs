@@ -18,6 +18,7 @@ namespace PlenkaWpf
         /// Минимальное значение
         /// </summary>
         public double? Min { get; set; }
+
         /// <summary>
         /// Максимальное значение
         /// </summary>
@@ -86,18 +87,12 @@ namespace PlenkaWpf
 
         private string range
         {
-            get
-            {
-                return $"{leftBound};{rightBound}";
-            }
+            get { return $"{leftBound};{rightBound}"; }
         }
 
         private string enterValueInRange
         {
-            get
-            {
-                return $"Введите значение в диапазоне: {range}";
-            }
+            get { return $"Введите значение в диапазоне: {range}"; }
         }
 
         public DoubleValidator()
@@ -111,13 +106,13 @@ namespace PlenkaWpf
             {
                 return new ValidationResult(false, "Значение не может быть пустым");
             }
+
             try
             {
-                if (((string)value).Length > 0)
+                if (((string) value).Length > 0)
                 {
-                    val = double.Parse((String)value);
+                    val = double.Parse((String) value);
                 }
-
             }
             catch (Exception e)
             {
@@ -126,7 +121,6 @@ namespace PlenkaWpf
 
             if (Min != null || Max != null)
             {
-
                 if (Min == null && Max != null)
                 {
                     if (IncludingMaxValue)
@@ -143,9 +137,8 @@ namespace PlenkaWpf
                             return new ValidationResult(false, enterValueInRange);
                         }
                     }
-
-
                 }
+
                 if (Min != null && Max == null)
                 {
                     if (IncludingMinValue)
@@ -199,10 +192,6 @@ namespace PlenkaWpf
                             enterValueInRange);
                     }
                 }
-
-
-
-
             }
 
             return ValidationResult.ValidResult;

@@ -44,6 +44,7 @@ public class CreatePropertyVM : ViewModelBase
     #region Commands
 
     private RelayCommand _saveProperty;
+
     /// <summary>
     /// Команда сохраняющая свойство в базу данных
     /// </summary>

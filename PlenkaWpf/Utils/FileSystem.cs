@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using iText.IO.Font;
 using iText.IO.Image;
 using iText.Kernel.Font;
@@ -22,7 +21,7 @@ namespace PlenkaWpf.Utils
     /// <summary>
     /// Класс для работы с файлами
     /// </summary>
-    internal class FileSystem 
+    internal class FileSystem
 
     {
         /// <summary>
@@ -32,7 +31,8 @@ namespace PlenkaWpf.Utils
         /// <param name="tempBitmap">График температуры</param>
         /// <param name="nBitMap">График вязкости</param>
         /// <param name="results">Результаты расчетов</param>
-        public static void exportPdf(string path, byte[] tempBitmap, byte[] nBitMap, CalculationResults results) // todo Переписать
+        public static void
+            exportPdf(string path, byte[] tempBitmap, byte[] nBitMap, CalculationResults results) // todo Переписать
         {
             var writer = new PdfWriter(path);
             var pdf = new PdfDocument(writer);
@@ -45,8 +45,12 @@ namespace PlenkaWpf.Utils
                 .SetFontSize(20);
             document.SetFont(font);
             var image = new Image(ImageDataFactory.Create(tempBitmap)).SetTextAlignment(TextAlignment.CENTER);
-            var widthscaler = (document.GetPageEffectiveArea(PageSize.A4).GetWidth() - document.GetLeftMargin() - document.GetRightMargin()) / image.GetImageWidth();
-            var heighscaler = (document.GetPageEffectiveArea(PageSize.A4).GetHeight() - document.GetTopMargin() - document.GetBottomMargin()) / image.GetImageHeight();
+            var widthscaler =
+                (document.GetPageEffectiveArea(PageSize.A4).GetWidth() - document.GetLeftMargin() -
+                 document.GetRightMargin()) / image.GetImageWidth();
+            var heighscaler =
+                (document.GetPageEffectiveArea(PageSize.A4).GetHeight() - document.GetTopMargin() -
+                 document.GetBottomMargin()) / image.GetImageHeight();
             float scaler;
             if (widthscaler < heighscaler)
             {
@@ -63,8 +67,12 @@ namespace PlenkaWpf.Utils
             document.Add(image);
 
             image = new Image(ImageDataFactory.Create(nBitMap)).SetTextAlignment(TextAlignment.CENTER);
-            widthscaler = (document.GetPageEffectiveArea(PageSize.A4).GetWidth() - document.GetLeftMargin() - document.GetRightMargin()) / image.GetImageWidth();
-            heighscaler = (document.GetPageEffectiveArea(PageSize.A4).GetHeight() - document.GetTopMargin() - document.GetBottomMargin()) / image.GetImageHeight();
+            widthscaler =
+                (document.GetPageEffectiveArea(PageSize.A4).GetWidth() - document.GetLeftMargin() -
+                 document.GetRightMargin()) / image.GetImageWidth();
+            heighscaler =
+                (document.GetPageEffectiveArea(PageSize.A4).GetHeight() - document.GetTopMargin() -
+                 document.GetBottomMargin()) / image.GetImageHeight();
             if (widthscaler < heighscaler)
             {
                 scaler = widthscaler;
@@ -80,7 +88,6 @@ namespace PlenkaWpf.Utils
             document.Add(image);
 
 
-
             Table table = new Table(UnitValue.CreatePercentArray(3)).UseAllAvailableWidth();
             table.AddHeaderCell("Координата по длине канала, м");
             table.AddHeaderCell("Температура, °С");
@@ -92,7 +99,7 @@ namespace PlenkaWpf.Utils
                 table.AddCell(results.Ti.ElementAt(i).Value.ToString());
             }
 
-            
+
             document.Add(new Paragraph($"Температура продукта {results.T} °С"));
             document.Add(new Paragraph($"Вязкость продукта {results.N} Па·с"));
             document.Add(new Paragraph($"Производительность канала {results.Q} кг/ч"));

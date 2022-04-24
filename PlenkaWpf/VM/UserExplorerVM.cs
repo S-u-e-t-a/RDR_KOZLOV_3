@@ -49,10 +49,7 @@ namespace PlenkaWpf.VM
         /// </summary>
         public RelayCommand AddNewUser
         {
-            get { return _addNewUser ??= new RelayCommand(o =>
-            {
-                ShowChildWindow(new UserEditWindow(new User()));
-            }); }
+            get { return _addNewUser ??= new RelayCommand(o => { ShowChildWindow(new UserEditWindow(new User())); }); }
         }
 
         private RelayCommand _editUser;
@@ -62,10 +59,7 @@ namespace PlenkaWpf.VM
         /// </summary>
         public RelayCommand EditUser
         {
-            get { return _editUser ??= new RelayCommand(o =>
-            {
-                ShowChildWindow(new UserEditWindow(SelectedUser));
-            }); }
+            get { return _editUser ??= new RelayCommand(o => { ShowChildWindow(new UserEditWindow(SelectedUser)); }); }
         }
 
         private RelayCommand _deleteUser;
@@ -75,16 +69,20 @@ namespace PlenkaWpf.VM
         /// </summary>
         public RelayCommand DeleteUser
         {
-            get { return _deleteUser ??= new RelayCommand(o =>
+            get
             {
-                if (MessageBox.Show($"Вы действительно хотите удалить пользователя {SelectedUser.UserName}?", "Удаление пользователя", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                return _deleteUser ??= new RelayCommand(o =>
                 {
-                    db.Users.Remove(SelectedUser);
-                    db.SaveChanges();
-                }
-            }); }
+                    if (MessageBox.Show($"Вы действительно хотите удалить пользователя {SelectedUser.UserName}?",
+                            "Удаление пользователя", MessageBoxButton.YesNo, MessageBoxImage.Warning) ==
+                        MessageBoxResult.Yes)
+                    {
+                        db.Users.Remove(SelectedUser);
+                        db.SaveChanges();
+                    }
+                });
+            }
         }
-
 
         #endregion
     }

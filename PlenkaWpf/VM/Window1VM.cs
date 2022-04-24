@@ -15,7 +15,6 @@ using PlenkaAPI.Models;
 using PlenkaWpf.Utils;
 
 
-
 namespace PlenkaWpf.VM
 {
     /// <summary>
@@ -27,15 +26,18 @@ namespace PlenkaWpf.VM
         /// Координата канала по X
         /// </summary>
         public double cord { get; set; }
+
         /// <summary>
         /// Температура
         /// </summary>
         public double temp { get; set; }
+
         /// <summary>
         /// Вязкость
         /// </summary>
         public double n { get; set; }
     }
+
     /// <summary>
     /// VM для окна исследователя
     /// </summary>
@@ -48,19 +50,20 @@ namespace PlenkaWpf.VM
 
         public Window1VM()
         {
-            Materials = DbContextSingleton.GetInstance().MembraneObjects.Where(o=> o.Type.TypeName=="Материал").ToList();
+            Materials = DbContextSingleton.GetInstance().MembraneObjects.Where(o => o.Type.TypeName == "Материал")
+                .ToList();
 
             Material = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "НашМатериал");
             Canal = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Канал");
             MatModel = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Стандартная модель");
 
-            tempLineSerie = new LineSeries(){Title = "Температура, °С" };
+            tempLineSerie = new LineSeries() {Title = "Температура, °С"};
             tempLineSerie.Fill = System.Windows.Media.Brushes.Transparent;
             TempSeries = new SeriesCollection() {tempLineSerie};
 
-            nLineSerie = new LineSeries(){ Title = "Вязкость, Па·с" };
+            nLineSerie = new LineSeries() {Title = "Вязкость, Па·с"};
             nLineSerie.Fill = System.Windows.Media.Brushes.Transparent;
-            NSeries = new SeriesCollection() { nLineSerie };
+            NSeries = new SeriesCollection() {nLineSerie};
         }
 
         #endregion
@@ -75,6 +78,7 @@ namespace PlenkaWpf.VM
         {
             return mat.Values.First(v => v.Prop.PropertyName == propName);
         }
+
         /// <summary>
         /// Функция, обновляющая точки графика по словарю со значениями
         /// </summary>
@@ -117,7 +121,7 @@ namespace PlenkaWpf.VM
 
         //    return false;
         //}
-        
+
         //private double getStepByValueRange(double valueRange, int countOfSteps)
         //{
         //    var estimatedStep = valueRange / countOfSteps;
@@ -170,7 +174,7 @@ namespace PlenkaWpf.VM
 
         #region Properties
 
-        private static readonly double[] roundRuleDigits = new[] {1, 2.5, 5,10};
+        private static readonly double[] roundRuleDigits = new[] {1, 2.5, 5, 10};
 
         /// <summary>
         /// Доступные материалы
@@ -178,6 +182,7 @@ namespace PlenkaWpf.VM
         public List<MembraneObject> Materials { get; set; }
 
         #region CanalProps
+
         /// <summary>
         /// Текущий канал
         /// </summary>
@@ -195,6 +200,7 @@ namespace PlenkaWpf.VM
                 OnPropertyChanged();
             }
         }
+
         /// <summary>
         /// Ширина канала
         /// </summary>
@@ -232,11 +238,7 @@ namespace PlenkaWpf.VM
         /// </summary>
         public MembraneObject Material
         {
-            get
-            {
-                return material;
-
-            }
+            get { return material; }
             set
             {
                 material = value;
@@ -399,6 +401,7 @@ namespace PlenkaWpf.VM
         #endregion
 
         #region Graphics
+
         /// <summary>
         /// Список со значениями температуры и вязкости на протяжении канала
         /// </summary>
@@ -414,6 +417,7 @@ namespace PlenkaWpf.VM
                 return null;
             }
         }
+
         /// <summary>
         /// Серия точек температуры
         /// </summary>
@@ -493,11 +497,12 @@ namespace PlenkaWpf.VM
             get
             {
                 Process currentProcess = Process.GetCurrentProcess();
-                return currentProcess.WorkingSet64 /(1024*1024);
+                return currentProcess.WorkingSet64 / (1024 * 1024);
             }
         }
 
         private CalculationResults results;
+
         /// <summary>
         /// Полученные результаты
         /// </summary>
@@ -513,9 +518,9 @@ namespace PlenkaWpf.VM
                 //TempAxisYStep = stepByDictionary( results.Ni.Values.ToList());
                 //NAxisXStep = stepByDictionary( results.Ni.Keys.ToList());
                 //NAxisYStep = stepByDictionary( results.Ni.Values.ToList());
-                updateLineSeriesByDictionary(tempLineSerie,Results.Ti);
+                updateLineSeriesByDictionary(tempLineSerie, Results.Ti);
                 updateLineSeriesByDictionary(nLineSerie, Results.Ni);
-                
+
                 OnPropertyChanged(nameof(TempSeries));
                 OnPropertyChanged(nameof(NSeries));
 
@@ -524,6 +529,7 @@ namespace PlenkaWpf.VM
                 OnPropertyChanged(nameof(TotalMemory));
             }
         }
+
         /// <summary>
         /// Шаг расчета
         /// </summary>
@@ -570,7 +576,6 @@ namespace PlenkaWpf.VM
                     Results = mc.calculate();
                     MathTimer.Stop();
                     OnPropertyChanged(nameof(MathTimer));
-                    
                 }));
             }
         }

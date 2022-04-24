@@ -82,9 +82,9 @@ namespace PlenkaAPI
             {
                 var ii = Round(i, GetDecimalDigitsCount(step));
                 Ti.Add(ii, Round(Tr + (1 / b) * Log((b * qGamma + W * au) /
-                        (b * qAlpha) * (1 - Exp(-((ii * b * qAlpha) /
-                                                  (p * c * Qch)))) +
-                        Exp(b * (T0 - Tr - (ii * qAlpha) / (p * c * Qch)))),
+                                                    (b * qAlpha) * (1 - Exp(-((ii * b * qAlpha) /
+                                                                              (p * c * Qch)))) +
+                                                    Exp(b * (T0 - Tr - (ii * qAlpha) / (p * c * Qch)))),
                     1));
                 Ni.Add(ii, Round(u0 * Exp(-b * (Ti[ii] - Tr)) * Pow(gamma, n - 1), 1));
             }

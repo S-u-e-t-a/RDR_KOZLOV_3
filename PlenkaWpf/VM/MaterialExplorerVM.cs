@@ -22,8 +22,8 @@ public class MaterialExplorerVM : ViewModelBase
     public MaterialExplorerVM()
     {
         db.SavedChanges += (sender, args) => { OnPropertyChanged(nameof(Materials)); };
-       
-       
+
+
         //var db = DbContextSingleton.GetInstance();
         Materials = db.MembraneObjects.Local.ToObservableCollection();
     }
@@ -64,35 +64,37 @@ public class MaterialExplorerVM : ViewModelBase
     {
         get
         {
-            return _editMemObject ??= new RelayCommand(o =>
-                {
-                    ShowChildWindow(new MaterialEdit(SelectedMemObject));
-                },
+            return _editMemObject ??= new RelayCommand(o => { ShowChildWindow(new MaterialEdit(SelectedMemObject)); },
                 c => SelectedMemObject != null
             );
         }
     }
 
     private RelayCommand _deleteMemObject;
+
     /// <summary>
     /// Команда, удаляющая объект
     /// </summary>
     public RelayCommand DeleteMemObject
     {
-        get { return _deleteMemObject ??= new RelayCommand(o =>
+        get
         {
-            if (MessageBox.Show($"Вы действительно хотите удалить объект {SelectedMemObject.ObName}?", "Удаление объекта", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            return _deleteMemObject ??= new RelayCommand(o =>
             {
-                foreach (var value in SelectedMemObject.Values)
+                if (MessageBox.Show($"Вы действительно хотите удалить объект {SelectedMemObject.ObName}?",
+                        "Удаление объекта", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    db.Values.Remove(value);
-                }
-                db.MembraneObjects.Remove(SelectedMemObject);
-                db.SaveChanges();
-            }
-        },c=> SelectedMemObject != null); }
-    }
+                    foreach (var value in SelectedMemObject.Values)
+                    {
+                        db.Values.Remove(value);
+                    }
 
+                    db.MembraneObjects.Remove(SelectedMemObject);
+                    db.SaveChanges();
+                }
+            }, c => SelectedMemObject != null);
+        }
+    }
 
     #endregion
 }

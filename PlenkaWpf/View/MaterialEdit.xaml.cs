@@ -9,8 +9,6 @@ namespace PlenkaWpf.View;
 /// </summary>
 public partial class MaterialEdit : Window
 {
-
-
     public MaterialEdit(MembraneObject material)
     {
         InitializeComponent();
