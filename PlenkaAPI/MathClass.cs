@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -48,10 +49,25 @@ namespace PlenkaAPI
 
     public struct CalculationResults
     {
+        /// <summary>
+        /// Таймер для времени расчета
+        /// </summary>
+        public Stopwatch MathTimer { get; init; } 
+        /// <summary>
+        /// Список с результатами расчета по координате канала
+        /// </summary>
         public List<CordTempN> cordTempNs { get; init; } 
-
+        /// <summary>
+        /// Производительность канала
+        /// </summary>
         public double Q { get; init; }
+        /// <summary>
+        /// Температура продукта
+        /// </summary>
         public double T { get; init; }
+        /// <summary>
+        /// Вязкость продукта
+        /// </summary>
         public double N { get; init; }
     }
 
@@ -91,6 +107,8 @@ namespace PlenkaAPI
 
         public CalculationResults calculate()
         {
+            var sw = new Stopwatch();
+            sw.Start();
             var F = 0.125 * Pow(H / W, 2) - 0.625 * (H / W) + 1;
             var gamma = Vu / H;
             var qGamma = H * W * u0 * Pow(gamma, n + 1);
@@ -114,7 +132,8 @@ namespace PlenkaAPI
             var Q = Round(p * Qch * 3600,2);
             var T = cordTempNs.Last().temp;
             var N = cordTempNs.Last().n;
-            return new CalculationResults() {Q = Q, T = T, N = N, cordTempNs = cordTempNs};
+            sw.Stop();
+            return new CalculationResults() {Q = Q, T = T, N = N, cordTempNs = cordTempNs, MathTimer = sw};
         }
     }
 }

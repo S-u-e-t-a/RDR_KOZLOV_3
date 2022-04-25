@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
@@ -45,6 +46,7 @@ namespace PlenkaWpf.VM
             nLineSerie = new LineSeries() {Title = "Вязкость, Па·с"};
             nLineSerie.Fill = System.Windows.Media.Brushes.Transparent;
             NSeries = new SeriesCollection() {nLineSerie};
+            IsCalculated = false;
         }
 
         #endregion
@@ -281,12 +283,12 @@ namespace PlenkaWpf.VM
         /// <summary>
         /// Скорость крышки
         /// </summary>
-        public double? CapSpeed { get; set; } = 1;
+        public double? CapSpeed { get; set; } = 1.5;
 
         /// <summary>
         /// Температура крашки
         /// </summary>
-        public double? CapTemperature { get; set; } = 1;
+        public double? CapTemperature { get; set; } = 210;
 
         #endregion
 
@@ -444,10 +446,7 @@ namespace PlenkaWpf.VM
 
         #region Timers
 
-        /// <summary>
-        /// Таймер для времени расчета
-        /// </summary>
-        public Stopwatch MathTimer { get; set; } = new();
+
 
         #endregion
 
@@ -491,7 +490,6 @@ namespace PlenkaWpf.VM
                 OnPropertyChanged(nameof(NSeries));
 
                 OnPropertyChanged(nameof(CordTempNs));
-                OnPropertyChanged(nameof(MathTimer));
                 OnPropertyChanged(nameof(TotalMemory));
             }
         }
@@ -501,7 +499,38 @@ namespace PlenkaWpf.VM
         /// </summary>
         public double? Step { get; set; } = 0.1;
 
-        public bool IsCalculated = false;
+
+        private bool _isCalculated = false;
+
+        public bool IsCalculated
+        {
+            get { return _isCalculated; }
+            set
+            {
+                _isCalculated = value;
+                if (IsCalculated)
+                {
+                    TabControlVisibility= Visibility.Visible;
+                }
+                else
+                {
+                    TabControlVisibility = Visibility.Hidden;
+                }
+            }
+        }
+
+        private Visibility _tabControlVisibility;
+
+        public Visibility TabControlVisibility
+        {
+            get { return _tabControlVisibility; }
+            set
+            {
+                _tabControlVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         #endregion
 
@@ -519,8 +548,6 @@ namespace PlenkaWpf.VM
                 return _calcCommand ?? (_calcCommand = new RelayCommand(o =>
                 {
                     IsCalculated = true;
-                    MathTimer.Reset();
-                    MathTimer.Start();
                     var cp = new CalculationParameters()
                     {
                         W = (double) Width,
@@ -540,8 +567,6 @@ namespace PlenkaWpf.VM
                     };
                     var mc = new MathClass(cp);
                     Results = mc.calculate();
-                    MathTimer.Stop();
-                    OnPropertyChanged(nameof(MathTimer));
                 }));
             }
         }
