@@ -71,8 +71,63 @@ namespace PlenkaWpf.View
             }
         }
 
+        private CartesianChart copyChart(CartesianChart chartToCopy, double width, double height)
+        {
+            var copiedChart = new CartesianChart
+            {
+                DisableAnimations = true,
+                Width = width,
+                Height = height,
+                Series = new SeriesCollection
+                {
+                    new LineSeries
+                    {
+                        Values = chartToCopy.Series[0].Values
+                    }
+                },
+                AxisX = new AxesCollection()
+                {
+                    new Axis()
+                    {
+                        Separator = new Separator()
+                        {
+                            Step = chartToCopy.AxisX[0].Separator.Step,
+                            Stroke= chartToCopy.AxisX[0].Separator.Stroke
+                        },
+                        Title = chartToCopy.AxisX[0].Title,
+                        MinValue = chartToCopy.AxisX[0].MinValue
+                    }
+                },
+                AxisY = new AxesCollection()
+                {
+                    new Axis()
+                    {
+                        Separator = new Separator()
+                        {
+                            Step = chartToCopy.AxisY[0].Separator.Step,
+                            Stroke= chartToCopy.AxisY[0].Separator.Stroke
+                        },
+                        Title = chartToCopy.AxisY[0].Title,
+                        MinValue = chartToCopy.AxisY[0].MinValue
+                    }
+                }
+            };
 
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e) //todo Переписать
+            return copiedChart;
+        }
+
+        private byte[] chartToBitmap(CartesianChart chart, double width = 1000, double height = 1000, int dpi = 150)
+        {
+            var nonVisibleChart = copyChart(chart, width, height);
+            var viewbox = new Viewbox();
+            viewbox.Child = nonVisibleChart;
+            viewbox.Measure(nonVisibleChart.RenderSize);
+            viewbox.Arrange(new Rect(new Point(0, 0), nonVisibleChart.RenderSize));
+            nonVisibleChart.Update(true, true); //force chart redraw
+            viewbox.UpdateLayout();
+            return EncodeVisual(nonVisibleChart, dpi);
+        }
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             var dlg = new SaveFileDialog();
             dlg.DefaultExt = ".pdf";
@@ -83,103 +138,12 @@ namespace PlenkaWpf.View
                 if ((DataContext as Window1VM).IsCalculated )
                 {
 
-                    var tempChartToPng = new CartesianChart
-                    {
-                        DisableAnimations = true,
-                        Width = 900,
-                        Height = 900,
-                        Series = new SeriesCollection
-                        {
-                            new LineSeries
-                            {
-                                Values = tempChart.Series[0].Values
-                            }
-                        },
-                        AxisX = new AxesCollection()
-                        {
-                            new Axis()
-                            {
-                                Separator = new Separator()
-                                {
-                                    Step = tempChart.AxisX[0].Separator.Step,
-                                    Stroke= tempChart.AxisX[0].Separator.Stroke
-                                },
-                                Title = tempChart.AxisX[0].Title,
-                                MinValue = tempChart.AxisX[0].MinValue
-                            }
-                        },
-                        AxisY = new AxesCollection()
-                        {
-                            new Axis()
-                            {
-                                Separator = new Separator()
-                                {
-                                    Step = tempChart.AxisY[0].Separator.Step,
-                                    Stroke= tempChart.AxisY[0].Separator.Stroke
-                                },
-                                Title = tempChart.AxisY[0].Title,
-                                MinValue = tempChart.AxisY[0].MinValue
-                            }
-                        }
+                    var tempChartBitMap = chartToBitmap(tempChart);
 
-                    };
+                    var nChartBitMap = chartToBitmap(nChart);
 
-                    var viewbox = new Viewbox();
-                    viewbox.Child = tempChartToPng;
-                    viewbox.Measure(tempChartToPng.RenderSize);
-                    viewbox.Arrange(new Rect(new Point(0, 0), tempChartToPng.RenderSize));
-                    tempChartToPng.Update(true, true); //force chart redraw
-                    viewbox.UpdateLayout();
-
-                    var nChartToPng = new CartesianChart
-                    {
-                        DisableAnimations = true,
-                        Width = 900,
-                        Height = 900,
-                        Series = new SeriesCollection
-                        {
-                            new LineSeries
-                            {
-                                Values = nChart.Series[0].Values
-                            }
-                        },
-                        AxisX = new AxesCollection()
-                        {
-                            new Axis()
-                            {
-                                Separator = new Separator()
-                                {
-                                    Step = nChart.AxisX[0].Separator.Step,
-                                    Stroke= nChart.AxisX[0].Separator.Stroke
-                                },
-                                Title = nChart.AxisX[0].Title,
-                                MinValue = nChart.AxisX[0].MinValue
-                            }
-                        },
-                        AxisY = new AxesCollection()
-                        {
-                            new Axis()
-                            {
-                                Separator = new Separator()
-                                {
-                                    Step = nChart.AxisY[0].Separator.Step,
-                                    Stroke= nChart.AxisY[0].Separator.Stroke
-                                },
-                                Title = nChart.AxisY[0].Title,
-                                MinValue = nChart.AxisY[0].MinValue
-                            }
-                        }
-
-                    };
-
-                    var viewbox2 = new Viewbox();
-                    viewbox2.Child = nChartToPng;
-                    viewbox2.Measure(nChartToPng.RenderSize);
-                    viewbox2.Arrange(new Rect(new Point(0, 0), nChartToPng.RenderSize));
-                    nChartToPng.Update(true, true); //force chart redraw
-                    viewbox2.UpdateLayout();
-
-                    FileSystem.exportPdf(dlg.FileName, EncodeVisual(tempChartToPng, 150),EncodeVisual(nChartToPng, 150), (DataContext as Window1VM).MathClass);
+                    
+                    FileSystem.exportPdf(dlg.FileName, tempChartBitMap,nChartBitMap, (DataContext as Window1VM).MathClass);
                 }
                 else
                 {

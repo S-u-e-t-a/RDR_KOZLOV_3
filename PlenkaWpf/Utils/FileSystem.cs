@@ -15,15 +15,46 @@ using iText.Layout.Element;
 using iText.Layout.Properties;
 using PlenkaAPI;
 
+using PlenkaWpf.VM;
+
 
 namespace PlenkaWpf.Utils
 {
     /// <summary>
     /// Класс для работы с файлами
     /// </summary>
-    internal class FileSystem
+    internal static class FileSystem
 
     {
+
+        private static Image createAndFitImage(byte[] bitmap, Document document)
+        {
+            var image = new Image(ImageDataFactory.Create(bitmap)).SetTextAlignment(TextAlignment.CENTER);
+            fitImageToDocument(image,document);
+            return image;
+        }
+        private static void fitImageToDocument(Image image, Document document)
+        {
+            var widthscaler =
+                (document.GetPageEffectiveArea(PageSize.A4).GetWidth() - document.GetLeftMargin() -
+                 document.GetRightMargin()) / image.GetImageWidth();
+            var heighscaler =
+                (document.GetPageEffectiveArea(PageSize.A4).GetHeight() - document.GetTopMargin() -
+                 document.GetBottomMargin()) / image.GetImageHeight();
+            float scaler;
+
+            if (widthscaler < heighscaler)
+            {
+                scaler = widthscaler;
+            }
+            else
+            {
+                scaler = heighscaler;
+            }
+
+            image.Scale(scaler, scaler);
+        }
+
         /// <summary>
         /// Функция экспорта результатов в пдф
         /// </summary>
@@ -45,24 +76,8 @@ namespace PlenkaWpf.Utils
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetFontSize(20);
             document.SetFont(font);
-            var image = new Image(ImageDataFactory.Create(tempBitmap)).SetTextAlignment(TextAlignment.CENTER);
-            var widthscaler =
-                (document.GetPageEffectiveArea(PageSize.A4).GetWidth() - document.GetLeftMargin() -
-                 document.GetRightMargin()) / image.GetImageWidth();
-            var heighscaler =
-                (document.GetPageEffectiveArea(PageSize.A4).GetHeight() - document.GetTopMargin() -
-                 document.GetBottomMargin()) / image.GetImageHeight();
-            float scaler;
-            if (widthscaler < heighscaler)
-            {
-                scaler = widthscaler;
-            }
-            else
-            {
-                scaler = heighscaler;
-            }
 
-            image.Scale(scaler, scaler);
+            var tGraphImage = createAndFitImage(tempBitmap, document);
             document.Add(header);
             document.Add(new Paragraph("Входные данные"));
 
@@ -77,7 +92,7 @@ namespace PlenkaWpf.Utils
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.H.ToString())));
 
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Тип материала")));
-            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Полистерол"))); // TODO СЮДА МЕТРИАЛ
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.MaterialName)));
 
             initialTable.AddCell(new Cell(1, 2).Add(new Paragraph("Параметры свойств материала").SetTextAlignment(TextAlignment.CENTER)));
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Плотность кг/м³")));
@@ -113,28 +128,12 @@ namespace PlenkaWpf.Utils
             document.Add(new AreaBreak());
 
             document.Add(new Paragraph("График температуры"));
-            document.Add(image);
+            document.Add(tGraphImage);
 
-            image = new Image(ImageDataFactory.Create(nBitMap)).SetTextAlignment(TextAlignment.CENTER);
-            widthscaler =
-                (document.GetPageEffectiveArea(PageSize.A4).GetWidth() - document.GetLeftMargin() -
-                 document.GetRightMargin()) / image.GetImageWidth();
-            heighscaler =
-                (document.GetPageEffectiveArea(PageSize.A4).GetHeight() - document.GetTopMargin() -
-                 document.GetBottomMargin()) / image.GetImageHeight();
-            if (widthscaler < heighscaler)
-            {
-                scaler = widthscaler;
-            }
-            else
-            {
-                scaler = heighscaler;
-            }
-
-            image.Scale(scaler, scaler);
+            var nGraphImage = createAndFitImage(nBitMap, document);
             document.Add(new AreaBreak());
             document.Add(new Paragraph("График вязкости"));
-            document.Add(image);
+            document.Add(nGraphImage);
 
 
             Table resultTable = new Table(UnitValue.CreatePercentArray(3)).UseAllAvailableWidth();

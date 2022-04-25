@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+
 using static System.Math;
+
 
 namespace PlenkaAPI
 {
@@ -29,47 +31,56 @@ namespace PlenkaAPI
         /// </summary>
         public double n { get; set; }
     }
+
+
     public struct CalculationParameters
     {
-        public double W;
-        public double H;
-        public double L;
-        public double p;
-        public double c;
-        public double T0;
-        public double Vu;
-        public double Tu;
-        public double u0;
-        public double b;
-        public double Tr;
-        public double n;
-        public double au;
-        public double step;
+        public string MaterialName { get; init; }
+        public double W { get; init; }
+        public double H { get; init; }
+        public double L { get; init; }
+        public double p { get; init; }
+        public double c { get; init; }
+        public double T0 { get; init; }
+        public double Vu { get; init; }
+        public double Tu { get; init; }
+        public double u0 { get; init; }
+        public double b { get; init; }
+        public double Tr { get; init; }
+        public double n { get; init; }
+        public double au { get; init; }
+        public double step { get; init; }
     }
+
 
     public struct CalculationResults
     {
         /// <summary>
         /// Таймер для времени расчета
         /// </summary>
-        public Stopwatch MathTimer { get; init; } 
+        public Stopwatch MathTimer { get; init; }
+
         /// <summary>
         /// Список с результатами расчета по координате канала
         /// </summary>
-        public List<CordTempN> cordTempNs { get; init; } 
+        public List<CordTempN> cordTempNs { get; init; }
+
         /// <summary>
         /// Производительность канала
         /// </summary>
         public double Q { get; init; }
+
         /// <summary>
         /// Температура продукта
         /// </summary>
         public double T { get; init; }
+
         /// <summary>
         /// Вязкость продукта
         /// </summary>
         public double N { get; init; }
     }
+
 
     public class MathClass // todo как-то красиво переписать все это
     {
@@ -78,7 +89,8 @@ namespace PlenkaAPI
             this.cp = cp;
         }
 
-        #region Parameters
+
+    #region Parameters
 
         public CalculationParameters cp { get; init; }
         private double W => cp.W;
@@ -96,7 +108,8 @@ namespace PlenkaAPI
         private double au => cp.au;
         private double step => cp.step;
 
-        #endregion
+    #endregion
+
 
         /// <summary>
         /// Результаты вычислений
@@ -106,7 +119,8 @@ namespace PlenkaAPI
         private int GetDecimalDigitsCount(double number)
         {
             string[] str = number.ToString(new System.Globalization.NumberFormatInfo() {NumberDecimalSeparator = "."})
-                .Split('.');
+                                 .Split('.');
+
             return str.Length == 2 ? str[1].Length : 0;
         }
 
@@ -124,24 +138,27 @@ namespace PlenkaAPI
             var Qch = H * W * Vu / 2 * F;
             var cordTempNs = new List<CordTempN>();
             var digitsCount = GetDecimalDigitsCount(step);
+
             for (double i = 0; i <= L; i += step)
             {
                 var z = Round(i, digitsCount);
+
                 var t = Tr + (1 / b) * Log((b * qGamma + W * au) /
-                                                 (b * qAlpha) *
-                                                 (1 - Exp(-((z * b * qAlpha) / (p * c * Qch)))) +
-                                                 Exp(b * (T0 - Tr - (z * qAlpha) / (p * c * Qch))));
+                                           (b * qAlpha) *
+                                           (1 - Exp(-((z * b * qAlpha) / (p * c * Qch)))) +
+                                           Exp(b * (T0 - Tr - (z * qAlpha) / (p * c * Qch))));
+
                 var ni = u0 * Exp(-b * (t - Tr)) * Pow(gamma, n - 1);
                 t = Round(t, 2);
                 ni = Round(ni, 2);
-                cordTempNs.Add(new CordTempN{cord = z,n=ni,temp =t });
+                cordTempNs.Add(new CordTempN {cord = z, n = ni, temp = t});
             }
 
-            var Q = Round(p * Qch * 3600,2);
+            var Q = Round(p * Qch * 3600, 2);
             var T = cordTempNs.Last().temp;
             var N = cordTempNs.Last().n;
             sw.Stop();
-            Results = new CalculationResults() { Q = Q, T = T, N = N, cordTempNs = cordTempNs, MathTimer = sw };
+            Results = new CalculationResults() {Q = Q, T = T, N = N, cordTempNs = cordTempNs, MathTimer = sw};
         }
     }
 }

@@ -35,7 +35,7 @@ namespace PlenkaWpf.VM
             Materials = DbContextSingleton.GetInstance().MembraneObjects.Where(o => o.Type.TypeName == "Материал")
                 .ToList();
 
-            Material = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Полистерол");
+            Material = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Полистирол");
             Canal = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Канал");
             MatModel = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Стандартная модель");
 
@@ -55,7 +55,6 @@ namespace PlenkaWpf.VM
         /// Функция, обновляющая точки графика по словарю со значениями
         /// </summary>
         /// <param name="ls">Серия графика</param>
-        /// <param name="points">Точки графика</param>
         private void updateLineSeriesByCordAndValue(LineSeries ls, List<double> x, List<double>y)
         {
             if (x.Count!=y.Count)
@@ -577,6 +576,7 @@ namespace PlenkaWpf.VM
                     IsCalculated = true;
                     var cp = new CalculationParameters()
                     {
+                        MaterialName = Material.ObName,
                         W = (double) Width,
                         H = (double) Depth,
                         L = (double) Length,
