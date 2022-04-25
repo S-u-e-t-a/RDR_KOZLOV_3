@@ -50,17 +50,6 @@ namespace PlenkaWpf.VM
         #endregion
 
         /// <summary>
-        /// Фукнция, получающая свойство по его названию
-        /// </summary>
-        /// <param name="propName">Название свойства</param>
-        /// <param name="mat">Объект, свойство которого надо получить</param>
-        /// <returns>Полученное свойство</returns>
-        private Value GetMatValueByPropertyName(string propName, MembraneObject mat)
-        {
-            return mat.Values.First(v => v.Prop.PropertyName == propName);
-        }
-
-        /// <summary>
         /// Функция, обновляющая точки графика по словарю со значениями
         /// </summary>
         /// <param name="ls">Серия графика</param>
@@ -178,10 +167,10 @@ namespace PlenkaWpf.VM
         /// </summary>
         public double? Length
         {
-            get { return GetMatValueByPropertyName("Длина", Canal).Value1; }
+            get { return Canal["Длина"]; }
             set
             {
-                GetMatValueByPropertyName("Длина", Canal).Value1 = value;
+                Canal["Длина"] = value;
                 OnPropertyChanged();
             }
         }
@@ -191,10 +180,10 @@ namespace PlenkaWpf.VM
         /// </summary>
         public double? Width
         {
-            get { return GetMatValueByPropertyName("Ширина", Canal).Value1; }
+            get { return Canal["Ширина"]; }
             set
             {
-                GetMatValueByPropertyName("Ширина", Canal).Value1 = value;
+                Canal["Ширина"] = value;
                 OnPropertyChanged();
             }
         }
@@ -204,10 +193,10 @@ namespace PlenkaWpf.VM
         /// </summary>
         public double? Depth
         {
-            get { return GetMatValueByPropertyName("Глубина", Canal).Value1; }
+            get { return Canal["Глубина"]; }
             set
             {
-                GetMatValueByPropertyName("Глубина", Canal).Value1 = value;
+                Canal["Глубина"] = value;
                 OnPropertyChanged();
             }
         }
@@ -251,10 +240,10 @@ namespace PlenkaWpf.VM
         /// </summary>
         public double? Density
         {
-            get { return GetMatValueByPropertyName("Плотность", Material).Value1; }
+            get { return Material["Плотность"]; }
             set
             {
-                GetMatValueByPropertyName("Плотность", Material).Value1 = value;
+                Material["Длина"] = value;
                 OnPropertyChanged();
             }
         }
@@ -264,10 +253,10 @@ namespace PlenkaWpf.VM
         /// </summary>
         public double? SpecifiсHeatCapacity
         {
-            get { return GetMatValueByPropertyName("Удельная теплоемкость", Material).Value1; }
+            get { return Material["Удельная теплоемкость"]; }
             set
             {
-                GetMatValueByPropertyName("Удельная теплоемкость", Material).Value1 = value;
+                Material["Удельная теплоемкость"] = value;
                 OnPropertyChanged();
             }
         }
@@ -277,10 +266,10 @@ namespace PlenkaWpf.VM
         /// </summary>
         public double? MeltingTemperature
         {
-            get { return GetMatValueByPropertyName("Температура плавления", Material).Value1; }
+            get { return Material["Температура плавления"]; }
             set
             {
-                GetMatValueByPropertyName("Температура плавления", Material).Value1 = value;
+                Material["Температура плавления"] = value;
                 OnPropertyChanged();
             }
         }
@@ -315,13 +304,11 @@ namespace PlenkaWpf.VM
         {
             get
             {
-                return GetMatValueByPropertyName("Коэффициент констистенции материала при температуре приведения",
-                    MatModel).Value1;
+                return MatModel["Коэффициент констистенции материала при температуре приведения"];
             }
             set
             {
-                GetMatValueByPropertyName("Коэффициент констистенции материала при температуре приведения", MatModel)
-                    .Value1 = value;
+                MatModel["Коэффициент констистенции материала при температуре приведения"] = value;
                 OnPropertyChanged();
             }
         }
@@ -331,10 +318,10 @@ namespace PlenkaWpf.VM
         /// </summary>
         public double? TempСoef
         {
-            get { return GetMatValueByPropertyName("Температурный коэффициент вязкости материала", MatModel).Value1; }
+            get { return MatModel["Температурный коэффициент вязкости материала"]; }
             set
             {
-                GetMatValueByPropertyName("Температурный коэффициент вязкости материала", MatModel).Value1 = value;
+                MatModel["Температурный коэффициент вязкости материала"] = value;
                 OnPropertyChanged();
             }
         }
@@ -344,10 +331,10 @@ namespace PlenkaWpf.VM
         /// </summary>
         public double? RefTemp
         {
-            get { return GetMatValueByPropertyName("Температура приведения", MatModel).Value1; }
+            get { return MatModel["Температура приведения"]; }
             set
             {
-                GetMatValueByPropertyName("Температура приведения", MatModel).Value1 = value;
+                MatModel["Температура приведения"] = value;
                 OnPropertyChanged();
             }
         }
@@ -357,10 +344,10 @@ namespace PlenkaWpf.VM
         /// </summary>
         public double? MatFlowIndex
         {
-            get { return GetMatValueByPropertyName("Индекс течения материала", MatModel).Value1; }
+            get { return MatModel["Индекс течения материала"]; }
             set
             {
-                GetMatValueByPropertyName("Индекс течения материала", MatModel).Value1 = value;
+                MatModel["Индекс течения материала"] = value;
                 OnPropertyChanged();
             }
         }
@@ -370,15 +357,10 @@ namespace PlenkaWpf.VM
         /// </summary>
         public double? HeatCoef
         {
-            get
-            {
-                return GetMatValueByPropertyName("Коэффициеент теплоотдачи от крышки канала к материалу", MatModel)
-                    .Value1;
-            }
+            get { return MatModel["Коэффициеент теплоотдачи от крышки канала к материалу"]; }
             set
             {
-                GetMatValueByPropertyName("Коэффициеент теплоотдачи от крышки канала к материалу", MatModel).Value1 =
-                    value;
+                MatModel["Коэффициеент теплоотдачи от крышки канала к материалу"] = value;
                 OnPropertyChanged();
             }
         }
