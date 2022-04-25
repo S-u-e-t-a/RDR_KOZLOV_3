@@ -92,11 +92,11 @@ namespace PlenkaWpf.Utils
             table.AddHeaderCell("Координата по длине канала, м");
             table.AddHeaderCell("Температура, °С");
             table.AddHeaderCell("Вязкость, Па·с");
-            for (int i = 0; i < results.Ti.Count; i++)
+            for (int i = 0; i < results.cordTempNs.Count; i++)
             {
-                table.AddCell(results.Ni.ElementAt(i).Key.ToString());
-                table.AddCell(results.Ni.ElementAt(i).Value.ToString());
-                table.AddCell(results.Ti.ElementAt(i).Value.ToString());
+                table.AddCell(results.cordTempNs[i].cord.ToString());
+                table.AddCell(results.cordTempNs[i].n.ToString());
+                table.AddCell(results.cordTempNs[i].temp.ToString());
             }
 
 

@@ -8,6 +8,26 @@ using static System.Math;
 
 namespace PlenkaAPI
 {
+    /// <summary>
+    /// Структура для отображения данных в таблице с результатами
+    /// </summary>
+    public struct CordTempN
+    {
+        /// <summary>
+        /// Координата канала по X
+        /// </summary>
+        public double cord { get; set; }
+
+        /// <summary>
+        /// Температура
+        /// </summary>
+        public double temp { get; set; }
+
+        /// <summary>
+        /// Вязкость
+        /// </summary>
+        public double n { get; set; }
+    }
     public struct CalculationParameters
     {
         public double W;
@@ -28,11 +48,11 @@ namespace PlenkaAPI
 
     public struct CalculationResults
     {
-        public Dictionary<double, double> Ti { get; set; }
-        public Dictionary<double, double> Ni { get; set; }
-        public double Q { get; set; }
-        public double T { get; set; }
-        public double N { get; set; }
+        public List<CordTempN> cordTempNs { get; init; } 
+
+        public double Q { get; init; }
+        public double T { get; init; }
+        public double N { get; init; }
     }
 
     public class MathClass // todo как-то красиво переписать все это
@@ -71,28 +91,30 @@ namespace PlenkaAPI
 
         public CalculationResults calculate()
         {
-            var F = 0.125 * Pow(cp.H / cp.W, 2);
-            var gamma = cp.Vu / cp.H;
+            var F = 0.125 * Pow(H / W, 2) - 0.625 * (H / W) + 1;
+            var gamma = Vu / H;
             var qGamma = H * W * u0 * Pow(gamma, n + 1);
             var qAlpha = W * au * (1 / b - Tu + Tr);
-            var Qch = ((H * W * Vu) / 2) * F;
-            var Ti = new Dictionary<double, double>();
-            var Ni = new Dictionary<double, double>();
+            var Qch = H * W * Vu / 2 * F;
+            var cordTempNs = new List<CordTempN>();
+            var digitsCount = GetDecimalDigitsCount(step);
             for (double i = 0; i <= L; i += step)
             {
-                var ii = Round(i, GetDecimalDigitsCount(step));
-                Ti.Add(ii, Round(Tr + (1 / b) * Log((b * qGamma + W * au) /
-                                                    (b * qAlpha) * (1 - Exp(-((ii * b * qAlpha) /
-                                                                              (p * c * Qch)))) +
-                                                    Exp(b * (T0 - Tr - (ii * qAlpha) / (p * c * Qch)))),
-                    1));
-                Ni.Add(ii, Round(u0 * Exp(-b * (Ti[ii] - Tr)) * Pow(gamma, n - 1), 1));
+                var z = Round(i, digitsCount);
+                var t = Tr + (1 / b) * Log((b * qGamma + W * au) /
+                                                 (b * qAlpha) *
+                                                 (1 - Exp(-((z * b * qAlpha) / (p * c * Qch)))) +
+                                                 Exp(b * (T0 - Tr - (z * qAlpha) / (p * c * Qch))));
+                var ni = u0 * Exp(-b * (t - Tr)) * Pow(gamma, n - 1);
+                t = Round(t, 2);
+                ni = Round(ni, 2);
+                cordTempNs.Add(new CordTempN{cord = z,n=ni,temp =t });
             }
 
-            var Q = p * Qch * 3600;
-            var T = Ti.Last().Value;
-            var N = Ni.Last().Value;
-            return new CalculationResults() {Q = Q, T = T, N = N, Ti = Ti, Ni = Ni};
+            var Q = Round(p * Qch * 3600,2);
+            var T = cordTempNs.Last().temp;
+            var N = cordTempNs.Last().n;
+            return new CalculationResults() {Q = Q, T = T, N = N, cordTempNs = cordTempNs};
         }
     }
 }

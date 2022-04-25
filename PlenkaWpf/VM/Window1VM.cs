@@ -17,26 +17,7 @@ using PlenkaWpf.Utils;
 
 namespace PlenkaWpf.VM
 {
-    /// <summary>
-    /// Структура для отображения данных в таблице с результатами
-    /// </summary>
-    public struct CordTempN
-    {
-        /// <summary>
-        /// Координата канала по X
-        /// </summary>
-        public double cord { get; set; }
-
-        /// <summary>
-        /// Температура
-        /// </summary>
-        public double temp { get; set; }
-
-        /// <summary>
-        /// Вязкость
-        /// </summary>
-        public double n { get; set; }
-    }
+    
 
     /// <summary>
     /// VM для окна исследователя
@@ -84,12 +65,16 @@ namespace PlenkaWpf.VM
         /// </summary>
         /// <param name="ls">Серия графика</param>
         /// <param name="points">Точки графика</param>
-        private void updateLineSeriesByDictionary(LineSeries ls, Dictionary<double, double> points)
+        private void updateLineSeriesByCordAndValue(LineSeries ls, List<double> x, List<double>y)
         {
-            var newValues = new ChartValues<ObservablePoint>();
-            foreach (var point in points)
+            if (x.Count!=y.Count)
             {
-                newValues.Add(new ObservablePoint(point.Key, point.Value));
+                throw new ArgumentException("Количество значений x не совпадает с количеством значений y");
+            }
+            var newValues = new ChartValues<ObservablePoint>();
+            for (int i = 0; i < x.Count; i++)
+            {
+                newValues.Add(new ObservablePoint(x[i], y[i]));
             }
 
             ls.Values = newValues;
@@ -409,12 +394,7 @@ namespace PlenkaWpf.VM
         {
             get
             {
-                if (Results.Ni != null)
-                {
-                    return cordTempNsByDictionaries(Results.Ti, Results.Ni);
-                }
-
-                return null;
+                return Results.cordTempNs;
             }
         }
 
@@ -518,8 +498,12 @@ namespace PlenkaWpf.VM
                 //TempAxisYStep = stepByDictionary( results.Ni.Values.ToList());
                 //NAxisXStep = stepByDictionary( results.Ni.Keys.ToList());
                 //NAxisYStep = stepByDictionary( results.Ni.Values.ToList());
-                updateLineSeriesByDictionary(tempLineSerie, Results.Ti);
-                updateLineSeriesByDictionary(nLineSerie, Results.Ni);
+                var x = Results.cordTempNs.Select(x => x.cord).ToList();
+                var n = Results.cordTempNs.Select(x => x.n).ToList();
+                var t = Results.cordTempNs.Select(x => x.temp).ToList();
+
+                updateLineSeriesByCordAndValue(tempLineSerie, x,t);
+                updateLineSeriesByCordAndValue(nLineSerie, x,n);
 
                 OnPropertyChanged(nameof(TempSeries));
                 OnPropertyChanged(nameof(NSeries));
