@@ -80,7 +80,7 @@ namespace PlenkaAPI
 
         #region Parameters
 
-        private CalculationParameters cp;
+        public CalculationParameters cp { get; init; }
         private double W => cp.W;
         private double H => cp.H;
         private double L => cp.L;

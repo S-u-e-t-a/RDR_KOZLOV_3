@@ -41,7 +41,7 @@ namespace PlenkaWpf.Utils
             //Trace.WriteLine($"-----------------------------------{Directory.GetCurrentDirectory()}");
             var FONT_FILENAME = "../../../resources/Times_New_Roman.ttf";
             var font = PdfFontFactory.CreateFont(FONT_FILENAME, PdfEncodings.IDENTITY_H);
-            var header = new Paragraph("Анализ методов замещения страниц").SetFont(font)
+            var header = new Paragraph("Отчёт о моделировании неизотермического течения аномально-вязкого материала").SetFont(font)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetFontSize(20);
             document.SetFont(font);
@@ -64,6 +64,54 @@ namespace PlenkaWpf.Utils
 
             image.Scale(scaler, scaler);
             document.Add(header);
+            document.Add(new Paragraph("Входные данные"));
+
+            Table initialTable = new Table(UnitValue.CreatePercentArray(2)).UseAllAvailableWidth();
+
+            initialTable.AddCell(new Cell(1, 2).Add(new Paragraph("Геометрические параметры канала").SetTextAlignment(TextAlignment.CENTER)));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Длина, м")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.L.ToString())));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Ширина, м")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.W.ToString())));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Глубина, м")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.H.ToString())));
+
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Тип материала")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Полистерол"))); // TODO СЮДА МЕТРИАЛ
+
+            initialTable.AddCell(new Cell(1, 2).Add(new Paragraph("Параметры свойств материала").SetTextAlignment(TextAlignment.CENTER)));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Плотность кг/м³")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.p.ToString())));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Удельная теплоёмкость, Дж/(кг·°С)")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.c.ToString())));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Температура плавления, °С")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.T0.ToString())));
+            
+            initialTable.AddCell(new Cell(1, 2).Add(new Paragraph("Режимные параметры процесса").SetTextAlignment(TextAlignment.CENTER)));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Скорость движения крышки, м/с")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.Vu.ToString())));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Температура крышки, °С")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.Tu.ToString())));
+
+            initialTable.AddCell(new Cell(1, 2).Add(new Paragraph("Параметры математической модели").SetTextAlignment(TextAlignment.CENTER)));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Шаг расчёта по длине канала, м")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.step.ToString())));
+
+            initialTable.AddCell(new Cell(1, 2).Add(new Paragraph("Эмпирические коэффициенты математической модели").SetTextAlignment(TextAlignment.CENTER)));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Коэффициент консистенции при температуре приведения, Па·сⁿ")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.u0.ToString())));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Температурный коэффициент вязкости материала, 1/°С")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.b.ToString())));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Температура приведения, °С")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.Tr.ToString())));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Индекс течения материала")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.n.ToString())));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Коэффициент теплоотдачи от крышки канала к материалу, Вт/(м²·°С)")));
+            initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.au.ToString())));
+
+            document.Add(initialTable);
+            document.Add(new AreaBreak());
+
             document.Add(new Paragraph("График температуры"));
             document.Add(image);
 
@@ -89,24 +137,24 @@ namespace PlenkaWpf.Utils
             document.Add(image);
 
 
-            Table table = new Table(UnitValue.CreatePercentArray(3)).UseAllAvailableWidth();
-            table.AddHeaderCell("Координата по длине канала, м");
-            table.AddHeaderCell("Температура, °С");
-            table.AddHeaderCell("Вязкость, Па·с");
+            Table resultTable = new Table(UnitValue.CreatePercentArray(3)).UseAllAvailableWidth();
+            resultTable.AddHeaderCell("Координата по длине канала, м");
+            resultTable.AddHeaderCell("Температура, °С");
+            resultTable.AddHeaderCell("Вязкость, Па·с");
             for (int i = 0; i < results.cordTempNs.Count; i++)
             {
-                table.AddCell(results.cordTempNs[i].cord.ToString());
-                table.AddCell(results.cordTempNs[i].n.ToString());
-                table.AddCell(results.cordTempNs[i].temp.ToString());
+                resultTable.AddCell(results.cordTempNs[i].cord.ToString());
+                resultTable.AddCell(results.cordTempNs[i].n.ToString());
+                resultTable.AddCell(results.cordTempNs[i].temp.ToString());
             }
 
-
+            document.Add(new Paragraph("Критериальные показатели"));
             document.Add(new Paragraph($"Температура продукта {results.T} °С"));
             document.Add(new Paragraph($"Вязкость продукта {results.N} Па·с"));
             document.Add(new Paragraph($"Производительность канала {results.Q} кг/ч"));
 
-            document.Add(new Paragraph("Таблица значений"));
-            document.Add(table);
+            document.Add(new Paragraph("Таблица параметров состояния"));
+            document.Add(resultTable);
             document.Close();
         }
     }

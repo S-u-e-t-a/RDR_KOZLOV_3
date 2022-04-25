@@ -35,7 +35,7 @@ namespace PlenkaWpf.VM
             Materials = DbContextSingleton.GetInstance().MembraneObjects.Where(o => o.Type.TypeName == "Материал")
                 .ToList();
 
-            Material = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "НашМатериал");
+            Material = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Полистерол");
             Canal = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Канал");
             MatModel = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Стандартная модель");
 
