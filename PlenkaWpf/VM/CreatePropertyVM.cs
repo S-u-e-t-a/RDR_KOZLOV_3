@@ -1,72 +1,88 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
+
 using PlenkaWpf.Utils;
 
-namespace PlenkaWpf.VM;
 
-public class CreatePropertyVM : ViewModelBase
+namespace PlenkaWpf.VM
 {
+    public class CreatePropertyVM : ViewModelBase
+    {
     #region Functions
 
     #region Constructors
 
-    public CreatePropertyVM(Property property)
-    {
-        EditingProperty = property;
-        TempProperty = new Property
+        public CreatePropertyVM(Property property)
         {
-            ProperrtyId = property.ProperrtyId,
-            PropertyName = property.PropertyName,
-            UnitId = property.UnitId,
-            Unit = property.Unit
-        };
-        Db = DbContextSingleton.GetInstance();
-        AllUnits = Db.Units.Local.ToObservableCollection();
-    }
+            EditingProperty = property;
+
+            TempProperty = new Property
+            {
+                ProperrtyId = property.ProperrtyId,
+                PropertyName = property.PropertyName,
+                UnitId = property.UnitId,
+                Unit = property.Unit,
+            };
+
+            Db = DbContextSingleton.GetInstance();
+            AllUnits = Db.Units.Local.ToObservableCollection();
+        }
 
     #endregion
 
     #endregion
+
 
     #region Properties
 
-    public MembraneContext Db { get; set; }
-    public ObservableCollection<Unit> AllUnits { get; set; }
-    public Property TempProperty { get; set; }
-    public Property EditingProperty { get; set; }
-    public List<Unit> Units => DbContextSingleton.GetInstance().Units.ToList();
+        public MembraneContext Db { get; set; }
+        public ObservableCollection<Unit> AllUnits { get; set; }
+        public Property TempProperty { get; set; }
+        public Property EditingProperty { get; set; }
+
+        public List<Unit> Units
+        {
+            get
+            {
+                return DbContextSingleton.GetInstance().Units.ToList();
+            }
+        }
 
     #endregion
+
 
     #region Commands
 
-    private RelayCommand _saveProperty;
+        private RelayCommand _saveProperty;
 
-    /// <summary>
-    /// Команда сохраняющая свойство в базу данных
-    /// </summary>
-    public RelayCommand SaveProperty
-    {
-        get
+        /// <summary>
+        ///     Команда сохраняющая свойство в базу данных
+        /// </summary>
+        public RelayCommand SaveProperty
         {
-            return _saveProperty ?? (_saveProperty = new RelayCommand(o =>
+            get
             {
-                EditingProperty.Unit = TempProperty.Unit;
-                EditingProperty.UnitId = TempProperty.UnitId;
-                EditingProperty.PropertyName = TempProperty.PropertyName;
-                if (!Db.Properties.Contains(EditingProperty))
-                {
-                    Db.Properties.Add(EditingProperty);
-                }
+                return _saveProperty ?? (_saveProperty = new RelayCommand(o =>
+                                            {
+                                                EditingProperty.Unit = TempProperty.Unit;
+                                                EditingProperty.UnitId = TempProperty.UnitId;
+                                                EditingProperty.PropertyName = TempProperty.PropertyName;
 
-                Db.SaveChanges();
-                OnClosingRequest();
-            }));
+                                                if (!Db.Properties.Contains(EditingProperty))
+                                                {
+                                                    Db.Properties.Add(EditingProperty);
+                                                }
+
+                                                Db.SaveChanges();
+                                                OnClosingRequest();
+                                            }));
+            }
         }
-    }
 
     #endregion
+    }
 }

@@ -1,56 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using PlenkaAPI.Data;
 using PlenkaAPI.Models;
+
 using PlenkaWpf.Utils;
+
 
 namespace PlenkaWpf.VM
 {
     internal class UserEditVM : ViewModelBase
 
     {
-        #region Functions
+    #region Functions
 
-        #region Constructors
+    #region Constructors
 
         public UserEditVM(User tempUser)
         {
-            TempUser = new User()
+            TempUser = new User
             {
                 UserId = tempUser.UserId,
                 UserName = tempUser.UserName,
                 UserPassword = tempUser.UserPassword,
-                UserType = tempUser.UserType
+                UserType = tempUser.UserType,
             };
+
             EditingUser = tempUser;
             Db = DbContextSingleton.GetInstance();
             UserTypes = Db.UserTypes.Local.ToObservableCollection();
         }
 
-        #endregion
+    #endregion
 
-        #endregion
+    #endregion
 
-        #region Properties
+
+    #region Properties
 
         public ObservableCollection<UserType> UserTypes { get; set; }
         public User TempUser { get; set; }
         public User EditingUser { get; set; }
 
-        private MembraneContext Db { get; set; }
+        private MembraneContext Db { get; }
 
-        #endregion
+    #endregion
 
-        #region Commands
+
+    #region Commands
 
         private RelayCommand _saveUser;
 
         /// <summary>
-        /// Команда сохраняющая изменение данных о пользователе в базе данных
+        ///     Команда сохраняющая изменение данных о пользователе в базе данных
         /// </summary>
         public RelayCommand SaveUser
         {
@@ -74,6 +76,6 @@ namespace PlenkaWpf.VM
             }
         }
 
-        #endregion
+    #endregion
     }
 }

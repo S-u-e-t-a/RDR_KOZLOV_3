@@ -1,20 +1,26 @@
-﻿namespace PlenkaAPI.Data;
-
-public class DbContextSingleton
+﻿namespace PlenkaAPI.Data
 {
-    private static MembraneContext instance;
-
-    private static readonly object syncRoot = new();
-
-
-    public static MembraneContext GetInstance()
+    public class DbContextSingleton
     {
-        if (instance == null)
-            lock (syncRoot)
+        private static MembraneContext instance;
+
+        private static readonly object syncRoot = new();
+
+
+        public static MembraneContext GetInstance()
+        {
+            if (instance == null)
             {
-                if (instance == null) instance = new MembraneContext();
+                lock (syncRoot)
+                {
+                    if (instance == null)
+                    {
+                        instance = new MembraneContext();
+                    }
+                }
             }
 
-        return instance;
+            return instance;
+        }
     }
 }

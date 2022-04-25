@@ -2,54 +2,66 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+
 using PlenkaWpf.Annotations;
 using PlenkaWpf.Utils;
 
-namespace PlenkaWpf.VM;
 
-/// <summary>
-/// Абстрактный класс для VM
-/// </summary>
-public class ViewModelBase : INotifyPropertyChanged
+namespace PlenkaWpf.VM
 {
-    private RelayCommand _closeWindow;
-
     /// <summary>
-    /// Команда, закрывающая текущее окно
+    ///     Абстрактный класс для VM
     /// </summary>
-    public RelayCommand CloseWindow
+    public class ViewModelBase : INotifyPropertyChanged
     {
-        get { return _closeWindow ?? (_closeWindow = new RelayCommand(o => { OnClosingRequest(); })); }
-    }
+        private RelayCommand _closeWindow;
 
-    public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        ///     Команда, закрывающая текущее окно
+        /// </summary>
+        public RelayCommand CloseWindow
+        {
+            get
+            {
+                return _closeWindow ?? (_closeWindow = new RelayCommand(o =>
+                                           {
+                                               OnClosingRequest();
+                                           }));
+            }
+        }
 
-    /// <summary>
-    /// Команда, открывающая новое окно
-    /// </summary>
-    /// <param name="window"></param>
-    public void ShowChildWindow(Window window)
-    {
-        window.Show();
-    }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-    public event EventHandler ClosingRequest;
+        /// <summary>
+        ///     Команда, открывающая новое окно
+        /// </summary>
+        /// <param name="window"></param>
+        public void ShowChildWindow(Window window)
+        {
+            window.Show();
+        }
 
-    /// <summary>
-    /// Функция, закрывающая текущее окно
-    /// </summary>
-    protected void OnClosingRequest()
-    {
-        if (ClosingRequest != null) ClosingRequest(this, EventArgs.Empty);
-    }
+        public event EventHandler ClosingRequest;
 
-    /// <summary>
-    /// Обработчик изменения свойств
-    /// </summary>
-    /// <param name="propertyName"></param>
-    [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        /// <summary>
+        ///     Функция, закрывающая текущее окно
+        /// </summary>
+        protected void OnClosingRequest()
+        {
+            if (ClosingRequest != null)
+            {
+                ClosingRequest(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        ///     Обработчик изменения свойств
+        /// </summary>
+        /// <param name="propertyName"></param>
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

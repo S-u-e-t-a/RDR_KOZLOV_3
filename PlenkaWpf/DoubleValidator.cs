@@ -1,26 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using iText.IO.Source;
+
 
 namespace PlenkaWpf
 {
     /// <summary>
-    /// Валидатор для double значений
+    ///     Валидатор для double значений
     /// </summary>
     internal class DoubleValidator : ValidationRule
     {
         /// <summary>
-        /// Минимальное значение
+        ///     Минимальное значение
         /// </summary>
         public double? Min { get; set; }
 
         /// <summary>
-        /// Максимальное значение
+        ///     Максимальное значение
         /// </summary>
         public double? Max { get; set; }
 
@@ -33,6 +29,7 @@ namespace PlenkaWpf
             {
                 var boundBracket = "";
                 var boundValue = "";
+
                 if (IncludingMinValue)
                 {
                     boundBracket = "[";
@@ -62,6 +59,7 @@ namespace PlenkaWpf
             {
                 var boundBracket = "";
                 var boundValue = "";
+
                 if (IncludingMaxValue)
                 {
                     boundBracket = "]";
@@ -87,21 +85,24 @@ namespace PlenkaWpf
 
         private string range
         {
-            get { return $"{leftBound};{rightBound}"; }
+            get
+            {
+                return $"{leftBound};{rightBound}";
+            }
         }
 
         private string enterValueInRange
         {
-            get { return $"Введите значение в диапазоне: {range}"; }
-        }
-
-        public DoubleValidator()
-        {
+            get
+            {
+                return $"Введите значение в диапазоне: {range}";
+            }
         }
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             double val = 0;
+
             if (value == null)
             {
                 return new ValidationResult(false, "Значение не может быть пустым");
@@ -111,7 +112,7 @@ namespace PlenkaWpf
             {
                 if (((string) value).Length > 0)
                 {
-                    val = double.Parse((String) value);
+                    val = double.Parse((string) value);
                 }
             }
             catch (Exception e)
@@ -159,37 +160,37 @@ namespace PlenkaWpf
 
                 if (IncludingMinValue && IncludingMaxValue)
                 {
-                    if ((val < Min) || (val > Max))
+                    if (val < Min || val > Max)
                     {
                         return new ValidationResult(false,
-                            enterValueInRange);
+                                                    enterValueInRange);
                     }
                 }
 
                 if (!IncludingMinValue && !IncludingMaxValue)
                 {
-                    if ((val <= Min) || (val >= Max))
+                    if (val <= Min || val >= Max)
                     {
                         return new ValidationResult(false,
-                            enterValueInRange);
+                                                    enterValueInRange);
                     }
                 }
 
                 if (!IncludingMinValue)
                 {
-                    if ((val <= Min) || (val > Max))
+                    if (val <= Min || val > Max)
                     {
                         return new ValidationResult(false,
-                            enterValueInRange);
+                                                    enterValueInRange);
                     }
                 }
 
                 if (!IncludingMaxValue)
                 {
-                    if ((val < Min) || (val >= Max))
+                    if (val < Min || val >= Max)
                     {
                         return new ValidationResult(false,
-                            enterValueInRange);
+                                                    enterValueInRange);
                     }
                 }
             }

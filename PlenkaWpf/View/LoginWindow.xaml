@@ -8,7 +8,6 @@
         Title="Авторизация" Height="388" Width="268"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
         <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
         <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
     </Window.Resources>

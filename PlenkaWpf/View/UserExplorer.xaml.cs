@@ -1,16 +1,19 @@
 ﻿using System.Windows.Controls;
+
 using PlenkaWpf.VM;
 
-namespace PlenkaWpf.View;
 
-/// <summary>
-///     Логика взаимодействия для UserExplorer.xaml
-/// </summary>
-public partial class UserExplorer : UserControl
+namespace PlenkaWpf.View
 {
-    public UserExplorer()
+    /// <summary>
+    ///     Логика взаимодействия для UserExplorer.xaml
+    /// </summary>
+    public partial class UserExplorer : UserControl
     {
-        InitializeComponent();
-        DataContext = new UserExplorerVM();
+        public UserExplorer()
+        {
+            InitializeComponent();
+            DataContext = new UserExplorerVM();
+        }
     }
 }

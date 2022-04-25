@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 using static System.Math;
 
@@ -12,22 +9,22 @@ using static System.Math;
 namespace PlenkaAPI
 {
     /// <summary>
-    /// Структура для отображения данных в таблице с результатами
+    ///     Структура для отображения данных в таблице с результатами
     /// </summary>
     public struct CordTempN
     {
         /// <summary>
-        /// Координата канала по X
+        ///     Координата канала по X
         /// </summary>
         public double cord { get; set; }
 
         /// <summary>
-        /// Температура
+        ///     Температура
         /// </summary>
         public double temp { get; set; }
 
         /// <summary>
-        /// Вязкость
+        ///     Вязкость
         /// </summary>
         public double n { get; set; }
     }
@@ -56,27 +53,27 @@ namespace PlenkaAPI
     public struct CalculationResults
     {
         /// <summary>
-        /// Таймер для времени расчета
+        ///     Таймер для времени расчета
         /// </summary>
         public Stopwatch MathTimer { get; init; }
 
         /// <summary>
-        /// Список с результатами расчета по координате канала
+        ///     Список с результатами расчета по координате канала
         /// </summary>
         public List<CordTempN> cordTempNs { get; init; }
 
         /// <summary>
-        /// Производительность канала
+        ///     Производительность канала
         /// </summary>
         public double Q { get; init; }
 
         /// <summary>
-        /// Температура продукта
+        ///     Температура продукта
         /// </summary>
         public double T { get; init; }
 
         /// <summary>
-        /// Вязкость продукта
+        ///     Вязкость продукта
         /// </summary>
         public double N { get; init; }
     }
@@ -90,42 +87,22 @@ namespace PlenkaAPI
         }
 
 
-    #region Parameters
-
-        public CalculationParameters cp { get; init; }
-        private double W => cp.W;
-        private double H => cp.H;
-        private double L => cp.L;
-        private double p => cp.p;
-        private double c => cp.c;
-        private double T0 => cp.T0;
-        private double Vu => cp.Vu;
-        private double Tu => cp.Tu;
-        private double u0 => cp.u0;
-        private double b => cp.b;
-        private double Tr => cp.Tr;
-        private double n => cp.n;
-        private double au => cp.au;
-        private double step => cp.step;
-
-    #endregion
-
-
         /// <summary>
-        /// Результаты вычислений
+        ///     Результаты вычислений
         /// </summary>
         public CalculationResults Results { get; private set; }
 
         private int GetDecimalDigitsCount(double number)
         {
-            string[] str = number.ToString(new System.Globalization.NumberFormatInfo() {NumberDecimalSeparator = "."})
-                                 .Split('.');
+            var str = number.ToString(new NumberFormatInfo
+                                          {NumberDecimalSeparator = ".",})
+                            .Split('.');
 
             return str.Length == 2 ? str[1].Length : 0;
         }
 
         /// <summary>
-        /// Функция производит вычисления с заданными параметрами
+        ///     Функция производит вычисления с заданными параметрами
         /// </summary>
         public void Calculate()
         {
@@ -143,22 +120,143 @@ namespace PlenkaAPI
             {
                 var z = Round(i, digitsCount);
 
-                var t = Tr + (1 / b) * Log((b * qGamma + W * au) /
-                                           (b * qAlpha) *
-                                           (1 - Exp(-((z * b * qAlpha) / (p * c * Qch)))) +
-                                           Exp(b * (T0 - Tr - (z * qAlpha) / (p * c * Qch))));
+                var t = Tr + 1 / b * Log((b * qGamma + W * au) /
+                                         (b * qAlpha) *
+                                         (1 - Exp(-(z * b * qAlpha / (p * c * Qch)))) +
+                                         Exp(b * (T0 - Tr - z * qAlpha / (p * c * Qch))));
 
                 var ni = u0 * Exp(-b * (t - Tr)) * Pow(gamma, n - 1);
                 t = Round(t, 2);
                 ni = Round(ni, 2);
-                cordTempNs.Add(new CordTempN {cord = z, n = ni, temp = t});
+                cordTempNs.Add(new CordTempN {cord = z, n = ni, temp = t,});
             }
 
             var Q = Round(p * Qch * 3600, 2);
             var T = cordTempNs.Last().temp;
             var N = cordTempNs.Last().n;
             sw.Stop();
-            Results = new CalculationResults() {Q = Q, T = T, N = N, cordTempNs = cordTempNs, MathTimer = sw};
+
+            Results = new CalculationResults
+                {Q = Q, T = T, N = N, cordTempNs = cordTempNs, MathTimer = sw,};
         }
+
+
+    #region Parameters
+
+        public CalculationParameters cp { get; init; }
+
+        private double W
+        {
+            get
+            {
+                return cp.W;
+            }
+        }
+
+        private double H
+        {
+            get
+            {
+                return cp.H;
+            }
+        }
+
+        private double L
+        {
+            get
+            {
+                return cp.L;
+            }
+        }
+
+        private double p
+        {
+            get
+            {
+                return cp.p;
+            }
+        }
+
+        private double c
+        {
+            get
+            {
+                return cp.c;
+            }
+        }
+
+        private double T0
+        {
+            get
+            {
+                return cp.T0;
+            }
+        }
+
+        private double Vu
+        {
+            get
+            {
+                return cp.Vu;
+            }
+        }
+
+        private double Tu
+        {
+            get
+            {
+                return cp.Tu;
+            }
+        }
+
+        private double u0
+        {
+            get
+            {
+                return cp.u0;
+            }
+        }
+
+        private double b
+        {
+            get
+            {
+                return cp.b;
+            }
+        }
+
+        private double Tr
+        {
+            get
+            {
+                return cp.Tr;
+            }
+        }
+
+        private double n
+        {
+            get
+            {
+                return cp.n;
+            }
+        }
+
+        private double au
+        {
+            get
+            {
+                return cp.au;
+            }
+        }
+
+        private double step
+        {
+            get
+            {
+                return cp.step;
+            }
+        }
+
+    #endregion
     }
 }

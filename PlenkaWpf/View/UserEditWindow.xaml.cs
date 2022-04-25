@@ -1,19 +1,23 @@
 ﻿using System.Windows;
+
 using PlenkaAPI.Models;
+
 using PlenkaWpf.VM;
 
-namespace PlenkaWpf.View;
 
-/// <summary>
-///     Логика взаимодействия для UserEditWindow.xaml
-/// </summary>
-public partial class UserEditWindow : Window
+namespace PlenkaWpf.View
 {
-    public UserEditWindow(User user)
+    /// <summary>
+    ///     Логика взаимодействия для UserEditWindow.xaml
+    /// </summary>
+    public partial class UserEditWindow : Window
     {
-        InitializeComponent();
-        var vm = new UserEditVM(user);
-        DataContext = vm;
-        vm.ClosingRequest += (sender, e) => Close();
+        public UserEditWindow(User user)
+        {
+            InitializeComponent();
+            var vm = new UserEditVM(user);
+            DataContext = vm;
+            vm.ClosingRequest += (sender, e) => Close();
+        }
     }
 }

@@ -1,26 +1,29 @@
-﻿using System.Windows.Controls;
-using HandyControl.Controls;
+﻿using HandyControl.Controls;
+
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+
 using PlenkaAPI.Data;
+
 using Window = System.Windows.Window;
 
-namespace PlenkaWpf.View;
 
-/// <summary>
-///     Логика взаимодействия для MainAdminPanel.xaml
-/// </summary>
-public partial class MainAdminPanel : Window
+namespace PlenkaWpf.View
 {
-    public MainAdminPanel()
+    /// <summary>
+    ///     Логика взаимодействия для MainAdminPanel.xaml
+    /// </summary>
+    public partial class MainAdminPanel : Window
     {
-        InitializeComponent();
-        DbContextSingleton.GetInstance().SavedChanges -= NotifyDBUpdated;
-        DbContextSingleton.GetInstance().SavedChanges += NotifyDBUpdated;
-    }
+        public MainAdminPanel()
+        {
+            InitializeComponent();
+            DbContextSingleton.GetInstance().SavedChanges -= NotifyDBUpdated;
+            DbContextSingleton.GetInstance().SavedChanges += NotifyDBUpdated;
+        }
 
-    private static void NotifyDBUpdated(object? sender, SavedChangesEventArgs savedChangesEventArgs)
-    {
-        Growl.SuccessGlobal("Данные в базе обновлены");
+        private static void NotifyDBUpdated(object? sender, SavedChangesEventArgs savedChangesEventArgs)
+        {
+            Growl.SuccessGlobal("Данные в базе обновлены");
+        }
     }
 }

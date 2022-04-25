@@ -7,7 +7,6 @@
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:plenkaWpf="clr-namespace:PlenkaWpf"
-        xmlns:utils="clr-namespace:PlenkaWpf.Utils"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance vm:Window1VM}"
         Title="Программный комплекс для исследования неизотермического течения аномально-вязких материалов"
@@ -27,12 +26,6 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <ControlTemplate x:Key="ValidationTemplate">
-            <DockPanel>
-                <AdornedElementPlaceholder />
-                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
-            </DockPanel>
-        </ControlTemplate>
 
     </Window.Resources>
 
@@ -107,10 +100,10 @@
                                                         Style="{StaticResource TextBoxInError}"
                                                         HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="Length" NotifyOnValidationError="True" 
+                                                    <Binding Path="Length" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator  />
+                                                            <plenkaWpf:DoubleValidator />
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -141,7 +134,7 @@
                                                     <Binding Path="Depth" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator  />
+                                                            <plenkaWpf:DoubleValidator />
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -222,7 +215,7 @@
                                                 <Binding Path="CapSpeed" NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                     <Binding.ValidationRules>
-                                                        <plenkaWpf:DoubleValidator  />
+                                                        <plenkaWpf:DoubleValidator />
                                                     </Binding.ValidationRules>
                                                 </Binding>
                                             </hc:TextBox.Text>
@@ -237,7 +230,7 @@
                                                 <Binding Path="CapTemperature" NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                     <Binding.ValidationRules>
-                                                        <plenkaWpf:DoubleValidator  />
+                                                        <plenkaWpf:DoubleValidator />
                                                     </Binding.ValidationRules>
                                                 </Binding>
                                             </hc:TextBox.Text>
@@ -340,7 +333,7 @@
                                                     <Binding Path="MatFlowIndex" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator  />
+                                                            <plenkaWpf:DoubleValidator />
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -358,7 +351,7 @@
                                                     <Binding Path="HeatCoef" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator  />
+                                                            <plenkaWpf:DoubleValidator />
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -375,7 +368,8 @@
                     </Grid>
                 </Expander>
                 <!-- ТАБКОНТРОЛ ПОКРАСИТЬ -->
-                <TabControl x:Name="tabs" Visibility="{Binding TabControlVisibility, UpdateSourceTrigger=PropertyChanged}"
+                <TabControl x:Name="tabs"
+                            Visibility="{Binding TabControlVisibility, UpdateSourceTrigger=PropertyChanged}"
                             Grid.Column="1" Style="{StaticResource TabControlInLine}"
                             Background="{StaticResource Style3}">
                     <TabItem x:Name="tab1" Header="График распределения температуры">
@@ -463,36 +457,31 @@
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
                                                 Text="{Binding MathClass.Results.T, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Stretch">
-                                    </hc:TextBox>
+                                                HorizontalAlignment="Stretch" />
                                     <hc:TextBox hc:InfoElement.Title="Вязкость продукта, Па·с"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
                                                 Text="{Binding MathClass.Results.N, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Stretch">
-                                    </hc:TextBox>
+                                                HorizontalAlignment="Stretch" />
                                     <hc:TextBox hc:InfoElement.Title="Производительность канала, кг/ч"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
                                                 Text="{Binding MathClass.Results.Q, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Stretch">
-                                    </hc:TextBox>
+                                                HorizontalAlignment="Stretch" />
                                     <hc:TextBox hc:InfoElement.Title="Время расчёта, мс"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
                                                 Text="{Binding MathClass.Results.MathTimer.ElapsedMilliseconds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Stretch">
-                                    </hc:TextBox>
+                                                HorizontalAlignment="Stretch" />
                                     <hc:TextBox hc:InfoElement.Title="Используемая оперативная память, МБ"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
                                                 Text="{Binding TotalMemory, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Stretch">
-                                    </hc:TextBox>
+                                                HorizontalAlignment="Stretch" />
                                 </StackPanel>
                             </Grid>
                         </Grid>

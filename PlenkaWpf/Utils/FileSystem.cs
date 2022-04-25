@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using iText.IO.Font;
+﻿using iText.IO.Font;
 using iText.IO.Image;
 using iText.Kernel.Font;
 using iText.Kernel.Geom;
@@ -13,34 +6,36 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-using PlenkaAPI;
 
-using PlenkaWpf.VM;
+using PlenkaAPI;
 
 
 namespace PlenkaWpf.Utils
 {
     /// <summary>
-    /// Класс для работы с файлами
+    ///     Класс для работы с файлами
     /// </summary>
     internal static class FileSystem
 
     {
-
         private static Image createAndFitImage(byte[] bitmap, Document document)
         {
             var image = new Image(ImageDataFactory.Create(bitmap)).SetTextAlignment(TextAlignment.CENTER);
-            fitImageToDocument(image,document);
+            fitImageToDocument(image, document);
+
             return image;
         }
+
         private static void fitImageToDocument(Image image, Document document)
         {
             var widthscaler =
                 (document.GetPageEffectiveArea(PageSize.A4).GetWidth() - document.GetLeftMargin() -
                  document.GetRightMargin()) / image.GetImageWidth();
+
             var heighscaler =
                 (document.GetPageEffectiveArea(PageSize.A4).GetHeight() - document.GetTopMargin() -
                  document.GetBottomMargin()) / image.GetImageHeight();
+
             float scaler;
 
             if (widthscaler < heighscaler)
@@ -56,7 +51,7 @@ namespace PlenkaWpf.Utils
         }
 
         /// <summary>
-        /// Функция экспорта результатов в пдф
+        ///     Функция экспорта результатов в пдф
         /// </summary>
         /// <param name="path">Путь к файлу</param>
         /// <param name="tempBitmap">График температуры</param>
@@ -69,19 +64,22 @@ namespace PlenkaWpf.Utils
             var writer = new PdfWriter(path);
             var pdf = new PdfDocument(writer);
             var document = new Document(pdf);
+
             //Trace.WriteLine($"-----------------------------------{Directory.GetCurrentDirectory()}");
             var FONT_FILENAME = "../../../resources/Times_New_Roman.ttf";
             var font = PdfFontFactory.CreateFont(FONT_FILENAME, PdfEncodings.IDENTITY_H);
+
             var header = new Paragraph("Отчёт о моделировании неизотермического течения аномально-вязкого материала").SetFont(font)
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetFontSize(20);
+
             document.SetFont(font);
 
             var tGraphImage = createAndFitImage(tempBitmap, document);
             document.Add(header);
             document.Add(new Paragraph("Входные данные"));
 
-            Table initialTable = new Table(UnitValue.CreatePercentArray(2)).UseAllAvailableWidth();
+            var initialTable = new Table(UnitValue.CreatePercentArray(2)).UseAllAvailableWidth();
 
             initialTable.AddCell(new Cell(1, 2).Add(new Paragraph("Геометрические параметры канала").SetTextAlignment(TextAlignment.CENTER)));
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Длина, м")));
@@ -101,7 +99,7 @@ namespace PlenkaWpf.Utils
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.c.ToString())));
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Температура плавления, °С")));
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.T0.ToString())));
-            
+
             initialTable.AddCell(new Cell(1, 2).Add(new Paragraph("Режимные параметры процесса").SetTextAlignment(TextAlignment.CENTER)));
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Скорость движения крышки, м/с")));
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.Vu.ToString())));
@@ -112,7 +110,9 @@ namespace PlenkaWpf.Utils
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Шаг расчёта по длине канала, м")));
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.step.ToString())));
 
-            initialTable.AddCell(new Cell(1, 2).Add(new Paragraph("Эмпирические коэффициенты математической модели").SetTextAlignment(TextAlignment.CENTER)));
+            initialTable.AddCell(new Cell(1, 2).Add(new Paragraph("Эмпирические коэффициенты математической модели")
+                                                        .SetTextAlignment(TextAlignment.CENTER)));
+
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Коэффициент консистенции при температуре приведения, Па·сⁿ")));
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph(mathModel.cp.u0.ToString())));
             initialTable.AddCell(new Cell(1, 1).Add(new Paragraph("Температурный коэффициент вязкости материала, 1/°С")));
@@ -136,11 +136,12 @@ namespace PlenkaWpf.Utils
             document.Add(nGraphImage);
 
 
-            Table resultTable = new Table(UnitValue.CreatePercentArray(3)).UseAllAvailableWidth();
+            var resultTable = new Table(UnitValue.CreatePercentArray(3)).UseAllAvailableWidth();
             resultTable.AddHeaderCell("Координата по длине канала, м");
             resultTable.AddHeaderCell("Температура, °С");
             resultTable.AddHeaderCell("Вязкость, Па·с");
-            for (int i = 0; i < results.cordTempNs.Count; i++)
+
+            for (var i = 0; i < results.cordTempNs.Count; i++)
             {
                 resultTable.AddCell(results.cordTempNs[i].cord.ToString());
                 resultTable.AddCell(results.cordTempNs[i].n.ToString());

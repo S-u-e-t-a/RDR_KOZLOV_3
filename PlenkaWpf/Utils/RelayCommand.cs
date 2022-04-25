@@ -1,36 +1,44 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace PlenkaWpf.Utils;
 
-public class RelayCommand : ICommand
+namespace PlenkaWpf.Utils
 {
-    private readonly Func<object, bool> _canExecute;
-    private readonly Action<object> _execute;
-
-
-    public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+    public class RelayCommand : ICommand
     {
-        _execute = execute;
-        _canExecute = canExecute;
-    }
+        private readonly Func<object, bool> _canExecute;
+        private readonly Action<object> _execute;
 
 
-    public event EventHandler CanExecuteChanged
-    {
-        add => CommandManager.RequerySuggested += value;
-        remove => CommandManager.RequerySuggested -= value;
-    }
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        {
+            _execute = execute;
+            _canExecute = canExecute;
+        }
 
 
-    public bool CanExecute(object parameter)
-    {
-        return _canExecute == null || _canExecute(parameter);
-    }
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                CommandManager.RequerySuggested += value;
+            }
+            remove
+            {
+                CommandManager.RequerySuggested -= value;
+            }
+        }
 
 
-    public void Execute(object parameter)
-    {
-        _execute(parameter);
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute == null || _canExecute(parameter);
+        }
+
+
+        public void Execute(object parameter)
+        {
+            _execute(parameter);
+        }
     }
 }
