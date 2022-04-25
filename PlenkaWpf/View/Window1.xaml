@@ -461,28 +461,28 @@
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding Results.T, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding MathClass.Results.T, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch">
                                     </hc:TextBox>
                                     <hc:TextBox hc:InfoElement.Title="Вязкость продукта, Па·с"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding Results.N, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding MathClass.Results.N, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch">
                                     </hc:TextBox>
                                     <hc:TextBox hc:InfoElement.Title="Производительность канала, кг/ч"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding Results.Q, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding MathClass.Results.Q, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch">
                                     </hc:TextBox>
                                     <hc:TextBox hc:InfoElement.Title="Время расчёта, мс"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding Results.MathTimer.ElapsedMilliseconds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding MathClass.Results.MathTimer.ElapsedMilliseconds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch">
                                     </hc:TextBox>
                                     <hc:TextBox hc:InfoElement.Title="Используемая оперативная память, МБ"

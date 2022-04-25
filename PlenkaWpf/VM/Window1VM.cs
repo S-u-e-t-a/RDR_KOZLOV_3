@@ -378,7 +378,12 @@ namespace PlenkaWpf.VM
         {
             get
             {
-                return Results.cordTempNs;
+                if (MathClass!=null)
+                {
+                    return MathClass.Results.cordTempNs;
+                }
+
+                return null;
             }
         }
 
@@ -443,13 +448,7 @@ namespace PlenkaWpf.VM
         //}
 
         #endregion
-
-        #region Timers
-
-
-
-        #endregion
-
+        
         /// <summary>
         /// Текущая занаятая память
         /// </summary>
@@ -462,37 +461,65 @@ namespace PlenkaWpf.VM
             }
         }
 
-        private CalculationResults results;
+        private MathClass _mathClass;
 
-        /// <summary>
-        /// Полученные результаты
-        /// </summary>
-        public CalculationResults Results
+        public MathClass MathClass
         {
-            get { return results; }
+            get { return _mathClass; }
             set
             {
-                results = value;
+                _mathClass = value;
                 OnPropertyChanged();
-
-                //TempAxisXStep = stepByDictionary(results.Ni.Keys.ToList());
-                //TempAxisYStep = stepByDictionary( results.Ni.Values.ToList());
-                //NAxisXStep = stepByDictionary( results.Ni.Keys.ToList());
-                //NAxisYStep = stepByDictionary( results.Ni.Values.ToList());
-                var x = Results.cordTempNs.Select(x => x.cord).ToList();
-                var n = Results.cordTempNs.Select(x => x.n).ToList();
-                var t = Results.cordTempNs.Select(x => x.temp).ToList();
-
-                updateLineSeriesByCordAndValue(tempLineSerie, x,t);
-                updateLineSeriesByCordAndValue(nLineSerie, x,n);
-
-                OnPropertyChanged(nameof(TempSeries));
-                OnPropertyChanged(nameof(NSeries));
-
-                OnPropertyChanged(nameof(CordTempNs));
-                OnPropertyChanged(nameof(TotalMemory));
             }
         }
+
+        private void updateInterfaceElelemts()
+        {
+            var x = MathClass.Results.cordTempNs.Select(x => x.cord).ToList();
+            var n = MathClass.Results.cordTempNs.Select(x => x.n).ToList();
+            var t = MathClass.Results.cordTempNs.Select(x => x.temp).ToList();
+
+            updateLineSeriesByCordAndValue(tempLineSerie, x, t);
+            updateLineSeriesByCordAndValue(nLineSerie, x, n);
+
+            OnPropertyChanged(nameof(TempSeries));
+            OnPropertyChanged(nameof(NSeries));
+
+            OnPropertyChanged(nameof(CordTempNs));
+            OnPropertyChanged(nameof(TotalMemory));
+        }
+
+        //private CalculationResults results;
+
+        ///// <summary>
+        ///// Полученные результаты
+        ///// </summary>
+        //public CalculationResults Results
+        //{
+        //    get { return results; }
+        //    set
+        //    {
+        //        results = value;
+        //        OnPropertyChanged();
+
+        //        //TempAxisXStep = stepByDictionary(results.Ni.Keys.ToList());
+        //        //TempAxisYStep = stepByDictionary( results.Ni.Values.ToList());
+        //        //NAxisXStep = stepByDictionary( results.Ni.Keys.ToList());
+        //        //NAxisYStep = stepByDictionary( results.Ni.Values.ToList());
+        //        var x = Results.cordTempNs.Select(x => x.cord).ToList();
+        //        var n = Results.cordTempNs.Select(x => x.n).ToList();
+        //        var t = Results.cordTempNs.Select(x => x.temp).ToList();
+
+        //        updateLineSeriesByCordAndValue(tempLineSerie, x,t);
+        //        updateLineSeriesByCordAndValue(nLineSerie, x,n);
+
+        //        OnPropertyChanged(nameof(TempSeries));
+        //        OnPropertyChanged(nameof(NSeries));
+
+        //        OnPropertyChanged(nameof(CordTempNs));
+        //        OnPropertyChanged(nameof(TotalMemory));
+        //    }
+        //}
 
         /// <summary>
         /// Шаг расчета
@@ -565,8 +592,10 @@ namespace PlenkaWpf.VM
                         au = (double) HeatCoef,
                         step = (double) Step
                     };
-                    var mc = new MathClass(cp);
-                    Results = mc.calculate();
+                    MathClass = new MathClass(cp);
+                    MathClass.Calculate();
+                    OnPropertyChanged(nameof(MathClass));
+                    updateInterfaceElelemts();
                 }));
             }
         }

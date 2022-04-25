@@ -179,7 +179,7 @@ namespace PlenkaWpf.View
                     nChartToPng.Update(true, true); //force chart redraw
                     viewbox2.UpdateLayout();
 
-                    FileSystem.exportPdf(dlg.FileName, EncodeVisual(tempChartToPng, 150),EncodeVisual(nChartToPng, 150), (DataContext as Window1VM).Results);
+                    FileSystem.exportPdf(dlg.FileName, EncodeVisual(tempChartToPng, 150),EncodeVisual(nChartToPng, 150), (DataContext as Window1VM).MathClass);
                 }
                 else
                 {

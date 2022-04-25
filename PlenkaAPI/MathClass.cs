@@ -98,6 +98,11 @@ namespace PlenkaAPI
 
         #endregion
 
+        /// <summary>
+        /// Результаты вычислений
+        /// </summary>
+        public CalculationResults Results { get; private set; }
+
         private int GetDecimalDigitsCount(double number)
         {
             string[] str = number.ToString(new System.Globalization.NumberFormatInfo() {NumberDecimalSeparator = "."})
@@ -105,7 +110,10 @@ namespace PlenkaAPI
             return str.Length == 2 ? str[1].Length : 0;
         }
 
-        public CalculationResults calculate()
+        /// <summary>
+        /// Функция производит вычисления с заданными параметрами
+        /// </summary>
+        public void Calculate()
         {
             var sw = new Stopwatch();
             sw.Start();
@@ -133,7 +141,7 @@ namespace PlenkaAPI
             var T = cordTempNs.Last().temp;
             var N = cordTempNs.Last().n;
             sw.Stop();
-            return new CalculationResults() {Q = Q, T = T, N = N, cordTempNs = cordTempNs, MathTimer = sw};
+            Results = new CalculationResults() { Q = Q, T = T, N = N, cordTempNs = cordTempNs, MathTimer = sw };
         }
     }
 }

@@ -32,8 +32,9 @@ namespace PlenkaWpf.Utils
         /// <param name="nBitMap">График вязкости</param>
         /// <param name="results">Результаты расчетов</param>
         public static void
-            exportPdf(string path, byte[] tempBitmap, byte[] nBitMap, CalculationResults results) // todo Переписать
+            exportPdf(string path, byte[] tempBitmap, byte[] nBitMap, MathClass mathModel) // todo Переписать
         {
+            var results = mathModel.Results;
             var writer = new PdfWriter(path);
             var pdf = new PdfDocument(writer);
             var document = new Document(pdf);
