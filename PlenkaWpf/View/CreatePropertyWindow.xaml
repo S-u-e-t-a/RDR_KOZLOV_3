@@ -7,7 +7,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         Title="Добавление свойства материала" Height="210" Width="300"
-        d:DataContext="{d:DesignInstance vm1:CreatePropertyVM}"
+        d:DataContext="{d:DesignInstance vm1:CreatePropertyVm}"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>

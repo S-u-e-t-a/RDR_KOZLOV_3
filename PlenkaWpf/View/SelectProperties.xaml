@@ -7,7 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Выбор свойств" Height="450" Width="800"
-        d:DataContext="{d:DesignInstance vm:SelectPropertiesVM}"
+        d:DataContext="{d:DesignInstance vm:SelectPropertiesVm}"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <vm:ObjectInListConverter x:Key="ObjectInListConverter" />

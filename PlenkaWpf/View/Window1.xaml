@@ -8,7 +8,7 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:plenkaWpf="clr-namespace:PlenkaWpf"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance vm:Window1VM}"
+             d:DataContext="{d:DesignInstance vm:Window1Vm}"
              FontSize="14">
     <!--WindowState="Maximized"
     Title="Программный комплекс для исследования неизотермического течения аномально-вязких материалов"-->
@@ -438,9 +438,9 @@
                                       IsReadOnly="True" Background="{StaticResource Style3}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Координата по длине канала, м"
-                                                        Binding="{Binding cord}" />
-                                    <DataGridTextColumn Header="Температура, °С" Binding="{Binding temp}" />
-                                    <DataGridTextColumn Header="Вязкость, Па·с" Binding="{Binding n}" />
+                                                        Binding="{Binding Cord}" />
+                                    <DataGridTextColumn Header="Температура, °С" Binding="{Binding Temp}" />
+                                    <DataGridTextColumn Header="Вязкость, Па·с" Binding="{Binding N}" />
                                 </DataGrid.Columns>
                             </DataGrid>
 

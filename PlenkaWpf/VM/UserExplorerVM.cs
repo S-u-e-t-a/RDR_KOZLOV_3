@@ -12,18 +12,18 @@ using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace PlenkaWpf.VM
 {
-    internal class UserExplorerVM : ViewModelBase
+    internal class UserExplorerVm : ViewModelBase
 
     {
     #region Functions
 
     #region Constructors
 
-        public UserExplorerVM()
+        public UserExplorerVm()
         {
-            db = DbContextSingleton.GetInstance();
-            Users = db.Users.Local.ToObservableCollection();
-            UserTypes = db.UserTypes.Local.ToObservableCollection();
+            _db = DbContextSingleton.GetInstance();
+            Users = _db.Users.Local.ToObservableCollection();
+            UserTypes = _db.UserTypes.Local.ToObservableCollection();
         }
 
     #endregion
@@ -33,7 +33,7 @@ namespace PlenkaWpf.VM
 
     #region Properties
 
-        private readonly MembraneContext db;
+        private readonly MembraneContext _db;
         public User SelectedUser { get; set; }
         public ObservableCollection<User> Users { get; set; }
         public ObservableCollection<UserType> UserTypes { get; set; }
@@ -90,8 +90,8 @@ namespace PlenkaWpf.VM
                                         "Удаление пользователя", MessageBoxButton.YesNo, MessageBoxImage.Warning) ==
                         MessageBoxResult.Yes)
                     {
-                        db.Users.Remove(SelectedUser);
-                        db.SaveChanges();
+                        _db.Users.Remove(SelectedUser);
+                        _db.SaveChanges();
                     }
                 });
             }

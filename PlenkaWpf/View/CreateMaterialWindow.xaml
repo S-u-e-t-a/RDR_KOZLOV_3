@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
         Title="Добавление материала" Height="170" Width="400"
-        d:DataContext="{d:DesignInstance vm:CreateMaterialVM}"
+        d:DataContext="{d:DesignInstance vm:CreateMaterialVm}"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <SolidColorBrush x:Key="Style1" Color="#c0ced7" />

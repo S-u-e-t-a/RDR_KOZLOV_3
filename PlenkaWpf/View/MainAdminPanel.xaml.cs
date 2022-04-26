@@ -20,9 +20,9 @@ namespace PlenkaWpf.View
         public MainAdminPanel()
         {
             InitializeComponent();
-            DbContextSingleton.GetInstance().SavedChanges -= NotifyDBUpdated;
-            DbContextSingleton.GetInstance().SavedChanges += NotifyDBUpdated;
-            var vm = new MainAdminPanelVM();
+            DbContextSingleton.GetInstance().SavedChanges -= NotifyDbUpdated;
+            DbContextSingleton.GetInstance().SavedChanges += NotifyDbUpdated;
+            var vm = new MainAdminPanelVm();
             DataContext = vm;
         }
 
@@ -37,7 +37,7 @@ namespace PlenkaWpf.View
             ChangingRequest.Invoke(this, newControl);
         }
 
-        private static void NotifyDBUpdated(object? sender, SavedChangesEventArgs savedChangesEventArgs)
+        private static void NotifyDbUpdated(object? sender, SavedChangesEventArgs savedChangesEventArgs)
         {
             Growl.SuccessGlobal("Данные в базе обновлены");
         }

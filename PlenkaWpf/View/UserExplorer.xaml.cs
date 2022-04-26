@@ -13,7 +13,7 @@ namespace PlenkaWpf.View
         public UserExplorer()
         {
             InitializeComponent();
-            DataContext = new UserExplorerVM();
+            DataContext = new UserExplorerVm();
         }
     }
 }

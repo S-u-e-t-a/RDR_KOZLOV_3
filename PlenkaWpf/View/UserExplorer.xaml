@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:PlenkaWpf.VM"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance vm:UserExplorerVM}"
+             d:DataContext="{d:DesignInstance vm:UserExplorerVm}"
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>

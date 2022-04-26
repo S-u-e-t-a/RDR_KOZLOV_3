@@ -9,14 +9,14 @@ using PlenkaWpf.Utils;
 
 namespace PlenkaWpf.VM
 {
-    internal class UserEditVM : ViewModelBase
+    internal class UserEditVm : ViewModelBase
 
     {
     #region Functions
 
     #region Constructors
 
-        public UserEditVM(User tempUser)
+        public UserEditVm(User tempUser)
         {
             TempUser = new User
             {

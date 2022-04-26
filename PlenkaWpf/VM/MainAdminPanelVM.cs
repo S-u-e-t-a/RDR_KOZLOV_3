@@ -1,6 +1,6 @@
 ﻿namespace PlenkaWpf.VM
 {
-    internal class MainAdminPanelVM : ViewModelBase
+    internal class MainAdminPanelVm : ViewModelBase
 
     {
     #region Functions

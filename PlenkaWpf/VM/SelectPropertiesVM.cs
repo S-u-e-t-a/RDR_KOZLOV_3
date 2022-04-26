@@ -35,19 +35,19 @@ namespace PlenkaWpf.VM
     }
 
 
-    public class SelectPropertiesVM : ViewModelBase
+    public class SelectPropertiesVm : ViewModelBase
     {
     #region Functions
 
     #region Constructors
 
-        public SelectPropertiesVM(MembraneObject material)
+        public SelectPropertiesVm(MembraneObject material)
         {
             Material = material;
-            AvailableProperties = db.Properties.ToList();
+            AvailableProperties = _db.Properties.ToList();
             var materialProperties = material.Values.Select(v => v.Prop);
             AvailableProperties = AvailableProperties.Except(materialProperties).ToList();
-            AllProperties = db.Properties.Local.ToObservableCollection();
+            AllProperties = _db.Properties.Local.ToObservableCollection();
         }
 
     #endregion
@@ -57,7 +57,7 @@ namespace PlenkaWpf.VM
 
     #region Properties
 
-        private readonly MembraneContext db = DbContextSingleton.GetInstance();
+        private readonly MembraneContext _db = DbContextSingleton.GetInstance();
         public ObservableCollection<Property> AllProperties { get; set; }
         public List<Property> AvailableProperties { get; set; }
         public MembraneObject Material { get; set; }

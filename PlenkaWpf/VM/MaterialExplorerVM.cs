@@ -12,22 +12,22 @@ using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace PlenkaWpf.VM
 {
-    public class MaterialExplorerVM : ViewModelBase
+    public class MaterialExplorerVm : ViewModelBase
     {
     #region Functions
 
     #region Constructors
 
-        public MaterialExplorerVM()
+        public MaterialExplorerVm()
         {
-            db.SavedChanges += (sender, args) =>
+            _db.SavedChanges += (sender, args) =>
             {
                 OnPropertyChanged(nameof(Materials));
             };
 
 
             //var db = DbContextSingleton.GetInstance();
-            Materials = db.MembraneObjects.Local.ToObservableCollection();
+            Materials = _db.MembraneObjects.Local.ToObservableCollection();
         }
 
     #endregion
@@ -37,7 +37,7 @@ namespace PlenkaWpf.VM
 
     #region Properties
 
-        private readonly MembraneContext db = DbContextSingleton.GetInstance();
+        private readonly MembraneContext _db = DbContextSingleton.GetInstance();
         public ObservableCollection<MembraneObject> Materials { get; set; }
 
         public MembraneObject SelectedMemObject { get; set; }
@@ -96,11 +96,11 @@ namespace PlenkaWpf.VM
                     {
                         foreach (var value in SelectedMemObject.Values)
                         {
-                            db.Values.Remove(value);
+                            _db.Values.Remove(value);
                         }
 
-                        db.MembraneObjects.Remove(SelectedMemObject);
-                        db.SaveChanges();
+                        _db.MembraneObjects.Remove(SelectedMemObject);
+                        _db.SaveChanges();
                     }
                 }, c => SelectedMemObject != null);
             }

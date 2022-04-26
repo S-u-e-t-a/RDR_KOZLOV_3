@@ -11,29 +11,29 @@ namespace PlenkaWpf.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        private UserControl control;
+        private UserControl _control;
 
         public MainWindow()
         {
             InitializeComponent();
-            changeContent(null, new LoginWindow());
+            ChangeContent(null, new LoginWindow());
         }
 
-        private void changeContent(object sender, UserControl control)
+        private void ChangeContent(object sender, UserControl control)
         {
-            this.control = control;
-            ((IСhangeableControl) this.control).ChangingRequest -= changeContent;
-            ((IСhangeableControl) this.control).ChangingRequest += changeContent;
-            content.Content = this.control;
-            WindowState = ((IСhangeableControl) this.control).PreferedWindowState;
+            this._control = control;
+            ((IСhangeableControl) this._control).ChangingRequest -= ChangeContent;
+            ((IСhangeableControl) this._control).ChangingRequest += ChangeContent;
+            content.Content = this._control;
+            WindowState = ((IСhangeableControl) this._control).PreferedWindowState;
 
             if (WindowState != WindowState.Maximized)
             {
-                Height = (double) ((IСhangeableControl) this.control).PreferedHeight;
-                Width = (double) ((IСhangeableControl) this.control).PreferedWidth;
+                Height = (double) ((IСhangeableControl) this._control).PreferedHeight;
+                Width = (double) ((IСhangeableControl) this._control).PreferedWidth;
             }
 
-            Title = ((IСhangeableControl) this.control).WindowTitle;
+            Title = ((IСhangeableControl) this._control).WindowTitle;
         }
     }
 }

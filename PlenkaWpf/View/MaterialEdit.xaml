@@ -8,7 +8,7 @@
 
         mc:Ignorable="d"
         Title="Изменение материала" Height="450" Width="800"
-        d:DataContext="{d:DesignInstance vm:MaterialEditVM}"
+        d:DataContext="{d:DesignInstance vm:MaterialEditVm}"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
@@ -32,7 +32,7 @@
                             MinWidth="100" Background="{StaticResource Style3}" />
             </StackPanel>
             <ListBox Grid.Row="1" x:Name="listBox"
-                     ItemsSource="{Binding Path=values, UpdateSourceTrigger=PropertyChanged}"
+                     ItemsSource="{Binding Path=Values, UpdateSourceTrigger=PropertyChanged}"
                      Background="{StaticResource Style2}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">

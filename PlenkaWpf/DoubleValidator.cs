@@ -23,7 +23,7 @@ namespace PlenkaWpf
         public bool IncludingMinValue { get; set; } = false;
         public bool IncludingMaxValue { get; set; } = true;
 
-        private string leftBound
+        private string LeftBound
         {
             get
             {
@@ -53,7 +53,7 @@ namespace PlenkaWpf
             }
         }
 
-        private string rightBound
+        private string RightBound
         {
             get
             {
@@ -83,19 +83,19 @@ namespace PlenkaWpf
             }
         }
 
-        private string range
+        private string Range
         {
             get
             {
-                return $"{leftBound};{rightBound}";
+                return $"{LeftBound};{RightBound}";
             }
         }
 
-        private string enterValueInRange
+        private string EnterValueInRange
         {
             get
             {
-                return $"Введите значение в диапазоне: {range}";
+                return $"Введите значение в диапазоне: {Range}";
             }
         }
 
@@ -128,14 +128,14 @@ namespace PlenkaWpf
                     {
                         if (val > Max)
                         {
-                            return new ValidationResult(false, enterValueInRange);
+                            return new ValidationResult(false, EnterValueInRange);
                         }
                     }
                     else
                     {
                         if (val >= Max)
                         {
-                            return new ValidationResult(false, enterValueInRange);
+                            return new ValidationResult(false, EnterValueInRange);
                         }
                     }
                 }
@@ -163,7 +163,7 @@ namespace PlenkaWpf
                     if (val < Min || val > Max)
                     {
                         return new ValidationResult(false,
-                                                    enterValueInRange);
+                                                    EnterValueInRange);
                     }
                 }
 
@@ -172,7 +172,7 @@ namespace PlenkaWpf
                     if (val <= Min || val >= Max)
                     {
                         return new ValidationResult(false,
-                                                    enterValueInRange);
+                                                    EnterValueInRange);
                     }
                 }
 
@@ -181,7 +181,7 @@ namespace PlenkaWpf
                     if (val <= Min || val > Max)
                     {
                         return new ValidationResult(false,
-                                                    enterValueInRange);
+                                                    EnterValueInRange);
                     }
                 }
 
@@ -190,7 +190,7 @@ namespace PlenkaWpf
                     if (val < Min || val >= Max)
                     {
                         return new ValidationResult(false,
-                                                    enterValueInRange);
+                                                    EnterValueInRange);
                     }
                 }
             }

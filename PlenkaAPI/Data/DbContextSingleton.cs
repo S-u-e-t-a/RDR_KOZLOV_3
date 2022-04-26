@@ -2,25 +2,25 @@
 {
     public class DbContextSingleton
     {
-        private static MembraneContext instance;
+        private static MembraneContext _instance;
 
-        private static readonly object syncRoot = new();
+        private static readonly object SyncRoot = new();
 
 
         public static MembraneContext GetInstance()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                lock (syncRoot)
+                lock (SyncRoot)
                 {
-                    if (instance == null)
+                    if (_instance == null)
                     {
-                        instance = new MembraneContext();
+                        _instance = new MembraneContext();
                     }
                 }
             }
 
-            return instance;
+            return _instance;
         }
     }
 }

@@ -9,16 +9,16 @@ using PlenkaWpf.View;
 
 namespace PlenkaWpf.VM
 {
-    public class MaterialEditVM : ViewModelBase
+    public class MaterialEditVm : ViewModelBase
     {
     #region Functions
 
     #region Constructors
 
-        public MaterialEditVM(MembraneObject material)
+        public MaterialEditVm(MembraneObject material)
         {
             Material = material;
-            values = Material.Values;
+            Values = Material.Values;
         }
 
     #endregion
@@ -28,7 +28,7 @@ namespace PlenkaWpf.VM
 
     #region Properties
 
-        public ObservableCollection<Value> values { get; set; }
+        public ObservableCollection<Value> Values { get; set; }
         public MembraneObject Material { get; set; }
 
     #endregion

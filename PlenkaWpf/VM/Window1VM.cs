@@ -21,7 +21,7 @@ namespace PlenkaWpf.VM
     /// <summary>
     ///     VM для окна исследователя
     /// </summary>
-    internal class Window1VM : ViewModelBase
+    internal class Window1Vm : ViewModelBase
 
     {
         public List<int> ErrorList { get; set; }
@@ -31,7 +31,7 @@ namespace PlenkaWpf.VM
 
     #region Constructors
 
-        public Window1VM()
+        public Window1Vm()
         {
             Materials = DbContextSingleton.GetInstance().MembraneObjects.Where(o => o.Type.TypeName == "Материал")
                                           .ToList();
@@ -40,21 +40,21 @@ namespace PlenkaWpf.VM
             Canal = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Канал");
             MatModel = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Стандартная модель");
 
-            tempLineSerie = new LineSeries
+            TempLineSerie = new LineSeries
                 {Title = "Температура, °С",};
 
-            tempLineSerie.Fill = Brushes.Transparent;
+            TempLineSerie.Fill = Brushes.Transparent;
 
             TempSeries = new SeriesCollection
-                {tempLineSerie,};
+                {TempLineSerie,};
 
-            nLineSerie = new LineSeries
+            NLineSerie = new LineSeries
                 {Title = "Вязкость, Па·с",};
 
-            nLineSerie.Fill = Brushes.Transparent;
+            NLineSerie.Fill = Brushes.Transparent;
 
             NSeries = new SeriesCollection
-                {nLineSerie,};
+                {NLineSerie,};
 
             IsCalculated = false;
         }
@@ -66,7 +66,7 @@ namespace PlenkaWpf.VM
         ///     Функция, обновляющая точки графика по словарю со значениями
         /// </summary>
         /// <param name="ls">Серия графика</param>
-        private void updateLineSeriesByCordAndValue(LineSeries ls, List<double> x, List<double> y)
+        private void UpdateLineSeriesByCordAndValue(LineSeries ls, List<double> x, List<double> y)
         {
             if (x.Count != y.Count)
             {
@@ -87,9 +87,7 @@ namespace PlenkaWpf.VM
 
 
     #region Properties
-
-        private static readonly double[] roundRuleDigits = {1, 2.5, 5, 10,};
-
+        
         /// <summary>
         ///     Доступные материалы
         /// </summary>
@@ -156,7 +154,7 @@ namespace PlenkaWpf.VM
 
     #region MaterialProps
 
-        private MembraneObject material;
+        private MembraneObject _material;
 
         /// <summary>
         ///     Выбранный материал
@@ -165,11 +163,11 @@ namespace PlenkaWpf.VM
         {
             get
             {
-                return material;
+                return _material;
             }
             set
             {
-                material = value;
+                _material = value;
 
                 OnPropertyChanged(nameof(Density));
                 OnPropertyChanged(nameof(SpecifiсHeatCapacity));
@@ -359,7 +357,7 @@ namespace PlenkaWpf.VM
             {
                 if (MathClass != null)
                 {
-                    return MathClass.Results.cordTempNs;
+                    return MathClass.Results.CordTempNs;
                 }
 
                 return null;
@@ -369,19 +367,16 @@ namespace PlenkaWpf.VM
         /// <summary>
         ///     Серия точек температуры
         /// </summary>
-        private LineSeries tempLineSerie { get; }
+        private LineSeries TempLineSerie { get; }
 
         public SeriesCollection TempSeries { get; set; }
-
-        private double _tempAxisXStep;
 
         /// <summary>
         ///     Серия точек вязкости
         /// </summary>
-        private LineSeries nLineSerie { get; }
+        private LineSeries NLineSerie { get; }
 
         public SeriesCollection NSeries { get; set; }
-        private double _nAxisXStep;
 
     #endregion
 
@@ -414,14 +409,14 @@ namespace PlenkaWpf.VM
             }
         }
 
-        private void updateInterfaceElelemts()
+        private void UpdateInterfaceElelemts()
         {
-            var x = MathClass.Results.cordTempNs.Select(x => x.cord).ToList();
-            var n = MathClass.Results.cordTempNs.Select(x => x.n).ToList();
-            var t = MathClass.Results.cordTempNs.Select(x => x.temp).ToList();
+            var x = MathClass.Results.CordTempNs.Select(x => x.Cord).ToList();
+            var n = MathClass.Results.CordTempNs.Select(x => x.N).ToList();
+            var t = MathClass.Results.CordTempNs.Select(x => x.Temp).ToList();
 
-            updateLineSeriesByCordAndValue(tempLineSerie, x, t);
-            updateLineSeriesByCordAndValue(nLineSerie, x, n);
+            UpdateLineSeriesByCordAndValue(TempLineSerie, x, t);
+            UpdateLineSeriesByCordAndValue(NLineSerie, x, n);
 
             OnPropertyChanged(nameof(TempSeries));
             OnPropertyChanged(nameof(NSeries));
@@ -488,34 +483,34 @@ namespace PlenkaWpf.VM
         {
             get
             {
-                return _calcCommand ?? (_calcCommand = new RelayCommand(o =>
-                                           {
-                                               IsCalculated = true;
+                return _calcCommand ??= new RelayCommand(o =>
+                {
+                    IsCalculated = true;
 
-                                               var cp = new CalculationParameters
-                                               {
-                                                   MaterialName = Material.ObName,
-                                                   W = (double) Width,
-                                                   H = (double) Depth,
-                                                   L = (double) Length,
-                                                   p = (double) Density,
-                                                   c = (double) SpecifiсHeatCapacity,
-                                                   T0 = (double) MeltingTemperature,
-                                                   Vu = (double) CapSpeed,
-                                                   Tu = (double) CapTemperature,
-                                                   u0 = (double) СonsСoef,
-                                                   b = (double) TempСoef,
-                                                   Tr = (double) RefTemp,
-                                                   n = (double) MatFlowIndex,
-                                                   au = (double) HeatCoef,
-                                                   step = (double) Step,
-                                               };
+                    var cp = new CalculationParameters
+                    {
+                        MaterialName = Material.ObName,
+                        W = (double) Width,
+                        H = (double) Depth,
+                        L = (double) Length,
+                        P = (double) Density,
+                        C = (double) SpecifiсHeatCapacity,
+                        T0 = (double) MeltingTemperature,
+                        Vu = (double) CapSpeed,
+                        Tu = (double) CapTemperature,
+                        U0 = (double) СonsСoef,
+                        B = (double) TempСoef,
+                        Tr = (double) RefTemp,
+                        N = (double) MatFlowIndex,
+                        Au = (double) HeatCoef,
+                        Step = (double) Step,
+                    };
 
-                                               MathClass = new MathClass(cp);
-                                               MathClass.Calculate();
-                                               OnPropertyChanged(nameof(MathClass));
-                                               updateInterfaceElelemts();
-                                           }));
+                    MathClass = new MathClass(cp);
+                    MathClass.Calculate();
+                    OnPropertyChanged(nameof(MathClass));
+                    UpdateInterfaceElelemts();
+                });
             }
         }
 

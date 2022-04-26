@@ -28,7 +28,7 @@ namespace PlenkaWpf.View
         public Window1()
         {
             InitializeComponent();
-            var vm = new Window1VM();
+            var vm = new Window1Vm();
             DataContext = vm;
 
             //vm.ClosingRequest += (sender, e) => Close();
@@ -45,28 +45,7 @@ namespace PlenkaWpf.View
             ChangingRequest?.Invoke(this, newControl);
         }
 
-
-        private void SaveToPng(FrameworkElement visual, string fileName)
-        {
-            var encoder = new PngBitmapEncoder();
-            EncodeVisual2(visual, fileName, encoder);
-        }
-
-        private static void EncodeVisual2(FrameworkElement visual, string fileName, BitmapEncoder encoder)
-        {
-            var bitmap = new RenderTargetBitmap((int) visual.ActualWidth, (int) visual.ActualHeight, 96, 96, PixelFormats.Pbgra32);
-            bitmap.Render(visual);
-            var frame = BitmapFrame.Create(bitmap);
-            encoder.Frames.Add(frame);
-
-            using (var stream = File.Create(fileName))
-            {
-                encoder.Save(stream);
-            }
-        }
-
-
-        public byte[] EncodeVisual(FrameworkElement element, int dpi)
+        public static byte[] EncodeVisual(FrameworkElement element, int dpi)
         {
             var bitmap = new RenderTargetBitmap((int) element.ActualWidth * dpi / 96, ((int) element.ActualHeight + 50) * dpi / 96, dpi, dpi
                                               , PixelFormats.Pbgra32);
@@ -76,17 +55,16 @@ namespace PlenkaWpf.View
             var encoder = new PngBitmapEncoder();
             encoder.Frames.Add(frame);
 
-            using (var stream = new MemoryStream())
-            {
-                encoder.Save(stream);
-                var bit = stream.ToArray();
-                stream.Close();
+            using var stream = new MemoryStream();
 
-                return bit;
-            }
+            encoder.Save(stream);
+            var bit = stream.ToArray();
+            stream.Close();
+
+            return bit;
         }
 
-        private CartesianChart copyChart(CartesianChart chartToCopy, double width, double height)
+        private static CartesianChart CopyChart(CartesianChart chartToCopy, double width, double height)
         {
             var copiedChart = new CartesianChart
             {
@@ -131,11 +109,14 @@ namespace PlenkaWpf.View
             return copiedChart;
         }
 
-        private byte[] chartToBitmap(CartesianChart chart, double width = 1000, double height = 1000, int dpi = 150)
+        private static byte[] ChartToBitmap(CartesianChart chart, double width = 1000, double height = 1000, int dpi = 150)
         {
-            var nonVisibleChart = copyChart(chart, width, height);
-            var viewbox = new Viewbox();
-            viewbox.Child = nonVisibleChart;
+            var nonVisibleChart = CopyChart(chart, width, height);
+            var viewbox = new Viewbox
+            {
+                Child = nonVisibleChart,
+            };
+
             viewbox.Measure(nonVisibleChart.RenderSize);
             viewbox.Arrange(new Rect(new Point(0, 0), nonVisibleChart.RenderSize));
             nonVisibleChart.Update(true, true); //force chart redraw
@@ -146,21 +127,24 @@ namespace PlenkaWpf.View
 
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            var dlg = new SaveFileDialog();
-            dlg.DefaultExt = ".pdf";
-            dlg.FileName = "АНАЛИЗ_" + DateTime.Now.ToString().Replace(':', '_');
+            var dlg = new SaveFileDialog
+            {
+                DefaultExt = ".pdf",
+                FileName = "АНАЛИЗ_" + DateTime.Now.ToString().Replace(':', '_'),
+            };
+
             var res = dlg.ShowDialog();
 
             if (res == true)
             {
-                if ((DataContext as Window1VM).IsCalculated)
+                if ((DataContext as Window1Vm).IsCalculated)
                 {
-                    var tempChartBitMap = chartToBitmap(tempChart);
+                    var tempChartBitMap = ChartToBitmap(tempChart);
 
-                    var nChartBitMap = chartToBitmap(nChart);
+                    var nChartBitMap = ChartToBitmap(nChart);
 
 
-                    FileSystem.exportPdf(dlg.FileName, tempChartBitMap, nChartBitMap, (DataContext as Window1VM).MathClass);
+                    FileSystem.ExportPdf(dlg.FileName, tempChartBitMap, nChartBitMap, (DataContext as Window1Vm).MathClass);
                 }
                 else
                 {
@@ -177,7 +161,7 @@ namespace PlenkaWpf.View
             }
             else
             {
-                (DataContext as Window1VM).CalcCommand.Execute(null);
+                (DataContext as Window1Vm).CalcCommand.Execute(null);
             }
         }
 

@@ -15,7 +15,7 @@ namespace PlenkaWpf.View
         public SelectProperties(MembraneObject material)
         {
             InitializeComponent();
-            var vm = new SelectPropertiesVM(material);
+            var vm = new SelectPropertiesVm(material);
             DataContext = vm;
             vm.ClosingRequest += (sender, e) => Close();
         }

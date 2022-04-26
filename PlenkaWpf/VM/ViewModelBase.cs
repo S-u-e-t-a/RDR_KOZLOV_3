@@ -23,10 +23,10 @@ namespace PlenkaWpf.VM
         {
             get
             {
-                return _closeWindow ?? (_closeWindow = new RelayCommand(o =>
-                                           {
-                                               OnClosingRequest();
-                                           }));
+                return _closeWindow ??= new RelayCommand(o =>
+                {
+                    OnClosingRequest();
+                });
             }
         }
 
@@ -36,7 +36,7 @@ namespace PlenkaWpf.VM
         ///     Команда, открывающая новое окно
         /// </summary>
         /// <param name="window"></param>
-        public void ShowChildWindow(Window window)
+        public static void ShowChildWindow(Window window)
         {
             window.Show();
         }
@@ -48,10 +48,7 @@ namespace PlenkaWpf.VM
         /// </summary>
         protected void OnClosingRequest()
         {
-            if (ClosingRequest != null)
-            {
-                ClosingRequest(this, EventArgs.Empty);
-            }
+            ClosingRequest?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

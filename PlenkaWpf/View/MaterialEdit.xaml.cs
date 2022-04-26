@@ -15,7 +15,7 @@ namespace PlenkaWpf.View
         public MaterialEdit(MembraneObject material)
         {
             InitializeComponent();
-            var vm = new MaterialEditVM(material);
+            var vm = new MaterialEditVm(material);
             DataContext = vm;
             vm.ClosingRequest += (sender, e) => Close();
         }

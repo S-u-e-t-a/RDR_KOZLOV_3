@@ -15,7 +15,7 @@ namespace PlenkaWpf.View
         public CreatePropertyWindow(Property property)
         {
             InitializeComponent();
-            var vm = new CreatePropertyVM(property);
+            var vm = new CreatePropertyVm(property);
             DataContext = vm;
             vm.ClosingRequest += (sender, e) => Close();
         }

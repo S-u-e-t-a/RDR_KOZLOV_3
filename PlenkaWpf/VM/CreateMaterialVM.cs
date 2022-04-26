@@ -9,14 +9,14 @@ using PlenkaWpf.Utils;
 
 namespace PlenkaWpf.VM
 {
-    internal class CreateMaterialVM : ViewModelBase
+    internal class CreateMaterialVm : ViewModelBase
 
     {
     #region Functions
 
     #region Constructors
 
-        public CreateMaterialVM()
+        public CreateMaterialVm()
         {
             AllTypes = DbContextSingleton.GetInstance().ObjectTypes.ToList();
         }

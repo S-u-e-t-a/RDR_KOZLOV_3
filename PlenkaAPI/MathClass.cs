@@ -16,17 +16,17 @@ namespace PlenkaAPI
         /// <summary>
         ///     Координата канала по X
         /// </summary>
-        public double cord { get; set; }
+        public double Cord { get; set; }
 
         /// <summary>
         ///     Температура
         /// </summary>
-        public double temp { get; set; }
+        public double Temp { get; set; }
 
         /// <summary>
         ///     Вязкость
         /// </summary>
-        public double n { get; set; }
+        public double N { get; set; }
     }
 
 
@@ -36,17 +36,17 @@ namespace PlenkaAPI
         public double W { get; init; }
         public double H { get; init; }
         public double L { get; init; }
-        public double p { get; init; }
-        public double c { get; init; }
+        public double P { get; init; }
+        public double C { get; init; }
         public double T0 { get; init; }
         public double Vu { get; init; }
         public double Tu { get; init; }
-        public double u0 { get; init; }
-        public double b { get; init; }
+        public double U0 { get; init; }
+        public double B { get; init; }
         public double Tr { get; init; }
-        public double n { get; init; }
-        public double au { get; init; }
-        public double step { get; init; }
+        public double N { get; init; }
+        public double Au { get; init; }
+        public double Step { get; init; }
     }
 
 
@@ -60,7 +60,7 @@ namespace PlenkaAPI
         /// <summary>
         ///     Список с результатами расчета по координате канала
         /// </summary>
-        public List<CordTempN> cordTempNs { get; init; }
+        public List<CordTempN> CordTempNs { get; init; }
 
         /// <summary>
         ///     Производительность канала
@@ -83,7 +83,7 @@ namespace PlenkaAPI
     {
         public MathClass(CalculationParameters cp)
         {
-            this.cp = cp;
+            this.Cp = cp;
         }
 
 
@@ -108,48 +108,48 @@ namespace PlenkaAPI
         {
             var sw = new Stopwatch();
             sw.Start();
-            var F = 0.125 * Pow(H / W, 2) - 0.625 * (H / W) + 1;
+            var f = 0.125 * Pow(H / W, 2) - 0.625 * (H / W) + 1;
             var gamma = Vu / H;
-            var qGamma = H * W * u0 * Pow(gamma, n + 1);
-            var qAlpha = W * au * (1 / b - Tu + Tr);
-            var Qch = H * W * Vu / 2 * F;
+            var qGamma = H * W * U0 * Pow(gamma, N + 1);
+            var qAlpha = W * Au * (1 / B - Tu + Tr);
+            var qch = H * W * Vu / 2 * f;
             var cordTempNs = new List<CordTempN>();
-            var digitsCount = GetDecimalDigitsCount(step);
+            var digitsCount = GetDecimalDigitsCount(Step);
 
-            for (double i = 0; i <= L; i += step)
+            for (double i = 0; i <= L; i += Step)
             {
                 var z = Round(i, digitsCount);
 
-                var t = Tr + 1 / b * Log((b * qGamma + W * au) /
-                                         (b * qAlpha) *
-                                         (1 - Exp(-(z * b * qAlpha / (p * c * Qch)))) +
-                                         Exp(b * (T0 - Tr - z * qAlpha / (p * c * Qch))));
+                var t = Tr + 1 / B * Log((B * qGamma + W * Au) /
+                                         (B * qAlpha) *
+                                         (1 - Exp(-(z * B * qAlpha / (P * C * qch)))) +
+                                         Exp(B * (T0 - Tr - z * qAlpha / (P * C * qch))));
 
-                var ni = u0 * Exp(-b * (t - Tr)) * Pow(gamma, n - 1);
+                var ni = U0 * Exp(-B * (t - Tr)) * Pow(gamma, N - 1);
                 t = Round(t, 2);
                 ni = Round(ni, 2);
-                cordTempNs.Add(new CordTempN {cord = z, n = ni, temp = t,});
+                cordTempNs.Add(new CordTempN {Cord = z, N = ni, Temp = t,});
             }
 
-            var Q = Round(p * Qch * 3600, 2);
-            var T = cordTempNs.Last().temp;
-            var N = cordTempNs.Last().n;
+            var q = Round(P * qch * 3600, 2);
+            var T = cordTempNs.Last().Temp;
+            var n = cordTempNs.Last().N;
             sw.Stop();
 
             Results = new CalculationResults
-                {Q = Q, T = T, N = N, cordTempNs = cordTempNs, MathTimer = sw,};
+                {Q = q, T = T, N = n, CordTempNs = cordTempNs, MathTimer = sw,};
         }
 
 
     #region Parameters
 
-        public CalculationParameters cp { get; init; }
+        public CalculationParameters Cp { get; init; }
 
         private double W
         {
             get
             {
-                return cp.W;
+                return Cp.W;
             }
         }
 
@@ -157,7 +157,7 @@ namespace PlenkaAPI
         {
             get
             {
-                return cp.H;
+                return Cp.H;
             }
         }
 
@@ -165,23 +165,23 @@ namespace PlenkaAPI
         {
             get
             {
-                return cp.L;
+                return Cp.L;
             }
         }
 
-        private double p
+        private double P
         {
             get
             {
-                return cp.p;
+                return Cp.P;
             }
         }
 
-        private double c
+        private double C
         {
             get
             {
-                return cp.c;
+                return Cp.C;
             }
         }
 
@@ -189,7 +189,7 @@ namespace PlenkaAPI
         {
             get
             {
-                return cp.T0;
+                return Cp.T0;
             }
         }
 
@@ -197,7 +197,7 @@ namespace PlenkaAPI
         {
             get
             {
-                return cp.Vu;
+                return Cp.Vu;
             }
         }
 
@@ -205,23 +205,23 @@ namespace PlenkaAPI
         {
             get
             {
-                return cp.Tu;
+                return Cp.Tu;
             }
         }
 
-        private double u0
+        private double U0
         {
             get
             {
-                return cp.u0;
+                return Cp.U0;
             }
         }
 
-        private double b
+        private double B
         {
             get
             {
-                return cp.b;
+                return Cp.B;
             }
         }
 
@@ -229,31 +229,31 @@ namespace PlenkaAPI
         {
             get
             {
-                return cp.Tr;
+                return Cp.Tr;
             }
         }
 
-        private double n
+        private double N
         {
             get
             {
-                return cp.n;
+                return Cp.N;
             }
         }
 
-        private double au
+        private double Au
         {
             get
             {
-                return cp.au;
+                return Cp.Au;
             }
         }
 
-        private double step
+        private double Step
         {
             get
             {
-                return cp.step;
+                return Cp.Step;
             }
         }
 
