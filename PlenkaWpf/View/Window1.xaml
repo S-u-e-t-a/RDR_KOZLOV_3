@@ -103,7 +103,7 @@
                                                     <Binding Path="Length" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -118,7 +118,7 @@
                                                     <Binding Path="Width" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -134,7 +134,7 @@
                                                     <Binding Path="Depth" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -164,7 +164,7 @@
                                                     <Binding Path="Density" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -179,7 +179,7 @@
                                                     <Binding Path="SpecifiсHeatCapacity" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -194,7 +194,7 @@
                                                     <Binding Path="MeltingTemperature" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -204,7 +204,7 @@
                                 </Expander>
                                 <Expander ExpandDirection="Down" Header="Варьируемые параметры"
                                           Background="{StaticResource Style1}">
-                                    <hc:ElementGroup Background="{StaticResource Style3}">
+                                    <StackPanel Background="{StaticResource Style3}">
                                         <hc:TextBox hc:InfoElement.Title="Скорость движения крышки, м/с"
                                                     hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                     hc:InfoElement.TitleWidth="450"
@@ -215,7 +215,7 @@
                                                 <Binding Path="CapSpeed" NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                     <Binding.ValidationRules>
-                                                        <plenkaWpf:DoubleValidator />
+                                                        <plenkaWpf:DoubleValidator Min="0"/>
                                                     </Binding.ValidationRules>
                                                 </Binding>
                                             </hc:TextBox.Text>
@@ -230,12 +230,12 @@
                                                 <Binding Path="CapTemperature" NotifyOnValidationError="True"
                                                          UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                     <Binding.ValidationRules>
-                                                        <plenkaWpf:DoubleValidator />
+                                                        <plenkaWpf:DoubleValidator Min="0"/>
                                                     </Binding.ValidationRules>
                                                 </Binding>
                                             </hc:TextBox.Text>
                                         </hc:TextBox>
-                                    </hc:ElementGroup>
+                                    </StackPanel>
                                 </Expander>
                                 <Expander ExpandDirection="Down" Header="Параметры математической модели"
                                           Background="{StaticResource Style1}">
@@ -255,7 +255,7 @@
                                                     <Binding Path="Step" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -279,7 +279,7 @@
                                                     <Binding Path="СonsСoef" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -297,7 +297,7 @@
                                                     <Binding Path="TempСoef" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -315,7 +315,7 @@
                                                     <Binding Path="RefTemp" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -333,7 +333,7 @@
                                                     <Binding Path="MatFlowIndex" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
@@ -351,13 +351,11 @@
                                                     <Binding Path="HeatCoef" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator />
+                                                            <plenkaWpf:DoubleValidator Min="0"/>
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </hc:TextBox.Text>
                                             </hc:TextBox>
-
-
                                         </StackPanel>
                                     </hc:ElementGroup>
                                 </Expander>
@@ -428,16 +426,18 @@
                                     <hc:Divider Content="Параметры состояния"
                                                 Margin="0 5" />
                                 </Border>
-                                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CordTempNs}"
+                                <hc:ScrollViewer Orientation="Vertical" VerticalScrollBarVisibility="Visible">
+                                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CordTempNs}"
                                           CanUserAddRows="False"
                                           IsReadOnly="True" Background="{StaticResource Style3}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Координата по длине канала, м"
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Координата по длине канала, м"
                                                             Binding="{Binding cord}" />
-                                        <DataGridTextColumn Header="Температура, °С" Binding="{Binding temp}" />
-                                        <DataGridTextColumn Header="Вязкость, Па·с" Binding="{Binding n}" />
-                                    </DataGrid.Columns>
-                                </DataGrid>
+                                            <DataGridTextColumn Header="Температура, °С" Binding="{Binding temp}" />
+                                            <DataGridTextColumn Header="Вязкость, Па·с" Binding="{Binding n}" />
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </hc:ScrollViewer>
                             </StackPanel>
 
                             <Border Grid.Column="1" Background="{StaticResource Style3}">

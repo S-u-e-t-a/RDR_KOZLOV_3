@@ -219,7 +219,7 @@ namespace PlenkaAPI.Data
 
         private void OnModelCreatingPartial(ModelBuilder modelBuilder)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

@@ -135,6 +135,12 @@ namespace PlenkaWpf.Utils
             document.Add(new Paragraph("График вязкости"));
             document.Add(nGraphImage);
 
+            document.Add(new Paragraph("Критериальные показатели"));
+            document.Add(new Paragraph($"Температура продукта {results.T} °С"));
+            document.Add(new Paragraph($"Вязкость продукта {results.N} Па·с"));
+            document.Add(new Paragraph($"Производительность канала {results.Q} кг/ч"));
+
+            document.Add(new AreaBreak());
 
             var resultTable = new Table(UnitValue.CreatePercentArray(3)).UseAllAvailableWidth();
             resultTable.AddHeaderCell("Координата по длине канала, м");
@@ -147,11 +153,6 @@ namespace PlenkaWpf.Utils
                 resultTable.AddCell(results.cordTempNs[i].n.ToString());
                 resultTable.AddCell(results.cordTempNs[i].temp.ToString());
             }
-
-            document.Add(new Paragraph("Критериальные показатели"));
-            document.Add(new Paragraph($"Температура продукта {results.T} °С"));
-            document.Add(new Paragraph($"Вязкость продукта {results.N} Па·с"));
-            document.Add(new Paragraph($"Производительность канала {results.Q} кг/ч"));
 
             document.Add(new Paragraph("Таблица параметров состояния"));
             document.Add(resultTable);

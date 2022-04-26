@@ -117,7 +117,7 @@ namespace PlenkaWpf
             }
             catch (Exception e)
             {
-                return new ValidationResult(false, $"Введено недопустимое значение {e.Message}");
+                return new ValidationResult(false, $"Введено недопустимое значение");
             }
 
             if (Min != null || Max != null)

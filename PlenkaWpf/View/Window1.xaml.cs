@@ -161,7 +161,7 @@ namespace PlenkaWpf.View
         {
             if (!IsValid(MainGrid))
             {
-                MessageBox.Show("Невозможно произвести расчет, есть ошибки ввода данных");
+                MessageBox.Show("Невозможно произвести расчёт, есть ошибки ввода данных", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
