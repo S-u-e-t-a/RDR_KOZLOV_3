@@ -7,12 +7,6 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance vm:MaterialExplorerVm}"
              d:DesignHeight="450">
-    <UserControl.Resources>
-        <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
-        <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
-        <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
-    </UserControl.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />

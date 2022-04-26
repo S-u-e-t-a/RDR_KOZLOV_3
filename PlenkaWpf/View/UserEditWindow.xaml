@@ -8,12 +8,6 @@
         mc:Ignorable="d"
         Title="Пользователь" Height="299" Width="285"
         d:DataContext="{d:DesignInstance vm:UserEditVm}">
-    <Window.Resources>
-        <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
-        <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
-        <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
-    </Window.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />

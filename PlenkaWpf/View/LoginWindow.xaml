@@ -7,11 +7,6 @@
              mc:Ignorable="d">
     <!--Title="Авторизация" Height="388" Width="268"-->
     <!--WindowStartupLocation="CenterScreen"-->
-    <UserControl.Resources>
-        <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
-        <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
-    </UserControl.Resources>
-
     <Grid Background="{StaticResource Style2}">
         <Grid.RowDefinitions>
             <RowDefinition Height="80" />
