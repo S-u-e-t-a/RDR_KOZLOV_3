@@ -1,5 +1,10 @@
 ﻿namespace PlenkaAPI
 {
+    public interface IKakable
+    {
+        public void POKAKAT();
+    }
+
     public interface IAutorization
     {
     }
