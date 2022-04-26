@@ -1,5 +1,9 @@
 ﻿namespace PlenkaAPI
 {
+    public interface IposudoMoyshble
+    {
+        public void POMIT_POSUDU();
+    }
     public interface IKakable
     {
         public void POKAKAT();
