@@ -23,14 +23,26 @@ namespace PlenkaWpf.View
     /// <summary>
     ///     Логика взаимодействия для Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class Window1 : UserControl, IСhangeableControl
     {
         public Window1()
         {
             InitializeComponent();
             var vm = new Window1VM();
             DataContext = vm;
-            vm.ClosingRequest += (sender, e) => Close();
+
+            //vm.ClosingRequest += (sender, e) => Close();
+        }
+
+        public WindowState PreferedWindowState { get; set; } = WindowState.Maximized;
+        public string WindowTitle { get; set; } = "Программный комплекс для исследования неизотермического течения аномально-вязких материалов";
+        public double? PreferedHeight { get; set; }
+        public double? PreferedWidth { get; set; }
+        public event IСhangeableControl.ChangingRequestHandler ChangingRequest;
+
+        public void OnChangingRequest(UserControl newControl)
+        {
+            ChangingRequest?.Invoke(this, newControl);
         }
 
 
@@ -183,6 +195,11 @@ namespace PlenkaWpf.View
         private void Validation_OnError(object? sender, ValidationErrorEventArgs e)
         {
             //throw new NotImplementedException();
+        }
+
+        private void ChangeUser(object sender, RoutedEventArgs e)
+        {
+            OnChangingRequest(new LoginWindow());
         }
     }
 }

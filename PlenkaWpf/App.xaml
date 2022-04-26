@@ -1,13 +1,22 @@
 ﻿<Application x:Class="PlenkaWpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="View/LoginWindow.xaml">
+             StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
+            <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
+            <SolidColorBrush x:Key="Style3" Color="#faf3f3" />
+            <DataTemplate x:Key="expanderHeader">
+                <TextBlock Text="{Binding}"
+                           FontSize="16"
+                           TextWrapping="Wrap" />
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

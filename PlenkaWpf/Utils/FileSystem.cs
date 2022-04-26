@@ -56,7 +56,7 @@ namespace PlenkaWpf.Utils
         /// <param name="path">Путь к файлу</param>
         /// <param name="tempBitmap">График температуры</param>
         /// <param name="nBitMap">График вязкости</param>
-        /// <param name="results">Результаты расчетов</param>
+        /// <param name="mathModel">Результаты расчетов и начальные параметры</param>
         public static void
             exportPdf(string path, byte[] tempBitmap, byte[] nBitMap, MathClass mathModel) // todo Переписать
         {
