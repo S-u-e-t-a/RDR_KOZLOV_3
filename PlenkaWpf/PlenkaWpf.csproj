@@ -12,6 +12,7 @@
     <None Remove="resources\exit.png" />
     <None Remove="resources\file.png" />
     <None Remove="resources\info.png" />
+    <None Remove="resources\logo.png" />
     <None Remove="resources\open.png" />
     <None Remove="resources\save.png" />
     <None Remove="resources\Times_New_Roman.ttf" />
@@ -57,6 +58,7 @@
     <Resource Include="resources\info.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="resources\logo.png" />
     <Resource Include="resources\open.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
