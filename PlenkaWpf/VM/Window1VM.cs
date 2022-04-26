@@ -87,7 +87,7 @@ namespace PlenkaWpf.VM
 
 
     #region Properties
-        
+
         /// <summary>
         ///     Доступные материалы
         /// </summary>

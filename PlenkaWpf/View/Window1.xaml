@@ -22,7 +22,6 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
     </UserControl.Resources>
 
     <Grid Background="{StaticResource Style3}" x:Name="MainGrid">
@@ -31,39 +30,8 @@
             <ColumnDefinition Width="193*" />
             <ColumnDefinition Width="605*" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Menu Grid.Row="0" Background="{StaticResource Style2}" Grid.ColumnSpan="3">
-            <MenuItem Header="Файл">
-                <MenuItem.Icon>
-                    <Image Source="pack://application:,,,/resources/file.png" />
-                </MenuItem.Icon>
-                <MenuItem Header="Экспортировать результаты" Click="MenuItem_OnClick">
-                    <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/save.png" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Сменить учётную запись" Click="ChangeUser">
-                    <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/user.png" />
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Выход">
-                    <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/exit.png" />
-                    </MenuItem.Icon>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header="Справка">
-                <MenuItem.Icon>
-                    <Image Source="pack://application:,,,/resources/info.png" />
-                </MenuItem.Icon>
-            </MenuItem>
-        </Menu>
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="3">
+        <Grid Grid.ColumnSpan="3">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />

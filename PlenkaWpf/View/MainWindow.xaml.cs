@@ -9,7 +9,7 @@ namespace PlenkaWpf.View
     /// <summary>
     ///     Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private UserControl _control;
 
@@ -21,19 +21,21 @@ namespace PlenkaWpf.View
 
         private void ChangeContent(object sender, UserControl control)
         {
-            this._control = control;
-            ((IСhangeableControl) this._control).ChangingRequest -= ChangeContent;
-            ((IСhangeableControl) this._control).ChangingRequest += ChangeContent;
-            content.Content = this._control;
-            WindowState = ((IСhangeableControl) this._control).PreferedWindowState;
+            _control = control;
+            ((IСhangeableControl) _control).ChangingRequest -= ChangeContent;
+            ((IСhangeableControl) _control).ChangingRequest += ChangeContent;
+            content.Content = _control;
+            WindowState = ((IСhangeableControl) _control).PreferedWindowState;
 
             if (WindowState != WindowState.Maximized)
             {
-                Height = (double) ((IСhangeableControl) this._control).PreferedHeight;
-                Width = (double) ((IСhangeableControl) this._control).PreferedWidth;
+                Height = (double) ((IСhangeableControl) _control).PreferedHeight;
+                Width = (double) ((IСhangeableControl) _control).PreferedWidth;
             }
 
-            Title = ((IСhangeableControl) this._control).WindowTitle;
+            Title = ((IСhangeableControl) _control).WindowTitle;
+
+            MenuControl.Content = control.TryFindResource("Menu") as Menu;
         }
     }
 }

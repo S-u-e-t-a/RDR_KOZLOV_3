@@ -112,6 +112,7 @@ namespace PlenkaWpf.View
         private static byte[] ChartToBitmap(CartesianChart chart, double width = 1000, double height = 1000, int dpi = 150)
         {
             var nonVisibleChart = CopyChart(chart, width, height);
+
             var viewbox = new Viewbox
             {
                 Child = nonVisibleChart,
