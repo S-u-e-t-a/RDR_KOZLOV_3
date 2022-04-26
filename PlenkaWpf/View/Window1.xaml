@@ -421,13 +421,19 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Column="0">
-                                <Border Background="{StaticResource Style2}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            
+
+                                <Border Grid.Row="0" Grid.Column="0" Background="{StaticResource Style2}">
                                     <hc:Divider Content="Параметры состояния"
                                                 Margin="0 5" />
                                 </Border>
-                                <hc:ScrollViewer Orientation="Vertical" VerticalScrollBarVisibility="Visible">
-                                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CordTempNs}"
+
+         
+                                <DataGrid Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False" ItemsSource="{Binding CordTempNs}"
                                           CanUserAddRows="False"
                                           IsReadOnly="True" Background="{StaticResource Style3}">
                                         <DataGrid.Columns>
@@ -437,21 +443,24 @@
                                             <DataGridTextColumn Header="Вязкость, Па·с" Binding="{Binding n}" />
                                         </DataGrid.Columns>
                                     </DataGrid>
-                                </hc:ScrollViewer>
-                            </StackPanel>
+                                
 
-                            <Border Grid.Column="1" Background="{StaticResource Style3}">
+
+                            <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource Style3}">
                                 <hc:Divider Background="{StaticResource DangerBrush}" Orientation="Vertical"
                                             Margin="0, 0, 0, 5" />
                             </Border>
 
-                            <Grid Grid.Column="2">
+
+                            <Border Grid.Row="0" Grid.Column="2" Background="{StaticResource Style2}">
+                                <hc:Divider Content="Критериальные показатели"
+                                                    Margin="0 5" />
+                            </Border>
+                            
+                            <Grid Grid.Row="1" Grid.Column="2">
 
                                 <StackPanel Background="{StaticResource Style3}">
-                                    <Border Background="{StaticResource Style2}">
-                                        <hc:Divider Content="Критериальные показатели"
-                                                    Margin="0 5" />
-                                    </Border>
+
                                     <hc:TextBox hc:InfoElement.Title="Температура продукта, °С"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"

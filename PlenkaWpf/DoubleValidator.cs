@@ -112,12 +112,12 @@ namespace PlenkaWpf
             {
                 if (((string) value).Length > 0)
                 {
-                    val = double.Parse((string) value);
+                    val = double.Parse((string) value, CultureInfo.InvariantCulture);
                 }
             }
             catch (Exception e)
             {
-                return new ValidationResult(false, $"Введено недопустимое значение");
+                return new ValidationResult(false, $"Введено недопустимое значение {e.Message}");
             }
 
             if (Min != null || Max != null)
