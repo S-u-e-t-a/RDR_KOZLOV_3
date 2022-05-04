@@ -364,7 +364,7 @@
                             Visibility="{Binding TabControlVisibility, UpdateSourceTrigger=PropertyChanged}"
                             Grid.Column="1" Style="{StaticResource TabControlInLine}"
                             Background="{StaticResource Style3}">
-                    <TabItem x:Name="tab1" Header="График распределения температуры">
+                    <TabItem Header="График распределения температуры" Background="{StaticResource Style2}">
                         <lvc:CartesianChart x:Name="tempChart"
                                             LegendLocation="None" Series="{Binding TempSeries}"
                                             Margin="10,10,10,0">
@@ -386,7 +386,7 @@
                             </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
                     </TabItem>
-                    <TabItem x:Name="tab2" Header="График распределения вязкости">
+                    <TabItem Header="График распределения вязкости" Background="{StaticResource Style2}">
                         <lvc:CartesianChart x:Name="nChart" LegendLocation="None"
                                             Series="{Binding NSeries}"
                                             Margin="10,10,10,5">
@@ -407,7 +407,7 @@
                             </lvc:CartesianChart.AxisY>
                         </lvc:CartesianChart>
                     </TabItem>
-                    <TabItem Header="Результаты вычислений">
+                    <TabItem Header="Результаты вычислений" Background="{StaticResource Style2}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="500" />

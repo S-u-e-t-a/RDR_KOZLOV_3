@@ -5,7 +5,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        NonClientAreaBackground="{StaticResource Style1}"
+        NonClientAreaBackground="{StaticResource Style4}"
         Title="MainWindow" Height="450" Width="800"
         ShowTitle="False"
         WindowStartupLocation="CenterScreen">
@@ -14,7 +14,7 @@
             <Image Source="pack://application:,,,/resources/logo.png" Height="20" Margin="3" RenderOptions.BitmapScalingMode="HighQuality"/>
             <ContentControl x:Name="MenuControl"/>
             <TextBlock Text="{Binding Title,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"
-                       Background="{StaticResource Style1}" Margin="5" FontSize="14" VerticalAlignment="Stretch"/>
+                       Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Margin="5" FontSize="14" VerticalAlignment="Stretch"/>
         </StackPanel>
         
     </hc:Window.NonClientAreaContent>
