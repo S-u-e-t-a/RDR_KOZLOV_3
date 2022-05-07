@@ -1,11 +1,15 @@
-﻿using PropertyChanged;
+﻿using System;
+using System.Collections.Generic;
+
+using PropertyChanged;
 
 
 namespace PlenkaAPI.Models
 {
     [AddINotifyPropertyChangedInterface]
-    public class DefaultProperty
+    public partial class DefaultProperty
     {
+        public long DfId { get; set; }
         public long TypeId { get; set; }
         public long PropId { get; set; }
 

@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using PropertyChanged;
 
@@ -6,7 +8,7 @@ using PropertyChanged;
 namespace PlenkaAPI.Models
 {
     [AddINotifyPropertyChangedInterface]
-    public class Unit
+    public partial class Unit
     {
         public Unit()
         {

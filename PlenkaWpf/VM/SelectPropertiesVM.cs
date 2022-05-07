@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Windows;
 using System.Windows.Data;
 
 using PlenkaAPI.Data;
@@ -11,6 +12,8 @@ using PlenkaAPI.Models;
 
 using PlenkaWpf.Utils;
 using PlenkaWpf.View;
+
+using MessageBox = HandyControl.Controls.MessageBox;
 
 
 namespace PlenkaWpf.VM
@@ -41,12 +44,12 @@ namespace PlenkaWpf.VM
 
     #region Constructors
 
-        public SelectPropertiesVm(MembraneObject material)
+        public SelectPropertiesVm(ObjectType objectType)
         {
-            Material = material;
+            TempObjectType = new ObjectType(){TypeId = objectType.TypeId, TypeName = objectType.TypeName, DefaultProperties = objectType.DefaultProperties, MembraneObjects = objectType.MembraneObjects};
+            editingObjectType = objectType;
             AvailableProperties = _db.Properties.ToList();
-            var materialProperties = material.Values.Select(v => v.Prop);
-            AvailableProperties = AvailableProperties.Except(materialProperties).ToList();
+            AvailableProperties = AvailableProperties.Except(ObjectTypeProperties).ToList();
             AllProperties = _db.Properties.Local.ToObservableCollection();
         }
 
@@ -57,19 +60,21 @@ namespace PlenkaWpf.VM
 
     #region Properties
 
+        private ObjectType editingObjectType;
+
         private readonly MembraneContext _db = DbContextSingleton.GetInstance();
         public ObservableCollection<Property> AllProperties { get; set; }
         public List<Property> AvailableProperties { get; set; }
-        public MembraneObject Material { get; set; }
+        public ObjectType TempObjectType { get; set; }
         private readonly List<Property> _propertiesToDelete = new();
         private readonly List<Property> _propertiesToAdd = new();
         public Property SelectedProperty { get; set; }
 
-        public List<Property> MaterialProperties
+        public List<Property> ObjectTypeProperties
         {
             get
             {
-                return Material.Values.Select(o => o.Prop).ToList();
+                return editingObjectType.DefaultProperties.Select(df => df.Prop).ToList();
             }
         }
 
@@ -89,25 +94,73 @@ namespace PlenkaWpf.VM
             {
                 return _selectProperties ??= new RelayCommand(o =>
                 {
+                    var unableToDelete = new List<string>();
+
                     foreach (var property in _propertiesToDelete)
                     {
-                        Material.Values.Remove(Material.Values.Where(o => o.Prop == property).First());
+                        if (_db.Values.Count(v => v.Prop == property && v.Mat.Type == TempObjectType && v.Value1 != null) != 0) //если есть заполненные записи с таким типом объекта и свойством в таблице значений
+                        {
+                            unableToDelete.Add(property.PropertyName);
+                        }
                     }
 
-                    foreach (var property in _propertiesToAdd)
+                    if (unableToDelete.Count != 0)
                     {
-                        if (Material.Values.Select(o => o)
-                                    .Where(o => o.MatId == Material.ObId && o.PropId == property.ProperrtyId).Count() ==
-                            0)
+                        var res = MessageBox.Show("В базе найдены объекты, у которых есть есть удаляемые свойства." +
+                                                  $" Вы хотите продолжить операцию? В результате будут удалены все записи с этими свойствами: \n{String.Join("\n",unableToDelete)}",
+                                                  "Осторожно!",
+                                                  MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                        if (res == MessageBoxResult.No)
                         {
-                            Material.Values.Add(new Value {Mat = Material, Prop = property,});
+                            return;
+                        }
+                    }
+
+                    foreach (var property in _propertiesToDelete) // удаляем свойства
+                    {
+                        _db.DefaultProperties.Remove(_db.DefaultProperties.Single(df => df.TypeId == TempObjectType.TypeId && df.PropId == property.ProperrtyId));
+
+                        foreach (var membraneObject in TempObjectType.MembraneObjects)
+                        {
+                            _db.Values.Remove(_db.Values.Single(v => v.Mat == membraneObject && v.Prop == property));
+                        }
+                    }
+
+                    foreach (var property in _propertiesToAdd) // добавляем новые свойства
+                    {
+                        if (_db.DefaultProperties.Count(df => df.PropId==property.ProperrtyId && df.TypeId==TempObjectType.TypeId)==0 )
+                        {
+                            TempObjectType.DefaultProperties.Add(new DefaultProperty(){PropId = property.ProperrtyId});
+                            //_db.DefaultProperties.Add(new DefaultProperty() {PropId = property.ProperrtyId, TypeId = TempObjectType.TypeId});
+                        }
+
+                        foreach (var membraneObject in TempObjectType.MembraneObjects)
+                        {
+                            if (_db.Values.Count(v => v.Mat == membraneObject && v.Prop == property) == 0)
+                            {
+                                _db.Values.Add(new Value() {Mat = membraneObject, Prop = property});
+                            }
                         }
                     }
 
 
-                    DbContextSingleton.GetInstance().SaveChanges();
+                    editingObjectType.MembraneObjects = TempObjectType.MembraneObjects;
+                    editingObjectType.DefaultProperties = TempObjectType.DefaultProperties;
+                    editingObjectType.TypeId=TempObjectType.TypeId;
+                    editingObjectType.TypeName=TempObjectType.TypeName;
+
+                    if (!_db.ObjectTypes.Contains(editingObjectType)) 
+                    {
+                        _db.ObjectTypes.Add(editingObjectType);
+                    }
+                    //foreach (var mo in _db.MembraneObjects.Where(mo => mo.TypeId==editingObjectType.TypeId))
+                    //{
+                    //    _db.Values.Add(new Value(){Mat = mo, Prop = })
+                    //}
+                    _db.SaveChanges();
                     OnClosingRequest();
-                }); //, o => ((IList) o).Count > 0);
+                }); 
             }
         }
 

@@ -38,7 +38,6 @@ namespace PlenkaWpf.VM
 
             Material = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Полистирол");
             Canal = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Канал");
-            MatModel = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Стандартная модель");
 
             TempLineSerie = new LineSeries
                 {Title = "Температура, °С",};
@@ -238,30 +237,6 @@ namespace PlenkaWpf.VM
             }
         }
 
-    #endregion
-
-
-    #region VarProps
-
-        /// <summary>
-        ///     Скорость крышки
-        /// </summary>
-        public double? CapSpeed { get; set; } = 1.5;
-
-        /// <summary>
-        ///     Температура крашки
-        /// </summary>
-        public double? CapTemperature { get; set; } = 210;
-
-    #endregion
-
-
-    #region MatModelProps
-
-        /// <summary>
-        ///     Текущая мат.модель
-        /// </summary>
-        public MembraneObject MatModel { get; set; }
 
         /// <summary>
         ///     Коэффициент констистенции материала при температуре приведения
@@ -270,11 +245,11 @@ namespace PlenkaWpf.VM
         {
             get
             {
-                return MatModel["Коэффициент констистенции материала при температуре приведения"];
+                return Material["Коэффициент констистенции материала при температуре приведения"];
             }
             set
             {
-                MatModel["Коэффициент констистенции материала при температуре приведения"] = value;
+                Material["Коэффициент констистенции материала при температуре приведения"] = value;
                 OnPropertyChanged();
             }
         }
@@ -286,11 +261,11 @@ namespace PlenkaWpf.VM
         {
             get
             {
-                return MatModel["Температурный коэффициент вязкости материала"];
+                return Material["Температурный коэффициент вязкости материала"];
             }
             set
             {
-                MatModel["Температурный коэффициент вязкости материала"] = value;
+                Material["Температурный коэффициент вязкости материала"] = value;
                 OnPropertyChanged();
             }
         }
@@ -302,11 +277,11 @@ namespace PlenkaWpf.VM
         {
             get
             {
-                return MatModel["Температура приведения"];
+                return Material["Температура приведения"];
             }
             set
             {
-                MatModel["Температура приведения"] = value;
+                Material["Температура приведения"] = value;
                 OnPropertyChanged();
             }
         }
@@ -318,11 +293,11 @@ namespace PlenkaWpf.VM
         {
             get
             {
-                return MatModel["Индекс течения материала"];
+                return Material["Индекс течения материала"];
             }
             set
             {
-                MatModel["Индекс течения материала"] = value;
+                Material["Индекс течения материала"] = value;
                 OnPropertyChanged();
             }
         }
@@ -334,14 +309,28 @@ namespace PlenkaWpf.VM
         {
             get
             {
-                return MatModel["Коэффициеент теплоотдачи от крышки канала к материалу"];
+                return Material["Коэффициеент теплоотдачи от крышки канала к материалу"];
             }
             set
             {
-                MatModel["Коэффициеент теплоотдачи от крышки канала к материалу"] = value;
+                Material["Коэффициеент теплоотдачи от крышки канала к материалу"] = value;
                 OnPropertyChanged();
             }
         }
+        #endregion
+
+
+        #region VarProps
+
+        /// <summary>
+        ///     Скорость крышки
+        /// </summary>
+        public double? CapSpeed { get; set; } = 1.5;
+
+        /// <summary>
+        ///     Температура крашки
+        /// </summary>
+        public double? CapTemperature { get; set; } = 210;
 
     #endregion
 

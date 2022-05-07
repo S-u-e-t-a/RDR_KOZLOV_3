@@ -38,6 +38,9 @@
             <TabItem Header="Редактирование пользователей">
                 <view:UserExplorer />
             </TabItem>
+            <TabItem Header="Редактирование типов объектов">
+                <view:ObjectProperties/>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

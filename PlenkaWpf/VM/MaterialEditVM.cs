@@ -36,23 +36,6 @@ namespace PlenkaWpf.VM
 
     #region Commands
 
-        private RelayCommand _openSelectPropertyesToChange;
-
-        /// <summary>
-        ///     Команад, открывающая окно со свойствами для редактирования
-        /// </summary>
-        public RelayCommand OpenSelectPropertyesToChange
-        {
-            get
-            {
-                return _openSelectPropertyesToChange ?? (_openSelectPropertyesToChange =
-                                                             new RelayCommand(o =>
-                                                             {
-                                                                 ShowChildWindow(new SelectProperties(Material));
-                                                             }));
-            }
-        }
-
         private RelayCommand _saveChanges;
 
         /// <summary>
@@ -65,6 +48,7 @@ namespace PlenkaWpf.VM
                 return _saveChanges ?? (_saveChanges = new RelayCommand(o =>
                                            {
                                                DbContextSingleton.GetInstance().SaveChanges();
+                                               OnClosingRequest();
                                            }));
             }
         }

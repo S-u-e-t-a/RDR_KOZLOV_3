@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using PropertyChanged;
 
@@ -6,10 +8,11 @@ using PropertyChanged;
 namespace PlenkaAPI.Models
 {
     [AddINotifyPropertyChangedInterface]
-    public class Property
+    public partial class Property
     {
         public Property()
         {
+            DefaultProperties = new ObservableCollection<DefaultProperty>();
             Values = new ObservableCollection<Value>();
         }
 
@@ -18,6 +21,7 @@ namespace PlenkaAPI.Models
         public long UnitId { get; set; }
 
         public virtual Unit Unit { get; set; }
+        public virtual ObservableCollection<DefaultProperty> DefaultProperties { get; set; }
         public virtual ObservableCollection<Value> Values { get; set; }
     }
 }

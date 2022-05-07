@@ -12,10 +12,10 @@ namespace PlenkaWpf.View
     /// </summary>
     public partial class SelectProperties : Window
     {
-        public SelectProperties(MembraneObject material)
+        public SelectProperties(ObjectType ot)
         {
             InitializeComponent();
-            var vm = new SelectPropertiesVm(material);
+            var vm = new SelectPropertiesVm(ot);
             DataContext = vm;
             vm.ClosingRequest += (sender, e) => Close();
         }
