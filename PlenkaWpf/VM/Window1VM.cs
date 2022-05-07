@@ -33,10 +33,10 @@ namespace PlenkaWpf.VM
 
         public Window1Vm()
         {
-            Materials = DbContextSingleton.GetInstance().MembraneObjects.Where(o => o.Type.TypeName == "Материал")
-                                          .ToList();
-
+            Materials = DbContextSingleton.GetInstance().MembraneObjects.Where(o => o.Type.TypeName == "Материал").ToList();
             Material = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Полистирол");
+
+            Canals = DbContextSingleton.GetInstance().MembraneObjects.Where(o => o.Type.TypeName == "Канал").ToList();
             Canal = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Канал");
 
             TempLineSerie = new LineSeries
@@ -91,14 +91,30 @@ namespace PlenkaWpf.VM
         ///     Доступные материалы
         /// </summary>
         public List<MembraneObject> Materials { get; set; }
+        public List<MembraneObject> Canals { get; set; }
 
 
-    #region CanalProps
+        #region CanalProps
 
         /// <summary>
         ///     Текущий канал
         /// </summary>
-        public MembraneObject Canal { get; set; }
+        private MembraneObject _canal;
+
+        public MembraneObject Canal
+        {
+            get
+            {
+                return _canal;
+            }
+            set
+            {
+                _canal = value;
+                OnPropertyChanged(nameof(Length));
+                OnPropertyChanged(nameof(Width));
+                OnPropertyChanged(nameof(Depth));
+            }
+        }
 
         /// <summary>
         ///     Длина канала
@@ -171,6 +187,11 @@ namespace PlenkaWpf.VM
                 OnPropertyChanged(nameof(Density));
                 OnPropertyChanged(nameof(SpecifiсHeatCapacity));
                 OnPropertyChanged(nameof(MeltingTemperature));
+                OnPropertyChanged(nameof(СonsСoef));
+                OnPropertyChanged(nameof(TempСoef));
+                OnPropertyChanged(nameof(RefTemp));
+                OnPropertyChanged(nameof(MatFlowIndex));
+                OnPropertyChanged(nameof(HeatCoef));
             }
         }
 
@@ -236,7 +257,6 @@ namespace PlenkaWpf.VM
                 OnPropertyChanged();
             }
         }
-
 
         /// <summary>
         ///     Коэффициент констистенции материала при температуре приведения

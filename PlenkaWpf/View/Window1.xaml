@@ -81,6 +81,15 @@
                                           Background="{StaticResource Style1}">
                                     <hc:ElementGroup>
                                         <Border Background="{StaticResource Style2}">
+                                            <hc:Divider Content="Выбор канала"
+                                                        Background="{StaticResource DangerBrush}"
+                                                        Margin="0 5" />
+                                        </Border>
+                                        <hc:ElementGroup Background="{StaticResource Style3}">
+                                            <hc:ComboBox Margin="10 10" ItemsSource="{Binding Canals}"
+                                                         SelectedItem="{Binding Canal}" DisplayMemberPath="ObName" />
+                                        </hc:ElementGroup>
+                                        <Border Background="{StaticResource Style2}">
                                             <hc:Divider Content="Геометрические параметры канала"
                                                         Background="{StaticResource Style2}" Margin="0 5" />
                                         </Border>
