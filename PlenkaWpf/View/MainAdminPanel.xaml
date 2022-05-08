@@ -31,14 +31,17 @@
         </Menu>
     </UserControl.Resources>
     <Grid>
-        <TabControl TabStripPlacement="Left">
-            <TabItem Header="Редактирование объектов">
+        <TabControl x:Name="tabs"
+                            Visibility="{Binding TabControlVisibility, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource TabControlInLine}"
+                            Background="{StaticResource Style3}">
+            <TabItem Header="Редактирование объектов" Background="{StaticResource Style2}">
                 <view:MaterialExplorer />
             </TabItem>
-            <TabItem Header="Редактирование пользователей">
+            <TabItem Header="Редактирование пользователей" Background="{StaticResource Style2}">
                 <view:UserExplorer />
             </TabItem>
-            <TabItem Header="Редактирование типов объектов">
+            <TabItem Header="Редактирование типов объектов" Background="{StaticResource Style2}">
                 <view:ObjectProperties/>
             </TabItem>
         </TabControl>

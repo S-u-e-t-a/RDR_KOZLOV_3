@@ -20,14 +20,25 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <hc:TextBox Margin="5" hc:InfoElement.Title="Имя типа объекта" hc:InfoElement.TitlePlacement="Left"
+        <StackPanel Background="{StaticResource Style3}">
+            <hc:TextBox Margin="5" hc:InfoElement.Title="Имя типа объекта" hc:InfoElement.TitlePlacement="Left"
                     Text="{Binding Path=TempObjectType.TypeName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    MinWidth="100" Background="{StaticResource Style3}" />
+                    MinWidth="100" />
+        </StackPanel>
+       
         <ListBox Grid.Row="1" ItemsSource="{Binding AllProperties}" SelectedItem="{Binding SelectedProperty}"
-                 Background="{StaticResource Style2}">
+                 Background="{StaticResource Style3}">
+            <ListBox.ItemContainerStyle>
+                <Style>
+                    <Setter Property="ListBoxItem.Background" Value="{StaticResource Style3}"/>
+                    <Setter Property="ListBoxItem.Margin" Value="5"/>
+                    <Setter Property="ListBoxItem.Padding" Value="5"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox Height="60" VerticalAlignment="Top" Content="{Binding PropertyName}">
+                    <CheckBox Height="30" VerticalAlignment="Top" Content="{Binding PropertyName}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Checked">
                                 <i:InvokeCommandAction

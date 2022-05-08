@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
-        Title="Добавление материала" Height="170" Width="400"
+        Title="Добавление материала" Height="190" Width="400"
         d:DataContext="{d:DesignInstance vm:CreateMaterialVm}"
         WindowStartupLocation="CenterScreen">
     <Grid>

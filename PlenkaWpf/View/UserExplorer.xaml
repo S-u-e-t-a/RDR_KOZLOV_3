@@ -17,7 +17,8 @@
                       IsReadOnly="True"
                       SelectedItem="{Binding SelectedUser}"
                       SelectionMode="Single"
-                      AutoGenerateColumns="False">
+                      AutoGenerateColumns="False" 
+                      Background="{StaticResource Style3}">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID"
@@ -30,14 +31,14 @@
                                         Binding="{Binding UserType.UserTypeName}" />
                 </DataGrid.Columns>
             </DataGrid>
-            <Grid Row="1">
+            <Grid Row="1" Background="{StaticResource Style2}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Width="100" Margin="5" Content="Добавить"
-                            Command="{Binding AddNewUser}" />
+                            Command="{Binding AddNewUser}" Background="{StaticResource Style3}" />
                     <Button Width="100" Margin="5" Content="Изменить"
-                            Command="{Binding EditUser}" />
+                            Command="{Binding EditUser}" Background="{StaticResource Style3}" />
                     <Button Width="100" Margin="5" Content="Удалить"
-                            Command="{Binding DeleteUser}" />
+                            Command="{Binding DeleteUser}" Background="{StaticResource Style3}" />
                 </StackPanel>
             </Grid>
         </Grid>

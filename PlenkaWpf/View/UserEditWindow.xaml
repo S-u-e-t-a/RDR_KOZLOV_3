@@ -6,7 +6,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
-        Title="Пользователь" Height="299" Width="285"
+        Title="Пользователь" Height="320" Width="285"
         d:DataContext="{d:DesignInstance vm:UserEditVm}">
     <Grid>
         <Grid.RowDefinitions>
@@ -30,8 +30,8 @@
         </StackPanel>
         <Grid Row="1" Background="{StaticResource Style1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveUser}" />
-                <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}" />
+                <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveUser}" Background="{StaticResource Style3}"/>
+                <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}" Background="{StaticResource Style3}"/>
             </StackPanel>
         </Grid>
     </Grid>
