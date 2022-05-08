@@ -4,7 +4,6 @@ using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 
 using PlenkaWpf.Utils;
-using PlenkaWpf.View;
 
 
 namespace PlenkaWpf.VM

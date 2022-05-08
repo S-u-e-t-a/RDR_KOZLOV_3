@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-using PlenkaAPI.Models;
+﻿using PlenkaAPI.Models;
 
 using PlenkaWpf.VM;
 

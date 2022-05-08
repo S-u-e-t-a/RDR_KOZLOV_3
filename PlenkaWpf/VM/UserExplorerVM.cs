@@ -71,7 +71,7 @@ namespace PlenkaWpf.VM
                 return _editUser ??= new RelayCommand(o =>
                 {
                     ShowChildWindow(new UserEditWindow(SelectedUser));
-                },_ => SelectedUser != null);
+                }, _ => SelectedUser != null);
             }
         }
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 using PropertyChanged;
 
@@ -8,7 +6,7 @@ using PropertyChanged;
 namespace PlenkaAPI.Models
 {
     [AddINotifyPropertyChangedInterface]
-    public partial class UserType
+    public class UserType
     {
         public UserType()
         {

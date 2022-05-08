@@ -1,22 +1,24 @@
 ﻿<hc:Window x:Class="PlenkaWpf.View.MaterialEdit"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:PlenkaWpf.VM"
+           xmlns:hc="https://handyorg.github.io/handycontrol"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:vm="clr-namespace:PlenkaWpf.VM"
 
-        mc:Ignorable="d"
-        Title="Изменение материала" Height="450" Width="800"
-        d:DataContext="{d:DesignInstance vm:MaterialEditVm}"
+           mc:Ignorable="d"
+           Title="Изменение материала" Height="450" Width="800"
+           d:DataContext="{d:DesignInstance vm:MaterialEditVm}"
            NonClientAreaBackground="{StaticResource Style4}"
-        ShowTitle="False"
-        WindowStartupLocation="CenterScreen">
+           ShowTitle="False"
+           WindowStartupLocation="CenterScreen">
     <hc:Window.NonClientAreaContent>
         <StackPanel Orientation="Horizontal">
-            <Image Source="pack://application:,,,/resources/logo.png" Height="20" Margin="3" RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Image Source="pack://application:,,,/resources/logo.png" Height="20" Margin="3"
+                   RenderOptions.BitmapScalingMode="HighQuality" />
             <TextBlock Text="{Binding Title,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"
-                       Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Margin="5" FontSize="14" VerticalAlignment="Stretch"/>
+                       Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"
+                       Margin="5" FontSize="14" VerticalAlignment="Stretch" />
         </StackPanel>
 
     </hc:Window.NonClientAreaContent>
@@ -46,7 +48,7 @@
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        
+
                         <!--<hc:ElementGroup Orientation="Horizontal" Margin="5" Height="40"
                                          Background="{StaticResource Style2}" HorizontalAlignment="Stretch"
                                          VerticalAlignment="Stretch">
@@ -65,22 +67,25 @@
 
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition Width="15*" />
                                 <ColumnDefinition Width="4*" />
-                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="3*" />
                             </Grid.ColumnDefinitions>
-                            
-                            <Label Grid.Column="0" Content="{Binding Path=Prop.PropertyName, UpdateSourceTrigger=PropertyChanged}"
+
+                            <Label Grid.Column="0"
+                                   Content="{Binding Path=Prop.PropertyName, UpdateSourceTrigger=PropertyChanged}"
                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Left"
-                                   Height="30"  Margin="-2 5" Background="{StaticResource Style3}" />
+                                   Height="30" Margin="-2 5" Background="{StaticResource Style3}" />
 
                             <hc:NumericUpDown
-                                Grid.Column="1" Value="{Binding Path=Value1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                Grid.Column="1"
+                                Value="{Binding Path=Value1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                 Height="30" Margin="-2 5" Background="{StaticResource Style3}" />
 
-                            <Label Grid.Column="2" Content="{Binding Path=Prop.Unit.UnitName, UpdateSourceTrigger=PropertyChanged}"
-                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-                               Height="30"  Margin="-2 5" Background="{StaticResource Style3}" />
+                            <Label Grid.Column="2"
+                                   Content="{Binding Path=Prop.Unit.UnitName, UpdateSourceTrigger=PropertyChanged}"
+                                   HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                   Height="30" Margin="-2 5" Background="{StaticResource Style3}" />
 
                         </Grid>
                     </DataTemplate>
@@ -90,11 +95,12 @@
 
         <Grid Row="1" Background="{StaticResource Style1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="140" Command="{Binding SaveChanges}" hc:BorderElement.CornerRadius="10" 
-                        Margin="0,0,5,0" Background="{StaticResource Style3}" >
+                <Button Width="140" Command="{Binding SaveChanges}" hc:BorderElement.CornerRadius="10"
+                        Margin="0,0,5,0" Background="{StaticResource Style3}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/resources/ok.png"  RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0"/>
-                        <TextBlock Text="Применить"/>
+                        <Image Source="pack://application:,,,/resources/ok.png"
+                               RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0" />
+                        <TextBlock Text="Применить" />
                     </StackPanel>
                 </Button>
             </StackPanel>

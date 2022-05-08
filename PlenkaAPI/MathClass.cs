@@ -83,7 +83,7 @@ namespace PlenkaAPI
     {
         public MathClass(CalculationParameters cp)
         {
-            this.Cp = cp;
+            Cp = cp;
         }
 
 

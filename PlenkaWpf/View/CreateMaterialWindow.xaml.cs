@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-using PlenkaWpf.VM;
+﻿using PlenkaWpf.VM;
 
 
 namespace PlenkaWpf.View

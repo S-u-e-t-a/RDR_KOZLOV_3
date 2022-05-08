@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+
 using PlenkaAPI.Models;
+
 
 namespace PlenkaAPI.Data
 {
-    public partial class MembraneContext : DbContext
+    public class MembraneContext : DbContext
     {
         public MembraneContext()
         {
@@ -38,7 +39,7 @@ namespace PlenkaAPI.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlite("DataSource=Membrane.db");
             }
         }
@@ -52,7 +53,7 @@ namespace PlenkaAPI.Data
                 entity.ToTable("default_properties");
 
                 entity.HasIndex(e => e.DfId, "IX_default_properties_df_id")
-                    .IsUnique();
+                      .IsUnique();
 
                 entity.Property(e => e.DfId).HasColumnName("df_id");
 
@@ -61,12 +62,12 @@ namespace PlenkaAPI.Data
                 entity.Property(e => e.TypeId).HasColumnName("type_id");
 
                 entity.HasOne(d => d.Prop)
-                    .WithMany(p => p.DefaultProperties)
-                    .HasForeignKey(d => d.PropId);
+                      .WithMany(p => p.DefaultProperties)
+                      .HasForeignKey(d => d.PropId);
 
                 entity.HasOne(d => d.Type)
-                    .WithMany(p => p.DefaultProperties)
-                    .HasForeignKey(d => d.TypeId);
+                      .WithMany(p => p.DefaultProperties)
+                      .HasForeignKey(d => d.TypeId);
             });
 
             modelBuilder.Entity<MembraneObject>(entity =>
@@ -76,22 +77,22 @@ namespace PlenkaAPI.Data
                 entity.ToTable("membrane_object");
 
                 entity.HasIndex(e => e.ObId, "IX_membrane_object_ob_id")
-                    .IsUnique();
+                      .IsUnique();
 
                 entity.HasIndex(e => e.ObName, "IX_membrane_object_ob_name")
-                    .IsUnique();
+                      .IsUnique();
 
                 entity.Property(e => e.ObId).HasColumnName("ob_id");
 
                 entity.Property(e => e.ObName)
-                    .IsRequired()
-                    .HasColumnName("ob_name");
+                      .IsRequired()
+                      .HasColumnName("ob_name");
 
                 entity.Property(e => e.TypeId).HasColumnName("type_id");
 
                 entity.HasOne(d => d.Type)
-                    .WithMany(p => p.MembraneObjects)
-                    .HasForeignKey(d => d.TypeId);
+                      .WithMany(p => p.MembraneObjects)
+                      .HasForeignKey(d => d.TypeId);
             });
 
             modelBuilder.Entity<ObjectType>(entity =>
@@ -101,13 +102,13 @@ namespace PlenkaAPI.Data
                 entity.ToTable("object_type");
 
                 entity.HasIndex(e => e.TypeId, "IX_object_type_type_id")
-                    .IsUnique();
+                      .IsUnique();
 
                 entity.Property(e => e.TypeId).HasColumnName("type_id");
 
                 entity.Property(e => e.TypeName)
-                    .IsRequired()
-                    .HasColumnName("type_name");
+                      .IsRequired()
+                      .HasColumnName("type_name");
             });
 
             modelBuilder.Entity<Property>(entity =>
@@ -117,19 +118,19 @@ namespace PlenkaAPI.Data
                 entity.ToTable("property");
 
                 entity.HasIndex(e => e.ProperrtyId, "IX_property_properrty_id")
-                    .IsUnique();
+                      .IsUnique();
 
                 entity.Property(e => e.ProperrtyId).HasColumnName("properrty_id");
 
                 entity.Property(e => e.PropertyName)
-                    .IsRequired()
-                    .HasColumnName("property_name");
+                      .IsRequired()
+                      .HasColumnName("property_name");
 
                 entity.Property(e => e.UnitId).HasColumnName("unit_id");
 
                 entity.HasOne(d => d.Unit)
-                    .WithMany(p => p.Properties)
-                    .HasForeignKey(d => d.UnitId);
+                      .WithMany(p => p.Properties)
+                      .HasForeignKey(d => d.UnitId);
             });
 
             modelBuilder.Entity<Unit>(entity =>
@@ -137,13 +138,13 @@ namespace PlenkaAPI.Data
                 entity.ToTable("unit");
 
                 entity.HasIndex(e => e.UnitId, "IX_unit_unit_id")
-                    .IsUnique();
+                      .IsUnique();
 
                 entity.Property(e => e.UnitId).HasColumnName("unit_id");
 
                 entity.Property(e => e.UnitName)
-                    .IsRequired()
-                    .HasColumnName("unit_name");
+                      .IsRequired()
+                      .HasColumnName("unit_name");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -151,26 +152,26 @@ namespace PlenkaAPI.Data
                 entity.ToTable("user");
 
                 entity.HasIndex(e => e.UserId, "IX_user_user_id")
-                    .IsUnique();
+                      .IsUnique();
 
                 entity.HasIndex(e => e.UserName, "IX_user_user_name")
-                    .IsUnique();
+                      .IsUnique();
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
                 entity.Property(e => e.UserName)
-                    .IsRequired()
-                    .HasColumnName("user_name");
+                      .IsRequired()
+                      .HasColumnName("user_name");
 
                 entity.Property(e => e.UserPassword)
-                    .IsRequired()
-                    .HasColumnName("user_password");
+                      .IsRequired()
+                      .HasColumnName("user_password");
 
                 entity.Property(e => e.UserTypeId).HasColumnName("user_type_id");
 
                 entity.HasOne(d => d.UserType)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.UserTypeId);
+                      .WithMany(p => p.Users)
+                      .HasForeignKey(d => d.UserTypeId);
             });
 
             modelBuilder.Entity<UserType>(entity =>
@@ -178,21 +179,21 @@ namespace PlenkaAPI.Data
                 entity.ToTable("user_type");
 
                 entity.HasIndex(e => e.UserTypeId, "IX_user_type_user_type_id")
-                    .IsUnique();
+                      .IsUnique();
 
                 entity.HasIndex(e => e.UserTypeName, "IX_user_type_user_type_name")
-                    .IsUnique();
+                      .IsUnique();
 
                 entity.Property(e => e.UserTypeId).HasColumnName("user_type_id");
 
                 entity.Property(e => e.UserTypeName)
-                    .IsRequired()
-                    .HasColumnName("user_type_name");
+                      .IsRequired()
+                      .HasColumnName("user_type_name");
             });
 
             modelBuilder.Entity<Value>(entity =>
             {
-                entity.HasKey(e => new { e.MatId, e.PropId });
+                entity.HasKey(e => new {e.MatId, e.PropId,});
 
                 entity.ToTable("value");
 
@@ -203,17 +204,20 @@ namespace PlenkaAPI.Data
                 entity.Property(e => e.Value1).HasColumnName("value");
 
                 entity.HasOne(d => d.Mat)
-                    .WithMany(p => p.Values)
-                    .HasForeignKey(d => d.MatId);
+                      .WithMany(p => p.Values)
+                      .HasForeignKey(d => d.MatId);
 
                 entity.HasOne(d => d.Prop)
-                    .WithMany(p => p.Values)
-                    .HasForeignKey(d => d.PropId);
+                      .WithMany(p => p.Values)
+                      .HasForeignKey(d => d.PropId);
             });
 
             OnModelCreatingPartial(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        private void OnModelCreatingPartial(ModelBuilder modelBuilder)
+        {
+            //throw new NotImplementedException();
+        }
     }
 }

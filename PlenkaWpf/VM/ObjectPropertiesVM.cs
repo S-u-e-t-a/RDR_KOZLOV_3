@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 using PlenkaAPI.Data;
@@ -20,84 +16,87 @@ namespace PlenkaWpf.VM
     internal class ObjectPropertiesVM : ViewModelBase
 
     {
-        #region Functions
+    #region Functions
 
-        #region Constructors
+    #region Constructors
 
-            public ObjectPropertiesVM()
-            {
-                MembraneObjectTypes = _db.ObjectTypes.Local.ToObservableCollection();
+        public ObjectPropertiesVM()
+        {
+            MembraneObjectTypes = _db.ObjectTypes.Local.ToObservableCollection();
         }
 
     #endregion
 
-        #endregion
+    #endregion
 
-        #region Properties
 
-            private static MembraneContext _db = DbContextSingleton.GetInstance();
+    #region Properties
+
+        private static readonly MembraneContext _db = DbContextSingleton.GetInstance();
         public ObjectType SelectedType { get; set; }
 
         public ObservableCollection<ObjectType> MembraneObjectTypes { get; set; }
-        #endregion
 
-        #region Commands
+    #endregion
 
-            private RelayCommand _addNewObjectType;
 
-            /// <summary>
-            ///     Команда, открывающая окно создания пользователя
-            /// </summary>
-            public RelayCommand AddObjectType
+    #region Commands
+
+        private RelayCommand _addNewObjectType;
+
+        /// <summary>
+        ///     Команда, открывающая окно создания пользователя
+        /// </summary>
+        public RelayCommand AddObjectType
+        {
+            get
             {
-                get
+                return _addNewObjectType ??= new RelayCommand(o =>
                 {
-                    return _addNewObjectType ??= new RelayCommand(o =>
-                    {
-                        ShowChildWindow(new SelectProperties(new ObjectType()));
-                    });
-                }
+                    ShowChildWindow(new SelectProperties(new ObjectType()));
+                });
             }
+        }
 
-            private RelayCommand _editObjectType;
+        private RelayCommand _editObjectType;
 
-            /// <summary>
-            ///     Команда, открывающая окно редактирования пользователя
-            /// </summary>
-            public RelayCommand EditObjectType
+        /// <summary>
+        ///     Команда, открывающая окно редактирования пользователя
+        /// </summary>
+        public RelayCommand EditObjectType
+        {
+            get
             {
-                get
+                return _editObjectType ??= new RelayCommand(o =>
                 {
-                    return _editObjectType ??= new RelayCommand(o =>
-                    {
-                        ShowChildWindow(new SelectProperties(SelectedType));
-                    },_=> SelectedType!=null);
-                }
+                    ShowChildWindow(new SelectProperties(SelectedType));
+                }, _ => SelectedType != null);
             }
+        }
 
-            private RelayCommand _deleteObjectType;
+        private RelayCommand _deleteObjectType;
 
-            /// <summary>
-            ///     Команда, удаляющая пользователя
-            /// </summary>
-            public RelayCommand DeleteObjectType
+        /// <summary>
+        ///     Команда, удаляющая пользователя
+        /// </summary>
+        public RelayCommand DeleteObjectType
+        {
+            get
             {
-                get
+                return _deleteObjectType ??= new RelayCommand(o =>
                 {
-                    return _deleteObjectType ??= new RelayCommand(o =>
+                    if (MessageBox.Show($"Вы действительно хотите удалить тип объекта \"{SelectedType.TypeName}\" и все объекты связанные с ним?" +
+                                        $"\nСвязанные объекты:\n{string.Join("\n", _db.MembraneObjects.Where(mo => mo.Type == SelectedType).Select(mo => mo.ObName))}",
+                                        "Удаление типа объекта", MessageBoxButton.YesNo, MessageBoxImage.Warning) ==
+                        MessageBoxResult.Yes)
                     {
-                        if (MessageBox.Show($"Вы действительно хотите удалить тип объекта \"{SelectedType.TypeName}\" и все объекты связанные с ним?"+
-                                            $"\nСвязанные объекты:\n{String.Join("\n", _db.MembraneObjects.Where(mo=> mo.Type==SelectedType).Select(mo=>mo.ObName))}",
-                                            "Удаление типа объекта", MessageBoxButton.YesNo, MessageBoxImage.Warning) ==
-                            MessageBoxResult.Yes)
-                        {
-                            _db.ObjectTypes.Remove(SelectedType);
-                            _db.SaveChanges();
-                        }
-                    },_ => SelectedType != null);
-                }
+                        _db.ObjectTypes.Remove(SelectedType);
+                        _db.SaveChanges();
+                    }
+                }, _ => SelectedType != null);
             }
+        }
 
-        #endregion
+    #endregion
     }
 }

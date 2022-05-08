@@ -46,7 +46,12 @@ namespace PlenkaWpf.VM
 
         public SelectPropertiesVm(ObjectType objectType)
         {
-            TempObjectType = new ObjectType(){TypeId = objectType.TypeId, TypeName = objectType.TypeName, DefaultProperties = objectType.DefaultProperties, MembraneObjects = objectType.MembraneObjects};
+            TempObjectType = new ObjectType
+            {
+                TypeId = objectType.TypeId, TypeName = objectType.TypeName, DefaultProperties = objectType.DefaultProperties,
+                MembraneObjects = objectType.MembraneObjects,
+            };
+
             editingObjectType = objectType;
             AvailableProperties = _db.Properties.ToList();
             AvailableProperties = AvailableProperties.Except(ObjectTypeProperties).ToList();
@@ -60,7 +65,7 @@ namespace PlenkaWpf.VM
 
     #region Properties
 
-        private ObjectType editingObjectType;
+        private readonly ObjectType editingObjectType;
 
         private readonly MembraneContext _db = DbContextSingleton.GetInstance();
         public ObservableCollection<Property> AllProperties { get; set; }
@@ -98,7 +103,8 @@ namespace PlenkaWpf.VM
 
                     foreach (var property in _propertiesToDelete)
                     {
-                        if (_db.Values.Count(v => v.Prop == property && v.Mat.Type == TempObjectType && v.Value1 != null) != 0) //если есть заполненные записи с таким типом объекта и свойством в таблице значений
+                        if (_db.Values.Count(v => v.Prop == property && v.Mat.Type == TempObjectType && v.Value1 != null) !=
+                            0) //если есть заполненные записи с таким типом объекта и свойством в таблице значений
                         {
                             unableToDelete.Add(property.PropertyName);
                         }
@@ -107,7 +113,7 @@ namespace PlenkaWpf.VM
                     if (unableToDelete.Count != 0)
                     {
                         var res = MessageBox.Show("В базе найдены объекты, у которых есть есть удаляемые свойства." +
-                                                  $" Вы хотите продолжить операцию? В результате будут удалены все записи с этими свойствами: \n{String.Join("\n",unableToDelete)}",
+                                                  $" Вы хотите продолжить операцию? В результате будут удалены все записи с этими свойствами: \n{string.Join("\n", unableToDelete)}",
                                                   "Осторожно!",
                                                   MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
@@ -119,7 +125,8 @@ namespace PlenkaWpf.VM
 
                     foreach (var property in _propertiesToDelete) // удаляем свойства
                     {
-                        _db.DefaultProperties.Remove(_db.DefaultProperties.Single(df => df.TypeId == TempObjectType.TypeId && df.PropId == property.ProperrtyId));
+                        _db.DefaultProperties.Remove(_db.DefaultProperties.Single(df => df.TypeId == TempObjectType.TypeId &&
+                                                                                        df.PropId == property.ProperrtyId));
 
                         foreach (var membraneObject in TempObjectType.MembraneObjects)
                         {
@@ -129,9 +136,11 @@ namespace PlenkaWpf.VM
 
                     foreach (var property in _propertiesToAdd) // добавляем новые свойства
                     {
-                        if (_db.DefaultProperties.Count(df => df.PropId==property.ProperrtyId && df.TypeId==TempObjectType.TypeId)==0 )
+                        if (_db.DefaultProperties.Count(df => df.PropId == property.ProperrtyId && df.TypeId == TempObjectType.TypeId) == 0)
                         {
-                            TempObjectType.DefaultProperties.Add(new DefaultProperty(){PropId = property.ProperrtyId});
+                            TempObjectType.DefaultProperties.Add(new DefaultProperty
+                                                                     {PropId = property.ProperrtyId,});
+
                             //_db.DefaultProperties.Add(new DefaultProperty() {PropId = property.ProperrtyId, TypeId = TempObjectType.TypeId});
                         }
 
@@ -139,7 +148,8 @@ namespace PlenkaWpf.VM
                         {
                             if (_db.Values.Count(v => v.Mat == membraneObject && v.Prop == property) == 0)
                             {
-                                _db.Values.Add(new Value() {Mat = membraneObject, Prop = property});
+                                _db.Values.Add(new Value
+                                                   {Mat = membraneObject, Prop = property,});
                             }
                         }
                     }
@@ -147,20 +157,21 @@ namespace PlenkaWpf.VM
 
                     editingObjectType.MembraneObjects = TempObjectType.MembraneObjects;
                     editingObjectType.DefaultProperties = TempObjectType.DefaultProperties;
-                    editingObjectType.TypeId=TempObjectType.TypeId;
-                    editingObjectType.TypeName=TempObjectType.TypeName;
+                    editingObjectType.TypeId = TempObjectType.TypeId;
+                    editingObjectType.TypeName = TempObjectType.TypeName;
 
-                    if (!_db.ObjectTypes.Contains(editingObjectType)) 
+                    if (!_db.ObjectTypes.Contains(editingObjectType))
                     {
                         _db.ObjectTypes.Add(editingObjectType);
                     }
+
                     //foreach (var mo in _db.MembraneObjects.Where(mo => mo.TypeId==editingObjectType.TypeId))
                     //{
                     //    _db.Values.Add(new Value(){Mat = mo, Prop = })
                     //}
                     _db.SaveChanges();
                     OnClosingRequest();
-                }); 
+                });
             }
         }
 

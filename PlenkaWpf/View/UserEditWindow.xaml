@@ -1,21 +1,23 @@
 ﻿<hc:Window x:Class="PlenkaWpf.View.UserEditWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
-        xmlns:vm="clr-namespace:PlenkaWpf.VM"
-        mc:Ignorable="d"
-        Title="Пользователь" Height="320" Width="285"
-        d:DataContext="{d:DesignInstance vm:UserEditVm}"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:hc="https://handyorg.github.io/handycontrol"
+           xmlns:vm="clr-namespace:PlenkaWpf.VM"
+           mc:Ignorable="d"
+           Title="Пользователь" Height="320" Width="285"
+           d:DataContext="{d:DesignInstance vm:UserEditVm}"
            NonClientAreaBackground="{StaticResource Style4}"
-        ShowTitle="False"
-        WindowStartupLocation="CenterScreen">
+           ShowTitle="False"
+           WindowStartupLocation="CenterScreen">
     <hc:Window.NonClientAreaContent>
         <StackPanel Orientation="Horizontal">
-            <Image Source="pack://application:,,,/resources/logo.png" Height="20" Margin="3" RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Image Source="pack://application:,,,/resources/logo.png" Height="20" Margin="3"
+                   RenderOptions.BitmapScalingMode="HighQuality" />
             <TextBlock Text="{Binding Title,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"
-                       Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Margin="5" FontSize="14" VerticalAlignment="Stretch"/>
+                       Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"
+                       Margin="5" FontSize="14" VerticalAlignment="Stretch" />
         </StackPanel>
 
     </hc:Window.NonClientAreaContent>
@@ -41,16 +43,20 @@
         </StackPanel>
         <Grid Row="1" Background="{StaticResource Style1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button hc:BorderElement.CornerRadius="10"  Width="100" Margin="5" Command="{Binding SaveUser}" Background="{StaticResource Style3}">
+                <Button hc:BorderElement.CornerRadius="10" Width="100" Margin="5" Command="{Binding SaveUser}"
+                        Background="{StaticResource Style3}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/resources/ok.png"  RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0"/>
-                        <TextBlock Text="Ок"/>
+                        <Image Source="pack://application:,,,/resources/ok.png"
+                               RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0" />
+                        <TextBlock Text="Ок" />
                     </StackPanel>
                 </Button>
-                <Button Width="100" Margin="5" hc:BorderElement.CornerRadius="10"  Command="{Binding CloseWindow}" Background="{StaticResource Style3}">
+                <Button Width="100" Margin="5" hc:BorderElement.CornerRadius="10" Command="{Binding CloseWindow}"
+                        Background="{StaticResource Style3}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/resources/cancel.png"  RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0"/>
-                        <TextBlock Text="Отмена"/>
+                        <Image Source="pack://application:,,,/resources/cancel.png"
+                               RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0" />
+                        <TextBlock Text="Отмена" />
                     </StackPanel>
                 </Button>
             </StackPanel>
