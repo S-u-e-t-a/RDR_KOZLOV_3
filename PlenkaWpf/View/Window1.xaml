@@ -25,27 +25,27 @@
         <Menu x:Key="Menu" Grid.Row="0" Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Grid.ColumnSpan="3">
             <MenuItem Header="Файл">
                 <MenuItem.Icon>
-                    <Image Source="pack://application:,,,/resources/file.png" />
+                    <Image Source="pack://application:,,,/resources/icons/file.png" />
                 </MenuItem.Icon>
                 <MenuItem Header="Экспортировать результаты" Click="MenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/save.png" />
+                        <Image Source="pack://application:,,,/resources/icons/save.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Сменить учётную запись" Click="ChangeUser">
                     <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/user.png" />
+                        <Image Source="pack://application:,,,/resources/icons/user.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Выход">
                     <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/exit.png" />
+                        <Image Source="pack://application:,,,/resources/icons/exit.png" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem.Icon>
-                    <Image Source="pack://application:,,,/resources/info.png" />
+                    <Image Source="pack://application:,,,/resources/icons/info.png" />
                 </MenuItem.Icon>
             </MenuItem>
         </Menu>
