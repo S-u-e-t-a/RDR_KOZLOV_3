@@ -13,11 +13,11 @@ using PlenkaWpf.VM;
 namespace PlenkaWpf.View
 {
     /// <summary>
-    ///     Логика взаимодействия для MainAdminPanel.xaml
+    ///     Логика взаимодействия для MainAdminControl.xaml
     /// </summary>
-    public partial class MainAdminPanel : UserControl, IСhangeableControl
+    public partial class MainAdminControl : UserControl, IСhangeableControl
     {
-        public MainAdminPanel()
+        public MainAdminControl()
         {
             InitializeComponent();
             DbContextSingleton.GetInstance().SavedChanges -= NotifyDbUpdated;
@@ -44,7 +44,7 @@ namespace PlenkaWpf.View
 
         private void ChangeUser(object sender, RoutedEventArgs e)
         {
-            OnChangingRequest(new LoginWindow());
+            OnChangingRequest(new LoginControl());
         }
     }
 }

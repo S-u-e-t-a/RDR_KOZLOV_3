@@ -7,7 +7,7 @@
            xmlns:vm="clr-namespace:PlenkaWpf.VM"
            mc:Ignorable="d"
            Title="Пользователь" Height="320" Width="285"
-           d:DataContext="{d:DesignInstance vm:UserEditVm}"
+           d:DataContext="{d:DesignInstance vm:UserEditVM}"
            NonClientAreaBackground="{StaticResource Style4}"
            ShowTitle="False"
            WindowStartupLocation="CenterScreen">

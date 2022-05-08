@@ -11,9 +11,9 @@ namespace PlenkaWpf.View
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LoginWindow : UserControl, IСhangeableControl
+    public partial class LoginControl : UserControl, IСhangeableControl
     {
-        public LoginWindow()
+        public LoginControl()
         {
             InitializeComponent();
             var con = DbContextSingleton.GetInstance();
@@ -33,12 +33,12 @@ namespace PlenkaWpf.View
 
         private void Button_Click(object sender, RoutedEventArgs e) //todo убрать заглушку
         {
-            OnChangingRequest(new MainAdminPanel());
+            OnChangingRequest(new MainAdminControl());
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            OnChangingRequest(new Window1());
+            OnChangingRequest(new ResearcherControl());
         }
     }
 }

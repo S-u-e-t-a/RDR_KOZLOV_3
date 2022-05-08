@@ -6,14 +6,14 @@ using PlenkaWpf.VM;
 namespace PlenkaWpf.View
 {
     /// <summary>
-    ///     Interaction logic for SelectProperties.xaml
+    ///     Interaction logic for SelectPropertiesWindow.xaml
     /// </summary>
-    public partial class SelectProperties
+    public partial class SelectPropertiesWindow
     {
-        public SelectProperties(ObjectType ot)
+        public SelectPropertiesWindow(ObjectType ot)
         {
             InitializeComponent();
-            var vm = new SelectPropertiesVm(ot);
+            var vm = new SelectPropertiesWindowVM(ot);
             DataContext = vm;
             vm.ClosingRequest += (sender, e) => Close();
         }

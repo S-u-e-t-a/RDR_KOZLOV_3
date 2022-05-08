@@ -10,13 +10,13 @@ using PlenkaWpf.Utils;
 
 namespace PlenkaWpf.VM
 {
-    public class CreatePropertyVm : ViewModelBase
+    public class CreatePropertyVM : ViewModelBase
     {
     #region Functions
 
     #region Constructors
 
-        public CreatePropertyVm(Property property)
+        public CreatePropertyVM(Property property)
         {
             EditingProperty = property;
 

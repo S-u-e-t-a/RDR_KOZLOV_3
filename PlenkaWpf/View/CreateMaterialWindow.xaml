@@ -7,7 +7,7 @@
            xmlns:vm="clr-namespace:PlenkaWpf.VM"
            mc:Ignorable="d"
            Title="Добавление материала" Height="190" Width="400"
-           d:DataContext="{d:DesignInstance vm:CreateMaterialVm}"
+           d:DataContext="{d:DesignInstance vm:CreateMaterialVM}"
            NonClientAreaBackground="{StaticResource Style4}"
            ShowTitle="False"
            WindowStartupLocation="CenterScreen">

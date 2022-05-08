@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PlenkaWpf.View.Window1"
+﻿<UserControl x:Class="PlenkaWpf.View.ResearcherControl"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,7 +8,7 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:plenkaWpf="clr-namespace:PlenkaWpf"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance vm:Window1Vm}"
+             d:DataContext="{d:DesignInstance vm:ResearcherControlVM}"
              FontSize="14">
     <!--WindowState="Maximized"
     Title="Программный комплекс для исследования неизотермического течения аномально-вязких материалов"-->

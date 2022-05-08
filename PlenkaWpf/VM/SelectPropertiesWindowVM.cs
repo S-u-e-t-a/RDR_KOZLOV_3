@@ -38,13 +38,13 @@ namespace PlenkaWpf.VM
     }
 
 
-    public class SelectPropertiesVm : ViewModelBase
+    public class SelectPropertiesWindowVM : ViewModelBase
     {
     #region Functions
 
     #region Constructors
 
-        public SelectPropertiesVm(ObjectType objectType)
+        public SelectPropertiesWindowVM(ObjectType objectType)
         {
             TempObjectType = new ObjectType
             {

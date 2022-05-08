@@ -8,13 +8,13 @@ using PlenkaWpf.Utils;
 
 namespace PlenkaWpf.VM
 {
-    public class MaterialEditVm : ViewModelBase
+    public class MaterialEditWindowVm : ViewModelBase
     {
     #region Functions
 
     #region Constructors
 
-        public MaterialEditVm(MembraneObject material)
+        public MaterialEditWindowVm(MembraneObject material)
         {
             Material = material;
             Values = Material.Values;

@@ -9,27 +9,27 @@ using PlenkaWpf.VM;
 namespace PlenkaWpf.View
 {
     /// <summary>
-    ///     Логика взаимодействия для MaterialExplorer.xaml
+    ///     Логика взаимодействия для MaterialExplorerControl.xaml
     /// </summary>
-    public partial class MaterialExplorer : UserControl
+    public partial class MaterialExplorerControl : UserControl
     {
-        public MaterialExplorer()
+        public MaterialExplorerControl()
         {
             InitializeComponent();
-            DataContext = new MaterialExplorerVm();
+            DataContext = new MaterialExplorerControlVm();
         }
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var win = new MaterialEdit((DataContext as MaterialExplorerVm).SelectedMemObject);
+            var win = new MaterialEditWindow((DataContext as MaterialExplorerControlVm).SelectedMemObject);
             win.ShowDialog();
         }
 
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            var win = new MaterialEdit(new MembraneObject());
+            var win = new MaterialEditWindow(new MembraneObject());
             win.ShowDialog();
         }
     }

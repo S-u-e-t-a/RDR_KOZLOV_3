@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PlenkaWpf.View.MainAdminPanel"
+﻿<UserControl x:Class="PlenkaWpf.View.MainAdminControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -28,13 +28,13 @@
                     Style="{StaticResource TabControlInLine}"
                     Background="{StaticResource Style3}">
             <TabItem Header="Редактирование объектов" Background="{StaticResource Style2}">
-                <view:MaterialExplorer />
+                <view:MaterialExplorerControl />
             </TabItem>
             <TabItem Header="Редактирование пользователей" Background="{StaticResource Style2}">
-                <view:UserExplorer />
+                <view:UserExplorerControl />
             </TabItem>
             <TabItem Header="Редактирование типов объектов" Background="{StaticResource Style2}">
-                <view:ObjectProperties />
+                <view:ObjectPropertiesControl />
             </TabItem>
         </TabControl>
     </Grid>

@@ -6,14 +6,14 @@ using PlenkaWpf.VM;
 namespace PlenkaWpf.View
 {
     /// <summary>
-    ///     Логика взаимодействия для MaterialEdit.xaml
+    ///     Логика взаимодействия для MaterialEditWindow.xaml
     /// </summary>
-    public partial class MaterialEdit
+    public partial class MaterialEditWindow
     {
-        public MaterialEdit(MembraneObject material)
+        public MaterialEditWindow(MembraneObject material)
         {
             InitializeComponent();
-            var vm = new MaterialEditVm(material);
+            var vm = new MaterialEditWindowVm(material);
             DataContext = vm;
             vm.ClosingRequest += (sender, e) => Close();
         }

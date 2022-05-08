@@ -13,14 +13,14 @@ using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace PlenkaWpf.VM
 {
-    internal class ObjectPropertiesVM : ViewModelBase
+    internal class ObjectPropertiesControlVM : ViewModelBase
 
     {
     #region Functions
 
     #region Constructors
 
-        public ObjectPropertiesVM()
+        public ObjectPropertiesControlVM()
         {
             MembraneObjectTypes = _db.ObjectTypes.Local.ToObservableCollection();
         }
@@ -53,7 +53,7 @@ namespace PlenkaWpf.VM
             {
                 return _addNewObjectType ??= new RelayCommand(o =>
                 {
-                    ShowChildWindow(new SelectProperties(new ObjectType()));
+                    ShowChildWindow(new SelectPropertiesWindow(new ObjectType()));
                 });
             }
         }
@@ -69,7 +69,7 @@ namespace PlenkaWpf.VM
             {
                 return _editObjectType ??= new RelayCommand(o =>
                 {
-                    ShowChildWindow(new SelectProperties(SelectedType));
+                    ShowChildWindow(new SelectPropertiesWindow(SelectedType));
                 }, _ => SelectedType != null);
             }
         }

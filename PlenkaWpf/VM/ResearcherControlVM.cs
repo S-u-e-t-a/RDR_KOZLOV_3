@@ -21,7 +21,7 @@ namespace PlenkaWpf.VM
     /// <summary>
     ///     VM для окна исследователя
     /// </summary>
-    internal class Window1Vm : ViewModelBase
+    internal class ResearcherControlVM : ViewModelBase
 
     {
         public List<int> ErrorList { get; set; }
@@ -31,7 +31,7 @@ namespace PlenkaWpf.VM
 
     #region Constructors
 
-        public Window1Vm()
+        public ResearcherControlVM()
         {
             Materials = DbContextSingleton.GetInstance().MembraneObjects.Where(o => o.Type.TypeName == "Материал").ToList();
             Material = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Полистирол");

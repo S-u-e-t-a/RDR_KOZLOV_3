@@ -21,14 +21,14 @@ using Separator = LiveCharts.Wpf.Separator;
 namespace PlenkaWpf.View
 {
     /// <summary>
-    ///     Логика взаимодействия для Window1.xaml
+    ///     Логика взаимодействия для ResearcherControl.xaml
     /// </summary>
-    public partial class Window1 : UserControl, IСhangeableControl
+    public partial class ResearcherControl : UserControl, IСhangeableControl
     {
-        public Window1()
+        public ResearcherControl()
         {
             InitializeComponent();
-            var vm = new Window1Vm();
+            var vm = new ResearcherControlVM();
             DataContext = vm;
 
             //vm.ClosingRequest += (sender, e) => Close();
@@ -138,14 +138,14 @@ namespace PlenkaWpf.View
 
             if (res == true)
             {
-                if ((DataContext as Window1Vm).IsCalculated)
+                if ((DataContext as ResearcherControlVM).IsCalculated)
                 {
                     var tempChartBitMap = ChartToBitmap(tempChart);
 
                     var nChartBitMap = ChartToBitmap(nChart);
 
 
-                    FileSystem.ExportPdf(dlg.FileName, tempChartBitMap, nChartBitMap, (DataContext as Window1Vm).MathClass);
+                    FileSystem.ExportPdf(dlg.FileName, tempChartBitMap, nChartBitMap, (DataContext as ResearcherControlVM).MathClass);
                 }
                 else
                 {
@@ -162,7 +162,7 @@ namespace PlenkaWpf.View
             }
             else
             {
-                (DataContext as Window1Vm).CalcCommand.Execute(null);
+                (DataContext as ResearcherControlVM).CalcCommand.Execute(null);
             }
         }
 
@@ -184,7 +184,7 @@ namespace PlenkaWpf.View
 
         private void ChangeUser(object sender, RoutedEventArgs e)
         {
-            OnChangingRequest(new LoginWindow());
+            OnChangingRequest(new LoginControl());
         }
     }
 }

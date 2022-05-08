@@ -12,14 +12,14 @@ using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace PlenkaWpf.VM
 {
-    internal class UserExplorerVm : ViewModelBase
+    internal class UserExplorerControlVM : ViewModelBase
 
     {
     #region Functions
 
     #region Constructors
 
-        public UserExplorerVm()
+        public UserExplorerControlVM()
         {
             _db = DbContextSingleton.GetInstance();
             Users = _db.Users.Local.ToObservableCollection();

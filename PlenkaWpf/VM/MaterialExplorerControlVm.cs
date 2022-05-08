@@ -12,13 +12,13 @@ using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace PlenkaWpf.VM
 {
-    public class MaterialExplorerVm : ViewModelBase
+    public class MaterialExplorerControlVm : ViewModelBase
     {
     #region Functions
 
     #region Constructors
 
-        public MaterialExplorerVm()
+        public MaterialExplorerControlVm()
         {
             _db.SavedChanges += (sender, args) =>
             {
@@ -74,7 +74,7 @@ namespace PlenkaWpf.VM
             {
                 return _editMemObject ??= new RelayCommand(o =>
                                                            {
-                                                               ShowChildWindow(new MaterialEdit(SelectedMemObject));
+                                                               ShowChildWindow(new MaterialEditWindow(SelectedMemObject));
                                                            },
                                                            c => SelectedMemObject != null);
             }
