@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         Title="Выбор свойств" Height="450" Width="800"
         d:DataContext="{d:DesignInstance vm:SelectPropertiesVm}"
@@ -14,11 +15,15 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <ListBox ItemsSource="{Binding AllProperties}" SelectedItem="{Binding SelectedProperty}"
+        <hc:TextBox Margin="5" hc:InfoElement.Title="Имя типа объекта" hc:InfoElement.TitlePlacement="Left"
+                    Text="{Binding Path=TempObjectType.TypeName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    MinWidth="100" Background="{StaticResource Style3}" />
+        <ListBox Grid.Row="1" ItemsSource="{Binding AllProperties}" SelectedItem="{Binding SelectedProperty}"
                  Background="{StaticResource Style2}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -39,7 +44,7 @@
                         <CheckBox.IsChecked>
                             <MultiBinding Converter="{StaticResource ObjectInListConverter}" Mode="OneWay">
                                 <Binding />
-                                <Binding Path="DataContext.MaterialProperties">
+                                <Binding Path="DataContext.ObjectTypeProperties">
                                     <Binding.RelativeSource>
                                         <RelativeSource Mode="FindAncestor" AncestorType="{x:Type Window}" />
                                     </Binding.RelativeSource>
@@ -59,7 +64,7 @@
                 <DataGridTextColumn Header="Единица измерения" Binding="{Binding Unit.UnitName}" />
             </DataGrid.Columns>
         </DataGrid>-->
-        <Grid Row="1" Background="{StaticResource Style1}">
+        <Grid Row="2" Background="{StaticResource Style1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="CreateButton" Width="100" Content="Создать" Command="{Binding CreateProperty}"
                         Margin="0,0,5,0" Background="{StaticResource Style3}" />
