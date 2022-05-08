@@ -50,35 +50,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="resources\fonts\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="resources\cancel.png" />
-    <Resource Include="resources\delete.png" />
-    <Resource Include="resources\editing.png" />
-    <Resource Include="resources\exit.png">
+    <Resource Include="resources\icons\cancel.png" />
+    <Resource Include="resources\icons\delete.png" />
+    <Resource Include="resources\icons\editing.png" />
+    <Resource Include="resources\icons\exit.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\file.png">
+    <Resource Include="resources\icons\file.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\info.png">
+    <Resource Include="resources\icons\info.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\logo.png" />
-    <Resource Include="resources\ok.png" />
-    <Resource Include="resources\open.png">
+    <Resource Include="resources\icons\logo.png" />
+    <Resource Include="resources\icons\ok.png" />
+    <Resource Include="resources\icons\open.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\plus.png" />
-    <Resource Include="resources\save.png">
+    <Resource Include="resources\icons\plus.png" />
+    <Resource Include="resources\icons\save.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\Times_New_Roman.ttf">
+    <Resource Include="resources\fonts\Times_New_Roman.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="resources\user.png">
+    <Resource Include="resources\icons\user.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

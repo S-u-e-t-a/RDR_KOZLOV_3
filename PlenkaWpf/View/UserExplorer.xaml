@@ -37,7 +37,7 @@
                     <Button Width="100" Margin="5" hc:BorderElement.CornerRadius="10"
                             Command="{Binding AddNewUser}" Background="{StaticResource Style3}">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://application:,,,/resources/plus.png"
+                            <Image Source="pack://application:,,,/resources/icons/plus.png"
                                    RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12"
                                    Margin="0,0,5,0" />
                             <TextBlock Text="Добавить" />
@@ -46,7 +46,7 @@
                     <Button Width="100" Margin="5" hc:BorderElement.CornerRadius="10"
                             Command="{Binding EditUser}" Background="{StaticResource Style3}">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://application:,,,/resources/editing.png"
+                            <Image Source="pack://application:,,,/resources/icons/editing.png"
                                    RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12"
                                    Margin="0,0,5,0" />
                             <TextBlock Text="Изменить" />
@@ -55,7 +55,7 @@
                     <Button Width="100" Margin="5" hc:BorderElement.CornerRadius="10"
                             Command="{Binding DeleteUser}" Background="{StaticResource Style3}">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://application:,,,/resources/delete.png"
+                            <Image Source="pack://application:,,,/resources/icons/delete.png"
                                    RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12"
                                    Margin="0,0,5,0" />
                             <TextBlock Text="Удалить" />

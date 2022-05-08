@@ -13,7 +13,7 @@
            WindowStartupLocation="CenterScreen">
     <hc:Window.NonClientAreaContent>
         <StackPanel Orientation="Horizontal">
-            <Image Source="pack://application:,,,/resources/logo.png" Height="20" Margin="3"
+            <Image Source="pack://application:,,,/resources/icons/logo.png" Height="20" Margin="3"
                    RenderOptions.BitmapScalingMode="HighQuality" />
             <TextBlock Text="{Binding Title,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"
                        Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"
@@ -41,7 +41,7 @@
                         Command="{Binding SaveProperty}"
                         Background="{StaticResource Style3}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/resources/ok.png"
+                        <Image Source="pack://application:,,,/resources/icons/ok.png"
                                RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0" />
                         <TextBlock Text="Применить" />
                     </StackPanel>
@@ -50,7 +50,7 @@
                         Command="{Binding CloseWindow}"
                         Background="{StaticResource Style3}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/resources/cancel.png"
+                        <Image Source="pack://application:,,,/resources/icons/cancel.png"
                                RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0" />
                         <TextBlock Text="Отмена" />
                     </StackPanel>
