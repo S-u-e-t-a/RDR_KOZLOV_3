@@ -71,7 +71,7 @@ namespace PlenkaWpf.VM
                 return _editUser ??= new RelayCommand(o =>
                 {
                     ShowChildWindow(new UserEditWindow(SelectedUser));
-                });
+                },_ => SelectedUser != null);
             }
         }
 
@@ -93,7 +93,7 @@ namespace PlenkaWpf.VM
                         _db.Users.Remove(SelectedUser);
                         _db.SaveChanges();
                     }
-                });
+                }, _ => SelectedUser != null);
             }
         }
 

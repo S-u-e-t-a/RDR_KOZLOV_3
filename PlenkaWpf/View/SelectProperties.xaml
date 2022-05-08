@@ -87,13 +87,28 @@
         </DataGrid>-->
         <Grid Row="2" Background="{StaticResource Style1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="CreateButton" Width="100" Content="Создать" Command="{Binding CreateProperty}"
-                        Margin="0,0,5,0" Background="{StaticResource Style3}" />
-                <Button x:Name="AddButton" Width="100" Content="Применить"
+                <Button x:Name="CreateButton" Width="100" Command="{Binding CreateProperty}" hc:BorderElement.CornerRadius="10" 
+                        Margin="0,0,5,0" Background="{StaticResource Style3}" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/resources/plus.png"  RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0"/>
+                        <TextBlock Text="Создать"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="AddButton" Width="100" hc:BorderElement.CornerRadius="10" 
                         CommandParameter="{Binding ElementName=PropertyGrid, Path=SelectedItems}"
-                        Command="{Binding SelectProperties}" Background="{StaticResource Style3}" Margin="5,0,5,0" />
-                <Button x:Name="EditButton" Width="100" Content="Изменить" Command="{Binding EditProperty}"
-                        Background="{StaticResource Style3}" Margin="5,0,5,0" />
+                        Command="{Binding SelectProperties}" Background="{StaticResource Style3}" Margin="5,0,5,0" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/resources/ok.png"  RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0"/>
+                        <TextBlock Text="Применить"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="EditButton" Width="100" Command="{Binding EditProperty}" hc:BorderElement.CornerRadius="10" 
+                        Background="{StaticResource Style3}" Margin="5,0,5,0" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/resources/editing.png"  RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0"/>
+                        <TextBlock Text="Изменить"/>
+                    </StackPanel>
+                </Button>
 
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" />

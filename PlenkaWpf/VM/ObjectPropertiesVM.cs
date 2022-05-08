@@ -71,7 +71,7 @@ namespace PlenkaWpf.VM
                     return _editObjectType ??= new RelayCommand(o =>
                     {
                         ShowChildWindow(new SelectProperties(SelectedType));
-                    });
+                    },_=> SelectedType!=null);
                 }
             }
 
@@ -94,7 +94,7 @@ namespace PlenkaWpf.VM
                             _db.ObjectTypes.Remove(SelectedType);
                             _db.SaveChanges();
                         }
-                    });
+                    },_ => SelectedType != null);
                 }
             }
 

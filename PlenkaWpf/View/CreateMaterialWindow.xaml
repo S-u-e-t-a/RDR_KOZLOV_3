@@ -33,10 +33,20 @@
         </StackPanel>
         <Grid Grid.Row="1" Background="{StaticResource Style1}" Margin="0,10,0,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Ок" Width="100" Margin="5" Command="{Binding SaveMaterial}"
-                        Background="{StaticResource Style3}" />
-                <Button Content="Отмена" Width="100" Margin="5" Command="{Binding CloseWindow}"
-                        Background="{StaticResource Style3}" />
+                <Button Width="100" Margin="5" hc:BorderElement.CornerRadius="10"  Command="{Binding SaveMaterial}"
+                        Background="{StaticResource Style3}" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/resources/ok.png"  RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0"/>
+                        <TextBlock Text="Ок"/>
+                    </StackPanel>
+                </Button>
+                <Button Width="100" hc:BorderElement.CornerRadius="10"  Margin="5" Command="{Binding CloseWindow}"
+                        Background="{StaticResource Style3}" >
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/resources/cancel.png"  RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0"/>
+                        <TextBlock Text="Отмена"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </Grid>
     </Grid>
