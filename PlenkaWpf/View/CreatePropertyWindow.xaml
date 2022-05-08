@@ -1,4 +1,4 @@
-﻿<Window x:Class="PlenkaWpf.View.CreatePropertyWindow"
+﻿<hc:Window x:Class="PlenkaWpf.View.CreatePropertyWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,8 +8,17 @@
         mc:Ignorable="d"
         Title="Добавление свойства материала" Height="210" Width="300"
         d:DataContext="{d:DesignInstance vm1:CreatePropertyVm}"
+           NonClientAreaBackground="{StaticResource Style4}"
+        ShowTitle="False"
         WindowStartupLocation="CenterScreen">
+    <hc:Window.NonClientAreaContent>
+        <StackPanel Orientation="Horizontal">
+            <Image Source="pack://application:,,,/resources/logo.png" Height="20" Margin="3" RenderOptions.BitmapScalingMode="HighQuality"/>
+            <TextBlock Text="{Binding Title,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}"
+                       Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Margin="5" FontSize="14" VerticalAlignment="Stretch"/>
+        </StackPanel>
 
+    </hc:Window.NonClientAreaContent>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -33,4 +42,4 @@
             </StackPanel>
         </Grid>
     </Grid>
-</Window>
+</hc:Window>

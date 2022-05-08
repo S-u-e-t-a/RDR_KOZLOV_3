@@ -10,7 +10,7 @@ namespace PlenkaWpf.View
     /// <summary>
     ///     Логика взаимодействия для MaterialEdit.xaml
     /// </summary>
-    public partial class MaterialEdit : Window
+    public partial class MaterialEdit
     {
         public MaterialEdit(MembraneObject material)
         {

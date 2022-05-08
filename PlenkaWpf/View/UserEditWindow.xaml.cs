@@ -10,7 +10,7 @@ namespace PlenkaWpf.View
     /// <summary>
     ///     Логика взаимодействия для UserEditWindow.xaml
     /// </summary>
-    public partial class UserEditWindow : Window
+    public partial class UserEditWindow
     {
         public UserEditWindow(User user)
         {

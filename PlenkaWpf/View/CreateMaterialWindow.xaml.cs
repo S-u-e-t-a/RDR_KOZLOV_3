@@ -8,7 +8,7 @@ namespace PlenkaWpf.View
     /// <summary>
     ///     Логика взаимодействия для CreateMaterialWindow.xaml
     /// </summary>
-    public partial class CreateMaterialWindow : Window
+    public partial class CreateMaterialWindow
     {
         public CreateMaterialWindow()
         {

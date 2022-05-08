@@ -8,10 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Menu x:Key="Menu" Grid.Row="0" Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Grid.ColumnSpan="3">
-            <MenuItem Header="Файл">
-                <MenuItem.Icon>
-                    <Image Source="pack://application:,,,/resources/file.png" />
-                </MenuItem.Icon>
+            <MenuItem Header="Меню">
                 <MenuItem Header="Сменить учётную запись" Click="ChangeUser">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/resources/user.png" />
@@ -22,11 +19,6 @@
                         <Image Source="pack://application:,,,/resources/exit.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-            </MenuItem>
-            <MenuItem Header="Справка">
-                <MenuItem.Icon>
-                    <Image Source="pack://application:,,,/resources/info.png" />
-                </MenuItem.Icon>
             </MenuItem>
         </Menu>
     </UserControl.Resources>

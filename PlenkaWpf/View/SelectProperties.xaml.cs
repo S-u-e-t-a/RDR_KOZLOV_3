@@ -10,7 +10,7 @@ namespace PlenkaWpf.View
     /// <summary>
     ///     Interaction logic for SelectProperties.xaml
     /// </summary>
-    public partial class SelectProperties : Window
+    public partial class SelectProperties
     {
         public SelectProperties(ObjectType ot)
         {

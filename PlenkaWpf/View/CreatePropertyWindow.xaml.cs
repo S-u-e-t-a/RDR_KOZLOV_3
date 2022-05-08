@@ -10,7 +10,7 @@ namespace PlenkaWpf.View
     /// <summary>
     ///     Interaction logic for CreatePropertyWindow.xaml
     /// </summary>
-    public partial class CreatePropertyWindow : Window
+    public partial class CreatePropertyWindow
     {
         public CreatePropertyWindow(Property property)
         {
