@@ -66,7 +66,7 @@ namespace PlenkaWpf.Utils
             var document = new Document(pdf);
 
             //Trace.WriteLine($"-----------------------------------{Directory.GetCurrentDirectory()}");
-            var fontFilename = "../../../resources/Times_New_Roman.ttf";
+            var fontFilename = "../../../resources/fonts/Times_New_Roman.ttf";
             var font = PdfFontFactory.CreateFont(fontFilename, PdfEncodings.IDENTITY_H);
 
             var header = new Paragraph("Отчёт о моделировании неизотермического течения аномально-вязкого материала").SetFont(font)

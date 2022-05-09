@@ -35,22 +35,10 @@
         </StackPanel>
         <Grid Grid.Row="1" Background="{StaticResource Style1}" Margin="0,10,0,0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="100" Margin="5" hc:BorderElement.CornerRadius="10" Command="{Binding SaveMaterial}"
-                        Background="{StaticResource Style3}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/resources/icons/ok.png"
-                               RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0" />
-                        <TextBlock Text="Ок" />
-                    </StackPanel>
-                </Button>
-                <Button Width="100" hc:BorderElement.CornerRadius="10" Margin="5" Command="{Binding CloseWindow}"
-                        Background="{StaticResource Style3}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/resources/icons/cancel.png"
-                               RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0" />
-                        <TextBlock Text="Отмена" />
-                    </StackPanel>
-                </Button>
+                <Button Content="{StaticResource ApplyButton}" Width="100" Margin="5" hc:BorderElement.CornerRadius="10" Command="{Binding SaveMaterial}"
+                        Background="{StaticResource Style3}"/>
+                <Button Width="100" Content="{StaticResource CancelButton}" hc:BorderElement.CornerRadius="10" Margin="5" Command="{Binding CloseWindow}"
+                        Background="{StaticResource Style3}"/>
             </StackPanel>
         </Grid>
     </Grid>

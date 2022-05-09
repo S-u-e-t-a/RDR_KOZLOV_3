@@ -95,14 +95,8 @@
 
         <Grid Row="1" Background="{StaticResource Style1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="140" Command="{Binding SaveChanges}" hc:BorderElement.CornerRadius="10"
-                        Margin="0,0,5,0" Background="{StaticResource Style3}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/resources/icons/ok.png"
-                               RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0" />
-                        <TextBlock Text="Применить" />
-                    </StackPanel>
-                </Button>
+                <Button Width="140" Content="{StaticResource ApplyButton}" Command="{Binding SaveChanges}" hc:BorderElement.CornerRadius="10"
+                        Margin="0,0,5,0" Background="{StaticResource Style3}"/>
             </StackPanel>
         </Grid>
     </Grid>

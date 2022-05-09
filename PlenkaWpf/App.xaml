@@ -4,11 +4,44 @@
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
-
             </ResourceDictionary.MergedDictionaries>
+
+            <StackPanel  x:Key="CancelButton" Orientation="Horizontal">
+                <Image Source="pack://application:,,,/resources/icons/cancel.png"
+                       RenderOptions.BitmapScalingMode="HighQuality" Width="8" Height="8" Margin="0,2,5,0" />
+                <TextBlock Text="Отмена" />
+            </StackPanel>
+
+            <StackPanel x:Key="ApplyButton" Orientation="Horizontal">
+                <Image Source="pack://application:,,,/resources/icons/ok.png"
+                       RenderOptions.BitmapScalingMode="HighQuality" Width="10" Height="10" Margin="0,2,5,0" />
+                <TextBlock Text="Применить" />
+            </StackPanel>
+
+            <StackPanel x:Key="AddButton" Orientation="Horizontal">
+                <Image Source="pack://application:,,,/resources/icons/plus.png"
+                       RenderOptions.BitmapScalingMode="HighQuality" Width="8" Height="8"
+                       Margin="0,4,5,0" />
+                <TextBlock Text="Добавить" />
+            </StackPanel>
+
+            <StackPanel x:Key="EditButton" Orientation="Horizontal">
+                <Image Source="pack://application:,,,/resources/icons/editing.png"
+                       RenderOptions.BitmapScalingMode="HighQuality" Width="9" Height="9" Margin="0,1,5,0" />
+                <TextBlock Text="Изменить" />
+            </StackPanel>
+
+            <StackPanel x:Key="DeleteButton" Orientation="Horizontal">
+                <Image Source="pack://application:,,,/resources/icons/delete.png"
+                       RenderOptions.BitmapScalingMode="HighQuality" Width="9" Height="9"
+                       Margin="0,1,5,0" />
+                <TextBlock Text="Удалить" />
+            </StackPanel>
+
             <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
             <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
             <SolidColorBrush x:Key="Style3" Color="#faf3f3" />

@@ -37,24 +37,12 @@
         </StackPanel>
         <Grid Row="1" Background="{StaticResource Style1}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="AddButton" Width="100" Margin="5" hc:BorderElement.CornerRadius="10"
+                <Button x:Name="AddButton" Content="{StaticResource ApplyButton}" Width="100" Margin="5" hc:BorderElement.CornerRadius="10"
                         Command="{Binding SaveProperty}"
-                        Background="{StaticResource Style3}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/resources/icons/ok.png"
-                               RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0" />
-                        <TextBlock Text="Применить" />
-                    </StackPanel>
-                </Button>
+                        Background="{StaticResource Style3}"/>
                 <Button x:Name="ExitButton" Width="100" Margin="5" hc:BorderElement.CornerRadius="10"
                         Command="{Binding CloseWindow}"
-                        Background="{StaticResource Style3}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/resources/icons/cancel.png"
-                               RenderOptions.BitmapScalingMode="HighQuality" Width="12" Height="12" Margin="0,0,5,0" />
-                        <TextBlock Text="Отмена" />
-                    </StackPanel>
-                </Button>
+                        Background="{StaticResource Style3}" Content="{StaticResource CancelButton}"/>
             </StackPanel>
         </Grid>
     </Grid>

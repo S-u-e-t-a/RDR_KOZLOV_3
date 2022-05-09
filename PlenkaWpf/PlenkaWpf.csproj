@@ -14,6 +14,7 @@
     <None Remove="resources\editing.png" />
     <None Remove="resources\exit.png" />
     <None Remove="resources\file.png" />
+    <None Remove="resources\icons\graph.png" />
     <None Remove="resources\info.png" />
     <None Remove="resources\logo.png" />
     <None Remove="resources\ok.png" />
@@ -59,6 +60,7 @@
     <Resource Include="resources\icons\file.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="resources\icons\graph.png" />
     <Resource Include="resources\icons\info.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
