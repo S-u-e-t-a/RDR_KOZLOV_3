@@ -1,9 +1,13 @@
-﻿using System.Windows;
+﻿using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 using PlenkaAPI.Data;
 
 using PlenkaWpf.VM;
+
+using MessageBox = HandyControl.Controls.MessageBox;
 
 
 namespace PlenkaWpf.View
@@ -16,7 +20,6 @@ namespace PlenkaWpf.View
         public LoginControl()
         {
             InitializeComponent();
-            var con = DbContextSingleton.GetInstance();
         }
 
         public WindowState PreferedWindowState { get; set; } = WindowState.Normal;
@@ -33,7 +36,34 @@ namespace PlenkaWpf.View
 
         private void Button_Click(object sender, RoutedEventArgs e) //todo убрать заглушку
         {
-            OnChangingRequest(new MainAdminControl());
+            var con = DbContextSingleton.GetInstance();
+            var userName = UserNameTextbox.Text;
+            var password = PasswordTextBox.Password;
+
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Введите имя пользователя и пароль!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            try
+            {
+                var user = con.Users.First(u => u.UserName == userName && u.UserPassword == password);
+                if (user.UserType.UserTypeName == "Администратор")
+                {
+                    OnChangingRequest(new MainAdminControl());
+                }
+
+                if (user.UserType.UserTypeName == "Исследователь")
+                {
+                    OnChangingRequest(new ResearcherControl());
+                }
+            }
+            catch (Exception exception){
+
+                MessageBox.Show("Неверное имя пользователя или пароль! Повторите попытку.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

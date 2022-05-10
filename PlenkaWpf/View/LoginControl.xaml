@@ -14,13 +14,12 @@
         <Grid Row="1" Width="180">
             <StackPanel Background="{StaticResource Style2}" Orientation="Vertical" HorizontalAlignment="Center"
                         Width="180">
-                <hc:TextBox hc:InfoElement.Title="Имя пользователя" Margin="10,0,10,10"
+                <hc:TextBox x:Name="UserNameTextbox" hc:InfoElement.Title="Имя пользователя" Margin="10,0,10,10"
                             Background="{StaticResource Style3}" />
-                <hc:PasswordBox hc:InfoElement.Title="Пароль" Margin="10,0,10,10" Background="{StaticResource Style3}" />
-                <Button x:Name="EnterButton" Width="100" hc:BorderElement.CornerRadius="10"
+                <hc:PasswordBox  x:Name="PasswordTextBox" hc:InfoElement.Title="Пароль" Margin="10,0,10,10" Background="{StaticResource Style3}" />
+                <Button x:Name="EnterButton" Width="100" hc:BorderElement.CornerRadius="10" Click="Button_Click"
                         Command="{Binding AddNewMemObject }" Content="{StaticResource EnterButton}"
-                        Margin="0,0,10,0" Background="{StaticResource Style3}">
-                </Button>
+                        Margin="0,0,10,0" Background="{StaticResource Style3}"/>
             </StackPanel>
 
         </Grid>
