@@ -10,39 +10,39 @@
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <StackPanel  x:Key="CancelButton" Orientation="Horizontal">
+            <StackPanel x:Shared="False"  x:Key="CancelButton" Orientation="Horizontal">
                 <Image Source="pack://application:,,,/resources/icons/cancel.png"
                        RenderOptions.BitmapScalingMode="HighQuality" Width="8" Height="8" Margin="0,2,5,0" />
                 <TextBlock Text="Отмена" />
             </StackPanel>
 
-            <StackPanel x:Key="ApplyButton" Orientation="Horizontal">
+            <StackPanel x:Shared="False" x:Key="ApplyButton" Orientation="Horizontal">
                 <Image Source="pack://application:,,,/resources/icons/ok.png"
                        RenderOptions.BitmapScalingMode="HighQuality" Width="10" Height="10" Margin="0,2,5,0" />
                 <TextBlock Text="Применить" />
             </StackPanel>
 
-            <StackPanel x:Key="AddButton" Orientation="Horizontal">
+            <StackPanel x:Shared="False" x:Key="AddButton" Orientation="Horizontal">
                 <Image Source="pack://application:,,,/resources/icons/plus.png"
                        RenderOptions.BitmapScalingMode="HighQuality" Width="8" Height="8"
                        Margin="0,4,5,0" />
                 <TextBlock Text="Добавить" />
             </StackPanel>
 
-            <StackPanel x:Key="EditButton" Orientation="Horizontal">
+            <StackPanel x:Shared="False" x:Key="EditButton" Orientation="Horizontal">
                 <Image Source="pack://application:,,,/resources/icons/editing.png"
                        RenderOptions.BitmapScalingMode="HighQuality" Width="9" Height="9" Margin="0,1,5,0" />
                 <TextBlock Text="Изменить" />
             </StackPanel>
 
-            <StackPanel x:Key="DeleteButton" Orientation="Horizontal">
+            <StackPanel x:Shared="False" x:Key="DeleteButton" Orientation="Horizontal">
                 <Image Source="pack://application:,,,/resources/icons/delete.png"
                        RenderOptions.BitmapScalingMode="HighQuality" Width="9" Height="9"
                        Margin="0,1,5,0" />
                 <TextBlock Text="Удалить" />
             </StackPanel>
 
-            <StackPanel x:Key="EnterButton" Orientation="Horizontal">
+            <StackPanel x:Shared="False" x:Key="EnterButton" Orientation="Horizontal">
                 <Image Source="pack://application:,,,/resources/icons/enter.png"
                        RenderOptions.BitmapScalingMode="HighQuality" Width="10" Height="10"
                        Margin="0,2,5,0" />
