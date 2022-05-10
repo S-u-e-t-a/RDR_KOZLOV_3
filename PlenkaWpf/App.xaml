@@ -42,6 +42,13 @@
                 <TextBlock Text="Удалить" />
             </StackPanel>
 
+            <StackPanel x:Key="EnterButton" Orientation="Horizontal">
+                <Image Source="pack://application:,,,/resources/icons/enter.png"
+                       RenderOptions.BitmapScalingMode="HighQuality" Width="10" Height="10"
+                       Margin="0,2,5,0" />
+                <TextBlock Text="Войти" />
+            </StackPanel>
+            
             <SolidColorBrush x:Key="Style1" Color="#c0ced7" />
             <SolidColorBrush x:Key="Style2" Color="#e1e5ea" />
             <SolidColorBrush x:Key="Style3" Color="#faf3f3" />

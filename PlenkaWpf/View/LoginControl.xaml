@@ -5,11 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
-    <!--Title="Авторизация" Height="388" Width="268"-->
-    <!--WindowStartupLocation="CenterScreen"-->
+
     <Grid Background="{StaticResource Style2}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
+            <RowDefinition Height="40" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Row="1" Width="180">
@@ -18,9 +17,10 @@
                 <hc:TextBox hc:InfoElement.Title="Имя пользователя" Margin="10,0,10,10"
                             Background="{StaticResource Style3}" />
                 <hc:PasswordBox hc:InfoElement.Title="Пароль" Margin="10,0,10,10" Background="{StaticResource Style3}" />
-                <Button Margin="5" Content="Администратор" Click="Button_Click" Background="{StaticResource Style3}" />
-                <Button Margin="5" Content="Исследователь" Click="ButtonBase_OnClick"
-                        Background="{StaticResource Style3}" />
+                <Button x:Name="EnterButton" Width="100" hc:BorderElement.CornerRadius="10"
+                        Command="{Binding AddNewMemObject }" Content="{StaticResource EnterButton}"
+                        Margin="0,0,10,0" Background="{StaticResource Style3}">
+                </Button>
             </StackPanel>
 
         </Grid>
