@@ -6,6 +6,7 @@ using PlenkaAPI.Data;
 using PlenkaAPI.Models;
 
 using PlenkaWpf.Utils;
+using PlenkaWpf.View;
 
 
 namespace PlenkaWpf.VM
@@ -80,6 +81,19 @@ namespace PlenkaWpf.VM
                                                 Db.SaveChanges();
                                                 OnClosingRequest();
                                             }));
+            }
+        }
+
+        private RelayCommand _addMeasureUnit;
+
+        public RelayCommand AddMeasureUnit
+        {
+            get
+            {
+                return _addMeasureUnit ??= new RelayCommand(o =>
+                {
+                    ShowChildWindow(new UnitCreateWindow());
+                });
             }
         }
 

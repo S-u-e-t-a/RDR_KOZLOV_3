@@ -43,11 +43,6 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Справка">
-                <MenuItem.Icon>
-                    <Image Source="pack://application:,,,/resources/icons/info.png" />
-                </MenuItem.Icon>
-            </MenuItem>
         </Menu>
     </UserControl.Resources>
 
