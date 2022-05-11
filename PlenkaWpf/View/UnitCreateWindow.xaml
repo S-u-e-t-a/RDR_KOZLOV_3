@@ -8,6 +8,8 @@
         xmlns:vm="clr-namespace:PlenkaWpf.VM"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        NonClientAreaBackground="{StaticResource Style4}"
+           ShowTitle="False"
         d:DataContext="{d:DesignInstance vm:UnitCreateWindowVM}"
         Title="Создание единицы измерения" Height="167" Width="339">
     <hc:Window.NonClientAreaContent>
