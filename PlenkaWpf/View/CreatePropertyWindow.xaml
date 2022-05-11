@@ -6,7 +6,7 @@
            xmlns:vm1="clr-namespace:PlenkaWpf.VM"
            xmlns:hc="https://handyorg.github.io/handycontrol"
            mc:Ignorable="d"
-           Title="Добавление свойства типа объекта" Height="210" Width="463"
+           Title="Добавление свойства" Height="220" Width="463"
            d:DataContext="{d:DesignInstance vm1:CreatePropertyVM}"
            NonClientAreaBackground="{StaticResource Style4}"
            ShowTitle="False"

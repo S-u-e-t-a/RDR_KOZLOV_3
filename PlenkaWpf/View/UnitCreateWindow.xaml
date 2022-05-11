@@ -11,7 +11,7 @@
         NonClientAreaBackground="{StaticResource Style4}"
            ShowTitle="False"
         d:DataContext="{d:DesignInstance vm:UnitCreateWindowVM}"
-        Title="Создание единицы измерения" Height="167" Width="339">
+        Title="Добавление единицы измерения" Height="167" Width="380">
     <hc:Window.NonClientAreaContent>
         <StackPanel Orientation="Horizontal">
             <Image Source="pack://application:,,,/resources/icons/logo.png" Height="20" Margin="3"
