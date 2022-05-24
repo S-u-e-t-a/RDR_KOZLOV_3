@@ -9,6 +9,18 @@
     <UserControl.Resources>
         <Menu x:Key="Menu" Grid.Row="0" Background="{Binding NonClientAreaBackground,RelativeSource={RelativeSource FindAncestor,AncestorType=Window}}" Grid.ColumnSpan="3">
             <MenuItem Header="Меню">
+                <MenuItem Header="База данных">
+                    <MenuItem Header="Сохранить базу данных" Click="SaveDB">
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/resources/icons/user.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Загрузить базу данных" Click="LoadDB">
+                        <MenuItem.Icon>
+                            <Image Source="pack://application:,,,/resources/icons/user.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
                 <MenuItem Header="Сменить учётную запись" Click="ChangeUser">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/resources/icons/user.png" />
