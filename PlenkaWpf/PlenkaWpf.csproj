@@ -16,6 +16,8 @@
     <None Remove="resources\file.png" />
     <None Remove="resources\icons\enter.png" />
     <None Remove="resources\icons\graph.png" />
+    <None Remove="resources\icons\upload %281%29.png" />
+    <None Remove="resources\icons\upload.png" />
     <None Remove="resources\info.png" />
     <None Remove="resources\logo.png" />
     <None Remove="resources\ok.png" />
@@ -92,6 +94,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\fonts\Times_New_Roman.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\icons\upload.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\icons\user.png">
