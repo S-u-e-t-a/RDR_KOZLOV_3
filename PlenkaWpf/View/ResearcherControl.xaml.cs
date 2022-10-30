@@ -128,30 +128,30 @@ namespace PlenkaWpf.View
 
         private void MenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            var dlg = new SaveFileDialog
-            {
-                DefaultExt = ".pdf",
-                FileName = "АНАЛИЗ_" + DateTime.Now.ToString().Replace(':', '_'),
-            };
-
-            var res = dlg.ShowDialog();
-
-            if (res == true)
-            {
-                if ((DataContext as ResearcherControlVM).IsCalculated)
-                {
-                    var tempChartBitMap = ChartToBitmap(tempChart);
-
-                    var nChartBitMap = ChartToBitmap(nChart);
-
-
-                    FileSystem.ExportPdf(dlg.FileName, tempChartBitMap, nChartBitMap, (DataContext as ResearcherControlVM).MathClass);
-                }
-                else
-                {
-                    MessageBox.Show("Нет данных для сохранения", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
+            // var dlg = new SaveFileDialog
+            // {
+            //     DefaultExt = ".pdf",
+            //     FileName = "АНАЛИЗ_" + DateTime.Now.ToString().Replace(':', '_'),
+            // };
+            //
+            // var res = dlg.ShowDialog();
+            //
+            // if (res == true)
+            // {
+            //     if ((DataContext as ResearcherControlVM).IsCalculated)
+            //     {
+            //         var tempChartBitMap = ChartToBitmap(tempChart);
+            //
+            //         var nChartBitMap = ChartToBitmap(nChart);
+            //
+            //
+            //         FileSystem.ExportPdf(dlg.FileName, tempChartBitMap, nChartBitMap, (DataContext as ResearcherControlVM).MathClass);
+            //     }
+            //     else
+            //     {
+            //         MessageBox.Show("Нет данных для сохранения", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            //     }
+            // }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) // нарушение mvvm
@@ -182,9 +182,6 @@ namespace PlenkaWpf.View
             //throw new NotImplementedException();
         }
 
-        private void ChangeUser(object sender, RoutedEventArgs e)
-        {
-            OnChangingRequest(new LoginControl());
-        }
+        
     }
 }

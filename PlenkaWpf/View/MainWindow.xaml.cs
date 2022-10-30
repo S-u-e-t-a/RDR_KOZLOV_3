@@ -16,7 +16,7 @@ namespace PlenkaWpf.View
         public MainWindow()
         {
             InitializeComponent();
-            ChangeContent(null, new LoginControl());
+            ChangeContent(null, new ResearcherControl());
         }
 
         private void ChangeContent(object sender, UserControl control)

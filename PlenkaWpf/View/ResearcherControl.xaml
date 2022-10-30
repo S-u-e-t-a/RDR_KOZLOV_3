@@ -32,11 +32,7 @@
                         <Image Source="pack://application:,,,/resources/icons/save.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Сменить учётную запись" Click="ChangeUser">
-                    <MenuItem.Icon>
-                        <Image Source="pack://application:,,,/resources/icons/user.png" />
-                    </MenuItem.Icon>
-                </MenuItem>
+                
                 <MenuItem Header="Выход">
                     <MenuItem.Icon>
                         <Image Source="pack://application:,,,/resources/icons/exit.png" />
@@ -76,27 +72,19 @@
                                           Background="{StaticResource Style1}">
                                     <hc:ElementGroup>
                                         <Border Background="{StaticResource Style2}">
-                                            <hc:Divider Content="Выбор канала"
+                                            <hc:Divider Content="Начальные параметры"
                                                         Background="{StaticResource DangerBrush}"
                                                         Margin="0 5" />
                                         </Border>
-                                        <hc:ElementGroup Background="{StaticResource Style3}">
-                                            <hc:ComboBox Margin="10 10" ItemsSource="{Binding Canals}"
-                                                         SelectedItem="{Binding Canal}" DisplayMemberPath="ObName" />
-                                        </hc:ElementGroup>
-                                        <Border Background="{StaticResource Style2}">
-                                            <hc:Divider Content="Геометрические параметры канала"
-                                                        Background="{StaticResource Style2}" Margin="0 5" />
-                                        </Border>
                                         <StackPanel Background="{StaticResource Style3}">
-                                            <hc:TextBox hc:InfoElement.Title="Длина, м"
+                                            <hc:TextBox hc:InfoElement.Title="Число ячеек в реакторе"
                                                         hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                         hc:InfoElement.TitleWidth="450"
                                                         ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Style="{StaticResource TextBoxInError}"
                                                         HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="Length" NotifyOnValidationError="True"
+                                                    <Binding Path="N" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="0" />
@@ -104,14 +92,14 @@
                                                     </Binding>
                                                 </hc:TextBox.Text>
                                             </hc:TextBox>
-                                            <hc:TextBox hc:InfoElement.Title="Ширина, м"
+                                            <hc:TextBox hc:InfoElement.Title="Концетрация на входе в первую ячейку"
                                                         hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                         hc:InfoElement.TitleWidth="450"
                                                         ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Style="{StaticResource TextBoxInError}"
                                                         HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="Width" NotifyOnValidationError="True"
+                                                    <Binding Path="CAIn" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="0" />
@@ -119,15 +107,14 @@
                                                     </Binding>
                                                 </hc:TextBox.Text>
                                             </hc:TextBox>
-
-                                            <hc:TextBox hc:InfoElement.Title="Глубина, м"
+                                            <hc:TextBox hc:InfoElement.Title="Объем аппарата"
                                                         hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                         hc:InfoElement.TitleWidth="450"
                                                         ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Style="{StaticResource TextBoxInError}"
                                                         HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="Depth" NotifyOnValidationError="True"
+                                                    <Binding Path="V" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="0" />
@@ -135,29 +122,14 @@
                                                     </Binding>
                                                 </hc:TextBox.Text>
                                             </hc:TextBox>
-                                        </StackPanel>
-                                        <Border Background="{StaticResource Style2}">
-                                            <hc:Divider Content="Выбор материала"
-                                                        Background="{StaticResource DangerBrush}"
-                                                        Margin="0 5" />
-                                        </Border>
-                                        <hc:ElementGroup Background="{StaticResource Style3}">
-                                            <hc:ComboBox Margin="10 10" ItemsSource="{Binding Materials}"
-                                                         SelectedItem="{Binding Material}" DisplayMemberPath="ObName" />
-                                        </hc:ElementGroup>
-                                        <Border Background="{StaticResource Style2}">
-                                            <hc:Divider Content="Параметры свойств материала"
-                                                        Background="{StaticResource DangerBrush}" Margin="0 5" />
-                                        </Border>
-                                        <StackPanel Background="{StaticResource Style3}">
-                                            <hc:TextBox hc:InfoElement.Title="Плотность кг/м³"
+                                            <hc:TextBox hc:InfoElement.Title="Объемный расход"
                                                         hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                         hc:InfoElement.TitleWidth="450"
                                                         ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Style="{StaticResource TextBoxInError}"
                                                         HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="Density" NotifyOnValidationError="True"
+                                                    <Binding Path="G" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="0" />
@@ -165,14 +137,14 @@
                                                     </Binding>
                                                 </hc:TextBox.Text>
                                             </hc:TextBox>
-                                            <hc:TextBox hc:InfoElement.Title="Удельная теплоёмкость, Дж/(кг·°С)"
+                                            <hc:TextBox hc:InfoElement.Title="M"
                                                         hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                         hc:InfoElement.TitleWidth="450"
                                                         ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                         Style="{StaticResource TextBoxInError}"
                                                         HorizontalAlignment="Stretch">
                                                 <hc:TextBox.Text>
-                                                    <Binding Path="SpecifiсHeatCapacity" NotifyOnValidationError="True"
+                                                    <Binding Path="M" NotifyOnValidationError="True"
                                                              UpdateSourceTrigger="PropertyChanged" Delay="1000">
                                                         <Binding.ValidationRules>
                                                             <plenkaWpf:DoubleValidator Min="0" />
@@ -180,70 +152,7 @@
                                                     </Binding>
                                                 </hc:TextBox.Text>
                                             </hc:TextBox>
-                                            <hc:TextBox hc:InfoElement.Title="Температура плавления, °С"
-                                                        hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                        hc:InfoElement.TitleWidth="450"
-                                                        ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                        Style="{StaticResource TextBoxInError}"
-                                                        HorizontalAlignment="Stretch">
-                                                <hc:TextBox.Text>
-                                                    <Binding Path="MeltingTemperature" NotifyOnValidationError="True"
-                                                             UpdateSourceTrigger="PropertyChanged" Delay="1000">
-                                                        <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator Min="0" />
-                                                        </Binding.ValidationRules>
-                                                    </Binding>
-                                                </hc:TextBox.Text>
-                                            </hc:TextBox>
-                                        </StackPanel>
-                                    </hc:ElementGroup>
-                                </Expander>
-                                <Expander ExpandDirection="Down" Header="Варьируемые параметры" IsExpanded="True"
-                                          HeaderTemplate="{StaticResource expanderHeader}"
-                                          Background="{StaticResource Style1}">
-                                    <StackPanel Background="{StaticResource Style3}">
-                                        <hc:TextBox hc:InfoElement.Title="Скорость движения крышки, м/с"
-                                                    hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                    hc:InfoElement.TitleWidth="450"
-                                                    ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                    Style="{StaticResource TextBoxInError}"
-                                                    HorizontalAlignment="Stretch">
-                                            <hc:TextBox.Text>
-                                                <Binding Path="CapSpeed" NotifyOnValidationError="True"
-                                                         UpdateSourceTrigger="PropertyChanged" Delay="1000">
-                                                    <Binding.ValidationRules>
-                                                        <plenkaWpf:DoubleValidator Min="0" />
-                                                    </Binding.ValidationRules>
-                                                </Binding>
-                                            </hc:TextBox.Text>
-                                        </hc:TextBox>
-                                        <hc:TextBox hc:InfoElement.Title="Температура крышки, °С"
-                                                    hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                    hc:InfoElement.TitleWidth="450"
-                                                    ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                    Style="{StaticResource TextBoxInError}"
-                                                    HorizontalAlignment="Stretch">
-                                            <hc:TextBox.Text>
-                                                <Binding Path="CapTemperature" NotifyOnValidationError="True"
-                                                         UpdateSourceTrigger="PropertyChanged" Delay="1000">
-                                                    <Binding.ValidationRules>
-                                                        <plenkaWpf:DoubleValidator Min="0" />
-                                                    </Binding.ValidationRules>
-                                                </Binding>
-                                            </hc:TextBox.Text>
-                                        </hc:TextBox>
-                                    </StackPanel>
-                                </Expander>
-                                <Expander ExpandDirection="Down" Header="Параметры математической модели"
-                                          IsExpanded="True" HeaderTemplate="{StaticResource expanderHeader}"
-                                          Background="{StaticResource Style1}">
-                                    <hc:ElementGroup>
-                                        <Border Background="{StaticResource Style2}">
-                                            <hc:Divider Content="Параметры метода решения"
-                                                        Background="{StaticResource DangerBrush}" Margin="0 5" />
-                                        </Border>
-                                        <hc:ElementGroup Background="{StaticResource Style3}">
-                                            <hc:TextBox hc:InfoElement.Title="Шаг расчёта по длине канала, м"
+                                            <hc:TextBox hc:InfoElement.Title="Шаг"
                                                         hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                         hc:InfoElement.TitleWidth="450"
                                                         ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -258,105 +167,10 @@
                                                     </Binding>
                                                 </hc:TextBox.Text>
                                             </hc:TextBox>
-                                        </hc:ElementGroup>
-                                        <Border Background="{StaticResource Style2}">
-                                            <hc:Divider Content="Эмпирические коэффициенты математической модели"
-                                                        Background="{StaticResource DangerBrush}" Margin="0 5" />
-                                        </Border>
-                                        <StackPanel Background="{StaticResource Style3}">
-
-
-                                            <hc:TextBox
-                                                hc:InfoElement.Title="Коэффициент консистенции при температуре приведения, Па·сⁿ"
-                                                hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                hc:InfoElement.TitleWidth="450"
-                                                ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Style="{StaticResource TextBoxInError}"
-                                                HorizontalAlignment="Stretch">
-                                                <hc:TextBox.Text>
-                                                    <Binding Path="СonsСoef" NotifyOnValidationError="True"
-                                                             UpdateSourceTrigger="PropertyChanged" Delay="1000">
-                                                        <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator Min="0" />
-                                                        </Binding.ValidationRules>
-                                                    </Binding>
-                                                </hc:TextBox.Text>
-                                            </hc:TextBox>
-
-
-                                            <hc:TextBox
-                                                hc:InfoElement.Title="Температурный коэффициент вязкости материала, 1/°С"
-                                                hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                hc:InfoElement.TitleWidth="450"
-                                                ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Style="{StaticResource TextBoxInError}"
-                                                HorizontalAlignment="Stretch">
-                                                <hc:TextBox.Text>
-                                                    <Binding Path="TempСoef" NotifyOnValidationError="True"
-                                                             UpdateSourceTrigger="PropertyChanged" Delay="1000">
-                                                        <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator Min="0" />
-                                                        </Binding.ValidationRules>
-                                                    </Binding>
-                                                </hc:TextBox.Text>
-                                            </hc:TextBox>
-
-
-                                            <hc:TextBox
-                                                hc:InfoElement.Title="Температура приведения, °С"
-                                                hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                hc:InfoElement.TitleWidth="450"
-                                                ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Style="{StaticResource TextBoxInError}"
-                                                HorizontalAlignment="Stretch">
-                                                <hc:TextBox.Text>
-                                                    <Binding Path="RefTemp" NotifyOnValidationError="True"
-                                                             UpdateSourceTrigger="PropertyChanged" Delay="1000">
-                                                        <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator Min="0" />
-                                                        </Binding.ValidationRules>
-                                                    </Binding>
-                                                </hc:TextBox.Text>
-                                            </hc:TextBox>
-
-
-                                            <hc:TextBox
-                                                hc:InfoElement.Title="Индекс течения материала"
-                                                hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                hc:InfoElement.TitleWidth="450"
-                                                ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Style="{StaticResource TextBoxInError}"
-                                                HorizontalAlignment="Stretch">
-                                                <hc:TextBox.Text>
-                                                    <Binding Path="MatFlowIndex" NotifyOnValidationError="True"
-                                                             UpdateSourceTrigger="PropertyChanged" Delay="1000">
-                                                        <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator Min="0" />
-                                                        </Binding.ValidationRules>
-                                                    </Binding>
-                                                </hc:TextBox.Text>
-                                            </hc:TextBox>
-
-
-                                            <hc:TextBox
-                                                hc:InfoElement.Title="Коэффициент теплоотдачи от крышки канала к материалу, Вт/(м²·°С)"
-                                                hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                hc:InfoElement.TitleWidth="450"
-                                                ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                Style="{StaticResource TextBoxInError}"
-                                                HorizontalAlignment="Stretch">
-                                                <hc:TextBox.Text>
-                                                    <Binding Path="HeatCoef" NotifyOnValidationError="True"
-                                                             UpdateSourceTrigger="PropertyChanged" Delay="1000">
-                                                        <Binding.ValidationRules>
-                                                            <plenkaWpf:DoubleValidator Min="0" />
-                                                        </Binding.ValidationRules>
-                                                    </Binding>
-                                                </hc:TextBox.Text>
-                                            </hc:TextBox>
                                         </StackPanel>
                                     </hc:ElementGroup>
                                 </Expander>
+                                
                             </hc:ElementGroup>
                         </hc:ScrollViewer>
                         <Button Grid.Row="2"
@@ -375,7 +189,7 @@
                             Background="{StaticResource Style3}">
                     <TabItem Header="График распределения температуры" Background="{StaticResource Style2}">
                         <lvc:CartesianChart x:Name="tempChart"
-                                            LegendLocation="None" Series="{Binding TempSeries}"
+                                            LegendLocation="None" Series="{Binding  ConcetraionSeries}"
                                             Margin="10,10,10,0">
                             <lvc:CartesianChart.AxisX>
                                 <lvc:Axis x:Name="tempChartAxisX" Title="Координата по длине канала, м" FontSize="14"
@@ -388,27 +202,6 @@
                             <lvc:CartesianChart.AxisY>
                                 <lvc:Axis x:Name="tempChartAxisY" Title="Температура, °С" FontSize="14"
                                           Foreground="Black">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator Stroke="DimGray" />
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-                        </lvc:CartesianChart>
-                    </TabItem>
-                    <TabItem Header="График распределения вязкости" Background="{StaticResource Style2}">
-                        <lvc:CartesianChart x:Name="nChart" LegendLocation="None"
-                                            Series="{Binding NSeries}"
-                                            Margin="10,10,10,5">
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis x:Name="ChartAxisX" Title="Координата по длине канала, м" FontSize="14"
-                                          Foreground="Black">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator Stroke="DimGray" />
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis x:Name="ChartAxisY" Title="Вязкость, Па·с" FontSize="14" Foreground="Black">
                                     <lvc:Axis.Separator>
                                         <lvc:Separator Stroke="DimGray" />
                                     </lvc:Axis.Separator>

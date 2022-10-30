@@ -10,8 +10,6 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 
 using PlenkaAPI;
-using PlenkaAPI.Data;
-using PlenkaAPI.Models;
 
 using PlenkaWpf.Utils;
 
@@ -33,39 +31,29 @@ namespace PlenkaWpf.VM
 
         public ResearcherControlVM()
         {
-            Materials = DbContextSingleton.GetInstance().MembraneObjects.Where(o => o.Type.TypeName == "Материал").ToList();
-            Material = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Полистирол");
 
-            Canals = DbContextSingleton.GetInstance().MembraneObjects.Where(o => o.Type.TypeName == "Канал").ToList();
-            Canal = DbContextSingleton.GetInstance().MembraneObjects.First(v => v.ObName == "Канал");
-
-            TempLineSerie = new LineSeries
-                {Title = "Температура, °С",};
-
-            TempLineSerie.Fill = Brushes.Transparent;
-
-            TempSeries = new SeriesCollection
-                {TempLineSerie,};
-
-            NLineSerie = new LineSeries
-                {Title = "Вязкость, Па·с",};
-
-            NLineSerie.Fill = Brushes.Transparent;
-
-            NSeries = new SeriesCollection
-                {NLineSerie,};
+            // TempLineSerie = new LineSeries
+            //     {Title = "Температура, °С",};
+            //
+            // TempLineSerie.Fill = Brushes.Transparent;
+            //
+            // TempSeries = new SeriesCollection
+            //     {TempLineSerie,};
+            //
+            // NLineSerie = new LineSeries
+            //     {Title = "Вязкость, Па·с",};
+            //
+            // NLineSerie.Fill = Brushes.Transparent;
+            //
+            // ConcetraionSeries = new SeriesCollection
+            //     {NLineSerie,};
 
             IsCalculated = false;
         }
 
     #endregion
-
-
-        /// <summary>
-        ///     Функция, обновляющая точки графика по словарю со значениями
-        /// </summary>
-        /// <param name="ls">Серия графика</param>
-        private void UpdateLineSeriesByCordAndValue(LineSeries ls, List<double> x, List<double> y)
+        
+        private LineSeries buildLineSeries(string name, List<double> x, List<double> y)
         {
             if (x.Count != y.Count)
             {
@@ -79,7 +67,13 @@ namespace PlenkaWpf.VM
                 newValues.Add(new ObservablePoint(x[i], y[i]));
             }
 
-            ls.Values = newValues;
+            var ls = new LineSeries()
+            {
+                Values = newValues,
+                Title = name
+            };
+
+            return ls;
         }
 
     #endregion
@@ -87,324 +81,30 @@ namespace PlenkaWpf.VM
 
     #region Properties
 
-        /// <summary>
-        ///     Доступные материалы
-        /// </summary>
-        public List<MembraneObject> Materials { get; set; }
-        public List<MembraneObject> Canals { get; set; }
+    #region input
 
-
-        #region CanalProps
-
-        /// <summary>
-        ///     Текущий канал
-        /// </summary>
-        private MembraneObject _canal;
-
-        public MembraneObject Canal
-        {
-            get
-            {
-                return _canal;
-            }
-            set
-            {
-                _canal = value;
-                OnPropertyChanged(nameof(Length));
-                OnPropertyChanged(nameof(Width));
-                OnPropertyChanged(nameof(Depth));
-            }
-        }
-
-        /// <summary>
-        ///     Длина канала
-        /// </summary>
-        public double? Length
-        {
-            get
-            {
-                return Canal["Длина"];
-            }
-            set
-            {
-                Canal["Длина"] = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Ширина канала
-        /// </summary>
-        public double? Width
-        {
-            get
-            {
-                return Canal["Ширина"];
-            }
-            set
-            {
-                Canal["Ширина"] = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Глубина канала
-        /// </summary>
-        public double? Depth
-        {
-            get
-            {
-                return Canal["Глубина"];
-            }
-            set
-            {
-                Canal["Глубина"] = value;
-                OnPropertyChanged();
-            }
-        }
+        public int N { get; set; } = 3;
+        public double M { get; set; } = 8;
+        public double CAIn { get; set; } = 20;
+        public double V { get; set; } = 80;
+        public double G { get; set; } = 50;
+        public double Step { get; set; } = 1;
 
     #endregion
-
-
-    #region MaterialProps
-
-        private MembraneObject _material;
-
-        /// <summary>
-        ///     Выбранный материал
-        /// </summary>
-        public MembraneObject Material
-        {
-            get
-            {
-                return _material;
-            }
-            set
-            {
-                _material = value;
-
-                OnPropertyChanged(nameof(Density));
-                OnPropertyChanged(nameof(SpecifiсHeatCapacity));
-                OnPropertyChanged(nameof(MeltingTemperature));
-                OnPropertyChanged(nameof(СonsСoef));
-                OnPropertyChanged(nameof(TempСoef));
-                OnPropertyChanged(nameof(RefTemp));
-                OnPropertyChanged(nameof(MatFlowIndex));
-                OnPropertyChanged(nameof(HeatCoef));
-            }
-        }
-
-        private object _null;
-
-        public object Null // Костыль для того чтобы ErrorStr в TextBox всегда был пустым
-        {
-            get
-            {
-                return _null;
-            }
-            set
-            {
-                _null = null;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Плоность материала
-        /// </summary>
-        public double? Density
-        {
-            get
-            {
-                return Material["Плотность"];
-            }
-            set
-            {
-                Material["Длина"] = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Удельная теплоемкость материала
-        /// </summary>
-        public double? SpecifiсHeatCapacity
-        {
-            get
-            {
-                return Material["Удельная теплоемкость"];
-            }
-            set
-            {
-                Material["Удельная теплоемкость"] = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Температуры плавления материала
-        /// </summary>
-        public double? MeltingTemperature
-        {
-            get
-            {
-                return Material["Температура плавления"];
-            }
-            set
-            {
-                Material["Температура плавления"] = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Коэффициент констистенции материала при температуре приведения
-        /// </summary>
-        public double? СonsСoef
-        {
-            get
-            {
-                return Material["Коэффициент констистенции материала при температуре приведения"];
-            }
-            set
-            {
-                Material["Коэффициент констистенции материала при температуре приведения"] = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Температурный коэффициент вязкости материала
-        /// </summary>
-        public double? TempСoef
-        {
-            get
-            {
-                return Material["Температурный коэффициент вязкости материала"];
-            }
-            set
-            {
-                Material["Температурный коэффициент вязкости материала"] = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Температура приведения
-        /// </summary>
-        public double? RefTemp
-        {
-            get
-            {
-                return Material["Температура приведения"];
-            }
-            set
-            {
-                Material["Температура приведения"] = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Индекс течения материала
-        /// </summary>
-        public double? MatFlowIndex
-        {
-            get
-            {
-                return Material["Индекс течения материала"];
-            }
-            set
-            {
-                Material["Индекс течения материала"] = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Коэффициеент теплоотдачи от крышки канала к материалу
-        /// </summary>
-        public double? HeatCoef
-        {
-            get
-            {
-                return Material["Коэффициеент теплоотдачи от крышки канала к материалу"];
-            }
-            set
-            {
-                Material["Коэффициеент теплоотдачи от крышки канала к материалу"] = value;
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-
-        #region VarProps
-
-        /// <summary>
-        ///     Скорость крышки
-        /// </summary>
-        public double? CapSpeed { get; set; } = 1.5;
-
-        /// <summary>
-        ///     Температура крашки
-        /// </summary>
-        public double? CapTemperature { get; set; } = 210;
-
-    #endregion
-
 
     #region Graphics
-
+        
         /// <summary>
-        ///     Список со значениями температуры и вязкости на протяжении канала
+        ///     Серия точек концетрации
         /// </summary>
-        public List<CordTempN> CordTempNs
-        {
-            get
-            {
-                if (MathClass != null)
-                {
-                    return MathClass.Results.CordTempNs;
-                }
+        private List<LineSeries> ConcetrationLineSeries { get; set; }
 
-                return null;
-            }
-        }
-
-        /// <summary>
-        ///     Серия точек температуры
-        /// </summary>
-        private LineSeries TempLineSerie { get; }
-
-        public SeriesCollection TempSeries { get; set; }
-
-        /// <summary>
-        ///     Серия точек вязкости
-        /// </summary>
-        private LineSeries NLineSerie { get; }
-
-        public SeriesCollection NSeries { get; set; }
+        public SeriesCollection ConcetraionSeries { get; set; }
 
     #endregion
 
-
-        /// <summary>
-        ///     Текущая занаятая память
-        /// </summary>
-        public long TotalMemory
-        {
-            get
-            {
-                var currentProcess = Process.GetCurrentProcess();
-
-                return currentProcess.WorkingSet64 / (1024 * 1024);
-            }
-        }
-
+        
         private MathClass _mathClass;
-
         public MathClass MathClass
         {
             get
@@ -420,26 +120,26 @@ namespace PlenkaWpf.VM
 
         private void UpdateInterfaceElelemts()
         {
-            var x = MathClass.Results.CordTempNs.Select(x => x.Cord).ToList();
-            var n = MathClass.Results.CordTempNs.Select(x => x.N).ToList();
-            var t = MathClass.Results.CordTempNs.Select(x => x.Temp).ToList();
+            ConcetrationLineSeries = new List<LineSeries>();
+            foreach (var concPercell in MathClass.Results.ConcetrationPerCell)
+            {
+                var x = concPercell.Value.Select(c => c.T).ToList();
+                var y = concPercell.Value.Select(c => c.Concetration).ToList();
+                var name = $"Ячейка {concPercell.Key}";
+                ConcetrationLineSeries.Add(buildLineSeries(name, x,y));
+            }
+        
+            ConcetraionSeries = new SeriesCollection(){};
 
-            UpdateLineSeriesByCordAndValue(TempLineSerie, x, t);
-            UpdateLineSeriesByCordAndValue(NLineSerie, x, n);
+            foreach (var lineSeries in ConcetrationLineSeries)
+            {
+                ConcetraionSeries.Add(lineSeries);
+            }
+            OnPropertyChanged(nameof(ConcetraionSeries));
+            OnPropertyChanged(nameof(MathClass));
 
-            OnPropertyChanged(nameof(TempSeries));
-            OnPropertyChanged(nameof(NSeries));
-
-            OnPropertyChanged(nameof(CordTempNs));
-            OnPropertyChanged(nameof(TotalMemory));
         }
-
-        /// <summary>
-        ///     Шаг расчета
-        /// </summary>
-        public double? Step { get; set; } = 0.1;
-
-
+        
         private bool _isCalculated;
 
         public bool IsCalculated
@@ -496,25 +196,15 @@ namespace PlenkaWpf.VM
                 {
                     IsCalculated = true;
 
-                    var cp = new CalculationParameters
+                    var cp = new CalculationParameters()
                     {
-                        MaterialName = Material.ObName,
-                        W = (double) Width,
-                        H = (double) Depth,
-                        L = (double) Length,
-                        P = (double) Density,
-                        C = (double) SpecifiсHeatCapacity,
-                        T0 = (double) MeltingTemperature,
-                        Vu = (double) CapSpeed,
-                        Tu = (double) CapTemperature,
-                        U0 = (double) СonsСoef,
-                        B = (double) TempСoef,
-                        Tr = (double) RefTemp,
-                        N = (double) MatFlowIndex,
-                        Au = (double) HeatCoef,
-                        Step = (double) Step,
+                        ConcetraionIn = CAIn,
+                        G = G,
+                        M = M,
+                        N = N,
+                        V = V,
+                        Step = Step,
                     };
-
                     MathClass = new MathClass(cp);
                     MathClass.Calculate();
                     OnPropertyChanged(nameof(MathClass));
