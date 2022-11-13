@@ -23,28 +23,17 @@ namespace PlenkaWpf.View
     /// <summary>
     ///     Логика взаимодействия для ResearcherControl.xaml
     /// </summary>
-    public partial class ResearcherControl : UserControl, IСhangeableControl
+    public partial class AnaliticalMethodControl : UserControl
     {
-        public ResearcherControl()
+        public AnaliticalMethodControl()
         {
             InitializeComponent();
-            var vm = new ResearcherControlVM();
+            var vm = new AnaliticalMethodControlVM();
             DataContext = vm;
 
             //vm.ClosingRequest += (sender, e) => Close();
         }
-
-        public WindowState PreferedWindowState { get; set; } = WindowState.Maximized;
-        public string WindowTitle { get; set; } = "Программный комплекс для исследования неизотермического течения аномально-вязких материалов";
-        public double? PreferedHeight { get; set; }
-        public double? PreferedWidth { get; set; }
-        public event IСhangeableControl.ChangingRequestHandler ChangingRequest;
-
-        public void OnChangingRequest(UserControl newControl)
-        {
-            ChangingRequest?.Invoke(this, newControl);
-        }
-
+        
         public static byte[] EncodeVisual(FrameworkElement element, int dpi)
         {
             var bitmap = new RenderTargetBitmap((int) element.ActualWidth * dpi / 96, ((int) element.ActualHeight + 50) * dpi / 96, dpi, dpi
@@ -162,7 +151,7 @@ namespace PlenkaWpf.View
             }
             else
             {
-                (DataContext as ResearcherControlVM).CalcCommand.Execute(null);
+                (DataContext as AnaliticalMethodControlVM).CalcCommand.Execute(null);
             }
         }
 

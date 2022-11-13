@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PlenkaWpf.View.ResearcherControl"
+﻿<UserControl x:Class="PlenkaWpf.View.AnaliticalMethodControl"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,7 +8,7 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:plenkaWpf="clr-namespace:PlenkaWpf"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance vm:ResearcherControlVM}"
+             d:DataContext="{d:DesignInstance vm:AnaliticalMethodControlVM}"
              FontSize="14">
     <!--WindowState="Maximized"
     Title="Программный комплекс для исследования неизотермического течения аномально-вязких материалов"-->
@@ -260,19 +260,19 @@
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding MathClass.Results.T, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding AnaliticalMethodMath.Results.T, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch" />
                                     <hc:TextBox hc:InfoElement.Title="Вязкость продукта, Па·с"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding MathClass.Results.N, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding AnaliticalMethodMath.Results.N, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch" />
                                     <hc:TextBox hc:InfoElement.Title="Производительность канала, кг/ч"
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding MathClass.Results.Q, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding AnaliticalMethodMath.Results.Q, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch" />
                                     <Border Grid.Row="0" Grid.Column="0" Background="{StaticResource Style2}">
                                         <hc:Divider Content="Показатели экономичности"
@@ -283,7 +283,7 @@
                                                 IsReadOnly="True"
                                                 hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                 hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding MathClass.Results.MathTimer.ElapsedMilliseconds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                                Text="{Binding AnaliticalMethodMath.Results.MathTimer.ElapsedMilliseconds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Stretch" />
                                     <hc:TextBox hc:InfoElement.Title="Используемая оперативная память, МБ"
                                                 IsReadOnly="True"

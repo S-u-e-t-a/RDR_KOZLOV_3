@@ -64,9 +64,9 @@ namespace PlenkaAPI
 
 
 
-    public class MathClass // todo как-то красиво переписать все это
+    public class AnaliticalMethodMath // todo как-то красиво переписать все это
     {
-        public MathClass(CalculationParameters cp)
+        public AnaliticalMethodMath(CalculationParameters cp)
         {
             Cp = cp;
         }
@@ -123,7 +123,7 @@ namespace PlenkaAPI
 
             Results = new CalculationResults();
 
-            for (int n = 0; n < Cp.N; n++)
+            for (int n = 1; n <= Cp.N; n++)
             {
                 Results.ConcetrationPerCell[n] = new List<ConcetrationPerTau>();
                 var t = 0.0;
@@ -143,12 +143,13 @@ namespace PlenkaAPI
 
                 //обратный ход
                 var currentConc = concstop.Concetration;
-
+                var t2 = 0.0;
                 while (currentConc > EPS)
                 {
-                    var conc = new ConcetrationPerTau() {Concetration = CANout(concstop.Concetration, t, Cp.Tau, n), T = t};
+                    var conc = new ConcetrationPerTau() {Concetration = CANout(concstop.Concetration, t2, Cp.Tau, n), T = t};
                     currentConc = conc.Concetration;
                     Results.ConcetrationPerCell[n].Add(conc);
+                    t2 += Cp.Step;
                     t += Cp.Step;
                 }
 

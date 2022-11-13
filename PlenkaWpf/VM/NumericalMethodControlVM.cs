@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
@@ -19,7 +20,7 @@ namespace PlenkaWpf.VM
     /// <summary>
     ///     VM для окна исследователя
     /// </summary>
-    internal class ResearcherControlVM : ViewModelBase
+    internal class NumericalMethodControlVM : ViewModelBase
 
     {
         public List<int> ErrorList { get; set; }
@@ -29,7 +30,7 @@ namespace PlenkaWpf.VM
 
     #region Constructors
 
-        public ResearcherControlVM()
+        public NumericalMethodControlVM()
         {
 
             // TempLineSerie = new LineSeries
@@ -84,11 +85,15 @@ namespace PlenkaWpf.VM
     #region input
 
         public int N { get; set; } = 3;
-        public double M { get; set; } = 8;
-        public double CAIn { get; set; } = 20;
-        public double V { get; set; } = 80;
-        public double G { get; set; } = 50;
-        public double Step { get; set; } = 1;
+        public double Cain { get; set; } = 5;
+        public double V { get; set; } = 10;
+        public double Ca1 { get; set; } = 5;
+        public double Cb1 { get; set; } = 6;
+        public double Cc1 { get; set; } = 7;
+        public double G { get; set; } = 5;
+        public double K { get; set; } = 2;
+        public double Step { get; set; } = 0.1;
+        public double T { get; set; } = 20;
 
     #endregion
 
@@ -104,24 +109,12 @@ namespace PlenkaWpf.VM
     #endregion
 
         
-        private MathClass _mathClass;
-        public MathClass MathClass
-        {
-            get
-            {
-                return _mathClass;
-            }
-            set
-            {
-                _mathClass = value;
-                OnPropertyChanged();
-            }
-        }
+        public NumericalMethodMath NumericalMethodMath { get; set; }
 
         private void UpdateInterfaceElelemts()
         {
             ConcetrationLineSeries = new List<LineSeries>();
-            foreach (var concPercell in MathClass.Results.ConcetrationPerCell)
+            foreach (var concPercell in NumericalMethodMath.Results.ConcetrationPerCell)
             {
                 var x = concPercell.Value.Select(c => c.T).ToList();
                 var y = concPercell.Value.Select(c => c.Concetration).ToList();
@@ -136,7 +129,7 @@ namespace PlenkaWpf.VM
                 ConcetraionSeries.Add(lineSeries);
             }
             OnPropertyChanged(nameof(ConcetraionSeries));
-            OnPropertyChanged(nameof(MathClass));
+            OnPropertyChanged(nameof(NumericalMethodMath));
 
         }
         
@@ -196,18 +189,22 @@ namespace PlenkaWpf.VM
                 {
                     IsCalculated = true;
 
-                    var cp = new CalculationParameters()
+                    var cp = new NumericalParameters
                     {
-                        ConcetraionIn = CAIn,
-                        G = G,
-                        M = M,
                         N = N,
+                        CAin = Cain,
                         V = V,
+                        CA1 = Ca1,
+                        CB1 = Cb1,
+                        CC1 = Cc1,
+                        G = G,
+                        K = K,
                         Step = Step,
+                        T = T
                     };
-                    MathClass = new MathClass(cp);
-                    MathClass.Calculate();
-                    OnPropertyChanged(nameof(MathClass));
+                    NumericalMethodMath = new NumericalMethodMath(cp);
+                    NumericalMethodMath.Calculate();
+                    OnPropertyChanged(nameof(NumericalMethodMath));
                     UpdateInterfaceElelemts();
                 });
             }
