@@ -14,7 +14,7 @@ public partial class Tabs : UserControl, IСhangeableControl
     }
 
     public WindowState PreferedWindowState { get; set; } = WindowState.Maximized;
-    public string WindowTitle { get; set; } = "Программный комплекс для исследования неизотермического течения аномально-вязких материалов";
+    public string WindowTitle { get; set; } = "Лабораторная работа №3";
     public double? PreferedHeight { get; set; }
     public double? PreferedWidth { get; set; }
     public event IСhangeableControl.ChangingRequestHandler ChangingRequest;

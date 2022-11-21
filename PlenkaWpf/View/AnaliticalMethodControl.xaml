@@ -92,7 +92,7 @@
                                                     </Binding>
                                                 </hc:TextBox.Text>
                                             </hc:TextBox>
-                                            <hc:TextBox hc:InfoElement.Title="Концетрация на входе в первую ячейку"
+                                            <hc:TextBox hc:InfoElement.Title="Концетрация на входе в первую ячейку, Кмоль/м^3"
                                                         hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                         hc:InfoElement.TitleWidth="450"
                                                         ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -107,7 +107,7 @@
                                                     </Binding>
                                                 </hc:TextBox.Text>
                                             </hc:TextBox>
-                                            <hc:TextBox hc:InfoElement.Title="Объем аппарата"
+                                            <hc:TextBox hc:InfoElement.Title="Объем аппарата, м^3/ч"
                                                         hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                         hc:InfoElement.TitleWidth="450"
                                                         ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -122,7 +122,7 @@
                                                     </Binding>
                                                 </hc:TextBox.Text>
                                             </hc:TextBox>
-                                            <hc:TextBox hc:InfoElement.Title="Объемный расход"
+                                            <hc:TextBox hc:InfoElement.Title="Объемный расход, м^3/ч"
                                                         hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                         hc:InfoElement.TitleWidth="450"
                                                         ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -152,7 +152,7 @@
                                                     </Binding>
                                                 </hc:TextBox.Text>
                                             </hc:TextBox>
-                                            <hc:TextBox hc:InfoElement.Title="Шаг"
+                                            <hc:TextBox hc:InfoElement.Title="Шаг, час"
                                                         hc:InfoElement.TitlePlacement="Left" Margin="10 5"
                                                         hc:InfoElement.TitleWidth="450"
                                                         ErrorStr="{Binding Null, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -192,7 +192,7 @@
                                             LegendLocation="None" Series="{Binding  ConcetraionSeries}"
                                             Margin="10,10,10,0">
                             <lvc:CartesianChart.AxisX>
-                                <lvc:Axis x:Name="tempChartAxisX" Title="Координата по длине канала, м" FontSize="14"
+                                <lvc:Axis x:Name="tempChartAxisX" Title="t (час)" FontSize="14"
                                           Foreground="Black">
                                     <lvc:Axis.Separator>
                                         <lvc:Separator Stroke="DimGray" />
@@ -200,7 +200,7 @@
                                 </lvc:Axis>
                             </lvc:CartesianChart.AxisX>
                             <lvc:CartesianChart.AxisY>
-                                <lvc:Axis x:Name="tempChartAxisY" Title="Температура, °С" FontSize="14"
+                                <lvc:Axis x:Name="tempChartAxisY" Title="C (Кмоль/м^3)" FontSize="14"
                                           Foreground="Black">
                                     <lvc:Axis.Separator>
                                         <lvc:Separator Stroke="DimGray" />
@@ -211,12 +211,6 @@
                     </TabItem>
                     <TabItem Header="Результаты вычислений" Background="{StaticResource Style2}">
                         <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="500" />
-                                <ColumnDefinition Width="1" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="30" />
                                 <RowDefinition />
@@ -230,69 +224,16 @@
 
 
                             <DataGrid Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False"
-                                      ItemsSource="{Binding CordTempNs}" SelectionMode="Single"
+                                      ItemsSource="{Binding TableData}" SelectionMode="Single"
                                       CanUserAddRows="False"
                                       IsReadOnly="True" Background="{StaticResource Style3}">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Координата по длине канала, м"
-                                                        Binding="{Binding Cord}" />
-                                    <DataGridTextColumn Header="Температура, °С" Binding="{Binding Temp}" />
-                                    <DataGridTextColumn Header="Вязкость, Па·с" Binding="{Binding N}" />
+                                    <DataGridTextColumn Header="Время, час"
+                                                        Binding="{Binding T}" />
+                                    <DataGridTextColumn Header="Выходная концетрация, Кмоль/м^3" Binding="{Binding Concetration}" />
                                 </DataGrid.Columns>
                             </DataGrid>
-
-
-                            <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource Style3}">
-                                <hc:Divider Background="{StaticResource DangerBrush}" Orientation="Vertical"
-                                            Margin="0, 0, 0, 5" />
-                            </Border>
-
-
-                            <Border Grid.Row="0" Grid.Column="2" Background="{StaticResource Style2}">
-                                <hc:Divider Content="Критериальные показатели"
-                                            Margin="0 5" />
-                            </Border>
-
-                            <Grid Grid.Row="1" Grid.Column="2">
-
-                                <StackPanel Background="{StaticResource Style3}">
-                                    <hc:TextBox hc:InfoElement.Title="Температура продукта, °С"
-                                                IsReadOnly="True"
-                                                hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding AnaliticalMethodMath.Results.T, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Stretch" />
-                                    <hc:TextBox hc:InfoElement.Title="Вязкость продукта, Па·с"
-                                                IsReadOnly="True"
-                                                hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding AnaliticalMethodMath.Results.N, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Stretch" />
-                                    <hc:TextBox hc:InfoElement.Title="Производительность канала, кг/ч"
-                                                IsReadOnly="True"
-                                                hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding AnaliticalMethodMath.Results.Q, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Stretch" />
-                                    <Border Grid.Row="0" Grid.Column="0" Background="{StaticResource Style2}">
-                                        <hc:Divider Content="Показатели экономичности"
-                                            Margin="0 5" />
-                                    </Border>
-
-                                    <hc:TextBox hc:InfoElement.Title="Время расчёта, мс"
-                                                IsReadOnly="True"
-                                                hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding AnaliticalMethodMath.Results.MathTimer.ElapsedMilliseconds, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Stretch" />
-                                    <hc:TextBox hc:InfoElement.Title="Используемая оперативная память, МБ"
-                                                IsReadOnly="True"
-                                                hc:InfoElement.TitlePlacement="Left" Margin="10 5"
-                                                hc:InfoElement.TitleWidth="270"
-                                                Text="{Binding TotalMemory, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                                                HorizontalAlignment="Stretch" />
-                                </StackPanel>
-                            </Grid>
+                            
                         </Grid>
                     </TabItem>
                 </TabControl>

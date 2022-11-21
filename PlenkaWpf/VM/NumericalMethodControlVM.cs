@@ -17,6 +17,14 @@ using PlenkaWpf.Utils;
 
 namespace PlenkaWpf.VM
 {
+
+    internal class TableRow
+    {
+        public double ConcA { get; set; }
+        public double ConcB { get; set; }
+        public double ConcC { get; set; }
+        public double T { get; set; }
+    }
     /// <summary>
     ///     VM для окна исследователя
     /// </summary>
@@ -77,6 +85,39 @@ namespace PlenkaWpf.VM
             return ls;
         }
 
+        //как же это плохо
+        private List<TableRow> buildTable(NumericalResults res)
+        {
+            int findCountOfRows()
+            {
+                var max = 0;
+
+                foreach (var c in res.ConcetrationPerCell)
+                {
+                    if (c.Value.Count>max)
+                    {
+                        max = c.Value.Count;
+                    }
+                }
+
+                return max;
+            }
+
+            var max = findCountOfRows();
+            var rows = new List<TableRow>();
+            
+            for (int i = 0; i < max; i++)
+            {
+                var row = new TableRow();
+                row.T = res.ConcetrationPerCell.First().Value[i].T;
+                row.ConcA = res.ConcetrationPerCell[0][i].Concetration;
+                row.ConcB = res.ConcetrationPerCell[1][i].Concetration;
+                row.ConcC = res.ConcetrationPerCell[2][i].Concetration;
+                rows.Add(row);
+            }
+
+            return rows;
+        }
     #endregion
 
 
@@ -108,7 +149,8 @@ namespace PlenkaWpf.VM
 
     #endregion
 
-        
+
+        public List<TableRow> TableRows { get; set; }
         public NumericalMethodMath NumericalMethodMath { get; set; }
 
         private void UpdateInterfaceElelemts()
@@ -128,6 +170,8 @@ namespace PlenkaWpf.VM
             {
                 ConcetraionSeries.Add(lineSeries);
             }
+
+            TableRows = buildTable(NumericalMethodMath.Results);
             OnPropertyChanged(nameof(ConcetraionSeries));
             OnPropertyChanged(nameof(NumericalMethodMath));
 

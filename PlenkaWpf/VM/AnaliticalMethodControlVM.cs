@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -103,6 +104,19 @@ namespace PlenkaWpf.VM
 
     #endregion
 
+
+        public ObservableCollection<ConcetrationPerTau> TableData
+        {
+            get
+            {
+                if (AnaliticalMethodMath is not null)
+                {
+                    return new ObservableCollection<ConcetrationPerTau>(AnaliticalMethodMath.Results.ConcetrationPerCell[N-1]);
+                }
+
+                return null;
+            }
+        }
         
         private AnaliticalMethodMath _analiticalMethodMath;
         public AnaliticalMethodMath AnaliticalMethodMath
@@ -137,6 +151,7 @@ namespace PlenkaWpf.VM
             }
             OnPropertyChanged(nameof(ConcetraionSeries));
             OnPropertyChanged(nameof(AnaliticalMethodMath));
+            OnPropertyChanged(nameof(TableData));
 
         }
         
@@ -205,8 +220,9 @@ namespace PlenkaWpf.VM
                         V = V,
                         Step = Step,
                     };
-                    AnaliticalMethodMath = new AnaliticalMethodMath(cp);
-                    AnaliticalMethodMath.Calculate();
+                    var math =  new AnaliticalMethodMath(cp);
+                    math.Calculate();
+                    AnaliticalMethodMath =math;
                     OnPropertyChanged(nameof(AnaliticalMethodMath));
                     UpdateInterfaceElelemts();
                 });
